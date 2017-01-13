@@ -1,4 +1,4 @@
-package com.xiaomuedu.common.config;
+package com.admin.common.config;
 
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
