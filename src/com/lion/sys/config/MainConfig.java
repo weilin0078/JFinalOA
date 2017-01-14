@@ -10,18 +10,21 @@ import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
+import com.jfinal.ext.handler.UrlSkipHandler;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
+import com.lion.sys.mvc.login.LoginController;
 import com.lion.sys.plugin.shiro.ShiroInterceptor;
 import com.lion.sys.plugin.shiro.ShiroPlugin;
 
 public class MainConfig extends JFinalConfig {
-	/**
-     * 供Shiro插件使用。
-     */
     Routes routes;
+    
+	public static void main(String[] args) {
+		JFinal.start("WebRoot", 80, "/", 5);
+	}
 	/**
 	 * 配置JFinal常量
 	 */
@@ -43,24 +46,17 @@ public class MainConfig extends JFinalConfig {
 		//me.setError404View("404.html");
 		//shiro相关配置
 		//RequiresGuest，RequiresAuthentication，RequiresUser验证异常，返回HTTP401状态码
-		me.setErrorView(401, "/login.html");
+		me.setErrorView(401, "/index.jsp");
 		//RequiresRoles，RequiresPermissions授权异常,返回HTTP403状态码
-		me.setErrorView(403, "/login.html");
-		
+		me.setErrorView(403, "/index.jsp");
+		//获取beetl模版引擎
 		me.setMainRenderFactory(new BeetlRenderFactory());
         // 获取GroupTemplate ,可以设置共享变量等操作
-		
         @SuppressWarnings("unused")
 		GroupTemplate groupTemplate = BeetlRenderFactory.groupTemplate ;
 		
 	}
-	/**
-	 * 配置JFinal路由映射
-	 */
-	@Override
-	public void configRoute(Routes me) {
-		this.routes = me;
-	}
+
 	/**
 	 * 配置JFinal插件
 	 * 数据库连接池
@@ -87,7 +83,6 @@ public class MainConfig extends JFinalConfig {
 	    shiroPlugin.setSuccessUrl("/login.html");//登陆成功url：验证成功自动跳转
 	    shiroPlugin.setUnauthorizedUrl("/login/needPermission");//授权url：未授权成功自动跳转
 	    me.add(shiroPlugin);
-		
 	}
 	
 	/**
@@ -102,13 +97,19 @@ public class MainConfig extends JFinalConfig {
 	 * 配置全局处理器
 	 */
 	@Override
-	public void configHandler(Handlers me) {
-
-	}
-	
-	public static void main(String[] args) {
-		JFinal.start("WebRoot", 80, "/", 5);
+	public void configHandler(Handlers handler) {
+		//log.info("configHandler 全局配置处理器，设置跳过哪些URL不处理");
+		handler.add(new UrlSkipHandler("/ca/.*|/se/.*|.*.jsp|.*.htm|.*.html|.*.js|.*.css|.*.json|.*.png|.*.gif|.*.jpg|.*.jpeg|.*.bmp|.*.ico|.*.exe|.*.txt|.*.zip|.*.rar|.*.7z", false));
 	}
 	
 
+	
+	/**
+	 * 配置JFinal路由映射
+	 */
+	@Override
+	public void configRoute(Routes me) {
+		this.routes = me;//shiro使用
+		me.add("/admin/login", LoginController.class);
+	}
 }

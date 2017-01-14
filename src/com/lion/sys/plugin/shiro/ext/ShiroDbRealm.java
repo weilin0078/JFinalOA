@@ -1,12 +1,9 @@
 package com.lion.sys.plugin.shiro.ext;
 
-import java.util.List;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -18,7 +15,6 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
 import com.jfinal.kit.StrKit;
-import com.lion.sys.plugin.shiro.ext.CaptchaRender;
 
 
 public class ShiroDbRealm extends AuthorizingRealm {
@@ -50,14 +46,15 @@ public class ShiroDbRealm extends AuthorizingRealm {
         if (!isRight) {
             throw new IncorrectCaptchaException("验证码错误!");
         }
-        User user = User.DAO.findByUsername(accountName);
-        if (null == user) {
-            throw new AuthenticationException("用户名或者密码错误");
-        }
-        if (user.getBoolean("is_locked")) {
-            throw new LockedAccountException("该用户已被锁定");
-        }
-        return  new SimpleAuthenticationInfo(new SimpleUser(user.getId(),user.getStr("username"),user.getStr("description"), user.getStr("type")), user.getStr("password"), getName());
+//        User user = User.DAO.findByUsername(accountName);
+//        if (null == user) {
+//            throw new AuthenticationException("用户名或者密码错误");
+//        }
+//        if (user.getBoolean("is_locked")) {
+//            throw new LockedAccountException("该用户已被锁定");
+//        }
+//        return  new SimpleAuthenticationInfo(new SimpleUser(user.getId(),user.getStr("username"),user.getStr("description"), user.getStr("type")), user.getStr("password"), getName());
+        return  new SimpleAuthenticationInfo();
     }
 
     /**
@@ -67,33 +64,33 @@ public class ShiroDbRealm extends AuthorizingRealm {
         //User user = (User) principals.fromRealm(getName()).iterator().next();
     	SimpleUser simpleUser = (SimpleUser) principals.fromRealm(getName()).iterator().next();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        if( null == simpleUser){
-        	return info;
-        }
-        User user = User.DAO.findById(simpleUser.getId());
-        if( null == user){
-        	return info;
-        }
-        List<Role> roles = user.getRoles();
-        if(ArrayKit.isNotEmpty(roles)){
-            for(Role role : roles){
-                //角色的名称及时角色的值
-                info.addRole(role.getStr("name"));
-                addResourceOfRole(role,info);
-            }
-        }
+//        if( null == simpleUser){
+//        	return info;
+//        }
+//        User user = User.DAO.findById(simpleUser.getId());
+//        if( null == user){
+//        	return info;
+//        }
+//        List<Role> roles = user.getRoles();
+//        if(ArrayKit.isNotEmpty(roles)){
+//            for(Role role : roles){
+//                //角色的名称及时角色的值
+//                info.addRole(role.getStr("name"));
+//                addResourceOfRole(role,info);
+//            }
+//        }
         return info;
     }
     
-    private void addResourceOfRole(Role role, SimpleAuthorizationInfo info){
-    	List<Resource> resources = role.getResources();
-        if(ArrayKit.isNotEmpty(resources)){
-            for(Resource resource : resources ){
-                //资源代码就是权限值，类似user：list
-                info.addStringPermission(resource.getStr("code"));
-            }
-        }
-    }
+//    private void addResourceOfRole(Role role, SimpleAuthorizationInfo info){
+//    	List<Resource> resources = role.getResources();
+//        if(ArrayKit.isNotEmpty(resources)){
+//            for(Resource resource : resources ){
+//                //资源代码就是权限值，类似user：list
+//                info.addStringPermission(resource.getStr("code"));
+//            }
+//        }
+//    }
 
     /**
      * 更新用户授权信息缓存.

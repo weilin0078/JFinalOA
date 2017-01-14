@@ -43,7 +43,7 @@ public class LoginController extends BaseController {
     @ActionKey("/login")
     public void login(){
     	this.createToken("loginToken");
-        this.render("/templates/account/login.html");
+        this.render("/login.html");
     }
     
     /**
