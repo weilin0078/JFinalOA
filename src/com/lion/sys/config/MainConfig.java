@@ -10,11 +10,13 @@ import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
-import com.jfinal.ext.handler.UrlSkipHandler;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
+import com.lion.sys.handler.GlobalHandler;
+import com.lion.sys.mvc.base._MappingKit;
+import com.lion.sys.mvc.home.HomeController;
 import com.lion.sys.mvc.login.LoginController;
 import com.lion.sys.plugin.shiro.ShiroInterceptor;
 import com.lion.sys.plugin.shiro.ShiroPlugin;
@@ -37,20 +39,10 @@ public class MainConfig extends JFinalConfig {
 		//设置默认上传文件保存路径 getFile等使用
 		me.setBaseUploadPath("upload/");
 		//设置上传最大限制尺寸
-		//me.setMaxPostSize(1024*1024*10);
-		//设置默认下载文件路径 renderFile使用
-		//me.setBaseDownloadPath("");
-		//设置默认视图类型
-		//me.setViewType(ViewType.JSP);
-		//设置404渲染视图
-		//me.setError404View("404.html");
-		//shiro相关配置
-		//RequiresGuest，RequiresAuthentication，RequiresUser验证异常，返回HTTP401状态码
-		me.setErrorView(401, "/index.jsp");
-		//RequiresRoles，RequiresPermissions授权异常,返回HTTP403状态码
-		me.setErrorView(403, "/index.jsp");
+		me.setMaxPostSize(1024*1024*10);
 		//获取beetl模版引擎
 		me.setMainRenderFactory(new BeetlRenderFactory());
+		me.setError404View("/error/404.html");
         // 获取GroupTemplate ,可以设置共享变量等操作
         @SuppressWarnings("unused")
 		GroupTemplate groupTemplate = BeetlRenderFactory.groupTemplate ;
@@ -72,6 +64,7 @@ public class MainConfig extends JFinalConfig {
 		ActiveRecordPlugin arp=new ActiveRecordPlugin(c3p0Plugin);
 		arp.setShowSql(PropKit.getBoolean("devMode"));
 		arp.setDialect(new MysqlDialect());
+		_MappingKit.mapping(arp);
 		/********在此添加数据库 表-Model 映射*********/
 		
 		//添加到插件列表中
@@ -80,7 +73,7 @@ public class MainConfig extends JFinalConfig {
 		
 		ShiroPlugin shiroPlugin = new ShiroPlugin(this.routes);
 	    shiroPlugin.setLoginUrl("/login.html");//登陆url：未验证成功跳转
-	    shiroPlugin.setSuccessUrl("/login.html");//登陆成功url：验证成功自动跳转
+	    shiroPlugin.setSuccessUrl("/admin/index");//登陆成功url：验证成功自动跳转
 	    shiroPlugin.setUnauthorizedUrl("/login/needPermission");//授权url：未授权成功自动跳转
 	    me.add(shiroPlugin);
 	}
@@ -99,7 +92,8 @@ public class MainConfig extends JFinalConfig {
 	@Override
 	public void configHandler(Handlers handler) {
 		//log.info("configHandler 全局配置处理器，设置跳过哪些URL不处理");
-		handler.add(new UrlSkipHandler("/ca/.*|/se/.*|.*.jsp|.*.htm|.*.html|.*.js|.*.css|.*.json|.*.png|.*.gif|.*.jpg|.*.jpeg|.*.bmp|.*.ico|.*.exe|.*.txt|.*.zip|.*.rar|.*.7z", false));
+//		handler.add(new UrlSkipHandler("/ca/.*|/se/.*|.*.htm|.*.html|.*.js|.*.css|.*.json|.*.png|.*.gif|.*.jpg|.*.jpeg|.*.bmp|.*.ico|.*.exe|.*.txt|.*.zip|.*.rar|.*.7z", false));
+		handler.add(new GlobalHandler());
 	}
 	
 
@@ -111,5 +105,6 @@ public class MainConfig extends JFinalConfig {
 	public void configRoute(Routes me) {
 		this.routes = me;//shiro使用
 		me.add("/admin/login", LoginController.class);
+		me.add("/admin/home", HomeController.class);
 	}
 }

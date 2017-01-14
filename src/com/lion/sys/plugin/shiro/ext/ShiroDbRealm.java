@@ -5,6 +5,9 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.credential.DefaultPasswordService;
+import org.apache.shiro.authc.credential.PasswordService;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cache.Cache;
@@ -15,6 +18,7 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
 import com.jfinal.kit.StrKit;
+import com.lion.sys.mvc.login.SysUser;
 
 
 public class ShiroDbRealm extends AuthorizingRealm {
@@ -28,14 +32,12 @@ public class ShiroDbRealm extends AuthorizingRealm {
      */    
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token){
         CaptchaUsernamePasswordToken authcToken = (CaptchaUsernamePasswordToken) token;
-        String accountName = authcToken.getUsername();
-        if (StrKit.isBlank(accountName)) {
+        //验证用户名
+        String username = authcToken.getUsername();
+        if (StrKit.isBlank(username)) {
             throw new AuthenticationException("用户名不可以为空");
         }
-        boolean isCaptchaBlank = StrKit.isBlank(authcToken.getCaptcha());
-        if (isCaptchaBlank) {
-            throw new IncorrectCaptchaException("验证码不可以为空!");
-        }
+        //验证验证码
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession(false);
         String md5Code = null;
@@ -46,15 +48,20 @@ public class ShiroDbRealm extends AuthorizingRealm {
         if (!isRight) {
             throw new IncorrectCaptchaException("验证码错误!");
         }
-//        User user = User.DAO.findByUsername(accountName);
-//        if (null == user) {
-//            throw new AuthenticationException("用户名或者密码错误");
-//        }
-//        if (user.getBoolean("is_locked")) {
-//            throw new LockedAccountException("该用户已被锁定");
-//        }
-//        return  new SimpleAuthenticationInfo(new SimpleUser(user.getId(),user.getStr("username"),user.getStr("description"), user.getStr("type")), user.getStr("password"), getName());
-        return  new SimpleAuthenticationInfo();
+        //验证用户是否存在
+        SysUser user = SysUser.dao.findByUsername(username);
+        if(user==null){
+        	throw new UnknownAccountException("用户不存在!");
+        }else{
+        	//验证密码
+        	String password = String.valueOf(authcToken.getPassword());
+        	PasswordService svc = new DefaultPasswordService();
+        	if(svc.passwordsMatch(password, user.getPassword())){
+        		return  new SimpleAuthenticationInfo(new SimpleUser(user.getId(), user.getUsername(),user.getName()), user.getPassword(), getName());
+        	}else{
+        		throw new AuthenticationException("密码错误!");
+        	}
+        }
     }
 
     /**

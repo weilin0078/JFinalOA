@@ -1,0 +1,19 @@
+Table: sys_user
+--------------+---------------+------+-----+---------+---------
+ Field        | Type          | Null | Key | Default | Remarks 
+--------------+---------------+------+-----+---------+---------
+ id           | VARCHAR(32)   | NO   | PRI |         |         
+ orderid      | BIGINT(19)    | YES  |     |         |         
+ username     | VARCHAR(50)   | YES  |     |         |         
+ password     | VARCHAR(500)  | YES  |     |         |         
+ name         | VARCHAR(25)   | YES  |     |         | 姓名      
+ salt         | VARCHAR(500)  | YES  |     |         |         
+ status       | CHAR(1)       | YES  |     | 1       |         
+ stopdate     | TIMESTAMP(19) | YES  |     |         | 退出时间    
+ departmentid | VARCHAR(32)   | YES  |     |         | 部门ID    
+ stationid    | TEXT(65535)   | YES  |     |         | 岗位ID    
+ email        | VARCHAR(100)  | YES  |     |         |         
+ idcard       | VARCHAR(25)   | YES  |     |         | 身份证号    
+ mobile       | VARCHAR(20)   | YES  |     |         |         
+--------------+---------------+------+-----+---------+---------
+

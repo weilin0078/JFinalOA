@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+<meta charset="UTF-8" />
+<title>JFinalOA</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<link rel="stylesheet" type="text/css" href="${ctx!}/common/lib/layui/css/layui.css" />
+<script type="text/javascript" src="${ctx!}/common/lib/layui/layui.js"></script>
+<script type="text/javascript" src="${ctx!}/common/js/ajax.js"></script>
+</head>
+<body>
+<!-- 顶部导航 -->
+<%
+	include("/WEB-INF/admin/home/header.html"){}
+%>
+<!-- 容器 -->
+<div id="container">
+	<!-- 左侧导航 -->
+	<% include("/WEB-INF/admin/home/lefter.html"){} %>
+	<!-- 主要内容 -->
+	<div id="main-content">
+		<% include("/platform/index/content.html"){} %>
+	</div>
+</div>
+ <script>
+ //基础配置
+ var ctx = "${ctx!}";
+ layui.use(['element'], function(){
+
+ });
+ </script>
+</body>
+</html>

@@ -6,19 +6,16 @@ import java.io.Serializable;
 
 public class SimpleUser implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private final Long id;
+	private final String id;
 	private final String username;
-	private final String description;
-	private final String type;
+	private final String name;
 	private String roleName;
-	public SimpleUser(Long id, String username, String description, String type) {
-		super();
+	public SimpleUser(String id, String username,String name) {
 		this.id = id;
 		this.username = username;
-		this.description = description;
-		this.type = type;
+		this.name = name;
 	}
-	public final Long getId() {
+	public final String getId() {
 		return id;
 	}
 	/**
@@ -29,24 +26,6 @@ public class SimpleUser implements Serializable{
 	 */
 	public final String getUsername() {
 		return username;
-	}
-	/**
-	 * @Title: getType  
-	 * @Description: 获得用户类型（web（前台）／admin（后台））  
-	 * @return 
-	 * @since V1.0.0
-	 */
-	public final String getType() {
-		return type;
-	}
-	/**
-	 * @Title: getDescription  
-	 * @Description: 获得用户描述（一般为真名）
-	 * @return 
-	 * @since V1.0.0
-	 */
-	public final String getDescription() {
-		return description;
 	}
 	/**
 	 * @Title: getRoleName  
@@ -66,4 +45,8 @@ public class SimpleUser implements Serializable{
 	public final void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
+	public String getName() {
+		return name;
+	}
+	
 }
