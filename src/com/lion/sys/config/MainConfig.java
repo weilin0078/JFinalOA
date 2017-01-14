@@ -1,5 +1,8 @@
 package com.lion.sys.config;
 
+import org.beetl.core.GroupTemplate;
+import org.beetl.ext.jfinal.BeetlRenderFactory;
+
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -11,7 +14,6 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
-import com.jfinal.render.ViewType;
 import com.lion.sys.plugin.shiro.ShiroInterceptor;
 import com.lion.sys.plugin.shiro.ShiroPlugin;
 
@@ -36,14 +38,20 @@ public class MainConfig extends JFinalConfig {
 		//设置默认下载文件路径 renderFile使用
 		//me.setBaseDownloadPath("");
 		//设置默认视图类型
-		me.setViewType(ViewType.JSP);
+		//me.setViewType(ViewType.JSP);
 		//设置404渲染视图
 		//me.setError404View("404.html");
 		//shiro相关配置
 		//RequiresGuest，RequiresAuthentication，RequiresUser验证异常，返回HTTP401状态码
-		me.setErrorView(401, "/login.jsp");
+		me.setErrorView(401, "/login.html");
 		//RequiresRoles，RequiresPermissions授权异常,返回HTTP403状态码
-		me.setErrorView(403, "/login.jsp");
+		me.setErrorView(403, "/login.html");
+		
+		me.setMainRenderFactory(new BeetlRenderFactory());
+        // 获取GroupTemplate ,可以设置共享变量等操作
+		
+        @SuppressWarnings("unused")
+		GroupTemplate groupTemplate = BeetlRenderFactory.groupTemplate ;
 		
 	}
 	/**
@@ -75,8 +83,8 @@ public class MainConfig extends JFinalConfig {
 		me.add(arp);
 		
 		ShiroPlugin shiroPlugin = new ShiroPlugin(this.routes);
-	    shiroPlugin.setLoginUrl("/login.jsp");//登陆url：未验证成功跳转
-	    shiroPlugin.setSuccessUrl("/login.jsp");//登陆成功url：验证成功自动跳转
+	    shiroPlugin.setLoginUrl("/login.html");//登陆url：未验证成功跳转
+	    shiroPlugin.setSuccessUrl("/login.html");//登陆成功url：验证成功自动跳转
 	    shiroPlugin.setUnauthorizedUrl("/login/needPermission");//授权url：未授权成功自动跳转
 	    me.add(shiroPlugin);
 		
