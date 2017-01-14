@@ -1,9 +1,69 @@
-<html>
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="UTF-8" />
+<title>JFinalUIBV3</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<link rel="stylesheet" type="text/css" href="${ctx!}/common/lib/layui/css/layui.css" />
+<script type="text/javascript" src="${ctx!}/common/lib/layui/layui.js"></script>
 </head>
 <body>
-	登录页
+<div style="margin: 150px auto 0px;width:600px;">
+	<form class="layui-form" action="${ctx!}/admin/login/doLogin">
+	  <div class="layui-form-item">
+		    <label class="layui-form-label">用户名</label>
+		    <div class="layui-input-block">
+		      	<input type="text" name="username" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+		    </div>
+	  </div>
+	  <div class="layui-form-item">
+	    	<label class="layui-form-label">密码</label>
+		    <div class="layui-input-block">
+		      	<input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+		    </div>
+	  </div>
+	  <div class="layui-form-item">
+		    <label class="layui-form-label">记住我</label>
+		    <div class="layui-input-inline" style="width: 0px;">
+		      	<input type="checkbox" name="rememberMe" lay-skin="switch">
+		    </div>
+		    <label class="layui-form-label">验证码</label>
+		    <div class="layui-input-inline"style="width: 100px;">
+		    	<input type="text" name="captcha" required  lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+		    </div>
+		    <div class="layui-input-inline"style="width: 0px;">
+		      	<img alt="验证码出错啦~!" src="${ctx!}/admin/login/img">
+		    </div>
+	  </div>
+	  <div class="layui-form-item">
+		    <div class="layui-input-block">
+		      	<button class="layui-btn" lay-submit lay-filter="formDemo">登陆</button>
+		    </div>
+	  </div>
+	</form>
+</div>
+
+ 
+<script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form();
+  
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    layer.msg(JSON.stringify(data.field));
+    return true;
+  });
+});
+</script>
+
+
 </body>
 </html>

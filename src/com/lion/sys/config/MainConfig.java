@@ -15,6 +15,7 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
+import com.lion.sys.handler.GlobalHandler;
 import com.lion.sys.mvc.login.LoginController;
 import com.lion.sys.plugin.shiro.ShiroInterceptor;
 import com.lion.sys.plugin.shiro.ShiroPlugin;
@@ -49,6 +50,7 @@ public class MainConfig extends JFinalConfig {
 		me.setErrorView(401, "/index.jsp");
 		//RequiresRoles，RequiresPermissions授权异常,返回HTTP403状态码
 		me.setErrorView(403, "/index.jsp");
+		me.setErrorView(404, "/error/404.html");
 		//获取beetl模版引擎
 		me.setMainRenderFactory(new BeetlRenderFactory());
         // 获取GroupTemplate ,可以设置共享变量等操作
@@ -100,6 +102,7 @@ public class MainConfig extends JFinalConfig {
 	public void configHandler(Handlers handler) {
 		//log.info("configHandler 全局配置处理器，设置跳过哪些URL不处理");
 		handler.add(new UrlSkipHandler("/ca/.*|/se/.*|.*.jsp|.*.htm|.*.html|.*.js|.*.css|.*.json|.*.png|.*.gif|.*.jpg|.*.jpeg|.*.bmp|.*.ico|.*.exe|.*.txt|.*.zip|.*.rar|.*.7z", false));
+		handler.add(new GlobalHandler());
 	}
 	
 

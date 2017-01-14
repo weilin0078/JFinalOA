@@ -14,8 +14,6 @@
  */
 package com.lion.sys.mvc.login;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -26,7 +24,6 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ThreadContext;
 
 import com.jfinal.aop.Before;
-import com.jfinal.core.ActionKey;
 import com.lion.sys.mvc.base.BaseController;
 import com.lion.sys.plugin.shiro.ext.CaptchaFormAuthenticationInterceptor;
 import com.lion.sys.plugin.shiro.ext.CaptchaRender;
@@ -40,8 +37,7 @@ public class LoginController extends BaseController {
     private static final int DEFAULT_CAPTCHA_LEN = 4;//验证码长度
     private static final String LOGIN_URL = "/login.do";
     
-    @ActionKey("/login")
-    public void login(){
+    public void index(){
     	this.createToken("loginToken");
         this.render("/login.html");
     }
@@ -51,7 +47,6 @@ public class LoginController extends BaseController {
      * @Description: 图形验证码   
      * @since V1.0.0
      */
-    @ActionKey("/img")
     public void img(){
         CaptchaRender img = new CaptchaRender(DEFAULT_CAPTCHA_LEN);
         this.setSessionAttr(CaptchaRender.DEFAULT_CAPTCHA_MD5_CODE_KEY, img.getMd5RandonCode());
@@ -59,7 +54,6 @@ public class LoginController extends BaseController {
     }
     
     @Before({LoginValidator.class, CaptchaFormAuthenticationInterceptor.class})
-    @ActionKey("/doLogin")
     public void doLogin(){
         try {
             CaptchaUsernamePasswordToken token = this.getAttr("shiroToken");
@@ -68,32 +62,35 @@ public class LoginController extends BaseController {
             //进行用用户名和密码验证
             subject.login(token);
             //获取当前用户，并将当前用户保存在Session中。
-            User user = User.DAO.findByUsername(token.getUsername());
-            //this.setSessionAttr("user", user);
-            //保存用户默认的皮肤
-            if(user != null){
-                this.setSessionAttr("skin", user.getStr("skin"));
-            }else{
-                this.setSessionAttr("skin", "flat");
-            }
+//            User user = User.DAO.findByUsername(token.getUsername());
+//            //this.setSessionAttr("user", user);
+//            //保存用户默认的皮肤
+//            if(user != null){
+//                this.setSessionAttr("skin", user.getStr("skin"));
+//            }else{
+//                this.setSessionAttr("skin", "flat");
+//            }
             //调转到主页面
-            this.redirect("/index.do");
+            
         } catch (IncorrectCaptchaException e) {
         	LOG.error(e.getMessage());
-//            this.redirect(LOGIN_URL, new Flash("msg","验证码错误"));
+        	setAttr("error", "验证码错误!");
+        	render("/login.html");
         } catch (LockedAccountException e) {
         	LOG.error(e.getMessage());
-//            this.redirect(LOGIN_URL, new Flash("msg","账号已被锁定"));
+        	setAttr("error", "账号已被锁定!");
+        	render("/login.html");
         } catch (AuthenticationException e) {
         	LOG.error(e.getMessage());
-//            this.redirect(LOGIN_URL, new Flash("msg","用户名或者密码错误"));
+        	setAttr("error", "用户名或者密码错误!");
+        	render("/login.html");
         } catch (Exception e) {
             LOG.error(e.getMessage());
-//            this.redirect(LOGIN_URL, new Flash("msg","系统异常"));
+            setAttr("error", "系统异常!");
+        	render("/login.html");
         }
     }
     @RequiresAuthentication
-    @ActionKey("/logout")
     public void logout() {
         Subject currentUser = SecurityUtils.getSubject();
         try {
