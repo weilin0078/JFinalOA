@@ -57,7 +57,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
         	String password = String.valueOf(authcToken.getPassword());
         	PasswordService svc = new DefaultPasswordService();
         	if(svc.passwordsMatch(password, user.getPassword())){
-        		return  new SimpleAuthenticationInfo(new SimpleUser(user.getId(), user.getUsername(),user.getName()), user.getPassword(), getName());
+        		return  new SimpleAuthenticationInfo(new SimpleUser(user.getId(), user.getUsername(),user.getName()), password, getName());
         	}else{
         		throw new AuthenticationException("密码错误!");
         	}

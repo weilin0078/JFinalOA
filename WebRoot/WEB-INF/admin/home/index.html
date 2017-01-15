@@ -20,20 +20,17 @@
 <%
 	include("/WEB-INF/admin/home/header.html"){}
 %>
-<!-- 容器 -->
 <div id="container">
 	<!-- 左侧导航 -->
 	<% include("/WEB-INF/admin/home/lefter.html"){} %>
 	<!-- 主要内容 -->
 	<div id="main-content">
-		<% include("/platform/index/content.html"){} %>
+		<% include("/WEB-INF/admin/home/content.html"){} %>
 	</div>
 </div>
  <script>
- //基础配置
- var ctx = "${ctx!}";
  layui.use(['element'], function(){
-
+	 
  });
  </script>
 </body>
