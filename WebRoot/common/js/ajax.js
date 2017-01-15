@@ -15,18 +15,10 @@ var common_ajax = function() {
 			dataType = "html";
 		}
 		
-		// 所有请求加上当前语言标示环境
-//		if(!data){
-//			data = {"localePram" : localePram};
-//		}else{
-//			data.localePram = localePram;
-//		}
-		
 		var result = "";
 		$.ajax({
 			type : "post",
-			url : encodeURI(encodeURI(cxt + url)),
-			headers : {"localePram" : localePram}, // 所有请求加上当前语言标示环境
+			url : encodeURI(encodeURI(ctx + url)),
 			data : data,
 			dataType : dataType,
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -109,14 +101,11 @@ var common_ajax = function() {
 		if(dataType == undefined || dataType == null){
 			dataType = "html";
 		}
-
 		var result = "";
 		$("#" + formId).ajaxSubmit({
 			dataType : dataType,
 			async: false,
 			cache: false,
-			headers : {"localePram" : localePram}, // 所有请求加上当前语言标示环境
-			//data: {"localePram" : localePram}, // 所有请求加上当前语言标示环境
 		    success:  function (data) {
 		    	result = data;
 		    	

@@ -18,7 +18,7 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
 import com.jfinal.kit.StrKit;
-import com.lion.sys.mvc.login.SysUser;
+import com.lion.sys.mvc.user.SysUser;
 
 
 public class ShiroDbRealm extends AuthorizingRealm {

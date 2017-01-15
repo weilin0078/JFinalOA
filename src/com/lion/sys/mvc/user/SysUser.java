@@ -1,4 +1,4 @@
-package com.lion.sys.mvc.login;
+package com.lion.sys.mvc.user;
 
 import com.lion.sys.mvc.base.model.BaseSysUser;
 

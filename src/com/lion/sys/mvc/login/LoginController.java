@@ -13,6 +13,7 @@ import org.apache.shiro.util.ThreadContext;
 
 import com.jfinal.aop.Before;
 import com.lion.sys.mvc.base.BaseController;
+import com.lion.sys.mvc.user.SysUser;
 import com.lion.sys.plugin.shiro.ext.CaptchaFormAuthenticationInterceptor;
 import com.lion.sys.plugin.shiro.ext.CaptchaRender;
 import com.lion.sys.plugin.shiro.ext.CaptchaUsernamePasswordToken;

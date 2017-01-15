@@ -1,5 +1,5 @@
 <ul class="layui-nav" id="header" style="padding: 0px 40px 0px 0px;height:60px;">
-	<li class="layui-nav-item">
+	<li class="layui-nav-item" onclick="siderLeftNavi()">
 		<a href="javascript:void(0);" onclick="{}"><i class="layui-icon">&#xe649;</i></a>
 	</li>
 	<li class="layui-nav-item" style="margin-left: 50px;">
@@ -20,3 +20,18 @@
 		<img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4057565284,2847218841&fm=23&gp=0.jpg" width="40px" height="40px" />
 	</li>
 </ul>
+
+<script>
+function siderLeftNavi(){
+	$("#lefter").addClass("animated");
+	if($("#lefter").hasClass("leftSideShow")){
+		$("#lefter").removeClass("leftSideShow");
+		$("#lefter").hide();
+		$("#main-content").attr("style","margin-left:0px;")
+	}else{
+		$("#lefter").addClass("leftSideShow");
+		$("#lefter").show();
+		$("#main-content").attr("style","margin-left:200px;")
+	}
+}
+</script>
