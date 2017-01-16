@@ -1,0 +1,131 @@
+<blockquote class="layui-elem-quote">
+	<ul class="breadcrumb">
+		<li><a href="#" onclick="common_ajax.ajaxMainPanel('/admin/home/content');">主页</a><span class="divider">/</span></li>
+		<li>菜单管理</li>
+	</ul>
+</blockquote>
+
+<div class="site-block-full" style="float: left;width: 200px;">
+	<ul id="menuTree"></ul>
+</div>
+<div class="site-block-full" style="width: auto;margin-left: 260px;">
+	<table class="layui-table">
+		  <colgroup>
+			    <col width="150">
+			    <col width="200">
+			    <col>
+		  </colgroup>
+		  <thead>
+			    <tr><th>昵称</th><th>加入时间</th><th>签名</th></tr> 
+		  </thead>
+		  <tbody>
+		    	<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
+				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
+				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
+				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
+				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
+				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
+				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
+				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
+				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
+		  </tbody>
+	</table>           
+	  <div id="pages" class = "pages"></div>
+</div>
+
+
+<script>
+siteBlockFull();
+layui.use(['laypage', 'layer','tree'], function(){
+  var laypage = layui.laypage
+  var layer = layui.layer;
+  var tree = layui.tree;
+  var data = [
+    '北京',
+    '上海',
+    '广州',
+    '深圳',
+    '杭州',
+    '长沙',
+    '合肥',
+    '宁夏',
+    '成都',
+    '西安',
+    '南昌',
+    '上饶',
+    '沈阳',
+    '济南',
+    '厦门',
+    '福州',
+    '九江',
+    '宜春',
+    '赣州',
+    '宁波',
+    '绍兴',
+    '无锡',
+    '苏州',
+    '徐州',
+    '东莞',
+    '佛山',
+    '中山',
+    '成都',
+    '武汉',
+    '青岛',
+    '天津',
+    '重庆',
+    '南京',
+    '九江',
+    '香港',
+    '澳门',
+    '台北'
+  ];
+  
+  var nums = 5; //每页出现的数据量
+  
+  //模拟渲染
+  var render = function(curr){
+    //此处只是演示，实际场景通常是返回已经当前页已经分组好的数据
+    var str = '', last = curr*nums - 1;
+    last = last >= data.length ? (data.length-1) : last;
+    for(var i = (curr*nums - nums); i <= last; i++){
+      str += '<li>'+ data[i] +'</li>';
+    }
+    return str;
+  };
+  
+  //调用分页
+  laypage({
+    cont: 'pages'
+    ,pages: Math.ceil(data.length/nums) //得到总页数
+    ,jump: function(obj){
+      //document.getElementById('biuuu_city_list').innerHTML = render(obj.curr);
+    }
+    ,skip: true
+  });
+  
+  
+  
+  layui.tree({
+      elem: '#menuTree' //传入元素选择器
+      ,nodes: [{ //节点
+        name: '父节点1'
+        ,children: [{
+          name: '子节点11'
+        },{
+          name: '子节点12'
+        }]
+      },{
+        name: '父节点2'
+        ,children: [{
+          name: '子节点21'
+          ,children: [{
+            name: '子节点211'
+          }]
+        }]
+      }]
+    });
+          
+  
+  
+});
+</script>

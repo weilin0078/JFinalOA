@@ -18,6 +18,8 @@ import com.lion.sys.handler.GlobalHandler;
 import com.lion.sys.mvc.base._MappingKit;
 import com.lion.sys.mvc.home.HomeController;
 import com.lion.sys.mvc.login.LoginController;
+import com.lion.sys.mvc.menu.MenuController;
+import com.lion.sys.mvc.user.UserController;
 import com.lion.sys.plugin.shiro.ShiroInterceptor;
 import com.lion.sys.plugin.shiro.ShiroPlugin;
 
@@ -106,5 +108,7 @@ public class MainConfig extends JFinalConfig {
 		this.routes = me;//shiro使用
 		me.add("/admin/login", LoginController.class);
 		me.add("/admin/home", HomeController.class);
+		me.add("/admin/user", UserController.class);
+		me.add("/admin/menu", MenuController.class);
 	}
 }

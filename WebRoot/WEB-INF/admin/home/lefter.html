@@ -1,36 +1,28 @@
 <div id="lefter" class="leftSideShow">
-	<ul class="layui-nav layui-nav-tree layui-nav-side" style="border-radius: 0px;top:60px;">
-	  <li class="layui-nav-item layui-nav-itemed">
-	    <a href="javascript:;">系统管理</a>
-	    <dl class="layui-nav-child">
-	      <dd><a href="#" onclick="common_ajax.ajaxMainPanel('/admin/login');">菜单管理</a></dd>
-	      <dd><a href="#">菜单2</a></dd>
-	      <dd><a href="#">菜单3</a></dd>
-	    </dl>
-	  </li>
-	  <li class="layui-nav-item layui-nav-itemed">
-	    <a href="javascript:;">权限管理</a>
-	    <dl class="layui-nav-child">
-	      <dd><a href="#" onclick="">菜单管理</a></dd>
-	      <dd><a href="#">菜单2</a></dd>
-	      <dd><a href="#">菜单3</a></dd>
-	    </dl>
-	  </li>
-	  <li class="layui-nav-item">
-	    <a href="javascript:;">内容管理</a>
-	    <dl class="layui-nav-child">
-	      <dd><a href="#">菜单1</a></dd>
-	      <dd><a href="#">菜单2</a></dd>
-	      <dd><a href="#">菜单3</a></dd>
-	    </dl>
-	  </li>
-	  <li class="layui-nav-item">
-	    <a href="javascript:;">流程管理</a>
-	    <dl class="layui-nav-child">
-	      <dd><a href="#">菜单1</a></dd>
-	      <dd><a href="#">菜单2</a></dd>
-	      <dd><a href="#">菜单3</a></dd>
-	    </dl>
-	  </li>
+	<ul class="layui-nav layui-nav-tree layui-nav-side"
+		style="border-radius: 0px; top: 60px;">
+		<li class="layui-nav-item layui-nav-itemed"><a href="javascript:;">主页</a></li>
+		<li class="layui-nav-item"><a href="javascript:;">系统管理</a>
+			<dl class="layui-nav-child">
+				<dd><a href="#"	onclick="common_ajax.ajaxMainPanel('/admin/menu/list');">菜单管理</a></dd>
+				<dd><a href="#">菜单2</a></dd>
+				<dd><a href="#">菜单3</a></dd>
+			</dl></li>
+		<li class="layui-nav-item">
+			<a href="javascript:;">权限管理</a>
+			<dl class="layui-nav-child">
+				<dd><a href="#" onclick="">菜单1</a></dd>
+				<dd><a href="#">菜单2</a></dd>
+				<dd><a href="#">菜单3</a></dd>
+			</dl>
+		</li>
+		<li class="layui-nav-item">
+			<a href="javascript:;">流程管理</a>
+			<dl class="layui-nav-child">
+				<dd><a href="#" onclick="">菜单1</a></dd>
+				<dd><a href="#">菜单2</a></dd>
+				<dd><a href="#">菜单3</a></dd>
+			</dl>
+		</li>
 	</ul>
 </div>

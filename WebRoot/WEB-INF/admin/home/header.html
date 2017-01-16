@@ -1,4 +1,4 @@
-<ul class="layui-nav" id="header" style="padding: 0px 40px 0px 0px;height:60px;">
+<ul class="layui-nav" id="header" style="padding: 0px 40px 0px 0px;z-index: 99999;height:60px;position: fixed;width: 100%;top: 0px;">
 	<li class="layui-nav-item" onclick="siderLeftNavi()">
 		<a href="javascript:void(0);" onclick="{}"><i class="layui-icon">&#xe649;</i></a>
 	</li>
@@ -22,6 +22,7 @@
 </ul>
 
 <script>
+//左侧导航显示隐藏
 function siderLeftNavi(){
 	$("#lefter").addClass("animated");
 	if($("#lefter").hasClass("leftSideShow")){
@@ -34,4 +35,55 @@ function siderLeftNavi(){
 		$("#main-content").attr("style","margin-left:200px;")
 	}
 }
+function siteBlockFull(){
+	$(".site-block-full").each(function(){
+		var h = $("body").height()-166;
+		$(this).css("height",h);
+	})
+}
 </script>
+<style>
+	body{
+		height: 100%;
+		position: absolute;
+		width: 100%;
+	}
+	.breadcrumb{
+		list-style: none;
+		padding-left:20px
+	}
+	.breadcrumb > li{
+		display: inline-block;
+		color : #888888;
+	}
+	.breadcrumb > li > a{
+		color : #888888;
+	}
+	.breadcrumb > li > .divider{
+		padding : 0 15px;
+		color : #888888;
+	}
+	.layui-elem-quote{
+		padding: 11px;
+	}
+	
+	
+	.site-block-full {
+	    padding: 20px;
+	    border: 1px solid #eee;
+		margin: 0 10px;
+	}
+	.pages{
+		margin:0 auto;
+		width: 560px;
+		position: absolute;
+		bottom: 0px;
+	}
+	
+	.clear {
+	    clear:both; 
+	    height: 0; 
+	    line-height: 0; 
+	    font-size: 0;
+	}
+</style>
