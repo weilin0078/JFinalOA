@@ -70,9 +70,9 @@ public abstract class BaseController extends Controller {
 	 */
 	public void renderSuccess(String code, Object data, String description) {
 		RenderBean renderBean = new RenderBean();
-		renderBean.setStatus(true);
+		renderBean.setSuccess(true);
 		renderBean.setData(data);
-		renderBean.setDescription(description);
+		renderBean.setMessage(description);
 		renderJson(renderBean);
 	}
 
@@ -85,9 +85,9 @@ public abstract class BaseController extends Controller {
 	 */
 	public void renderError(String code, Object data, String description) {
 		RenderBean renderBean = new RenderBean();
-		renderBean.setStatus(false);
+		renderBean.setSuccess(false);
 		renderBean.setCode(code);
-		renderBean.setDescription(description);
+		renderBean.setMessage(description);
 		renderJson(renderBean);
 	}
 

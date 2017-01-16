@@ -13,7 +13,7 @@ public class RenderBean implements Serializable{
 	/**
 	 * 状态：成功success、失败error
 	 */
-	private Boolean status ;
+	private Boolean success ;
 	
 	/**
 	 * 状态码
@@ -23,21 +23,19 @@ public class RenderBean implements Serializable{
 	/**
 	 * 描述
 	 */
-	private String description = "";
+	private String message = "";
 	
 	/**
 	 * 正常情况下返回的数据
 	 */
 	private Object data;
 
-
-
-	public Boolean getStatus() {
-		return status;
+	public Boolean getSuccess() {
+		return success;
 	}
 
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setSuccess(Boolean success) {
+		this.success = success;
 	}
 
 	public String getCode() {
@@ -48,12 +46,12 @@ public class RenderBean implements Serializable{
 		this.code = code;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public Object getData() {
@@ -63,5 +61,8 @@ public class RenderBean implements Serializable{
 	public void setData(Object data) {
 		this.data = data;
 	}
+
+
+
 	
 }

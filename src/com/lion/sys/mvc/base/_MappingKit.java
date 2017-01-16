@@ -1,6 +1,7 @@
 package com.lion.sys.mvc.base;
 
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.lion.sys.mvc.menu.SysMenu;
 import com.lion.sys.mvc.user.SysUser;
 
 /**
@@ -17,7 +18,7 @@ import com.lion.sys.mvc.user.SysUser;
 public class _MappingKit {
 
 	public static void mapping(ActiveRecordPlugin arp) {
-		arp.addMapping("sys_user", "id", SysUser.class);
+		arp.addMapping("sys_menu", "id", SysMenu.class);
 	}
 }
 

@@ -59,7 +59,7 @@ var common_ajax = function() {
 	};
 	
 	/**
-	 * ajaxForm请求，执行前进行确认
+	 * ajaxDiv请求，执行前进行确认
 	 */
 	var ajaxDivConfirm = function(divId, url, data, callback) {
 		bootbox.confirm("确定要这样操作吗？", function(result) {

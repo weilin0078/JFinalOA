@@ -6,14 +6,27 @@ Table: sys_user
  orderid      | BIGINT(19)    | YES  |     |         |         
  username     | VARCHAR(50)   | YES  |     |         |         
  password     | VARCHAR(500)  | YES  |     |         |         
- name         | VARCHAR(25)   | YES  |     |         | ÐÕÃû      
+ name         | VARCHAR(25)   | YES  |     |         | ï¿½ï¿½ï¿½ï¿½      
  salt         | VARCHAR(500)  | YES  |     |         |         
  status       | CHAR(1)       | YES  |     | 1       |         
- stopdate     | TIMESTAMP(19) | YES  |     |         | ÍË³öÊ±¼ä    
- departmentid | VARCHAR(32)   | YES  |     |         | ²¿ÃÅID    
- stationid    | TEXT(65535)   | YES  |     |         | ¸ÚÎ»ID    
+ stopdate     | TIMESTAMP(19) | YES  |     |         | ï¿½Ë³ï¿½Ê±ï¿½ï¿½    
+ departmentid | VARCHAR(32)   | YES  |     |         | ï¿½ï¿½ï¿½ï¿½ID    
+ stationid    | TEXT(65535)   | YES  |     |         | ï¿½ï¿½Î»ID    
  email        | VARCHAR(100)  | YES  |     |         |         
- idcard       | VARCHAR(25)   | YES  |     |         | Éí·ÝÖ¤ºÅ    
+ idcard       | VARCHAR(25)   | YES  |     |         | ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½    
  mobile       | VARCHAR(20)   | YES  |     |         |         
 --------------+---------------+------+-----+---------+---------
+
+
+Table: sys_menu
+------------+-------------+------+-----+---------+---------
+ Field      | Type        | Null | Key | Default | Remarks 
+------------+-------------+------+-----+---------+---------
+ id         | VARCHAR(32) | NO   | PRI |         |         
+ name       | VARCHAR(25) | YES  |     |         |         
+ order      | BIGINT(19)  | YES  |     |         |         
+ operatorid | VARCHAR(32) | YES  |     |         |         
+ parent_id  | VARCHAR(32) | YES  |     |         |         
+ isparent   | VARCHAR(5)  | YES  |     |         |         
+------------+-------------+------+-----+---------+---------
 
