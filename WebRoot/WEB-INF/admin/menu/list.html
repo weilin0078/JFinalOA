@@ -109,11 +109,10 @@ layui.use(['laypage', 'layer','tree'], function(){
   /**
   * 左侧树渲染
   */
-  common_ajax.ajaxFunc("/admin/menu/getAllMenuTree",null,"json",function(data){
-	  layui.tree({
-	      elem: '#menuTree' //传入元素选择器
-	      ,nodes: data.data
-	    });
+  var d = common_ajax.ajaxFunc("/admin/menu/getAllMenuTree",null,"json",null);
+  layui.tree({
+      elem: '#menuTree' //传入元素选择器
+      ,nodes: d.data
   });
 
           
