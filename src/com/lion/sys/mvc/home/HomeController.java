@@ -19,4 +19,10 @@ public class HomeController extends BaseController {
     public void content(){
     	render("/WEB-INF/admin/home/content.html");
     }
+    /***
+     * 获取消息中心最新消息
+     */
+    public void getSiteMessageTipPage(){
+    	render("/WEB-INF/admin/home/siteMessageTip.html");
+    }
 }

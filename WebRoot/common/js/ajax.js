@@ -75,21 +75,21 @@ var common_ajax = function() {
 	 * @param data 参数
 	 * @param callback 回调
 	 */
-	var ajaxMainPanel = function(url, data, callback){
-		var result = ajaxFunc(url, data, callback);
-		$("#main-content").html(result);
-	};
+//	var ajaxMainPanel = function(url, data, callback){
+//		var result = ajaxFunc(url, data, callback);
+//		$("#main-content").html(result);
+//	};
 	
 	/**
 	 * ajaxForm请求，执行前进行确认
 	 */
-	var ajaxMainPanelConfirm = function(url, data, callback) {
-		bootbox.confirm("确定要这样操作吗？", function(result) {
-			if(result){
-				ajaxMainPanel(url, data, callback);
-			}
-		});
-	};
+//	var ajaxMainPanelConfirm = function(url, data, callback) {
+//		bootbox.confirm("确定要这样操作吗？", function(result) {
+//			if(result){
+//				ajaxMainPanel(url, data, callback);
+//			}
+//		});
+//	};
 	
 	/**
 	 * ajax提交form求并返回结果
@@ -156,21 +156,21 @@ var common_ajax = function() {
 	 * @param formId 提交formid
 	 * @param callback 回调
 	 */
-	var ajaxFormMainPanel = function(formId, callback){
-		var result = ajaxForm(formId, callback);
-		$("#main-content").html(result);
-	};
+//	var ajaxFormMainPanel = function(formId, callback){
+//		var result = ajaxForm(formId, callback);
+//		$("#main-content").html(result);
+//	};
 
 	/**
 	 * ajaxFormMainPanel请求，执行前进行确认
 	 */
-	var ajaxFormMainPanelConfirm = function(formId, callback) {
-		bootbox.confirm("确定要这样操作吗？", function(result) {
-			if(result){
-				ajaxFormMainPanel(formId, callback);
-			}
-		});
-	};
+//	var ajaxFormMainPanelConfirm = function(formId, callback) {
+//		bootbox.confirm("确定要这样操作吗？", function(result) {
+//			if(result){
+//				ajaxFormMainPanel(formId, callback);
+//			}
+//		});
+//	};
 	
 	return {
 		ajaxFunc : ajaxFunc,
@@ -179,8 +179,8 @@ var common_ajax = function() {
 		ajaxDiv : ajaxDiv,
 		ajaxDivConfirm : ajaxDivConfirm,
 		
-		ajaxMainPanel : ajaxMainPanel,
-		ajaxMainPanelConfirm : ajaxMainPanelConfirm,
+//		ajaxMainPanel : ajaxMainPanel,
+//		ajaxMainPanelConfirm : ajaxMainPanelConfirm,
 		
 		ajaxForm : ajaxForm,
 		ajaxFormConfirm : ajaxFormConfirm,
@@ -188,8 +188,8 @@ var common_ajax = function() {
 		ajaxFormDiv : ajaxFormDiv,
 		ajaxFormDivConfirm : ajaxFormDivConfirm,
 		
-		ajaxFormMainPanel : ajaxFormMainPanel,
-		ajaxFormMainPanelConfirm : ajaxFormMainPanelConfirm
+//		ajaxFormMainPanel : ajaxFormMainPanel,
+//		ajaxFormMainPanelConfirm : ajaxFormMainPanelConfirm
 	};
 	
 }();
