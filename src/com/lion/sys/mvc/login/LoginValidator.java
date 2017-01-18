@@ -16,7 +16,7 @@ public class LoginValidator extends Validator {
 	protected void handleError(Controller c) {
 		c.keepPara("username");
         c.createToken("loginToken");
-        c.render("/templates/account/login.html");
+        c.render("/login.html");
 	}
 
 }

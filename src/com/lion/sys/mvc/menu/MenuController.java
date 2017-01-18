@@ -30,5 +30,8 @@ public class MenuController extends BaseController {
     	renderSuccess(null, rootList, null);
     }
     
-    
+    public void listData(){
+    	String curr = getPara("curr");
+    	
+    }
 }

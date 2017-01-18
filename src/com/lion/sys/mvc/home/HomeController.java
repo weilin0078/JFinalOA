@@ -10,6 +10,9 @@ public class HomeController extends BaseController {
     public void index(){
     	render("/WEB-INF/admin/home/index.html");
     }
+    public void getMainPage(){
+    	render("/WEB-INF/admin/home/main.html");
+    }
     /**
      * 内容页
      * */

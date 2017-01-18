@@ -18,7 +18,7 @@
 		  <thead>
 			    <tr><th>昵称</th><th>加入时间</th><th>签名</th></tr> 
 		  </thead>
-		  <tbody>
+		  <tbody id = "tableBody">
 		    	<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
 				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
 				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
@@ -82,27 +82,17 @@ layui.use(['laypage', 'layer','tree'], function(){
     '澳门',
     '台北'
   ];
-  var nums = 5; //每页出现的数据量
-  
-  //模拟渲染
-  var render = function(curr){
-    //此处只是演示，实际场景通常是返回已经当前页已经分组好的数据
-    var str = '', last = curr*nums - 1;
-    last = last >= data.length ? (data.length-1) : last;
-    for(var i = (curr*nums - nums); i <= last; i++){
-      str += '<li>'+ data[i] +'</li>';
-    }
-    return str;
-  };
+  var nums = 10; //每页出现的数据量
   
   //调用分页
   laypage({
-    cont: 'pages'
-    ,pages: Math.ceil(data.length/nums) //得到总页数
-    ,jump: function(obj){
-      //document.getElementById('biuuu_city_list').innerHTML = render(obj.curr);
-    }
-    ,skip: true
+	    cont: 'pages'
+	    ,pages: Math.ceil(data.length/nums) //得到总页数
+	    ,jump: function(obj){
+	    	var d = common_ajax.ajaxFunc(ctx+"/admin/menu/listData?curr="+obj.curr,null,"json",null);//查询数据
+	    	$("#tableBody").renderPages(d);
+	    }
+	    ,skip: true
   });
   
   
