@@ -56,13 +56,13 @@ layui.config({
 	});
 
 	//锁屏
-	$(document).on('keydown', function() {
-		var e = window.event;
-		if(e.keyCode === 76 && e.altKey) {
-			//alert("你按下了alt+l");
-			lock($, layer);
-		}
-	});
+//	$(document).on('keydown', function() {
+//		var e = window.event;
+//		if(e.keyCode === 76 && e.altKey) {
+//			//alert("你按下了alt+l");
+//			lock($, layer);
+//		}
+//	});
 	$('#lock').on('click', function() {
 		lock($, layer);
 	});
