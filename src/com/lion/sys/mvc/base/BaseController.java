@@ -60,7 +60,19 @@ public abstract class BaseController extends Controller {
 		}
 		renderFile(file, downloadSaveFileName);
 	}
-
+	
+	/***
+	 * 分页数据
+	 */
+	public void renderPage(Object data,String msg ,int count){
+		RenderBean renderBean = new RenderBean();
+		renderBean.setSuccess(true);
+		renderBean.setData(data);
+		renderBean.setMessage(msg);
+		renderBean.setCount(count);
+		renderJson(renderBean);
+	}
+	
 	/**
 	 * 自定义render
 	 * @param code 状态码

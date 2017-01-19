@@ -3,6 +3,8 @@ package com.lion.sys.mvc.menu;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.activerecord.Page;
 import com.lion.sys.dto.LayTreeNode;
 import com.lion.sys.mvc.base.BaseController;
 
@@ -23,7 +25,7 @@ public class MenuController extends BaseController {
     	//声明根节点
     	LayTreeNode root = new LayTreeNode();
     	root.setId("#root");
-    	root.setName("菜单管理");
+    	root.setName("根目录");
     	root.setChildren(nodelist);
     	root.setSpread(true);
     	rootList.add(root);
@@ -31,7 +33,13 @@ public class MenuController extends BaseController {
     }
     
     public void listData(){
-    	String curr = getPara("curr");
-    	
+    	String curr = getPara("pageIndex");
+    	String pageSize = getPara("pageSize");
+    	String pid = getPara("pid");
+    	if(StrKit.isBlank(pid)){
+    		pid = "#root";
+    	}
+    	Page<SysMenu> page = SysMenu.dao.getChildrenPageByPid(Integer.valueOf(curr),Integer.valueOf(pageSize),pid);
+    	renderPage(page.getList(),"" ,page.getTotalRow());
     }
 }

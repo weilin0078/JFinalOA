@@ -7,8 +7,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<title>登录</title>
-		<link rel="stylesheet" type="text/css" href="${ctx!}/common/lib/layui/css/layui.css" />
-		<link rel="stylesheet" type="text/css" href="${ctx!}/common/css/login.css" />
+		<link rel="stylesheet" type="text/css" href="#(ctx??)/common/lib/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="#(ctx??)/common/css/login.css" />
 	</head>
 
 	<body class="beg-login-bg">
@@ -17,7 +17,7 @@
 				<h1>后台登录</h1>
 			</header>
 			<div class="beg-login-main">
-				<form action="${ctx!}/admin/login/doLogin" class="layui-form" method="post">
+				<form action="#(ctx??)/admin/login/doLogin" class="layui-form" method="post">
 					<div class="layui-form-item">
 						<label class="beg-login-icon">
 	                        <i class="layui-icon">&#xe612;</i>
@@ -34,7 +34,7 @@
 				    	<input type="text" name="captcha" required  lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
 				    </div>
 				    <div class="layui-input-inline"style="width: 0px;">
-				      	<img alt="验证码出错啦~!" src="${ctx!}/admin/login/img">
+				      	<img alt="验证码出错啦~!" src="#(ctx??)/admin/login/img">
 				    </div>
 					<div class="layui-form-item">
 						<div class="beg-pull-left beg-login-remember">
@@ -51,10 +51,10 @@
 				</form>
 			</div>
 			<footer>
-				<p>Beginner © www.zhengjinfan.cn</p>
+				<!-- <p>Beginner © www.zhengjinfan.cn</p> -->
 			</footer>
 		</div>
-		<script type="text/javascript" src="${ctx!}/common/lib/layui/layui.js"></script>
+		<script type="text/javascript" src="#(ctx??)/common/lib/layui/layui.js"></script>
 		<script>
 			layui.use(['layer', 'form'], function() {
 				var layer = layui.layer,
@@ -66,7 +66,7 @@
 				    return true;
 				  });
 				  
-				  var err = "${error!}";
+				  var err = "#(error??)";
 				  if(err){
 					  layer.msg(err, {icon: 5,anim:6}); 
 				  }

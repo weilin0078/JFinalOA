@@ -1,112 +1,91 @@
-<blockquote class="layui-elem-quote">
-	<ul class="breadcrumb">
-		<li><a href="#" onclick="common_ajax.ajaxMainPanel('/admin/home/content');">主页</a><span class="divider">/</span></li>
-		<li>菜单管理</li>
-	</ul>
-</blockquote>
-
-<div class="site-block-full" style="float: left;width: 200px;">
-	<ul id="menuTree"></ul>
+	#include("/common/include/include.html")
+<style>
+	.breadcrumb li{
+		float:left;
+	}
+</style>
+<div class="admin-main">
+	<blockquote class="layui-elem-quote">
+					主页/菜单管理
+	</blockquote>
+	
+	<div class="site-block-full" style="float: left;width: 200px;">
+		<ul id="menuTree"></ul>
+	</div>
+	<div class="site-block-full" style="width: auto;margin-left: 260px;">
+		<table class="layui-table">
+			  <colgroup>
+				    <col width="150">
+				    <col width="200">
+				    <col>
+			  </colgroup>
+			  <thead>
+				    <tr><th>菜单名称</th><th>功能名称</th><th>对应URL</th><th>父级</th><th>操作</th></tr> 
+			  </thead>
+			  <tbody id = "tableBody"></tbody>
+		</table>           
+		  <div id="pages" class = "pages"></div>
+	</div>
 </div>
-<div class="site-block-full" style="width: auto;margin-left: 260px;">
-	<table class="layui-table">
-		  <colgroup>
-			    <col width="150">
-			    <col width="200">
-			    <col>
-		  </colgroup>
-		  <thead>
-			    <tr><th>昵称</th><th>加入时间</th><th>签名</th></tr> 
-		  </thead>
-		  <tbody id = "tableBody">
-		    	<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
-				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
-				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
-				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
-				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
-				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
-				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
-				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
-				<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>
-		  </tbody>
-	</table>           
-	  <div id="pages" class = "pages"></div>
-</div>
-
+		<!--模板-->
+		<script type="text/html" id="conTemp">
+			{{# layui.each(d.data, function(index, item){ }}
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>{{ item.name }}</td>
+				<td>{{ item.age }}</td>
+				<td>{{ item.createtime }}</td>
+				<td>
+					<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
+					<a href="/manage/article_edit_1" class="layui-btn layui-btn-mini">编辑</a>
+					<a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+				</td>
+			</tr>
+			{{# }); }}
+		</script>
 
 <script>
-layui.use(['laypage', 'layer','tree'], function(){
-  var laypage = layui.laypage
-  var layer = layui.layer;
-  var tree = layui.tree;
-  
-  
-  
-  
-  var data = [
-    '北京',
-    '上海',
-    '广州',
-    '深圳',
-    '杭州',
-    '长沙',
-    '合肥',
-    '宁夏',
-    '成都',
-    '西安',
-    '南昌',
-    '上饶',
-    '沈阳',
-    '济南',
-    '厦门',
-    '福州',
-    '九江',
-    '宜春',
-    '赣州',
-    '宁波',
-    '绍兴',
-    '无锡',
-    '苏州',
-    '徐州',
-    '东莞',
-    '佛山',
-    '中山',
-    '成都',
-    '武汉',
-    '青岛',
-    '天津',
-    '重庆',
-    '南京',
-    '九江',
-    '香港',
-    '澳门',
-    '台北'
-  ];
-  var nums = 10; //每页出现的数据量
-  
-  //调用分页
-  laypage({
-	    cont: 'pages'
-	    ,pages: Math.ceil(data.length/nums) //得到总页数
-	    ,jump: function(obj){
-	    	var d = common_ajax.ajaxFunc(ctx+"/admin/menu/listData?curr="+obj.curr,null,"json",null);//查询数据
-	    	$("#tableBody").renderPages(d);
-	    }
-	    ,skip: true
-  });
-  
-  
-  /**
-  * 左侧树渲染
-  */
-  var d = common_ajax.ajaxFunc("/admin/menu/getAllMenuTree",null,"json",null);
-  layui.tree({
-      elem: '#menuTree' //传入元素选择器
-      ,nodes: d.data
-  });
-
-          
-  
-  
+layui.config({
+	  base: ctx+'/common/js/'
+}).use(['laypage','tree','ajax','paging'], function(){
+		 laypage = layui.laypage;
+		 ajax = layui.ajax;
+		 tree = layui.tree;
+		 paging = layui.paging();
+		//初始化左侧菜单树
+		var d = ajax.ajaxFunc(ctx+"/admin/menu/getAllMenuTree",null,"json",null);
+		layui.tree({
+		    elem: '#menuTree' //传入元素选择器
+		    ,nodes: d.data
+		});
+		paging.init({
+			url: ctx+"/admin/menu/listData",  //地址
+			elem: '#tableBody',
+			tempElem: '#conTemp',  //模块容器
+			pageConfig: {        //分页参数配置
+				elem: '#pages',  //分页容器
+				pageSize: 3     //分页大小
+			},
+			success:function(){   //渲染成功的回调
+				//alert('渲染成功');
+			},
+			fail:function(msg){       //获取数据失败的回调
+				//alert('获取数据失败')
+			},
+			complate:function(){     //完成的回调
+				//alert('处理完成');
+			}
+		});
+		
+		/* 
+		laypage({
+			    cont: 'pages'
+			    ,pages: 30 //得到总页数
+			    ,jump: function(obj){
+			    	//var d = common_ajax.ajaxFunc(ctx+"/admin/menu/listData?curr="+obj.curr,null,"json",null);//查询数据
+			    }
+			    ,skip: true
+		});  */
 });
+
 </script>

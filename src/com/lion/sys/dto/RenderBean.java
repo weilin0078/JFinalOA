@@ -25,6 +25,11 @@ public class RenderBean implements Serializable{
 	 */
 	private String message = "";
 	
+	/***
+	 * 总数-分页
+	 */
+	private int count;
+	
 	/**
 	 * 正常情况下返回的数据
 	 */
@@ -60,6 +65,14 @@ public class RenderBean implements Serializable{
 
 	public void setData(Object data) {
 		this.data = data;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 

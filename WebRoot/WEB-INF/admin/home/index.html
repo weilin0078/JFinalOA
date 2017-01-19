@@ -9,12 +9,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="format-detection" content="telephone=no">
-		<link rel="stylesheet" type="text/css" href="${ctx!}/common/lib/layui/css/layui.css" />
-		<link rel="stylesheet" href="${ctx!}/common/css/global.css" media="all">
-		<link rel="stylesheet" href="${ctx!}/common/lib/font-awesome/css/font-awesome.min.css">
-		<script>
-			var ctx = "${ctx!}";
-		</script>
+			#include("/common/include/include.html")
 	</head>
 
 	<body>
@@ -22,7 +17,7 @@
 			<div class="layui-header header header-demo">
 				<div class="layui-main">
 					<div class="admin-login-box">
-						<a class="logo" style="left: 0;" href="http://beginner.zhengjinfan.cn/demo/beginner_admin/">
+						<a class="logo" style="left: 0;" href="#">
 							<span style="font-size: 22px;">JFinalOA</span>
 						</a>
 						<div class="admin-side-toggle">
@@ -55,9 +50,42 @@
 				<div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side">
 				<ul class="layui-nav layui-nav-tree">
 						<li class="layui-nav-item layui-nav-itemed">
-							<a href="javascript:;"><i class="fa fa-cubes" aria-hidden="true" data-icon="fa-cubes"></i><cite>基本元素</cite><span class="layui-nav-more"></span></a><dl class="layui-nav-child"><dd><a href="javascript:;" data-url="button.html"><i class="layui-icon" data-icon=""></i><cite>按钮</cite></a></dd><dd><a href="javascript:;" data-url="form.html"><i class="layui-icon" data-icon=""></i><cite>表单</cite></a></dd><dd><a href="javascript:;" data-url="table.html"><i class="layui-icon" data-icon=""></i><cite>表格</cite></a></dd><dd><a href="javascript:;" data-url="nav.html"><i class="layui-icon" data-icon=""></i><cite>导航</cite></a></dd><dd><a href="javascript:;" data-url="tab.html"><i class="layui-icon" data-icon=""></i><cite>Tab选项卡</cite></a></dd><dd><a href="javascript:;" data-url="auxiliar.html"><i class="layui-icon" data-icon=""></i><cite>辅助性元素</cite></a></dd></dl>
+							<a href="javascript:;"><i class="fa fa-cubes" aria-hidden="true" data-icon="fa-cubes"></i><cite>系统设置</cite><span class="layui-nav-more"></span></a>
+							<dl class="layui-nav-child">
+								<dd><a href="javascript:;" data-url="#(ctx??)/admin/menu/list"><i class="layui-icon" data-icon=""></i><cite>菜单管理</cite></a></dd>
+								<dd><a href="javascript:;" data-url="auxiliar.html"><i class="layui-icon" data-icon=""></i><cite>组织结构</cite></a></dd>
+								<dd><a href="javascript:;" data-url="tab.html"><i class="layui-icon" data-icon=""></i><cite>用户管理</cite></a></dd>
+								<dd><a href="javascript:;" data-url="auxiliar.html"><i class="layui-icon" data-icon=""></i><cite>岗位管理</cite></a></dd>
+							</dl>
 						</li>
-						<li style="" class="layui-nav-item"><a href="javascript:;"><i class="fa fa-cogs" aria-hidden="true" data-icon="fa-cogs"></i><cite>组件</cite><span class="layui-nav-more"></span></a><dl class="layui-nav-child"><dd><a href="javascript:;" data-url="begtable.html"><i class="fa fa-table" data-icon="fa-table" aria-hidden="true"></i><cite>Datatable</cite></a></dd><dd><a href="javascript:;" data-url="navbar.html"><i class="fa fa-navicon" data-icon="fa-navicon" aria-hidden="true"></i><cite>Navbar组件</cite></a></dd><dd><a href="javascript:;" data-url="paging.html"><i class="layui-icon" data-icon=""></i><cite>Laytpl+Laypage</cite></a></dd></dl></li><li class="layui-nav-item"><a href="javascript:;"><i class="layui-icon" data-icon="ဂ">ဂ</i><cite>第三方组件</cite><span class="layui-nav-more"></span></a><dl class="layui-nav-child"><dd><a href="javascript:;" data-url="icheck.html"><i class="fa fa-check-square-o" data-icon="fa-check-square-o" aria-hidden="true"></i><cite>iCheck组件</cite></a></dd></dl></li><li class="layui-nav-item"><a href="javascript:;"><i class="fa fa-address-book" aria-hidden="true" data-icon="fa-address-book"></i><cite>地址本</cite><span class="layui-nav-more"></span></a><dl class="layui-nav-child"><dd><a href="javascript:;" data-url="https://www.github.com/"><i class="fa fa-github" data-icon="fa-github" aria-hidden="true"></i><cite>Github</cite></a></dd><dd><a href="javascript:;" data-url="http://www.qq.com/"><i class="fa fa-qq" data-icon="fa-qq" aria-hidden="true"></i><cite>QQ</cite></a></dd><dd><a href="javascript:;" data-url="http://fly.layui.com/"><i class="layui-icon" data-icon=""></i><cite>Fly社区</cite></a></dd><dd><a href="javascript:;" data-url="http://weibo.com/"><i class="fa fa-weibo" data-icon="fa-weibo" aria-hidden="true"></i><cite>新浪微博</cite></a></dd></dl></li><li class="layui-nav-item"><a href="javascript:;" data-url="https://www.baidu.com"><i class="fa fa-stop-circle" aria-hidden="true" data-icon="fa-stop-circle"></i><cite>这是一级导航</cite></a></li></ul>
+						<li class="layui-nav-item">
+							<a href="javascript:;"><i class="layui-icon" data-icon="ဂ">ဂ</i><cite>权限管理</cite><span class="layui-nav-more"></span></a>
+							<dl class="layui-nav-child">
+								<dd><a href="javascript:;" data-url="nav.html"><i class="layui-icon" data-icon=""></i><cite>功能管理</cite></a></dd>
+								<dd><a href="javascript:;" data-url="form.html"><i class="layui-icon" data-icon=""></i><cite>角色管理</cite></a></dd>
+								<dd><a href="javascript:;" data-url="table.html"><i class="layui-icon" data-icon=""></i><cite>权限分配</cite></a></dd>
+							</dl>
+						</li>
+						<li style="" class="layui-nav-item">
+							<a href="javascript:;"><i class="fa fa-cogs" aria-hidden="true" data-icon="fa-cogs"></i><cite>内容管理</cite><span class="layui-nav-more"></span></a>
+							<dl class="layui-nav-child">
+								<dd><a href="javascript:;" data-url="begtable.html"><i class="fa fa-table" data-icon="fa-table" aria-hidden="true"></i><cite>Datatable</cite></a></dd>
+								<dd><a href="javascript:;" data-url="navbar.html"><i class="fa fa-navicon" data-icon="fa-navicon" aria-hidden="true"></i><cite>Navbar组件</cite></a></dd>
+								<dd><a href="javascript:;" data-url="paging.html"><i class="layui-icon" data-icon=""></i><cite>Laytpl+Laypage</cite></a></dd>
+							</dl>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;"><i class="fa fa-address-book" aria-hidden="true" data-icon="fa-address-book"></i><cite>流程管理</cite><span class="layui-nav-more"></span></a>
+							<dl class="layui-nav-child">
+								<dd><a href="javascript:;" data-url="https://www.github.com/"><i class="fa fa-github" data-icon="fa-github" aria-hidden="true"></i><cite>运行中的流程</cite></a></dd>
+								<dd><a href="javascript:;" data-url="http://www.qq.com/"><i class="fa fa-qq" data-icon="fa-qq" aria-hidden="true"></i><cite>模型管理</cite></a></dd>
+								<dd><a href="javascript:;" data-url="http://fly.layui.com/"><i class="layui-icon" data-icon=""></i><cite>表单设计流程</cite></a></dd>
+							</dl>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;" data-url="https://www.baidu.com"><i class="fa fa-stop-circle" aria-hidden="true" data-icon="fa-stop-circle"></i><cite>这是一级导航</cite></a>
+						</li>
+					</ul>
 				</div>
 			</div>
 			<div class="layui-body" style="bottom: 0;border-left: solid 2px #1AA094;" id="admin-body">
@@ -70,7 +98,7 @@
 					</ul>
 					<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
 						<div class="layui-tab-item layui-show">
-							<iframe src="${ctx!}/admin/home/getMainPage"></iframe>
+							<iframe src="#(ctx??)/admin/home/getMainPage"></iframe>
 						</div>
 					</div>
 				</div>
@@ -91,7 +119,7 @@
 			<script type="text/template" id="lock-temp">
 				<div class="admin-header-lock" id="lock-box">
 					<div class="admin-header-lock-img">
-						<img src="${ctx!}/images/0.jpg"/>
+						<img src="#(ctx??)/images/0.jpg"/>
 					</div>
 					<div class="admin-header-lock-name" id="lockUserName">beginner</div>
 					<input type="text" class="admin-header-lock-input" value="输入密码解锁.." name="lockPwd" id="lockPwd" />
@@ -99,22 +127,16 @@
 				</div>
 			</script>
 			<!--锁屏模板 end -->
-			<script type="text/javascript" src="${ctx!}/common/lib/layui/layui.js"></script>
-			<script type="text/javascript" src="${ctx!}/common/js/navbar.js"></script>
-			<script type="text/javascript" src="${ctx!}/common/js/index.js"></script>
+			<script type="text/javascript" src="#(ctx??)/common/js/navbar.js"></script>
+			<script type="text/javascript" src="#(ctx??)/common/js/index.js"></script>
 			<script>
-				var $; 
-				layui.use('layer', function() {
-					$ = layui.jquery,
-						layer = layui.layer;
-				});
 				function openSiteMessageTip(){
-					layer.tips(common_ajax.ajaxFunc('/admin/home/getSiteMessageTipPage',null,null,null), '#siteMessage', {
+					layer.tips(ajax.ajaxFunc(ctx+'/admin/home/getSiteMessageTipPage',null,null,null), '#siteMessage', {
 						  tips: [3,'#f2f2f2'],area: ['510px', 'auto'],time: 0,shadeClose: true,shade: [0.0000001, '#fff'],moveOut: true
 					});					
 				}
 			</script>
-			<script type="text/javascript" src="${ctx!}/common/js/ajax.js"></script>
+			
 		</div>
 	</body>
 

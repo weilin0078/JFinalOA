@@ -3,6 +3,7 @@ package com.lion.sys.mvc.menu;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jfinal.plugin.activerecord.Page;
 import com.lion.sys.dto.LayTreeNode;
 import com.lion.sys.mvc.base.model.BaseSysMenu;
 
@@ -17,8 +18,16 @@ public class SysMenu extends BaseSysMenu<SysMenu> {
 	 * @param id
 	 * @return
 	 */
-	public List<SysMenu> getChildrenById(String id){
+	public List<SysMenu> getChildrenByPid(String id){
 		return SysMenu.dao.find("select * from sys_menu m where m.parent_id='"+id+"'");
+	}
+	/***
+	 * 根据id 查询孩子分页
+	 * @param id
+	 * @return
+	 */
+	public Page<SysMenu> getChildrenPageByPid(int pnum,int psize, String pid){
+		return SysMenu.dao.paginate(pnum, psize, "select * ", " from sys_menu m where m.parent_id='"+pid+"'");
 	}
 	/***
 	 * 菜单转成LayTreeNode
@@ -61,8 +70,7 @@ public class SysMenu extends BaseSysMenu<SysMenu> {
 	 * @return
 	 */
 	public List<SysMenu> getChildren(String id){
-		System.out.println("************赵孩子****************");
-		List<SysMenu> menuList =  getChildrenById(id);//根据id查询孩子
+		List<SysMenu> menuList =  getChildrenByPid(id);//根据id查询孩子
 		for(SysMenu m : menuList){
 			System.out.println(m.getName());
 			m.setChildren(getChildren(m.getId()));

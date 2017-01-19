@@ -14,7 +14,7 @@ layui.define(['layer', 'laypage', 'laytpl'], function(exports) {
 			paged: true,
 			pageConfig: { //参数应该为object类型
 				elem: undefined,
-				pageSize: 15 //分页大小
+				pageSize: 10 //分页大小
 			},
 			success: undefined, //type:function
 			fail: undefined, //type:function
@@ -66,7 +66,8 @@ layui.define(['layer', 'laypage', 'laytpl'], function(exports) {
 			throwError('Paging Error:type参数配置出错，只支持GET或都POST');
 		}
 		that.get({
-			pageIndex: 1
+			pageIndex: 1,
+			pageSize:_pageConfig.pageSize
 		});
 
 		return that;
@@ -81,10 +82,10 @@ layui.define(['layer', 'laypage', 'laytpl'], function(exports) {
 		$.ajax({
 			type: _config.type,
 			url: _config.url,
-			data: options.params,
+			data: options,
 			dataType: 'json',
 			success: function(result, status, xhr) {
-				if(result.code === 0) {
+				if(result.success) {
 					//获取模板
 					var tpl = $(_config.tempElem).html();
 					//渲染数据
@@ -104,13 +105,15 @@ layui.define(['layer', 'laypage', 'laytpl'], function(exports) {
 						var defaults = {
 							cont: $(_pageConfig.elem),
 							curr: options.pageIndex,
+							skip: true,
 							pages: pages,
 							jump: function(obj, first) {
 								//得到了当前页，用于向服务端请求对应数据
 								var curr = obj.curr;
 								if(!first) {
 									that.get({
-										pageIndex: curr
+										pageIndex: curr,
+										pageSize:pageSize
 									});
 								}
 							}
@@ -120,7 +123,7 @@ layui.define(['layer', 'laypage', 'laytpl'], function(exports) {
 					}
 					_config.success(); //渲染成功
 				} else {
-					_config.fail(result.msg);//获取数据失败
+					_config.fail(result.message);//获取数据失败
 				}
 				_config.complate();//渲染完成
 			},

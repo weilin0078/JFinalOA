@@ -14,6 +14,7 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
+import com.jfinal.template.Engine;
 import com.lion.sys.handler.GlobalHandler;
 import com.lion.sys.mvc.base._MappingKit;
 import com.lion.sys.mvc.home.HomeController;
@@ -43,11 +44,11 @@ public class MainConfig extends JFinalConfig {
 		//设置上传最大限制尺寸
 		me.setMaxPostSize(1024*1024*10);
 		//获取beetl模版引擎
-		me.setMainRenderFactory(new BeetlRenderFactory());
+//		me.setRenderFactory(new BeetlRenderFactory());
 		me.setError404View("/error/404.html");
         // 获取GroupTemplate ,可以设置共享变量等操作
-        @SuppressWarnings("unused")
-		GroupTemplate groupTemplate = BeetlRenderFactory.groupTemplate ;
+//        @SuppressWarnings("unused")
+//		GroupTemplate groupTemplate = BeetlRenderFactory.groupTemplate ;
 		
 	}
 
@@ -110,5 +111,11 @@ public class MainConfig extends JFinalConfig {
 		me.add("/admin/home", HomeController.class);
 		me.add("/admin/user", UserController.class);
 		me.add("/admin/menu", MenuController.class);
+	}
+	
+	@Override
+	public void configEngine(Engine me) {
+		// TODO Auto-generated method stub
+		
 	}
 }
