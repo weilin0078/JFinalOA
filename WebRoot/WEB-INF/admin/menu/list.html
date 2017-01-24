@@ -20,7 +20,7 @@
 				    <col>
 			  </colgroup>
 			  <thead>
-				    <tr><th>菜单名称</th><th>功能名称</th><th>对应URL</th><th>父级</th><th>操作</th></tr> 
+				    <tr><th>菜单名称</th><th>功能名称</th><th>对应URL</th><th>父级</th><th>排序</th><th>操作</th></tr> 
 			  </thead>
 			  <tbody id = "tableBody"></tbody>
 		</table>           
@@ -32,9 +32,10 @@
 			{{# layui.each(d.data, function(index, item){ }}
 			<tr>
 				<td><input type="checkbox"></td>
-				<td>{{ item.name }}</td>
-				<td>{{ item.age }}</td>
-				<td>{{ item.createtime }}</td>
+				<td>{{ item.name?item.name:"" }}</td>
+				<td>{{ item.age?item.age:"" }}</td>
+				<td>{{ item.createtime?item.createtime:"" }}</td>
+				<td>{{ item.order }}</td>
 				<td>
 					<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
 					<a href="/manage/article_edit_1" class="layui-btn layui-btn-mini">编辑</a>
@@ -58,6 +59,7 @@ layui.config({
 		    elem: '#menuTree' //传入元素选择器
 		    ,nodes: d.data
 		});
+		//分页
 		paging.init({
 			url: ctx+"/admin/menu/listData",  //地址
 			elem: '#tableBody',
@@ -76,16 +78,6 @@ layui.config({
 				//alert('处理完成');
 			}
 		});
-		
-		/* 
-		laypage({
-			    cont: 'pages'
-			    ,pages: 30 //得到总页数
-			    ,jump: function(obj){
-			    	//var d = common_ajax.ajaxFunc(ctx+"/admin/menu/listData?curr="+obj.curr,null,"json",null);//查询数据
-			    }
-			    ,skip: true
-		});  */
 });
 
 </script>
