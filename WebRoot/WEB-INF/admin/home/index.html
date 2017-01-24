@@ -24,6 +24,7 @@
 							<i class="fa fa-bars" aria-hidden="true"></i>
 						</div>
 					</div>
+					
 					<ul class="layui-nav admin-header-item">
 						<li class="layui-nav-item layui-nav-bar-no-anim">
 							<a href="javascript:;" id= "siteMessage" onclick="openSiteMessageTip()"><i class="fa fa-envelope-o" aria-hidden="true" style="padding-right: 5px;font-size: 17px;"></i></a>
@@ -49,39 +50,16 @@
 			<div class="layui-side layui-bg-black" id="admin-side">
 				<div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side">
 				<ul class="layui-nav layui-nav-tree">
-						<li class="layui-nav-item layui-nav-itemed">
-							<a href="javascript:;"><i class="fa fa-cubes" aria-hidden="true" data-icon="fa-cubes"></i><cite>系统设置</cite><span class="layui-nav-more"></span></a>
-							<dl class="layui-nav-child">
-								<dd><a href="javascript:;" data-url="#(ctx??)/admin/menu/list"><i class="layui-icon" data-icon=""></i><cite>菜单管理</cite></a></dd>
-								<dd><a href="javascript:;" data-url="auxiliar.html"><i class="layui-icon" data-icon=""></i><cite>组织结构</cite></a></dd>
-								<dd><a href="javascript:;" data-url="tab.html"><i class="layui-icon" data-icon=""></i><cite>用户管理</cite></a></dd>
-								<dd><a href="javascript:;" data-url="auxiliar.html"><i class="layui-icon" data-icon=""></i><cite>岗位管理</cite></a></dd>
-							</dl>
-						</li>
-						<li class="layui-nav-item">
-							<a href="javascript:;"><i class="layui-icon" data-icon="ဂ">ဂ</i><cite>权限管理</cite><span class="layui-nav-more"></span></a>
-							<dl class="layui-nav-child">
-								<dd><a href="javascript:;" data-url="nav.html"><i class="layui-icon" data-icon=""></i><cite>功能管理</cite></a></dd>
-								<dd><a href="javascript:;" data-url="form.html"><i class="layui-icon" data-icon=""></i><cite>角色管理</cite></a></dd>
-								<dd><a href="javascript:;" data-url="table.html"><i class="layui-icon" data-icon=""></i><cite>权限分配</cite></a></dd>
-							</dl>
-						</li>
-						<li style="" class="layui-nav-item">
-							<a href="javascript:;"><i class="fa fa-cogs" aria-hidden="true" data-icon="fa-cogs"></i><cite>内容管理</cite><span class="layui-nav-more"></span></a>
-							<dl class="layui-nav-child">
-								<dd><a href="javascript:;" data-url="begtable.html"><i class="fa fa-table" data-icon="fa-table" aria-hidden="true"></i><cite>Datatable</cite></a></dd>
-								<dd><a href="javascript:;" data-url="navbar.html"><i class="fa fa-navicon" data-icon="fa-navicon" aria-hidden="true"></i><cite>Navbar组件</cite></a></dd>
-								<dd><a href="javascript:;" data-url="paging.html"><i class="layui-icon" data-icon=""></i><cite>Laytpl+Laypage</cite></a></dd>
-							</dl>
-						</li>
-						<li class="layui-nav-item">
-							<a href="javascript:;"><i class="fa fa-address-book" aria-hidden="true" data-icon="fa-address-book"></i><cite>流程管理</cite><span class="layui-nav-more"></span></a>
-							<dl class="layui-nav-child">
-								<dd><a href="javascript:;" data-url="https://www.github.com/"><i class="fa fa-github" data-icon="fa-github" aria-hidden="true"></i><cite>运行中的流程</cite></a></dd>
-								<dd><a href="javascript:;" data-url="http://www.qq.com/"><i class="fa fa-qq" data-icon="fa-qq" aria-hidden="true"></i><cite>模型管理</cite></a></dd>
-								<dd><a href="javascript:;" data-url="http://fly.layui.com/"><i class="layui-icon" data-icon=""></i><cite>表单设计流程</cite></a></dd>
-							</dl>
-						</li>
+						#for(m:menu)
+							<li class="layui-nav-item">
+								<a href="javascript:;"><i class="fa fa-cubes" aria-hidden="true" data-icon="fa-cubes"></i><cite>#(m.name)</cite><span class="layui-nav-more"></span></a>
+								<dl class="layui-nav-child">
+									#for(c:m.children)
+										<dd><a href="javascript:;" data-url="#(ctx??)/admin/menu/list"><i class="layui-icon" data-icon=""></i><cite>#(c.name)</cite></a></dd>
+									#end
+								</dl>
+							</li>
+						#end
 						<li class="layui-nav-item">
 							<a href="javascript:;" data-url="https://www.baidu.com"><i class="fa fa-stop-circle" aria-hidden="true" data-icon="fa-stop-circle"></i><cite>这是一级导航</cite></a>
 						</li>
