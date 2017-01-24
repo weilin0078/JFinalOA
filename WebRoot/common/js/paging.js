@@ -41,6 +41,8 @@ layui.define(['layer', 'laypage', 'laytpl'], function(exports) {
 		var that = this;
 		$.extend(true, that.config, options);
 		var _config = that.config;
+		var _pageConfig = _config.pageConfig;
+		_pageConfig.pageIndex=1;
 		if(_config.url === undefined) {
 			throwError('Paging Error:请配置远程URL!');
 		}
@@ -65,10 +67,7 @@ layui.define(['layer', 'laypage', 'laytpl'], function(exports) {
 		if(_config.type.toUpperCase() !== 'GET' && _config.type.toUpperCase() !== 'POST') {
 			throwError('Paging Error:type参数配置出错，只支持GET或都POST');
 		}
-		that.get({
-			pageIndex: 1,
-			pageSize:_pageConfig.pageSize
-		});
+		that.get(_config.pageConfig);
 
 		return that;
 	};
@@ -110,11 +109,9 @@ layui.define(['layer', 'laypage', 'laytpl'], function(exports) {
 							jump: function(obj, first) {
 								//得到了当前页，用于向服务端请求对应数据
 								var curr = obj.curr;
+								_pageConfig.pageIndex=curr;
 								if(!first) {
-									that.get({
-										pageIndex: curr,
-										pageSize:pageSize
-									});
+									that.get(_pageConfig);
 								}
 							}
 						};

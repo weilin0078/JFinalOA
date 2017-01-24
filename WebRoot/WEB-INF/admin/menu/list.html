@@ -13,14 +13,9 @@
 		<ul id="menuTree"></ul>
 	</div>
 	<div class="site-block-full" style="width: auto;margin-left: 260px;">
-		<table class="layui-table">
-			  <colgroup>
-				    <col width="150">
-				    <col width="200">
-				    <col>
-			  </colgroup>
+		<table class="layui-table" lay-even>
 			  <thead>
-				    <tr><th>菜单名称</th><th>功能名称</th><th>对应URL</th><th>父级</th><th>排序</th><th>操作</th></tr> 
+				    <tr><th style="width: 12px;padding-left: 15px;"><input type="checkbox" id="checkAll"></th><th>菜单名称</th><th>功能名称</th><th>对应URL</th><th>父级</th><th>排序</th><th>操作</th></tr> 
 			  </thead>
 			  <tbody id = "tableBody"></tbody>
 		</table>           
@@ -58,26 +53,33 @@ layui.config({
 		layui.tree({
 		    elem: '#menuTree' //传入元素选择器
 		    ,nodes: d.data
+		    ,click: function(node){
+		    	getPageData(node.id);
+		    }  
 		});
 		//分页
-		paging.init({
-			url: ctx+"/admin/menu/listData",  //地址
-			elem: '#tableBody',
-			tempElem: '#conTemp',  //模块容器
-			pageConfig: {        //分页参数配置
-				elem: '#pages',  //分页容器
-				pageSize: 3     //分页大小
-			},
-			success:function(){   //渲染成功的回调
-				//alert('渲染成功');
-			},
-			fail:function(msg){       //获取数据失败的回调
-				//alert('获取数据失败')
-			},
-			complate:function(){     //完成的回调
-				//alert('处理完成');
-			}
-		});
+		getPageData("");
 });
 
+function getPageData(pid){
+	paging.init({
+		url: ctx+"/admin/menu/listData",  //地址
+		elem: '#tableBody',
+		tempElem: '#conTemp',  //模块容器
+		pageConfig: {        //分页参数配置
+			elem: '#pages',  //分页容器
+			pageSize: 10,     //分页大小
+			pid:pid
+		},
+		success:function(){   //渲染成功的回调
+			//alert('渲染成功');
+		},
+		fail:function(msg){       //获取数据失败的回调
+			//alert('获取数据失败')
+		},
+		complate:function(){     //完成的回调
+			//alert('处理完成');
+		}
+	});
+}
 </script>

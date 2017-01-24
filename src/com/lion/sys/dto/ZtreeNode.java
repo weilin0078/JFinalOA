@@ -1,3 +1,8 @@
+/**
+ * @author Lion
+ * @date 2017年1月24日 下午12:02:35
+ * @qq 439635374
+ */
 package com.lion.sys.dto;
 
 import java.util.List;

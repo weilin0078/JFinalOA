@@ -1,7 +1,9 @@
+/**
+ * @author Lion
+ * @date 2017年1月24日 下午12:02:35
+ * @qq 439635374
+ */
 package com.lion.sys.config;
-
-import org.beetl.core.GroupTemplate;
-import org.beetl.ext.jfinal.BeetlRenderFactory;
 
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
@@ -16,7 +18,7 @@ import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.template.Engine;
 import com.lion.sys.handler.GlobalHandler;
-import com.lion.sys.mvc.base._MappingKit;
+import com.lion.sys.mvc.base.model._MappingKit;
 import com.lion.sys.mvc.home.HomeController;
 import com.lion.sys.mvc.login.LoginController;
 import com.lion.sys.mvc.menu.MenuController;

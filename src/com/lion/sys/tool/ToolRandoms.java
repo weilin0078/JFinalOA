@@ -5,10 +5,7 @@ import java.util.UUID;
 
 import com.jfinal.log.Log;
 
-/**
- * 随机数类
- * @author 董华健  dongcb678@163.com
- */
+
 public abstract class ToolRandoms {
 
 	@SuppressWarnings("unused")
