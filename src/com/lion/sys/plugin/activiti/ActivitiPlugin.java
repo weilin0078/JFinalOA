@@ -14,7 +14,11 @@ import org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import com.jfinal.plugin.IPlugin;
 import com.jfinal.plugin.activerecord.DbKit;
 
-
+/**
+ * @author Lion
+ * @date 2017年1月24日 下午12:02:35
+ * @qq 439635374
+ */
 public class ActivitiPlugin implements IPlugin{
 
 	private static ProcessEngine processEngine = null;
