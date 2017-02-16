@@ -15,7 +15,7 @@ import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Table;
 import com.jfinal.plugin.activerecord.TableMapping;
-import com.lion.sys.tool.ToolRandoms;
+import com.lion.sys.tool.RandomUtil;
 
 
 /**
@@ -156,7 +156,7 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 	public boolean save() {
 		String[] pkArr = getTable().getPrimaryKey();
 		for (String pk : pkArr) {
-			this.set(pk, ToolRandoms.getUuid(true)); // 设置主键值
+			this.set(pk, RandomUtil.getUuid(true)); // 设置主键值
 		}
 		
 		if(getTable().hasColumnLabel(column_version)){ // 是否需要乐观锁控制
