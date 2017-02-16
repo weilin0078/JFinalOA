@@ -1,4 +1,4 @@
-layui.define(['layer', 'laypage', 'laytpl'], function(exports) {
+layui.define(['layer', 'laypage', 'laytpl','icheck'], function(exports) {
 	"use strict";
 	var $ = layui.jquery,
 		layer = layui.layer,
@@ -90,6 +90,34 @@ layui.define(['layer', 'laypage', 'laytpl'], function(exports) {
 					//渲染数据
 					laytpl(tpl).render(result, function(html) {
 						$(_config.elem).html(html);
+						//使用icheck渲染复选框
+						$('input').iCheck({
+							checkboxClass: 'icheckbox_flat-green'
+					 	});
+						//绑定全选事件,和选择事件
+						$('.site-table tbody tr').on('click', function(event) {
+							var $this = $(this);
+							var $input = $this.children('td').eq(0).find('input');
+							$input.on('ifChecked', function(e) {
+								$this.css('background-color', '#EEEEEE');
+							});
+							$input.on('ifUnchecked', function(e) {
+								$this.removeAttr('style');
+							});
+							$input.iCheck('toggle');
+						}).find('input').each(function() {
+							var $this = $(this);
+							$this.on('ifChecked', function(e) {
+								$this.parents('tr').css('background-color', '#EEEEEE');
+							});
+							$this.on('ifUnchecked', function(e) {
+								$this.parents('tr').removeAttr('style');
+							});
+						});
+						$('#selected-all').on('ifChanged', function(event) {
+							var $input = $('.site-table tbody tr td').find('input');
+							$input.iCheck(event.currentTarget.checked ? 'check' : 'uncheck');
+						});
 					});
 					if(_config.paged) {
 						if(result.count === null || result.count === 0) {
@@ -137,7 +165,7 @@ layui.define(['layer', 'laypage', 'laytpl'], function(exports) {
 		throw new Error(msg);
 		return;
 	};
-
+	
 	var paging = new Paging();
 	exports('paging', function(options) {
 		return paging.set(options);

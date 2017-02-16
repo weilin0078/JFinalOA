@@ -6,6 +6,23 @@
 */
 
 
+
+/**
+	自定义 -start
+*/
+body,td,th {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 14px;color: #444444;} 
+/* 导航 */
+.layui-elem-quote .navi-xiegang{padding: 0px 10px;}
+.layui-elem-quote .func-right{Float:right}
+/**
+	自定义 - end
+*/
+
+
+
+
+
+
 /* 布局 */
 .site-inline{font-size: 0;}
 .site-tree, .site-content{display: inline-block;  *display:inline; *zoom:1; vertical-align: top; font-size: 14px;}

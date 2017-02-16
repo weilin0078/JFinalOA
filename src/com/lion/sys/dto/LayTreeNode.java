@@ -1,12 +1,15 @@
 /**
- * @author Lion
- * @date 2017年1月24日 下午12:02:35
- * @qq 439635374
+ * 
  */
 package com.lion.sys.dto;
 
 import java.util.List;
 
+/**
+ * @author Lion
+ * @date 2017年2月16日 下午3:42:41
+ * @qq 439635374
+ */
 public class LayTreeNode {
 	private String id;//id
 	private String name;//名称

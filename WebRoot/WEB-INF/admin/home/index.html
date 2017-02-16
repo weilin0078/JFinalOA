@@ -31,11 +31,7 @@
 						</li>
 						<li class="layui-nav-item">
 							<a href="javascript:;" class="admin-header-user">
-<<<<<<< HEAD
 								<img src="/JFinalOA/common/images/user/0.jpg" />
-=======
-								<img src="/JFinalOA/images/0.jpg" />
->>>>>>> 20a4c682587af45a35d2af0b8f1b2afaa00f2784
 								<span>JFinalOA</span>
 							</a>
 							<dl class="layui-nav-child">
@@ -54,6 +50,14 @@
 			<div class="layui-side layui-bg-black" id="admin-side">
 				<div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side">
 				<ul class="layui-nav layui-nav-tree">
+							<li class="layui-nav-item">
+								<a href="javascript:;"><i class="fa fa-cubes" aria-hidden="true" data-icon="fa-cubes"></i><cite>流程管理</cite><span class="layui-nav-more"></span></a>
+								<dl class="layui-nav-child">
+										<dd><a href="javascript:;" data-url="#(ctx??)/admin/menu/list"><i class="layui-icon" data-icon=""></i><cite>运行中的流程</cite></a></dd>
+										<dd><a href="javascript:;" data-url="#(ctx??)/admin/model/list"><i class="layui-icon" data-icon=""></i><cite>模型管理</cite></a></dd>
+										<dd><a href="javascript:;" data-url="#(ctx??)/admin/menu/list"><i class="layui-icon" data-icon=""></i><cite>表单设计流程</cite></a></dd>
+								</dl>
+							</li>
 						#for(m:menu)
 							<li class="layui-nav-item">
 								<a href="javascript:;"><i class="fa fa-cubes" aria-hidden="true" data-icon="fa-cubes"></i><cite>#(m.name)</cite><span class="layui-nav-more"></span></a>
