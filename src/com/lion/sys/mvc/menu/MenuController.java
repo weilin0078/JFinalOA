@@ -1,3 +1,8 @@
+/**
+ * @author Lion
+ * @date 2017年1月24日 下午12:02:35
+ * @qq 439635374
+ */
 package com.lion.sys.mvc.menu;
 
 import java.util.ArrayList;
@@ -8,7 +13,9 @@ import com.jfinal.plugin.activerecord.Page;
 import com.lion.sys.dto.LayTreeNode;
 import com.lion.sys.mvc.base.BaseController;
 
-
+/***
+ * 菜单管理控制器
+ */
 public class MenuController extends BaseController {
 	
     public void list(){

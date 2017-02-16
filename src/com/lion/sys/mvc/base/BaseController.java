@@ -16,9 +16,6 @@ import com.jfinal.render.JsonRender;
 import com.lion.sys.dto.RenderBean;
 
 
-/**
- * 公共Controller
- */
 public abstract class BaseController extends Controller {
 
 

@@ -10,7 +10,7 @@ import org.apache.commons.codec.binary.Base64;
 /**
  * 字符串处理常用方法
  */
-public abstract class ToolString {
+public abstract class StringUtil {
 
 	/**
 	 * 常用正则表达式：匹配非负整数（正整数 + 0）

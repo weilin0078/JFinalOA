@@ -6,10 +6,10 @@ import java.util.UUID;
 import com.jfinal.log.Log;
 
 
-public abstract class ToolRandoms {
+public abstract class RandomUtil {
 
 	@SuppressWarnings("unused")
-	private static final Log log = Log.getLog(ToolRandoms.class);
+	private static final Log log = Log.getLog(RandomUtil.class);
 
 	private static final Random random = new Random();
 

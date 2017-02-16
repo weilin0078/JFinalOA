@@ -23,6 +23,7 @@ import com.lion.sys.mvc.home.HomeController;
 import com.lion.sys.mvc.login.LoginController;
 import com.lion.sys.mvc.menu.MenuController;
 import com.lion.sys.mvc.user.UserController;
+import com.lion.sys.plugin.activiti.ActivitiPlugin;
 import com.lion.sys.plugin.shiro.ShiroInterceptor;
 import com.lion.sys.plugin.shiro.ShiroPlugin;
 
@@ -69,13 +70,13 @@ public class MainConfig extends JFinalConfig {
 		ActiveRecordPlugin arp=new ActiveRecordPlugin(c3p0Plugin);
 		arp.setShowSql(PropKit.getBoolean("devMode"));
 		arp.setDialect(new MysqlDialect());
+		//流程引擎
+		ActivitiPlugin acitivitiPlugin = new ActivitiPlugin();
 		_MappingKit.mapping(arp);
-		/********在此添加数据库 表-Model 映射*********/
-		
 		//添加到插件列表中
 		me.add(c3p0Plugin);
 		me.add(arp);
-		
+		me.add(acitivitiPlugin);
 		ShiroPlugin shiroPlugin = new ShiroPlugin(this.routes);
 	    shiroPlugin.setLoginUrl("/login.html");//登陆url：未验证成功跳转
 	    shiroPlugin.setSuccessUrl("/admin/index");//登陆成功url：验证成功自动跳转

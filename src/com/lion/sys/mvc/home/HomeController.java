@@ -1,9 +1,16 @@
+/**
+ * @author Lion
+ * @date 2017年1月24日 下午12:02:35
+ * @qq 439635374
+ */
 package com.lion.sys.mvc.home;
 
 import com.lion.sys.mvc.base.BaseController;
 import com.lion.sys.mvc.menu.SysMenu;
 
-
+/***
+ * 首页控制器
+ */
 public class HomeController extends BaseController {
 	/***
 	 * 首页
