@@ -6,16 +6,16 @@
 </style>
 <div class="admin-main">
 	<blockquote class="layui-elem-quote">
-					主页/菜单管理
+					主页/菜单管理  
 	</blockquote>
 	
 	<div class="site-block-full" style="float: left;width: 200px;">
 		<ul id="menuTree"></ul>
 	</div>
 	<div class="site-block-full" style="width: auto;margin-left: 260px;">
-		<table class="layui-table" lay-even>
+		<table class="site-table table-hover" lay-even>
 			  <thead>
-				    <tr><th style="width: 12px;padding-left: 15px;"><input type="checkbox" id="checkAll"></th><th>菜单名称</th><th>功能名称</th><th>对应URL</th><th>父级</th><th>排序</th><th>操作</th></tr> 
+				    <tr><th style="width: 12px;padding-left: 15px;"><input type="checkbox" id="selected-all"></th><th>菜单名称</th><th>功能名称</th><th>对应URL</th><th>父级</th><th>排序</th><th>操作</th></tr> 
 			  </thead>
 			  <tbody id = "tableBody"></tbody>
 		</table>           
@@ -24,27 +24,27 @@
 </div>
 		<!--模板-->
 		<script type="text/html" id="conTemp">
-			{{# layui.each(d.data, function(index, item){ }}
-			<tr>
-				<td><input type="checkbox"></td>
-				<td>{{ item.name?item.name:"" }}</td>
-				<td>{{ item.age?item.age:"" }}</td>
-				<td>{{ item.createtime?item.createtime:"" }}</td>
-				<td>{{ item.order }}</td>
-				<td>
-					<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
-					<a href="/manage/article_edit_1" class="layui-btn layui-btn-mini">编辑</a>
-					<a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
-				</td>
-			</tr>
-			{{# }); }}
+				{{# layui.each(d.data, function(index, item){ }}
+					<tr>
+						<td><input type="checkbox" class="icheckbox_flat-green"></td>
+						<td>{{ item.name?item.name:"" }}</td>
+						<td>{{ item.age?item.age:"" }}</td>
+						<td>{{ item.createtime?item.createtime:"" }}</td>
+						<td>{{ item.createtime?item.createtime:"" }}</td>
+						<td>{{ item.order }}</td>
+						<td>
+							<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
+							<a href="/manage/article_edit_1" class="layui-btn layui-btn-mini">编辑</a>
+							<a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+						</td>
+					</tr>
+				{{# }); }}
 		</script>
 
 <script>
 layui.config({
 	  base: ctx+'/common/js/'
-}).use(['laypage','tree','ajax','paging'], function(){
-		 laypage = layui.laypage;
+}).use(['tree','ajax','paging'], function(){
 		 ajax = layui.ajax;
 		 tree = layui.tree;
 		 paging = layui.paging();
@@ -59,6 +59,7 @@ layui.config({
 		});
 		//分页
 		getPageData("");
+		 
 });
 
 function getPageData(pid){
@@ -82,4 +83,6 @@ function getPageData(pid){
 		}
 	});
 }
+
+
 </script>
