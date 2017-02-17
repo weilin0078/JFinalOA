@@ -46,11 +46,12 @@ public class SysMenu extends BaseSysMenu<SysMenu> {
 	 * @param menu
 	 * @return
 	 */
-	public List<LayTreeNode> toLayTreeNode(List<SysMenu> menuList){
+	public List<LayTreeNode> toLayTreeNode(List<SysMenu> menuList,Boolean spread){
 		List<LayTreeNode> list = new ArrayList<LayTreeNode>();
 		for(SysMenu menu : menuList){
 			LayTreeNode node = toLayTreeNode(menu);
-			node.setChildren(toLayTreeNode(menu.getChildren()));
+			node.setChildren(toLayTreeNode(menu.getChildren(),spread));
+			node.setSpread(spread);
 			list.add(node);
 		}
 		return list;
@@ -60,7 +61,7 @@ public class SysMenu extends BaseSysMenu<SysMenu> {
 	 * @return
 	 */
 	public List<SysMenu> getAllMenu(){
-		List<SysMenu> list =  getChildren("#root");
+		List<SysMenu> list =  getChildrenAll("#root");
 		return list;
 	}
 	/***
@@ -69,11 +70,11 @@ public class SysMenu extends BaseSysMenu<SysMenu> {
 	 * @param id
 	 * @return
 	 */
-	public List<SysMenu> getChildren(String id){
+	public List<SysMenu> getChildrenAll(String id){
 		List<SysMenu> menuList =  getChildrenByPid(id);//根据id查询孩子
 		for(SysMenu m : menuList){
 			System.out.println(m.getName());
-			m.setChildren(getChildren(m.getId()));
+			m.setChildren(getChildrenAll(m.getId()));
 		}
 		return menuList;
 	}

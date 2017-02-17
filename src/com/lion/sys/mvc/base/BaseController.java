@@ -26,7 +26,8 @@ public abstract class BaseController extends Controller {
 	protected String ids;				// 主键
 	protected List<?> list;				// 公共list
 	
-	
+	protected static String messageSuccess = "操作成功";	
+	protected static String messageFail = "操作失败";
 	/**
 	 * 重写renderJson，避免出现IE8下出现下载弹出框
 	 */
@@ -82,14 +83,32 @@ public abstract class BaseController extends Controller {
 	 * @param description 描述
 	 * 描述：公共render，所有的renderJson都必须返回RenderObject，包含处理状态、返回数据、失败下的状态码、失败描述
 	 */
-	public void renderSuccess(String code, Object data, String description) {
+	public void renderSuccess(Object data, String description) {
 		RenderBean renderBean = new RenderBean();
 		renderBean.setSuccess(true);
 		renderBean.setData(data);
 		renderBean.setMessage(description);
 		renderJson(renderBean);
 	}
-
+	public void renderSuccess(Object data) {
+		RenderBean renderBean = new RenderBean();
+		renderBean.setSuccess(true);
+		renderBean.setData(data);
+		renderBean.setMessage(messageSuccess);
+		renderJson(renderBean);
+	}
+	public void renderSuccess(String message) {
+		RenderBean renderBean = new RenderBean();
+		renderBean.setSuccess(true);
+		renderBean.setMessage(message);
+		renderJson(renderBean);
+	}
+	public void renderSuccess() {
+		RenderBean renderBean = new RenderBean();
+		renderBean.setSuccess(true);
+		renderBean.setMessage(messageSuccess);
+		renderJson(renderBean);
+	}
 	/**
 	 * 自定义render失败
 	 * @param code 状态码
@@ -97,11 +116,28 @@ public abstract class BaseController extends Controller {
 	 * @param description 描述
 	 * 描述：公共render，所有的renderJson都必须返回RenderObject，包含处理状态、返回数据、失败下的状态码、失败描述
 	 */
-	public void renderError(String code, Object data, String description) {
+	public void renderError(Object data, String description) {
 		RenderBean renderBean = new RenderBean();
 		renderBean.setSuccess(false);
-		renderBean.setCode(code);
 		renderBean.setMessage(description);
+		renderJson(renderBean);
+	}
+	public void renderError(Object data) {
+		RenderBean renderBean = new RenderBean();
+		renderBean.setSuccess(false);
+		renderBean.setMessage(messageFail);
+		renderJson(renderBean);
+	}
+	public void renderError(String message) {
+		RenderBean renderBean = new RenderBean();
+		renderBean.setSuccess(false);
+		renderBean.setMessage(message);
+		renderJson(renderBean);
+	}
+	public void renderError() {
+		RenderBean renderBean = new RenderBean();
+		renderBean.setSuccess(false);
+		renderBean.setMessage(messageFail);
 		renderJson(renderBean);
 	}
 

@@ -27,7 +27,7 @@ public class MenuController extends BaseController {
      */
     public void getAllMenuTree(){
     	List<SysMenu> menuList = SysMenu.dao.getAllMenu();
-    	List<LayTreeNode> nodelist = SysMenu.dao.toLayTreeNode(menuList);//数据库中的菜单
+    	List<LayTreeNode> nodelist = SysMenu.dao.toLayTreeNode(menuList,false);//数据库中的菜单
     	List<LayTreeNode> rootList = new ArrayList<LayTreeNode>();//页面展示的,带根节点
     	//声明根节点
     	LayTreeNode root = new LayTreeNode();
@@ -36,7 +36,7 @@ public class MenuController extends BaseController {
     	root.setChildren(nodelist);
     	root.setSpread(true);
     	rootList.add(root);
-    	renderSuccess(null, rootList, null);
+    	renderSuccess(rootList, null);
     }
     
     public void listData(){

@@ -1,15 +1,13 @@
 	#include("/common/include/include.html")
-<style>
-	.breadcrumb li{
-		float:left;
-	}
-</style>
 <div class="admin-main">
 	<blockquote class="layui-elem-quote">
 					<span>主页<span><span>/</span><a href="#(ctx??)/admin/module/getListPage">模块管理</a><span>/</span><span class="curr">模块</span>
 					<div class="func-right">
-						<a href="#(ctx??)/admin/module/getAddPage" class="layui-btn layui-btn-small" id="add">
+						<a href="#(ctx??)/admin/module/getEditPage" class="layui-btn layui-btn-small" id="add">
 							<i class="layui-icon">&#xe608;</i> 添加模块
+						</a>
+						<a href="javascript:void(0);" onclick="deleteAll()" class="layui-btn layui-btn-small" id="add">
+							<i class="layui-icon">&#x1006;</i> 删除
 						</a>
 					</div>
 	</blockquote>
@@ -31,20 +29,19 @@
 		<script type="text/html" id="conTemp">
 				{{# layui.each(d.data, function(index, item){ }}
 					<tr>
-						<td><input type="checkbox" class="icheckbox_flat-green"></td>
+						<td><input type="checkbox" class="icheckbox_flat-green" value="{{ item.id?item.id:"" }}"></td>
 						<td>{{ item.name?item.name:"" }}</td>
 						<td>{{ item.description?item.description:"" }}</td>
 						<td>{{ item.image?item.image:"" }}</td>
 						<td>{{ item.sort?item.sort:"" }}</td>
 						<td>
-							<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
-							<a href="/manage/article_edit_1" class="layui-btn layui-btn-mini">编辑</a>
-							<a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+							<a href="#(ctx??)/admin/module/getEditPage?parentid={{ item.id?item.id:"" }}" class="layui-btn layui-btn-normal layui-btn-mini">添加子模块</a>
+							<a href="#(ctx??)/admin/module/getEditPage?id={{ item.id?item.id:"" }}" class="layui-btn layui-btn-mini">编辑</a>
+							<a href="javascript:void(0);" onclick="deleteModule('{{ item.id?item.id:"" }}')" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
 						</td>
 					</tr>
 				{{# }); }}
 		</script>
-
 <script>
 layui.config({
 	  base: ctx+'/common/js/'
@@ -52,20 +49,24 @@ layui.config({
 		 ajax = layui.ajax;
 		 tree = layui.tree;
 		 paging = layui.paging();
-		//初始化左侧菜单树
-		var d = ajax.ajaxFunc(ctx+"/admin/module/getAllMenuTree",null,"json",null);
-		layui.tree({
-		    elem: '#menuTree' //传入元素选择器
-		    ,nodes: d.data
-		    ,click: function(node){
-		    	getPageData(node.id);
-		    }  
-		});
-		//分页
-		getPageData("");
-		 
+		 refresh();
 });
-
+function refresh(){
+	initTree();
+	getPageData("");
+}
+//初始化左侧菜单树
+function initTree(){
+	$("#menuTree").html("")
+	var d = ajax.ajaxFunc(ctx+"/admin/module/getAllMenuTree",null,"json",null);
+	layui.tree({
+	    elem: '#menuTree' //传入元素选择器
+	    ,nodes: d.data
+	    ,click: function(node){
+	    	getPageData(node.id);
+	    }  
+	});
+}
 function getPageData(pid){
 	paging.init({
 		url: ctx+"/admin/module/listData",  //地址
@@ -75,18 +76,26 @@ function getPageData(pid){
 			elem: '#pages',  //分页容器
 			pageSize: 10,     //分页大小
 			pid:pid
-		},
-		success:function(){   //渲染成功的回调
-			//alert('渲染成功');
-		},
-		fail:function(msg){       //获取数据失败的回调
-			//alert('获取数据失败')
-		},
-		complate:function(){     //完成的回调
-			//alert('处理完成');
 		}
 	});
 }
-
-
+//删除
+function deleteModule(ids){
+	var r = ajax.ajaxFunc(ctx+"/admin/module/delete",{"ids":ids},"json",null);
+	if(r.success){
+		layer.alert(r.message);
+		refresh();
+	}else{
+		layer.alert(r.message);
+	}
+}
+//删除所选
+function deleteAll(){
+	var data = [];
+	$.each($(".icheckbox_flat-green :checked"),function(i,d){
+		data.push($(d).val());
+	});
+	var ids = data.join(",");
+	deleteModule(ids);
+}
 </script>

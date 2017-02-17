@@ -146,11 +146,14 @@ layui.define(['layer', 'laypage', 'laytpl','icheck'], function(exports) {
 						$.extend(defaults, _pageConfig);
 						layui.laypage(defaults);
 					}
-					_config.success(); //渲染成功
+					//渲染成功
+					if(_config.success){_config.success();}
 				} else {
-					_config.fail(result.message);//获取数据失败
+					//获取数据失败
+					if(_config.fail){_config.fail(result.message);}
 				}
-				_config.complate();//渲染完成
+				//渲染完成
+				if(_config.complate){_config.complate();}
 			},
 			error:function(xhr,status,error){
 				_config.serverError(xhr,status,error);//服务器错误

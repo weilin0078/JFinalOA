@@ -11,6 +11,7 @@
 	自定义 -start
 */
 body,td,th,a {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 14px;color: #777777;} 
+input,textarea{color: #555555;}
 /* 导航 */
 .layui-elem-quote span{padding: 0px 5px;}
 .layui-elem-quote .curr{color: #1AA094;}
