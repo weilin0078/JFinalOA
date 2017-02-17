@@ -10,7 +10,7 @@
 /**
 	自定义 -start
 */
-body,td,th {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 14px;color: #444444;} 
+body,td,th,a {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 14px;color: #777777;} 
 /* 导航 */
 .layui-elem-quote .navi-xiegang{padding: 0px 10px;}
 .layui-elem-quote .func-right{Float:right}

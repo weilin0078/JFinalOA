@@ -40,12 +40,12 @@ public abstract class BaseSysMenu<M extends BaseSysMenu<M>> extends Model<M> imp
 		return get("name");
 	}
 
-	public void setOrder(java.lang.Long order) {
-		set("order", order);
+	public void setSort(java.lang.Long sort) {
+		set("sort", sort);
 	}
 
-	public java.lang.Long getOrder() {
-		return get("order");
+	public java.lang.Long getSort() {
+		return get("sort");
 	}
 
 	public void setOperatorid(java.lang.String operatorid) {

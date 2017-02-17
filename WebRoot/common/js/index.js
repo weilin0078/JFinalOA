@@ -27,6 +27,7 @@ layui.config({
 //	navbar.render();
 	//监听点击事件
 	navbar.on('click(side)', function(data) {
+//		alert(JSON.stringify(data.field));
 		tab.tabAdd(data.field);
 	});
 
