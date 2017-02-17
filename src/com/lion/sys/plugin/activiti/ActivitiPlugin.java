@@ -68,7 +68,11 @@ public class ActivitiPlugin implements IPlugin{
 		isStarted = true;
 		//开启流程引擎
 		System.out.println("启动流程引擎.......");
+<<<<<<< HEAD
 //		createModel(processEngine);//创建空模型
+=======
+		createModel(processEngine);
+>>>>>>> 41da0ec27d99493c19019e0658febfd68c065329
 		return isStarted;
 	}
 

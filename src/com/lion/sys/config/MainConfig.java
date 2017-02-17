@@ -25,7 +25,10 @@ import com.lion.sys.mvc.menu.MenuController;
 import com.lion.sys.mvc.user.UserController;
 import com.lion.sys.mvc.workflow.WorkFlowController;
 import com.lion.sys.mvc.workflow.main.StencilsetRestResource;
+<<<<<<< HEAD
 import com.lion.sys.mvc.workflow.model.ModelController;
+=======
+>>>>>>> 41da0ec27d99493c19019e0658febfd68c065329
 import com.lion.sys.mvc.workflow.model.ModelEditorJsonRestResource;
 import com.lion.sys.mvc.workflow.model.ModelSaveRestResource;
 import com.lion.sys.mvc.workflow.rest.ProcessDefinitionDiagramLayoutResource;
@@ -124,7 +127,10 @@ public class MainConfig extends JFinalConfig {
 		me.add("/admin/user", UserController.class);
 		me.add("/admin/menu", MenuController.class);
 		me.add("/admin/workflow",WorkFlowController.class);
+<<<<<<< HEAD
 		me.add("/admin/model",ModelController.class);
+=======
+>>>>>>> 41da0ec27d99493c19019e0658febfd68c065329
 		//流程在线编辑器和流程跟踪所用路由
 		me.add("/admin/process-instance/highlights",ProcessInstanceHighlightsResource.class);//modeler
 		me.add("/admin/process-instance/diagram-layout",ProcessInstanceDiagramLayoutResource.class);//modeler
