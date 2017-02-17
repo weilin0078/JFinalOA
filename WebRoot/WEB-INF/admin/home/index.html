@@ -53,9 +53,9 @@
 							<li class="layui-nav-item">
 								<a href="javascript:;"><i class="fa fa-cubes" aria-hidden="true" data-icon="fa-cubes"></i><cite>流程管理</cite><span class="layui-nav-more"></span></a>
 								<dl class="layui-nav-child">
-										<dd><a href="javascript:;" data-url="#(ctx??)/admin/module/list"><i class="layui-icon" data-icon="&#xe60c;">&#xe60c;</i>  <cite>模块管理</cite></a></dd>
-										<dd><a href="javascript:;" data-url="#(ctx??)/admin/model/list"><i class="layui-icon" data-icon="&#xe620;">&#xe620;</i><cite>模型管理</cite></a></dd>
-										<dd><a href="javascript:;" data-url="#(ctx??)/admin/menu/list"><i class="layui-icon" data-icon="&#xe617;">&#xe617;</i><cite>表单设计流程</cite></a></dd>
+										<dd><a href="javascript:;" data-url="#(ctx??)/admin/module/getListPage"><i class="layui-icon" data-icon="&#xe60c;">&#xe60c;</i>  <cite>模块管理</cite></a></dd>
+										<dd><a href="javascript:;" data-url="#(ctx??)/admin/model/getListPage"><i class="layui-icon" data-icon="&#xe620;">&#xe620;</i><cite>模型管理</cite></a></dd>
+										<dd><a href="javascript:;" data-url="#(ctx??)/admin/menu/getListPage"><i class="layui-icon" data-icon="&#xe617;">&#xe617;</i><cite>表单设计流程</cite></a></dd>
 								</dl>
 							</li>
 						#for(m:menu)
@@ -63,7 +63,7 @@
 								<a href="javascript:;"><i class="fa fa-cubes" aria-hidden="true" data-icon="fa-cubes"></i><cite>#(m.name)</cite><span class="layui-nav-more"></span></a>
 								<dl class="layui-nav-child">
 									#for(c:m.children)
-										<dd><a href="javascript:;" data-url="#(ctx??)/admin/menu/list"><i class="layui-icon" data-icon=""></i><cite>#(c.name)</cite></a></dd>
+										<dd><a href="javascript:;" data-url="#(ctx??)/admin/menu/getListPage"><i class="layui-icon" data-icon=""></i><cite>#(c.name)</cite></a></dd>
 									#end
 								</dl>
 							</li>
@@ -88,8 +88,8 @@
 			</div>
 			<div class="layui-footer footer footer-demo" id="admin-footer">
 				<div class="layui-main">
-					<p>2016 &copy;
-						<a href="http://beginner.zhengjinfan.cn/demo/beginner_admin/">beginner.zhengjinfan.cn</a> LGPL license
+					<p>2017 &copy;
+						<a href="javascript:void(0);">JFinalOA</a> GPL license
 					</p>
 				</div>
 			</div>

@@ -17,7 +17,7 @@ public class ModelController extends BaseController{
 	/***
 	 * 获得列表页
 	 */
-	public void list(){
+	public void getListPage(){
     	render("/WEB-INF/admin/workflow/model/list.html");
     }
     /***

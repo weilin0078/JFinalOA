@@ -17,8 +17,10 @@ import com.lion.sys.mvc.base.BaseController;
  * 菜单管理控制器
  */
 public class ModuleController extends BaseController {
-	
-    public void list(){
+	/***
+	 * 获取列表页面
+	 */
+    public void getListPage(){
     	render("/WEB-INF/admin/module/list.html");
     }
     
@@ -38,7 +40,9 @@ public class ModuleController extends BaseController {
     	rootList.add(root);
     	renderSuccess(null, rootList, null);
     }
-    
+    /***
+     * 获取分页数据
+     */
     public void listData(){
     	String curr = getPara("pageIndex");
     	String pageSize = getPara("pageSize");
@@ -49,4 +53,11 @@ public class ModuleController extends BaseController {
     	Page<SysModule> page = SysModule.dao.getChildrenPageByPid(Integer.valueOf(curr),Integer.valueOf(pageSize),pid);
     	renderPage(page.getList(),"" ,page.getTotalRow());
     }
+    /***
+     * 获取新增页面
+     */
+    public void getAddPage(){
+    	render("/WEB-INF/admin/module/add.html");
+    }
+    
 }

@@ -18,7 +18,7 @@ import com.lion.sys.mvc.base.BaseController;
  */
 public class MenuController extends BaseController {
 	
-    public void list(){
+    public void getListPage(){
     	render("/WEB-INF/admin/menu/list.html");
     }
     
