@@ -6,19 +6,19 @@
 </style>
 <div class="admin-main">
 	<blockquote class="layui-elem-quote">
-					<span>主页<span><span>/</span><a href="#(ctx??)/admin/module/getListPage">模块管理</a><span>/</span><span class="curr">模块</span>
+					<span>主页<span><span>/</span><a href="#(ctx??)/admin/operate/getListPage">功能管理</a><span>/</span><span class="curr">功能</span>
 	</blockquote>
 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-		<legend>添加新模块</legend>
+		<legend>添加新功能</legend>
 	</fieldset>
 
 	<form class="layui-form" >
 		<div class="layui-form-item">
-			<label class="layui-form-label">父级模块</label>
+			<label class="layui-form-label">所属模块</label>
 			<div class="layui-input-inline">
-				<input type="text" id="parentName" value="#(parent?parent.name:'根目录')"  class="layui-input">
-				<input type="hidden" id="parentId" name="sysModule.parent_id" value="#(parent?parent.id:'#root')" lay-verify="title" lay-verify="required"  class="layui-input">
-				<input type="hidden" name = "sysModule.id" value="#(module?module.id:'')">
+				<input type="text" id="moduleName" value="#(module?module.name:'根目录')"  class="layui-input">
+				<input type="text" id="moduleId" name="sysOperate.module_id" value="#(oper?oper.module_id:'#root')" lay-verify="title" lay-verify="required"  class="layui-input">
+				<input type="text" name = "sysOperate.id" value="#(oper?oper.id:'')">
 			</div>
 			<div class="layui-input-inline">
 				<a class="layui-btn layui-btn-small" onclick="selectModule()">选择</a>
@@ -27,30 +27,30 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">名称</label>
 			<div class="layui-input-inline">
-				<input type="text"  lay-verify="title" lay-verify="required" name="sysModule.name" value="#(module?module.name:'')"  placeholder="请输入名称" class="layui-input">
+				<input type="text" name="sysOperate.name" value="#(oper?oper.name:'')"  placeholder="请输入名称" lay-verify="title" lay-verify="required" class="layui-input">
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">图标</label>
+			<label class="layui-form-label">地址</label>
 			<div class="layui-input-inline">
-				<input type="text" lay-verify="title" name="sysModule.image" value="#(module?module.image:'')" placeholder="请输入图标" class="layui-input">
+				<input type="text" name="sysOperate.url" value="#(oper?oper.url:'')" placeholder="请输入地址" lay-verify="title" lay-verify="required" class="layui-input">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">排序</label>
 			<div class="layui-input-inline">
-				<input type="text" lay-verify="sort" lay-verify="required" name="sysModule.sort" value="#(module?module.sort:'0')"  placeholder="请输入排序号" class="layui-input">
+				<input type="text" name="sysOperate.sort" value="#(oper?oper.sort:'0')"  placeholder="请输入排序号" lay-verify="sort" lay-verify="required"  class="layui-input">
 			</div>
 		</div>
 		<div class="layui-form-item layui-form-text">
 			<label class="layui-form-label">描述信息</label>
 			<div class="layui-input-block">
-				<textarea placeholder="请输入内容" class="layui-textarea" name="sysModule.description">#(module?module.description:'')</textarea>
+				<textarea placeholder="请输入内容" class="layui-textarea" name="sysOperate.description">#(oper?oper.description:'')</textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-input-block">
-				<button class="layui-btn" lay-submit="" lay-filter="submitFormFilter">立即提交</button>
+				<button class="layui-btn" lay-submit="" lay-filter="submitFormFilter">保存</button>
 				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 			</div>
 		</div>
@@ -70,10 +70,10 @@ layui.config({
 				}
 		 });
 		 form.on('submit(submitFormFilter)', function(data) {
-			var d = ajax.ajaxFunc(ctx+"/admin/module/save",data.field,"json",null);
+			var d = ajax.ajaxFunc(ctx+"/admin/operate/save",data.field,"json",null);
 			if(d.success){
 				parent.layer.alert(d.message);
-				window.location.href=ctx+"/admin/module/getListPage";				
+				window.location.href=ctx+"/admin/operate/getListPage";				
 			}else{
 				parent.layer.alert(d.message);
 			}
@@ -89,7 +89,7 @@ function selectModule(){
 	}); 
 }
 function setSelectedParent(data){
-	$("#parentId").val(data.id);
-	$("#parentName").val(data.name);
+	$("#moduleId").val(data.id);
+	$("#moduleName").val(data.name);
 }
 </script>

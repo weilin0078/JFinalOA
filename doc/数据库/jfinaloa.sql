@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : localhost
 Source Server Version : 50711
 Source Host           : localhost:3306
-Source Database       : oa
+Source Database       : jfinaloa
 
 Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2017-02-17 14:53:22
+Date: 2017-02-18 20:20:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -710,7 +710,7 @@ CREATE TABLE `sys_menu` (
   `operatorid` varchar(32) COLLATE utf8_bin DEFAULT NULL,
   `parent_id` varchar(32) COLLATE utf8_bin DEFAULT NULL,
   `isparent` varchar(5) COLLATE utf8_bin DEFAULT NULL,
-  `order` bigint(20) DEFAULT NULL,
+  `sort` bigint(20) DEFAULT NULL,
   `icon` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '图标',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -740,262 +740,231 @@ INSERT INTO `sys_menu` VALUES ('43', '表单设计流程', '0', '4', 'false', '0
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_module`;
 CREATE TABLE `sys_module` (
-  `ids` varchar(32) COLLATE utf8_bin NOT NULL,
-  `version` bigint(20) DEFAULT NULL,
+  `id` varchar(32) COLLATE utf8_bin NOT NULL,
+  `version` bigint(20) DEFAULT '0',
   `description` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `images` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `image` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `isparent` varchar(5) COLLATE utf8_bin DEFAULT NULL,
-  `names` varchar(25) COLLATE utf8_bin DEFAULT NULL,
-  `orderids` bigint(20) DEFAULT NULL,
-  `parentmoduleids` varchar(32) COLLATE utf8_bin DEFAULT NULL,
-  `systemsids` varchar(32) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`ids`)
+  `name` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `sort` bigint(20) DEFAULT NULL,
+  `parent_id` varchar(32) COLLATE utf8_bin DEFAULT NULL,
+  `system_id` varchar(32) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of sys_module
 -- ----------------------------
-INSERT INTO `sys_module` VALUES ('297e0cf944e9762e0144e97dfd6e00c9', '0', '数据源', '2.png', 'true', '数据源', '2', 'ec01ee2ea97a4ff1b2371304b8d0fe34', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('33a6f5664a194da8bc2394826cc25bc3', '0', null, '2.png', 'true', '岗位功能', '2', '6c4e642b911e468dbdcb62c9b4669eb3', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('377c7b7a896b43d0992c630d62bd596d', '0', null, '2.png', 'true', '用户岗位', '2', '6c4e642b911e468dbdcb62c9b4669eb3', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('417ed3d3cf4d4b7a939613829e8db17d', '0', null, '3.png', 'true', '消息管理', '3', '8a40c0353fa828a6013fa898d4ac1100', 'd3a5c976c4c24751b6b00ec775692683');
-INSERT INTO `sys_module` VALUES ('4c343ddf030d4e17b6db83465600778b', '0', null, '2.png', 'true', '验证码', '2', '75f9bd430f4a4ec7b0a71928e15ea5f7', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('529d39f773a54ff39eea877f606d74b0', '0', null, '2.png', 'true', 'Ueditor', '2', '75f9bd430f4a4ec7b0a71928e15ea5f7', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('625e895224aa424693149208c9d4073e', '0', null, '2.png', 'true', '分组角色', '2', '6c4e642b911e468dbdcb62c9b4669eb3', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('68422887e56645728038cdde08caef9a', '0', null, '2.png', 'true', 'Test', '2', '8a40c0353fa828a6013fa898d4ac0020', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('6c4e642b911e468dbdcb62c9b4669eb3', '0', null, '2.png', 'true', '权限', '2', '8a40c0353fa828a6013fa898d4ac0020', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('75f9bd430f4a4ec7b0a71928e15ea5f7', '0', null, '2.png', 'true', '通用功能', '2', '8a40c0353fa828a6013fa898d4ac0020', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('7a35846a305c42abb68601b4f7347289', '0', null, '4.png', 'true', '主页管理', '4', '8a40c0353fa828a6013fa898d4ac1100', 'd3a5c976c4c24751b6b00ec775692683');
-INSERT INTO `sys_module` VALUES ('7cbeac9418c946a2bda0c6aabf23c276', '0', null, '2.png', 'true', '博客', '2', '68422887e56645728038cdde08caef9a', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac0020', '0', '根节点', '3.png', 'true', '根节点', '1', null, '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac0021', '0', '后台登陆', '8.png', 'true', '登陆', '1', '6c4e642b911e468dbdcb62c9b4669eb3', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac0022', '0', '字典', '2.png', 'true', '字典', '2', 'eabc054760164b4cb730c4f5c2a4d305', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac0023', '0', '用户分组管理', '2.png', 'true', '分组', '2', '6c4e642b911e468dbdcb62c9b4669eb3', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac0024', '0', '角色管理', '2.png', 'true', '角色', '3', '6c4e642b911e468dbdcb62c9b4669eb3', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac0025', '0', '岗位管理', '5.png', 'true', '岗位', '4', 'cbe70ed41ad040938cfd7bcc5f4f0c58', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac0026', '0', '系统管理', '5.png', 'true', '系统', '5', 'cbe70ed41ad040938cfd7bcc5f4f0c58', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac0027', '0', '功能管理', '7.png', 'true', '功能', '6', '6c4e642b911e468dbdcb62c9b4669eb3', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac0028', '0', '部门管理', '3.png', 'true', '部门', '7', 'cbe70ed41ad040938cfd7bcc5f4f0c58', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac0029', '0', '日志管理', '6.png', 'true', '日志', '11', 'ec01ee2ea97a4ff1b2371304b8d0fe34', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac0030', '0', '用户管理', '3.png', 'true', '用户', '1', 'cbe70ed41ad040938cfd7bcc5f4f0c58', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac0031', '0', '公共功能', '5.png', 'true', '公共', '1', '75f9bd430f4a4ec7b0a71928e15ea5f7', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac0032', '0', '菜单管理', '8.png', 'true', '菜单', '1', '6c4e642b911e468dbdcb62c9b4669eb3', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac0033', '0', '模块管理', '7.png', 'true', '模块', '1', '6c4e642b911e468dbdcb62c9b4669eb3', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac1100', '0', '根节点', '3.png', 'true', '根节点', '1', null, 'd3a5c976c4c24751b6b00ec775692683');
-INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac2200', '0', '根节点', '3.png', 'true', '根节点', '1', null, '0c1230c98ef34e58947903fab5a4fa85');
-INSERT INTO `sys_module` VALUES ('8d7a260e02674bd3873656deb716202e', '0', null, '4.png', 'false', '文件上传', '4', '75f9bd430f4a4ec7b0a71928e15ea5f7', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('8f53706d4af541588bde334d99d44727', '0', null, '6.png', 'true', '自动回复', '6', '8a40c0353fa828a6013fa898d4ac1100', 'd3a5c976c4c24751b6b00ec775692683');
-INSERT INTO `sys_module` VALUES ('c4ab6b8d50434ddf8fa0ec106fcfc6ea', '0', null, '2.png', 'true', '角色功能', '2', '6c4e642b911e468dbdcb62c9b4669eb3', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('c4e63c4171db4ae2a83f7dfcc2656b0e', '0', null, '2.png', 'true', '用户管理', '2', '8a40c0353fa828a6013fa898d4ac1100', 'd3a5c976c4c24751b6b00ec775692683');
-INSERT INTO `sys_module` VALUES ('c87c35097a2d4bc898fe6e9b1e280a3d', '0', null, '5.png', 'true', '位置管理', '5', '8a40c0353fa828a6013fa898d4ac1100', 'd3a5c976c4c24751b6b00ec775692683');
-INSERT INTO `sys_module` VALUES ('c9cbb508c11b4b10aeac87a4f3ebc340', '0', null, '2.png', 'true', '资源负载', '2', 'ec01ee2ea97a4ff1b2371304b8d0fe34', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('cbe70ed41ad040938cfd7bcc5f4f0c58', '0', null, '2.png', 'true', '组织机构', '2', '8a40c0353fa828a6013fa898d4ac0020', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('e6eb0165223447218410f867a9614300', '0', null, '2.png', 'true', '分组管理', '2', '8a40c0353fa828a6013fa898d4ac1100', 'd3a5c976c4c24751b6b00ec775692683');
-INSERT INTO `sys_module` VALUES ('eabc054760164b4cb730c4f5c2a4d305', '0', null, '2.png', 'true', '配置项', '2', '8a40c0353fa828a6013fa898d4ac0020', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('ec01ee2ea97a4ff1b2371304b8d0fe34', '0', null, '2.png', 'true', '运维', '2', '8a40c0353fa828a6013fa898d4ac0020', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('f2496d3a9635448280b28fbc373f6db6', '0', null, '2.png', 'true', '新增模块9', '2', 'cbe70ed41ad040938cfd7bcc5f4f0c58', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('f7fbc8e3ee59405dabe02e18d562abf4', '0', null, '2.png', 'true', '用户分组', '2', '6c4e642b911e468dbdcb62c9b4669eb3', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('f85f516c0b86439087d48a45173ba0e7', '0', null, '2.png', 'true', 'Log4j', '2', 'ec01ee2ea97a4ff1b2371304b8d0fe34', '8a40c0353fa828a6013fa898d4ac0020');
-INSERT INTO `sys_module` VALUES ('ffeeb72e053a4a86a4fe242642877a44', '0', null, '2.png', 'true', '参数管理', '2', 'eabc054760164b4cb730c4f5c2a4d305', '8a40c0353fa828a6013fa898d4ac0020');
+INSERT INTO `sys_module` VALUES ('0dd06fb576ba4c24b36f7e4f0799d17c', '0', '内容管理', null, null, '内容管理', '2', '9a40c0353fa828a6013fa898d4ac2200', null);
+INSERT INTO `sys_module` VALUES ('1864407715b2458395bfa769d0c8400c', '0', '权限分配', null, null, '权限分配', '3', '8a40c0353fa828a6013fa898d4ac2200', null);
+INSERT INTO `sys_module` VALUES ('4eba0ed9d5de43ce8f9f97aee8a5872d', '0', '岗位管理', null, null, '岗位管理', '2', '8a40c0353fa828a6013fa898d4ac1100', null);
+INSERT INTO `sys_module` VALUES ('70db0f59266340b1b920f0700686f6e9', '0', '用户管理', null, null, '用户管理', '4', '8a40c0353fa828a6013fa898d4ac1100', null);
+INSERT INTO `sys_module` VALUES ('7208ed07a2d74eec9dc17f89d50bdf5a', '0', '角色管理', null, null, '角色管理', '2', '8a40c0353fa828a6013fa898d4ac2200', null);
+INSERT INTO `sys_module` VALUES ('79e798cb6e49498ca1930163183192c6', '0', '菜单管理', null, null, '菜单管理', '1', '8a40c0353fa828a6013fa898d4ac1100', null);
+INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac0020', '0', '流程管理', null, null, '流程管理', '4', '#root', null);
+INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac1100', '0', '系统设置', null, null, '系统设置', '1', '#root', null);
+INSERT INTO `sys_module` VALUES ('8a40c0353fa828a6013fa898d4ac2200', '0', '权限管理', null, null, '权限管理', '2', '#root', null);
+INSERT INTO `sys_module` VALUES ('9a40c0353fa828a6013fa898d4ac2200', '0', '内容管理', null, null, '内容管理', '3', '#root', null);
+INSERT INTO `sys_module` VALUES ('a1ed0f0685754901bf4d2ad8934476ce', null, '运行中的流程', null, null, '运行中的流程', '0', '8a40c0353fa828a6013fa898d4ac0020', null);
+INSERT INTO `sys_module` VALUES ('b32fcab21c7f4bf0bd63ec6c0666939a', '0', '组织结构', null, null, '组织结构', '3', '8a40c0353fa828a6013fa898d4ac1100', null);
+INSERT INTO `sys_module` VALUES ('ebc31da9d364434290e4d1ea4ad7fd6c', '0', '模型管理', null, null, '模型管理', '0', '8a40c0353fa828a6013fa898d4ac0020', null);
+INSERT INTO `sys_module` VALUES ('f8160d4ca2fb4b59960060e2fcc1be1c', '0', '功能管理', null, null, '功能管理', '1', '8a40c0353fa828a6013fa898d4ac2200', null);
+INSERT INTO `sys_module` VALUES ('ff750f65eeef4d00b0360afe320b5db1', '0', '栏目管理', null, null, '栏目管理', '1', '9a40c0353fa828a6013fa898d4ac2200', null);
 
 -- ----------------------------
--- Table structure for sys_operator
+-- Table structure for sys_operate
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_operator`;
-CREATE TABLE `sys_operator` (
-  `ids` varchar(32) COLLATE utf8_bin NOT NULL,
+DROP TABLE IF EXISTS `sys_operate`;
+CREATE TABLE `sys_operate` (
+  `id` varchar(32) COLLATE utf8_bin NOT NULL,
   `version` bigint(20) DEFAULT NULL,
   `description` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `names` varchar(25) COLLATE utf8_bin DEFAULT NULL,
-  `onemany` char(1) COLLATE utf8_bin DEFAULT NULL,
-  `returnparamkeys` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `returnurl` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `rowfilter` char(1) COLLATE utf8_bin DEFAULT NULL,
+  `name` varchar(25) COLLATE utf8_bin DEFAULT NULL,
+  `one_many` char(1) COLLATE utf8_bin DEFAULT NULL,
+  `return_url` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `row_filter` char(1) COLLATE utf8_bin DEFAULT NULL,
   `url` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `moduleids` varchar(32) COLLATE utf8_bin DEFAULT NULL,
-  `splitpage` char(1) COLLATE utf8_bin DEFAULT NULL,
-  `formtoken` char(1) COLLATE utf8_bin DEFAULT NULL,
-  `ipblack` char(1) COLLATE utf8_bin DEFAULT NULL,
-  `privilegess` char(1) COLLATE utf8_bin DEFAULT NULL,
-  `ispv` char(1) COLLATE utf8_bin DEFAULT NULL,
-  `pvtype` char(1) COLLATE utf8_bin DEFAULT NULL,
-  `modulenames` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`ids`),
-  KEY `onemanyindex` (`onemany`) USING BTREE,
-  KEY `returnparamkeysindex` (`returnparamkeys`) USING BTREE,
-  KEY `returnurlindex` (`returnurl`) USING BTREE,
-  KEY `rowfilterindex` (`rowfilter`) USING BTREE,
+  `module_id` varchar(32) COLLATE utf8_bin DEFAULT NULL,
+  `form_token` char(1) COLLATE utf8_bin DEFAULT '0',
+  `ip_black` char(1) COLLATE utf8_bin DEFAULT '0',
+  `privilegess` char(1) COLLATE utf8_bin DEFAULT '1',
+  `module_name` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `sort` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `onemanyindex` (`one_many`) USING BTREE,
+  KEY `returnurlindex` (`return_url`) USING BTREE,
+  KEY `rowfilterindex` (`row_filter`) USING BTREE,
   KEY `urlindex` (`url`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of sys_operator
+-- Records of sys_operate
 -- ----------------------------
-INSERT INTO `sys_operator` VALUES ('01aa0c85c8b84ae8aca7f5484336b203', '0', null, '保存', null, null, null, '0', '/platform/dict/save', '8a40c0353fa828a6013fa898d4ac0022', '0', '0', '0', '1', null, null, '字典');
-INSERT INTO `sys_operator` VALUES ('0478826a46df4f20b12f4043a97f8209', '0', null, '验证码', null, null, null, '0', '/platform/authImg', '4c343ddf030d4e17b6db83465600778b', '0', '0', '0', '0', null, null, '验证码');
-INSERT INTO `sys_operator` VALUES ('05114c0cbe1f4c2095b3216f13cfb681', '0', null, '保存', null, null, null, '0', '/wx/keyword/save', '8f53706d4af541588bde334d99d44727', '0', '0', '0', '1', null, null, '自动回复');
-INSERT INTO `sys_operator` VALUES ('053d330462e1459ca1012c9d29113bc4', '0', null, '获取部门负责人', null, null, null, '0', '/platform/dept/getPrincipal', '8a40c0353fa828a6013fa898d4ac0028', '0', '0', '0', '1', null, null, '部门');
-INSERT INTO `sys_operator` VALUES ('0773a58c4bdb4858ab062c4a2a4da69a', '0', null, '默认主页', null, null, null, '0', '/wx/keyword', '8f53706d4af541588bde334d99d44727', '1', '0', '0', '1', null, null, '自动回复');
-INSERT INTO `sys_operator` VALUES ('08a96d5dd37f49459eeb02eebeb0a78c', '0', null, '列表', null, null, null, '0', '/platform/roleOperator', 'c4ab6b8d50434ddf8fa0ec106fcfc6ea', '1', '0', '0', '1', null, null, '角色功能');
-INSERT INTO `sys_operator` VALUES ('091855dd809b418fae88a7fec6d9f246', '0', null, '准备更新', null, null, null, '0', '/platform/dict/edit', '8a40c0353fa828a6013fa898d4ac0022', '0', '0', '0', '1', null, null, '字典');
-INSERT INTO `sys_operator` VALUES ('09b6ce29313c4051ba765de516a9b283', '0', null, 'treeData', null, null, null, '0', '/platform/station/treeData', '8a40c0353fa828a6013fa898d4ac0025', '0', '0', '0', '1', null, null, '岗位');
-INSERT INTO `sys_operator` VALUES ('09dbbe046d6e469d8a5ba12e29abc522', '0', null, '菜单功能列表', null, null, null, '0', '/platform/menu/list', '8a40c0353fa828a6013fa898d4ac0032', '1', '0', '0', '1', null, null, '菜单');
-INSERT INTO `sys_operator` VALUES ('0da15c49299d41a4b720f787d053e3cb', '0', null, '默认列表', null, null, null, '0', '/platform/operator', '8a40c0353fa828a6013fa898d4ac0027', '1', '0', '0', '1', null, null, '功能');
-INSERT INTO `sys_operator` VALUES ('0fb7938c7d614fc389568eb67b442303', '0', null, '单选', null, null, null, '0', '/platform/module/radio.html', '8a40c0353fa828a6013fa898d4ac0033', '0', '0', '0', '1', null, null, '模块');
-INSERT INTO `sys_operator` VALUES ('1046389d8525451697f2793185e7d6ee', '0', null, '更新', null, null, null, '0', '/platform/dept/update', '8a40c0353fa828a6013fa898d4ac0028', '0', '0', '0', '1', null, null, '部门');
-INSERT INTO `sys_operator` VALUES ('10499bc7f9cb4adf99beba00343b4ea6', '0', null, '获取菜单功能', null, null, null, '0', '/platform/menu/getOperator', '8a40c0353fa828a6013fa898d4ac0032', '0', '0', '0', '1', null, null, '菜单');
-INSERT INTO `sys_operator` VALUES ('12141c1c3be241ca8a868bce9cd610d5', '0', null, '准备添加', null, null, null, '0', '/platform/dict/add.html', '8a40c0353fa828a6013fa898d4ac0022', '0', '0', '0', '1', null, null, '字典');
-INSERT INTO `sys_operator` VALUES ('1329f58a0eed44e195dec78bddc591b6', '0', null, '单文件分片上传', null, null, null, '0', '/platform/upload/slice', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', null, null, '上传文件');
-INSERT INTO `sys_operator` VALUES ('15566e63f3104c73b4a0b4a784dd11ca', '0', null, '保存', null, null, null, '0', '/platform/role/save', '8a40c0353fa828a6013fa898d4ac0024', '0', '0', '0', '1', null, null, '角色');
-INSERT INTO `sys_operator` VALUES ('18f50e0f48ef4dd9bec85f5612ab10c0', '0', null, '功能列表', null, null, null, '0', '/platform/test/operator', '68422887e56645728038cdde08caef9a', '1', '0', '0', '1', null, null, 'Test');
-INSERT INTO `sys_operator` VALUES ('1a8b4d8e4411412fa8bb561393563a85', '0', null, '准备添加', null, null, null, '0', '/platform/user/add.html', '8a40c0353fa828a6013fa898d4ac0030', '0', '0', '0', '1', null, null, '用户');
-INSERT INTO `sys_operator` VALUES ('1b0d7476974e4bf9b52f75fb82f87330', '0', null, '分组默认列表', null, null, null, '0', '/platform/group', '8a40c0353fa828a6013fa898d4ac0023', '1', '0', '0', '1', null, null, '分组');
-INSERT INTO `sys_operator` VALUES ('1b1a809815574b2a9c1d0e18d692de17', '0', null, '更新', null, null, null, '0', '/platform/operator/update', '8a40c0353fa828a6013fa898d4ac0027', '0', '0', '0', '1', null, null, '功能');
-INSERT INTO `sys_operator` VALUES ('1d2b6919b80a4a21821adc3efcda77b2', '0', null, '列表', null, null, null, '0', '/platform/upload/list', '8d7a260e02674bd3873656deb716202e', '1', '0', '0', '1', null, null, '文件上传');
-INSERT INTO `sys_operator` VALUES ('1f05b6496a494f488e4cacd2a449c37a', '0', null, '删除', null, null, null, '0', '/platform/stationOperator/del', '33a6f5664a194da8bc2394826cc25bc3', '0', '0', '0', '1', null, null, '岗位功能');
-INSERT INTO `sys_operator` VALUES ('21141da4febe4c929abe37126b37fd12', '0', null, '多选', null, null, null, '0', '/platform/station/checkbox.html', '8a40c0353fa828a6013fa898d4ac0025', '0', '0', '0', '1', null, null, '岗位');
-INSERT INTO `sys_operator` VALUES ('21b0a910ef6e4c60a325d5e57e6e6f65', '0', null, '单选', null, null, null, '0', '/platform/dict/radio.html', '8a40c0353fa828a6013fa898d4ac0022', '0', '0', '0', '1', null, null, '字典');
-INSERT INTO `sys_operator` VALUES ('22926eb196a14b48be775f4880b5ba94', '0', null, '保存', null, null, null, '0', '/platform/group/save', '8a40c0353fa828a6013fa898d4ac0023', '0', '0', '0', '1', null, null, '分组');
-INSERT INTO `sys_operator` VALUES ('2329f58a0eed44e195dec78bddc591b7', '0', null, '多文件分片上传', null, null, null, '0', '/platform/upload/slices', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', null, null, '上传文件');
-INSERT INTO `sys_operator` VALUES ('233356b63d8e477fb6e948b703232809', '0', null, '默认树', null, null, null, '0', '/platform/station', '8a40c0353fa828a6013fa898d4ac0025', '0', '0', '0', '1', null, null, '岗位');
-INSERT INTO `sys_operator` VALUES ('235d855d7b914d728e434f0f309aa04d', '0', null, '默认列表', null, null, null, '0', '/platform/sysLog', '8a40c0353fa828a6013fa898d4ac0029', '1', '0', '0', '1', null, null, '日志');
-INSERT INTO `sys_operator` VALUES ('235d855d7b914d728e434f0f309ab041', '0', null, '导出', null, null, null, '0', '/platform/sysLog/export', '8a40c0353fa828a6013fa898d4ac0029', '1', '0', '0', '1', null, null, '日志');
-INSERT INTO `sys_operator` VALUES ('29c18b3394924c30882da049da14ad99', '0', null, '更新', null, null, null, '0', '/platform/role/update', '8a40c0353fa828a6013fa898d4ac0024', '0', '0', '0', '1', null, null, '角色');
-INSERT INTO `sys_operator` VALUES ('2bd0e8f116f9420692a81d1723cecf5c', '0', null, '日志列表', null, null, null, '0', '/platform/test/sysLog', '68422887e56645728038cdde08caef9a', '1', '0', '0', '1', null, null, 'Test');
-INSERT INTO `sys_operator` VALUES ('2be34991827e4e8da8e92f9b9e8bce25', '0', null, 'treeTableSub', null, null, null, '0', '/platform/dict/treeTable', '8a40c0353fa828a6013fa898d4ac0022', '0', '0', '0', '1', null, null, '字典');
-INSERT INTO `sys_operator` VALUES ('2c2063e17dc742a3b9c330b84c5dfa6a', '0', null, '自动补全', null, null, null, '0', '/platform/test/autoComplete', '68422887e56645728038cdde08caef9a', '0', '0', '0', '1', null, null, 'Test');
-INSERT INTO `sys_operator` VALUES ('2c91467f905a4f5ba9f52830131c8ad9', '0', null, '默认分组列表', null, null, null, '0', '/wx/group', 'e6eb0165223447218410f867a9614300', '1', '0', '0', '1', null, null, '分组管理');
-INSERT INTO `sys_operator` VALUES ('2e32e08e495b4ccea6148774e9f91182', '0', null, '查看', null, null, null, '0', '/platform/param/view', 'ffeeb72e053a4a86a4fe242642877a44', '0', '0', '0', '1', null, null, '参数管理');
-INSERT INTO `sys_operator` VALUES ('2fbbc9cfb0bf4b5bb504ead155c3423c', '0', null, '保存', null, null, null, '0', '/platform/station/save', '8a40c0353fa828a6013fa898d4ac0025', '0', '0', '0', '1', null, null, '岗位');
-INSERT INTO `sys_operator` VALUES ('2fee901117c64e18873f60e8f800713d', '0', null, '单选', null, null, null, '0', '/platform/station/radio.html', '8a40c0353fa828a6013fa898d4ac0025', '0', '0', '0', '1', null, null, '岗位');
-INSERT INTO `sys_operator` VALUES ('3085a3b0c20d4f3aaa7c2d27fe986aba', '0', null, '博客添加', null, null, null, '0', '/test/blog/add.html', '7cbeac9418c946a2bda0c6aabf23c276', '0', '0', '0', '1', null, null, '博客');
-INSERT INTO `sys_operator` VALUES ('30bf01ffe1cb4ed39e92c6600ea39e93', '0', null, '添加', null, null, null, '0', '/platform/groupRole/addRole', '625e895224aa424693149208c9d4073e', '0', '0', '0', '1', null, null, '分组角色');
-INSERT INTO `sys_operator` VALUES ('32a3e59964204a3c8848e84b864306ae', '0', null, '删除', null, null, null, '0', '/platform/systems/delete', '8a40c0353fa828a6013fa898d4ac0026', '0', '0', '0', '1', null, null, '系统');
-INSERT INTO `sys_operator` VALUES ('3329f58a0eed44e195dec78bddc591b8', '0', null, '验证文件md5', null, null, null, '0', '/platform/upload/md5', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', null, null, '上传文件');
-INSERT INTO `sys_operator` VALUES ('335d1f8f46eb47a18001889f8cc21348', '0', null, '删除', null, null, null, '0', '/platform/role/delete', '8a40c0353fa828a6013fa898d4ac0024', '0', '0', '0', '1', null, null, '角色');
-INSERT INTO `sys_operator` VALUES ('351851fb7fce48f9a0ff6747971715ac', '0', null, 'lucene', null, null, null, '0', '/platform/test/lucene', '68422887e56645728038cdde08caef9a', '1', '0', '0', '1', null, null, 'Test');
-INSERT INTO `sys_operator` VALUES ('362cf247241c4d12b6242301e4a73516', '0', null, '删除', null, null, null, '0', '/platform/station/delete', '8a40c0353fa828a6013fa898d4ac0025', '0', '0', '0', '1', null, null, '岗位');
-INSERT INTO `sys_operator` VALUES ('37218fb52ec94fb4bf76209a17916094', '0', null, '默认树', null, null, null, '0', '/platform/module', '8a40c0353fa828a6013fa898d4ac0033', '0', '0', '0', '1', null, null, '模块');
-INSERT INTO `sys_operator` VALUES ('39d82b5574b540b88d3723b36eb3e577', '0', null, '验证手机号是否存在', null, null, null, '0', '/platform/login/valiMobile', '8a40c0353fa828a6013fa898d4ac0021', '0', '0', '0', '1', null, null, '登陆');
-INSERT INTO `sys_operator` VALUES ('3da96263a14343eaa7b409a93ec9e1db', '0', null, 'treeTable', null, null, null, '0', '/platform/param/treeTable', 'ffeeb72e053a4a86a4fe242642877a44', '0', '0', '0', '1', null, null, '参数管理');
-INSERT INTO `sys_operator` VALUES ('3dd486cd58da467dbd83ae420db14815', '0', null, '准备添加', null, null, null, '0', '/weiXin/keyword/add.html', '8f53706d4af541588bde334d99d44727', '0', '0', '0', '1', null, null, '自动回复');
-INSERT INTO `sys_operator` VALUES ('3e4e9e72dab243d38a1785d157c24cb6', '0', null, '博客更新', null, null, null, '0', '/test/blog/update', '7cbeac9418c946a2bda0c6aabf23c276', '0', '1', '0', '1', null, null, '博客');
-INSERT INTO `sys_operator` VALUES ('3ee5f986289d4a1990f4e42c9a0caadb', '0', null, '准备添加', null, null, null, '0', '/platform/group/add.html', '8a40c0353fa828a6013fa898d4ac0023', '0', '0', '0', '1', null, null, '分组');
-INSERT INTO `sys_operator` VALUES ('420d8ebc68ad44dc8188d4c27dc585d1', '0', null, '位置默认列表', null, null, null, '0', '/wx/location', 'c87c35097a2d4bc898fe6e9b1e280a3d', '1', '0', '0', '1', null, null, '位置管理');
-INSERT INTO `sys_operator` VALUES ('423e8c2e2a644bbda0803f46ea8f31e2', '0', null, '准备国际化编辑', null, null, null, '0', '/platform/menu/toEdit', '8a40c0353fa828a6013fa898d4ac0032', '0', '0', '0', '1', null, null, '菜单');
-INSERT INTO `sys_operator` VALUES ('4376888fd74f4247a926529e5da03442', '0', null, 'treeData', null, null, null, '0', '/platform/user/treeData', '8a40c0353fa828a6013fa898d4ac0030', '0', '0', '0', '1', null, null, '用户');
-INSERT INTO `sys_operator` VALUES ('437e05d09dd94720b67c4f230cdebe58', '0', null, '更新', null, null, null, '0', '/platform/module/update', '8a40c0353fa828a6013fa898d4ac0033', '0', '0', '0', '1', null, null, '模块');
-INSERT INTO `sys_operator` VALUES ('46b7269a26044dfebb4edd06a2f9cd83', '0', null, '博客列表', null, null, null, '0', '/test/blog', '7cbeac9418c946a2bda0c6aabf23c276', '1', '0', '0', '1', null, null, '博客');
-INSERT INTO `sys_operator` VALUES ('46e00ef0fd234e9dbf68ed9bbb437d0f', '0', null, '多选', null, null, null, '0', '/platform/department/checkbox.html', '8a40c0353fa828a6013fa898d4ac0028', '0', '0', '0', '1', null, null, '部门');
-INSERT INTO `sys_operator` VALUES ('481d4d5c0a634c4085c72c990260e58d', '0', null, '微信管理主页', null, null, null, '0', '/wx/index/content', '7a35846a305c42abb68601b4f7347289', '0', '0', '0', '1', null, null, '主页管理');
-INSERT INTO `sys_operator` VALUES ('483bdacba04f4663986e6339166e8321', '0', null, '验证账号是否存在', null, null, null, '0', '/platform/login/valiUserName', '8a40c0353fa828a6013fa898d4ac0021', '0', '0', '0', '1', null, null, '登陆');
-INSERT INTO `sys_operator` VALUES ('48db51f20b504c4ab489b1dcfd3ecbd9', '0', null, '密码变更', null, null, null, '0', '/platform/user/passChange.html', '8a40c0353fa828a6013fa898d4ac0030', '0', '0', '0', '1', null, null, '用户');
-INSERT INTO `sys_operator` VALUES ('4959d88b8ca64eb19310c30799faa07c', '0', null, '准备添加', null, null, null, '0', '/platform/param/add.html', 'ffeeb72e053a4a86a4fe242642877a44', '0', '0', '0', '1', null, null, '参数管理');
-INSERT INTO `sys_operator` VALUES ('4a6544ae7a2548ad81c0e3994999023c', '0', null, '准备设置菜单功能', null, null, null, '0', '/platform/menu/operatorTree.html', '8a40c0353fa828a6013fa898d4ac0032', '0', '0', '0', '1', null, null, '菜单');
-INSERT INTO `sys_operator` VALUES ('4bebccaa8f0c4bfbaa2ff89f00706100', '0', null, '博客编辑', null, null, null, '0', '/test/blog/edit', '7cbeac9418c946a2bda0c6aabf23c276', '0', '0', '0', '1', null, null, '博客');
-INSERT INTO `sys_operator` VALUES ('4df80521e66447618796c3cfe02bf239', '0', null, '默认treeTable', null, null, null, '0', '/platform/dict', '8a40c0353fa828a6013fa898d4ac0022', '0', '0', '0', '1', null, null, '字典');
-INSERT INTO `sys_operator` VALUES ('4e03be6af2c74dae99a131a1ab3569f6', '0', null, '编辑', null, null, null, '0', '/platform/param/edit', 'ffeeb72e053a4a86a4fe242642877a44', '0', '0', '0', '1', null, null, '参数管理');
-INSERT INTO `sys_operator` VALUES ('5148ea207b974ee197f0bc57060ab1ad', '0', null, '删除', null, null, null, '0', '/wx/location/delete', 'c87c35097a2d4bc898fe6e9b1e280a3d', '0', '0', '0', '1', null, null, '位置管理');
-INSERT INTO `sys_operator` VALUES ('58a85040aa9f40cca0bdba6e23e30363', '0', null, '保存', null, null, null, '0', '/platform/dept/save', '8a40c0353fa828a6013fa898d4ac0028', '0', '0', '0', '1', null, null, '部门');
-INSERT INTO `sys_operator` VALUES ('5b249ad344d948b99f58768c323f5f71', '0', null, '准备添加', null, null, null, '0', '/platform/systems/add.html', '8a40c0353fa828a6013fa898d4ac0026', '0', '0', '0', '1', null, null, '系统');
-INSERT INTO `sys_operator` VALUES ('5b47ae382f42421682852f889c176d49', '0', null, '验证身份证是否存在', null, null, null, '0', '/platform/login/valiIdcard', '8a40c0353fa828a6013fa898d4ac0021', '0', '0', '0', '1', null, null, '登陆');
-INSERT INTO `sys_operator` VALUES ('5c2bdc059ae24ffda2758a2781bb46da', '0', null, 'log4jServlet', null, null, null, '0', '/se/log4j', 'f85f516c0b86439087d48a45173ba0e7', '0', '0', '0', '1', null, null, 'Log4j');
-INSERT INTO `sys_operator` VALUES ('5d6f2bb8faa948108081492179d0c0ad', '0', null, '删除', null, null, null, '0', '/platform/upload/delete', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', null, null, '文件上传');
-INSERT INTO `sys_operator` VALUES ('5fcac107c80d493d91b53a815d4b297a', '0', null, '保存', null, null, null, '0', '/platform/user/save', '8a40c0353fa828a6013fa898d4ac0030', '0', '0', '0', '1', null, null, '用户');
-INSERT INTO `sys_operator` VALUES ('61da3d9c60704621aa60d1da4553a264', '0', null, '添加', null, null, null, '0', '/platform/userGroup/addGroup', 'f7fbc8e3ee59405dabe02e18d562abf4', '0', '0', '0', '1', null, null, '用户分组');
-INSERT INTO `sys_operator` VALUES ('6324ff9e83654aa0bf7f9d918b636b55', '0', null, '查看字典', null, null, null, '0', '/platform/dict/view', '8a40c0353fa828a6013fa898d4ac0022', '0', '0', '0', '1', null, null, '字典');
-INSERT INTO `sys_operator` VALUES ('6566adb7fc6347e7b01a3c47129b5eb5', '0', null, 'ueditor', null, null, null, '0', '/platform/ueditor', '529d39f773a54ff39eea877f606d74b0', '0', '0', '0', '1', null, null, 'Ueditor');
-INSERT INTO `sys_operator` VALUES ('6569e0d9f2cd4e3a97af4e1b0cd8d2f7', '0', null, '删除', null, null, null, '0', '/platform/dict/delete', '8a40c0353fa828a6013fa898d4ac0022', '0', '0', '0', '1', null, null, '字典');
-INSERT INTO `sys_operator` VALUES ('671ce1e6167840baaa6d27f4f04574c9', '0', null, '主页', null, null, null, '0', '/platform/param', 'ffeeb72e053a4a86a4fe242642877a44', '0', '0', '0', '1', null, null, '参数管理');
-INSERT INTO `sys_operator` VALUES ('6b527ed138c343a89ddf73cf16fef565', '0', null, '更新', null, null, null, '0', '/wx/keyword/update', '8f53706d4af541588bde334d99d44727', '0', '0', '0', '1', null, null, '自动回复');
-INSERT INTO `sys_operator` VALUES ('6daed51284f94923b1c8a6414e646959', '0', null, 'treeData', null, null, null, '0', '/platform/operator/treeData', '8a40c0353fa828a6013fa898d4ac0027', '0', '0', '0', '1', null, null, '功能');
-INSERT INTO `sys_operator` VALUES ('721f7255449c445faf36607c254eea06', '0', null, 'iframe', null, null, null, '0', '/platform/log4j/iframe.html', 'f85f516c0b86439087d48a45173ba0e7', '0', '0', '0', '1', null, null, 'Log4j');
-INSERT INTO `sys_operator` VALUES ('77823e12391a47729a1f82a00bc15c5b', '0', null, '准备更新', null, null, null, '0', '/wx/keyword/edit', '8f53706d4af541588bde334d99d44727', '0', '0', '0', '1', null, null, '自动回复');
-INSERT INTO `sys_operator` VALUES ('78c6026c6af44b41a6bef4cdb4cfb414', '0', null, '获取角色功能', null, null, null, '0', '/platform/role/getOperator', '8a40c0353fa828a6013fa898d4ac0024', '0', '0', '0', '1', null, null, '角色');
-INSERT INTO `sys_operator` VALUES ('79039a2260da46b0aabb5a62e8db6c87', '0', null, '查看', null, null, null, '0', '/platform/user/view', '8a40c0353fa828a6013fa898d4ac0030', '0', '0', '0', '1', null, null, '用户');
-INSERT INTO `sys_operator` VALUES ('7ae62737df444d619f8fd376360d160c', '0', null, '默认列表', null, null, null, '0', '/platform/role', '8a40c0353fa828a6013fa898d4ac0024', '1', '0', '0', '1', null, null, '角色');
-INSERT INTO `sys_operator` VALUES ('7b4281dd247c4624bee0d8f84c2c2715', '0', null, '保存', null, null, null, '0', '/platform/systems/save', '8a40c0353fa828a6013fa898d4ac0026', '0', '0', '0', '1', null, null, '系统');
-INSERT INTO `sys_operator` VALUES ('7bd7ca42560140ee8573b2ade6388f3e', '0', null, '用户分组选择', null, null, null, '0', '/platform/userGroup/select', 'f7fbc8e3ee59405dabe02e18d562abf4', '0', '0', '0', '1', null, null, '用户分组');
-INSERT INTO `sys_operator` VALUES ('7cc12b5c154a4a9782c518c57e8ab3aa', '0', null, '准备更新', null, null, null, '0', '/platform/role/edit', '8a40c0353fa828a6013fa898d4ac0024', '0', '0', '0', '1', null, null, '角色');
-INSERT INTO `sys_operator` VALUES ('7eab5f800bab4efb8df1b2e8a0575f73', '0', null, '默认列表', null, null, null, '0', '/platform/systems', '8a40c0353fa828a6013fa898d4ac0026', '1', '0', '0', '1', null, null, '系统');
-INSERT INTO `sys_operator` VALUES ('7ed5eefbbf3d4aa78d0c5b99f3b7010c', '0', null, '登陆验证', null, null, null, '0', '/platform/login/vali', '8a40c0353fa828a6013fa898d4ac0021', '0', '0', '0', '0', null, null, '登陆');
-INSERT INTO `sys_operator` VALUES ('827a7067a28d442da3ddd834677127af', '0', null, '国际化编辑', null, null, null, '0', '/platform/menu/edit', '8a40c0353fa828a6013fa898d4ac0032', '0', '0', '0', '1', null, null, '菜单');
-INSERT INTO `sys_operator` VALUES ('8329f58a0eed44e195dec78bddc591b5', '0', null, '上传', null, null, null, '0', '/platform/upload', '8d7a260e02674bd3873656deb716202e', '0', '0', '0', '1', null, null, '文件上传');
-INSERT INTO `sys_operator` VALUES ('83ef85fd17804bb195d0ad3c07f88c30', '0', null, '准备更新', null, null, null, '0', '/platform/operator/edit', '8a40c0353fa828a6013fa898d4ac0027', '0', '0', '0', '1', null, null, '功能');
-INSERT INTO `sys_operator` VALUES ('88298fbd650d49f492e268816feffd15', '0', null, '验证邮箱是否存在', null, null, null, '0', '/platform/login/valiMailBox', '8a40c0353fa828a6013fa898d4ac0021', '0', '0', '0', '1', null, null, '登陆');
-INSERT INTO `sys_operator` VALUES ('886bd497064b4c9f87d8461ebba421d1', '0', null, '首页', null, null, null, '0', '/platform/index', '8a40c0353fa828a6013fa898d4ac0021', '0', '0', '0', '1', null, null, '登陆');
-INSERT INTO `sys_operator` VALUES ('8897dbe85b3e4e6989d662495272cf26', '0', null, 'Iframe', null, null, null, '0', '/platform/dict/treeTableIframe.html', '8a40c0353fa828a6013fa898d4ac0022', '0', '0', '0', '1', null, null, '字典');
-INSERT INTO `sys_operator` VALUES ('8b1c1c86385642f2b6c97930b44bbbcf', '0', null, '单选', null, null, null, '0', '/platform/param/radio.html', 'ffeeb72e053a4a86a4fe242642877a44', '0', '0', '0', '1', null, null, '参数管理');
-INSERT INTO `sys_operator` VALUES ('8bd9c0e14df941cdaf6253cd08dbd9cd', '0', null, '准备更新', null, null, null, '0', '/platform/systems/edit', '8a40c0353fa828a6013fa898d4ac0026', '0', '0', '0', '1', null, null, '系统');
-INSERT INTO `sys_operator` VALUES ('8ca8af501522439d8c9249e00db5d78d', '0', null, '查看', null, null, null, '0', '/platform/sysLog/view', '8a40c0353fa828a6013fa898d4ac0029', '0', '0', '0', '1', null, null, '日志');
-INSERT INTO `sys_operator` VALUES ('8f79857b31d4475a94c712e997e89c99', '0', null, '更新', null, null, null, '0', '/platform/dict/update', '8a40c0353fa828a6013fa898d4ac0022', '0', '0', '0', '1', null, null, '字典');
-INSERT INTO `sys_operator` VALUES ('90c3cee940ea4211a714f5111d24ff5d', '0', null, 'treeData', null, null, null, '0', '/platform/param/treeData', 'ffeeb72e053a4a86a4fe242642877a44', '0', '0', '0', '1', null, null, '参数管理');
-INSERT INTO `sys_operator` VALUES ('910955c2192a418995eeab8bf15372e9', '0', null, '准备添加', null, null, null, '0', '/platform/operator/add.html', '8a40c0353fa828a6013fa898d4ac0027', '0', '0', '0', '1', null, null, '功能');
-INSERT INTO `sys_operator` VALUES ('91baed789bc14efdbebb10b49c69ee5b', '0', null, '默认主页列表', null, null, null, '0', '/platform/user', '8a40c0353fa828a6013fa898d4ac0030', '1', '0', '0', '1', null, null, '用户');
-INSERT INTO `sys_operator` VALUES ('9750ea3ee4474711b9acbda8d5b87ee7', '0', null, '删除', null, null, null, '0', '/platform/groupRole/delRole', '625e895224aa424693149208c9d4073e', '0', '0', '0', '1', null, null, '分组角色');
-INSERT INTO `sys_operator` VALUES ('9765e6bb76eb40ab800cb8954822190e', '0', null, '删除', null, null, null, '0', '/wx/keyword/delete', '8f53706d4af541588bde334d99d44727', '0', '0', '0', '1', null, null, '自动回复');
-INSERT INTO `sys_operator` VALUES ('9a708f39e123455e84b6125774bab1ea', '0', null, 'treeData', null, null, null, '0', '/platform/module/treeData', '8a40c0353fa828a6013fa898d4ac0033', '0', '0', '0', '1', null, null, '模块');
-INSERT INTO `sys_operator` VALUES ('9adcc4c40e3148988e5003aaedbb4948', '0', null, 'treeTableIframe', null, null, null, '0', '/platform/param/treeTableIframe.html', 'ffeeb72e053a4a86a4fe242642877a44', '0', '0', '0', '1', null, null, '参数管理');
-INSERT INTO `sys_operator` VALUES ('9c0ae757fc564f27860b975e5792ae6a', '0', null, 'log4jhtml', null, null, null, '0', '/platform/log4j/log4j.html', 'f85f516c0b86439087d48a45173ba0e7', '0', '0', '0', '1', null, null, 'Log4j');
-INSERT INTO `sys_operator` VALUES ('9f75b47bdc0249e2b493c47384785a72', '0', null, '保存', null, null, null, '0', '/platform/menu/save', '8a40c0353fa828a6013fa898d4ac0032', '0', '0', '0', '1', null, null, '菜单');
-INSERT INTO `sys_operator` VALUES ('a0c01a5248cd4bf38e57945dbb2b98c5', '0', null, '更新', null, null, null, '0', '/platform/group/update', '8a40c0353fa828a6013fa898d4ac0023', '0', '0', '0', '1', null, null, '分组');
-INSERT INTO `sys_operator` VALUES ('a0d2897ee9194378819e78538189faa0', '0', null, '列表', null, null, null, '0', '/platform/stationOperator', '33a6f5664a194da8bc2394826cc25bc3', '1', '0', '0', '1', null, null, '岗位功能');
-INSERT INTO `sys_operator` VALUES ('a1ff68acf9b24c34b347ff21e333cb70', '0', null, '设置菜单功能', null, null, null, '0', '/platform/menu/setOperator', '8a40c0353fa828a6013fa898d4ac0032', '0', '0', '0', '1', null, null, '菜单');
-INSERT INTO `sys_operator` VALUES ('a2727f19f7cd4a038dd1a94f042a8cf1', '0', null, '博客保存', null, null, null, '0', '/test/blog/save', '7cbeac9418c946a2bda0c6aabf23c276', '0', '1', '0', '1', null, null, '博客');
-INSERT INTO `sys_operator` VALUES ('a498a20dd4824b8fb103202360669de4', '0', null, '菜单功能设置', null, null, null, '0', '/platform/menu/set', '8a40c0353fa828a6013fa898d4ac0032', '0', '0', '0', '1', null, null, '菜单');
-INSERT INTO `sys_operator` VALUES ('a5289b2638d845fbb06dedbcdd517f97', '0', null, '删除', null, null, null, '0', '/platform/group/delete', '8a40c0353fa828a6013fa898d4ac0023', '0', '0', '0', '1', null, null, '分组');
-INSERT INTO `sys_operator` VALUES ('a6623c65480f4f2cb63a4d7673f81e3a', '0', null, 'treeData', null, null, null, '0', '/platform/menu/treeData', '8a40c0353fa828a6013fa898d4ac0032', '0', '0', '0', '1', null, null, '菜单');
-INSERT INTO `sys_operator` VALUES ('aa126932641f4e068ed8278a332de85d', '0', null, '默认主页', null, null, null, '0', '/platform/index/content', '8a40c0353fa828a6013fa898d4ac0021', '0', '0', '0', '1', null, null, '登陆');
-INSERT INTO `sys_operator` VALUES ('acbceb432b5849aca9e9b284240281ec', '0', null, '分组角色下拉选择', null, null, null, '0', '/platform/role/select', '8a40c0353fa828a6013fa898d4ac0024', '0', '0', '0', '1', null, null, '角色');
-INSERT INTO `sys_operator` VALUES ('ad09a1b897744812875c752c2d70f11a', '0', null, '默认树', null, null, null, '0', '/platform/dept', '8a40c0353fa828a6013fa898d4ac0028', '0', '0', '0', '1', null, null, '部门');
-INSERT INTO `sys_operator` VALUES ('ad51a6ca95c646ce9c03778eda715734', '0', null, '保存', null, null, null, '0', '/platform/operator/save', '8a40c0353fa828a6013fa898d4ac0027', '0', '0', '0', '1', null, null, '功能');
-INSERT INTO `sys_operator` VALUES ('b13b002e2fad4e95bbe0e4dbc9fbdfe1', '0', null, '保存', null, null, null, '0', '/platform/module/save', '8a40c0353fa828a6013fa898d4ac0033', '0', '0', '0', '1', null, null, '模块');
-INSERT INTO `sys_operator` VALUES ('b23b17d4c83242e8a1a8ee8cfcde9907', '0', null, '查看', null, null, null, '0', '/platform/operator/view', '8a40c0353fa828a6013fa898d4ac0027', '0', '0', '0', '1', null, null, '功能');
-INSERT INTO `sys_operator` VALUES ('b4ee4ae4391f4243be69e838545d2131', '0', null, 'treeData', null, null, null, '0', '/platform/dept/treeData', '8a40c0353fa828a6013fa898d4ac0028', '0', '0', '0', '1', null, null, '部门');
-INSERT INTO `sys_operator` VALUES ('b8218945b8e743f29651569950014511', '0', null, '单选', null, null, null, '0', '/platform/department/radio.html', '8a40c0353fa828a6013fa898d4ac0028', '0', '0', '0', '1', null, null, '部门');
-INSERT INTO `sys_operator` VALUES ('b82d86fb7b64498a9c2b8b9a99b3fbeb', '0', null, '删除', null, null, null, '0', '/platform/menu/delete', '8a40c0353fa828a6013fa898d4ac0032', '0', '0', '0', '1', null, null, '菜单');
-INSERT INTO `sys_operator` VALUES ('b8339f29d8d84a4ead6454295f87b79c', '0', null, '人员分组设置', null, null, null, '0', '/platform/group/select', '8a40c0353fa828a6013fa898d4ac0023', '0', '0', '0', '1', null, null, '分组');
-INSERT INTO `sys_operator` VALUES ('bc2c865be6af42cf861294d446fb1c6f', '0', null, '单选', null, null, null, '0', '/platform/user/radio.html', '8a40c0353fa828a6013fa898d4ac0030', '0', '0', '0', '1', null, null, '用户');
-INSERT INTO `sys_operator` VALUES ('c04adcd019e04cf3ba7c66af721a18dc', '0', null, '删除', null, null, null, '0', '/platform/user/delete', '8a40c0353fa828a6013fa898d4ac0030', '0', '0', '0', '1', null, null, '用户');
-INSERT INTO `sys_operator` VALUES ('c05642442e0a468ebe4f0b7771a803ae', '0', null, '更新', null, null, null, '0', '/platform/systems/update', '8a40c0353fa828a6013fa898d4ac0026', '0', '0', '0', '1', null, null, '系统');
-INSERT INTO `sys_operator` VALUES ('c081c50918f4459f8e36ab8cb4151a61', '0', null, '准备岗位功能设置', null, null, null, '0', '/platform/station/operatorTree.html', '8a40c0353fa828a6013fa898d4ac0025', '0', '0', '0', '1', null, null, '岗位');
-INSERT INTO `sys_operator` VALUES ('c0ccfcd127c347a8b9db140e5aa62188', '0', null, '准备添加', null, null, null, '0', '/platform/role/add.html', '8a40c0353fa828a6013fa898d4ac0024', '0', '0', '0', '1', null, null, '角色');
-INSERT INTO `sys_operator` VALUES ('c1e991d1f56749298c18ff69d7777e0b', '0', null, '删除', null, null, null, '0', '/platform/module/delete', '8a40c0353fa828a6013fa898d4ac0033', '0', '0', '0', '1', null, null, '模块');
-INSERT INTO `sys_operator` VALUES ('c29ea4cbd9044bc786e9f4584ad840ff', '0', null, '获取岗位功能', null, null, null, '0', '/platform/station/getOperator', '8a40c0353fa828a6013fa898d4ac0025', '0', '0', '0', '1', null, null, '岗位');
-INSERT INTO `sys_operator` VALUES ('c7132250f5054b808bb119122a6ecb52', '0', null, '设置岗位功能', null, null, null, '0', '/platform/station/setOperator', '8a40c0353fa828a6013fa898d4ac0025', '0', '0', '0', '1', null, null, '岗位');
-INSERT INTO `sys_operator` VALUES ('c9d013d14cbd4f148fb4562c91803ee8', '0', null, '准备更新', null, null, null, '0', '/platform/group/edit', '8a40c0353fa828a6013fa898d4ac0023', '0', '0', '0', '1', null, null, '分组');
-INSERT INTO `sys_operator` VALUES ('ca0f6da01ada419eaa7739d9790e5b88', '0', null, '准备角色功能设置', null, null, null, '0', '/platform/role/operatorTree.html', '8a40c0353fa828a6013fa898d4ac0024', '0', '0', '0', '1', null, null, '角色');
-INSERT INTO `sys_operator` VALUES ('cc6bcbee40ab43b2bd5aff6d9385e1fc', '0', null, '删除', null, null, null, '0', '/platform/operator/delete', '8a40c0353fa828a6013fa898d4ac0027', '0', '0', '0', '1', null, null, '功能');
-INSERT INTO `sys_operator` VALUES ('cc88acee3a664c58861a872c351385e6', '0', null, '选择', null, null, null, '0', '/platform/groupRole/select', '625e895224aa424693149208c9d4073e', '0', '0', '0', '1', null, null, '分组角色');
-INSERT INTO `sys_operator` VALUES ('ccf9b69e151840a28be75d8443b70273', '0', null, '更新', null, null, null, '0', '/platform/param/update', 'ffeeb72e053a4a86a4fe242642877a44', '0', '0', '0', '1', null, null, '参数管理');
-INSERT INTO `sys_operator` VALUES ('cf26c1d2baa24a8791b3d264154b80d4', '0', null, '默认树', null, null, null, '0', '/platform/menu', '8a40c0353fa828a6013fa898d4ac0032', '0', '0', '0', '1', null, null, '菜单');
-INSERT INTO `sys_operator` VALUES ('d115d08591ef4c0eaebef15f8294b287', '0', null, '准备设置部门负责人', null, null, null, '0', '/platform/department/userTree.html', '8a40c0353fa828a6013fa898d4ac0028', '0', '0', '0', '1', null, null, '部门');
-INSERT INTO `sys_operator` VALUES ('d247fb45be724ed2a2bb5c92d73bf6cf', '0', null, '设置用户的组', null, null, null, '0', '/platform/user/setGroup', '8a40c0353fa828a6013fa898d4ac0030', '0', '0', '0', '1', null, null, '用户');
-INSERT INTO `sys_operator` VALUES ('d479dbdc901f4d85a207b9bace6465ac', '0', null, '更新', null, null, null, '0', '/platform/user/update', '8a40c0353fa828a6013fa898d4ac0030', '0', '0', '0', '1', null, null, '用户');
-INSERT INTO `sys_operator` VALUES ('d496b161d2564111992687b948862244', '0', null, 'iframe', null, null, null, '0', '/platform/druid/iframe.html', '297e0cf944e9762e0144e97dfd6e00c9', '0', '0', '0', '1', null, null, '数据源');
-INSERT INTO `sys_operator` VALUES ('d5c8bdf7a49a4e46b776c05dc9ead484', '0', null, 'treeData', null, null, null, '0', '/platform/dict/treeData', '8a40c0353fa828a6013fa898d4ac0022', '0', '0', '0', '1', null, null, '字典');
-INSERT INTO `sys_operator` VALUES ('d646da8707ae41838fd2ec9bf0d467ee', '0', null, '设置角色功能', null, null, null, '0', '/platform/role/setOperator', '8a40c0353fa828a6013fa898d4ac0024', '0', '0', '0', '1', null, null, '角色');
-INSERT INTO `sys_operator` VALUES ('da6077ec1f354a409d0385b2c063e044', '0', null, '添加功能', null, null, null, '0', '/platform/roleOperator/add', 'c4ab6b8d50434ddf8fa0ec106fcfc6ea', '0', '0', '0', '1', null, null, '角色功能');
-INSERT INTO `sys_operator` VALUES ('dc750e57b54f4baca78d66969321ee51', '0', null, '更新', null, null, null, '0', '/platform/station/update', '8a40c0353fa828a6013fa898d4ac0025', '0', '0', '0', '1', null, null, '岗位');
-INSERT INTO `sys_operator` VALUES ('df0aa534655242e4a0bcd638b51a4e03', '0', null, '更新', null, null, null, '0', '/platform/menu/update', '8a40c0353fa828a6013fa898d4ac0032', '0', '0', '0', '1', null, null, '菜单');
-INSERT INTO `sys_operator` VALUES ('dfc7af0979a54e8e9a3f18b7a5d66030', '0', null, '查看', null, null, null, '0', '/wx/keyword/view', '8f53706d4af541588bde334d99d44727', '0', '0', '0', '1', null, null, '自动回复');
-INSERT INTO `sys_operator` VALUES ('dfe9d74fe0ef4220bfcfe6d7bb2f9436', '0', null, '默认用户列表', null, null, null, '0', '/wx/user', 'c4e63c4171db4ae2a83f7dfcc2656b0e', '1', '0', '0', '1', null, null, '用户管理');
-INSERT INTO `sys_operator` VALUES ('e037e0bae9a94e549d6b647db49a64a1', '0', null, '角色设置', null, null, null, '0', '/platform/group/setRole', '8a40c0353fa828a6013fa898d4ac0023', '0', '0', '0', '1', null, null, '分组');
-INSERT INTO `sys_operator` VALUES ('e1ac811d2a16495d927f994dd006e824', '0', null, '删除', null, null, null, '0', '/platform/param/delete', 'ffeeb72e053a4a86a4fe242642877a44', '0', '0', '0', '1', null, null, '参数管理');
-INSERT INTO `sys_operator` VALUES ('e2cead0f68ac4a2d98765264578a9f83', '0', null, '删除', null, null, null, '0', '/platform/userGroup/delGroup', 'f7fbc8e3ee59405dabe02e18d562abf4', '0', '0', '0', '1', null, null, '用户分组');
-INSERT INTO `sys_operator` VALUES ('e4f182b4009e48a58673134324b2ec56', '0', null, '资源负载', null, null, null, '0', '/platform/resources', 'c9cbb508c11b4b10aeac87a4f3ebc340', '0', '0', '0', '1', null, null, '资源负载');
-INSERT INTO `sys_operator` VALUES ('e754dfdb794d4e7db6023c9b089a340c', '0', null, '多选', null, null, null, '0', '/platform/user/checkbox.html', '8a40c0353fa828a6013fa898d4ac0030', '0', '0', '0', '1', null, null, '用户');
-INSERT INTO `sys_operator` VALUES ('ee27f5c23b6d4217b3b66295a3506a40', '0', null, '删除功能', null, null, null, '0', '/platform/roleOperator/del', 'c4ab6b8d50434ddf8fa0ec106fcfc6ea', '0', '0', '0', '1', null, null, '角色功能');
-INSERT INTO `sys_operator` VALUES ('f1f6f2c8f026498c8ee64b7a918d06df', '0', null, '准备更新', null, null, null, '0', '/platform/user/edit', '8a40c0353fa828a6013fa898d4ac0030', '0', '0', '0', '1', null, null, '用户');
-INSERT INTO `sys_operator` VALUES ('f604f021cba44b6fb96115265e557521', '0', null, '添加', null, null, null, '0', '/platform/stationOperator/add', '33a6f5664a194da8bc2394826cc25bc3', '0', '0', '0', '1', null, null, '岗位功能');
-INSERT INTO `sys_operator` VALUES ('f771691134c34174a819b5990310d000', '0', null, '首页', null, null, null, '0', '/platform/', '8a40c0353fa828a6013fa898d4ac0021', '0', '0', '0', '1', null, null, '登陆');
-INSERT INTO `sys_operator` VALUES ('f771691134c34174a819b5990310da56', '0', null, '注销', null, null, null, '0', '/platform/login/logout', '8a40c0353fa828a6013fa898d4ac0021', '0', '0', '0', '1', null, null, '登陆');
-INSERT INTO `sys_operator` VALUES ('f82c021dc443419fb2469032af73bf3e', '0', null, '删除', null, null, null, '0', '/platform/dept/delete', '8a40c0353fa828a6013fa898d4ac0028', '0', '0', '0', '1', null, null, '部门');
-INSERT INTO `sys_operator` VALUES ('fb487ba403254ce8843b39a768422f04', '0', null, '保存', null, null, null, '0', '/platform/param/save', 'ffeeb72e053a4a86a4fe242642877a44', '0', '0', '0', '1', null, null, '参数管理');
-INSERT INTO `sys_operator` VALUES ('fb6a0c1e618041bcbbf8cfd41311b1fa', '0', null, '准备登陆', null, null, null, '0', '/platform/login', '8a40c0353fa828a6013fa898d4ac0021', '0', '0', '0', '0', null, null, '登陆');
-INSERT INTO `sys_operator` VALUES ('fd9978df5c5a47f298e2d28e21e70b15', '0', null, '删除', null, null, null, '0', '/platform/sysLog/delete', '8a40c0353fa828a6013fa898d4ac0029', '0', '0', '0', '1', null, null, '日志');
-INSERT INTO `sys_operator` VALUES ('fdaeeb41691d460b8f142066d1f79927', '0', null, '博客删除', null, null, null, '0', '/test/blog/delete', '7cbeac9418c946a2bda0c6aabf23c276', '0', '0', '0', '1', null, null, '博客');
-INSERT INTO `sys_operator` VALUES ('ff91363b32424fa399e44cc0dfd688e9', '0', null, '博客查看', null, null, null, '0', '/test/blog/view', '7cbeac9418c946a2bda0c6aabf23c276', '0', '0', '0', '1', null, null, '博客');
+INSERT INTO `sys_operate` VALUES ('01aa0c85c8b84ae8aca7f5484336b203', '0', '111', '保存', null, null, '0', '/platform/dict/save', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '字典', '0');
+INSERT INTO `sys_operate` VALUES ('0478826a46df4f20b12f4043a97f8209', '0', null, '验证码', null, null, '0', '/platform/authImg', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '0', '验证码', null);
+INSERT INTO `sys_operate` VALUES ('05114c0cbe1f4c2095b3216f13cfb681', '0', null, '保存', null, null, '0', '/wx/keyword/save', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '自动回复', null);
+INSERT INTO `sys_operate` VALUES ('053d330462e1459ca1012c9d29113bc4', '0', null, '获取部门负责人', null, null, '0', '/platform/dept/getPrincipal', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '部门', null);
+INSERT INTO `sys_operate` VALUES ('0773a58c4bdb4858ab062c4a2a4da69a', '0', null, '默认主页', null, null, '0', '/wx/keyword', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '自动回复', null);
+INSERT INTO `sys_operate` VALUES ('08a96d5dd37f49459eeb02eebeb0a78c', '0', null, '列表', null, null, '0', '/platform/roleOperator', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '角色功能', null);
+INSERT INTO `sys_operate` VALUES ('091855dd809b418fae88a7fec6d9f246', '0', null, '准备更新', null, null, '0', '/platform/dict/edit', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '字典', null);
+INSERT INTO `sys_operate` VALUES ('09b6ce29313c4051ba765de516a9b283', '0', null, 'treeData', null, null, '0', '/platform/station/treeData', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '岗位', null);
+INSERT INTO `sys_operate` VALUES ('09dbbe046d6e469d8a5ba12e29abc522', '0', null, '菜单功能列表', null, null, '0', '/platform/menu/list', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '菜单', null);
+INSERT INTO `sys_operate` VALUES ('0da15c49299d41a4b720f787d053e3cb', '0', null, '默认列表', null, null, '0', '/platform/operator', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '功能', null);
+INSERT INTO `sys_operate` VALUES ('0fb7938c7d614fc389568eb67b442303', '0', null, '单选', null, null, '0', '/platform/module/radio.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '模块', null);
+INSERT INTO `sys_operate` VALUES ('1046389d8525451697f2793185e7d6ee', '0', null, '更新', null, null, '0', '/platform/dept/update', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '部门', null);
+INSERT INTO `sys_operate` VALUES ('10499bc7f9cb4adf99beba00343b4ea6', '0', null, '获取菜单功能', null, null, '0', '/platform/menu/getOperator', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '菜单', null);
+INSERT INTO `sys_operate` VALUES ('12141c1c3be241ca8a868bce9cd610d5', '0', null, '准备添加', null, null, '0', '/platform/dict/add.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '字典', null);
+INSERT INTO `sys_operate` VALUES ('1329f58a0eed44e195dec78bddc591b6', '0', null, '单文件分片上传', null, null, '0', '/platform/upload/slice', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '上传文件', null);
+INSERT INTO `sys_operate` VALUES ('15566e63f3104c73b4a0b4a784dd11ca', '0', null, '保存', null, null, '0', '/platform/role/save', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '角色', null);
+INSERT INTO `sys_operate` VALUES ('18f50e0f48ef4dd9bec85f5612ab10c0', '0', null, '功能列表', null, null, '0', '/platform/test/operator', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', 'Test', null);
+INSERT INTO `sys_operate` VALUES ('1a8b4d8e4411412fa8bb561393563a85', '0', null, '准备添加', null, null, '0', '/platform/user/add.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户', null);
+INSERT INTO `sys_operate` VALUES ('1b0d7476974e4bf9b52f75fb82f87330', '0', null, '分组默认列表', null, null, '0', '/platform/group', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '分组', null);
+INSERT INTO `sys_operate` VALUES ('1b1a809815574b2a9c1d0e18d692de17', '0', null, '更新', null, null, '0', '/platform/operator/update', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '功能', null);
+INSERT INTO `sys_operate` VALUES ('1d2b6919b80a4a21821adc3efcda77b2', '0', null, '列表', null, null, '0', '/platform/upload/list', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '文件上传', null);
+INSERT INTO `sys_operate` VALUES ('1f05b6496a494f488e4cacd2a449c37a', '0', null, '删除', null, null, '0', '/platform/stationOperator/del', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '岗位功能', null);
+INSERT INTO `sys_operate` VALUES ('21141da4febe4c929abe37126b37fd12', '0', null, '多选', null, null, '0', '/platform/station/checkbox.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '岗位', null);
+INSERT INTO `sys_operate` VALUES ('21b0a910ef6e4c60a325d5e57e6e6f65', '0', null, '单选', null, null, '0', '/platform/dict/radio.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '字典', null);
+INSERT INTO `sys_operate` VALUES ('22926eb196a14b48be775f4880b5ba94', '0', null, '保存', null, null, '0', '/platform/group/save', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '分组', null);
+INSERT INTO `sys_operate` VALUES ('2329f58a0eed44e195dec78bddc591b7', '0', null, '多文件分片上传', null, null, '0', '/platform/upload/slices', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '上传文件', null);
+INSERT INTO `sys_operate` VALUES ('233356b63d8e477fb6e948b703232809', '0', null, '默认树', null, null, '0', '/platform/station', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '岗位', null);
+INSERT INTO `sys_operate` VALUES ('235d855d7b914d728e434f0f309aa04d', '0', null, '默认列表', null, null, '0', '/platform/sysLog', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '日志', null);
+INSERT INTO `sys_operate` VALUES ('235d855d7b914d728e434f0f309ab041', '0', null, '导出', null, null, '0', '/platform/sysLog/export', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '日志', null);
+INSERT INTO `sys_operate` VALUES ('29c18b3394924c30882da049da14ad99', '0', null, '更新', null, null, '0', '/platform/role/update', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '角色', null);
+INSERT INTO `sys_operate` VALUES ('2bd0e8f116f9420692a81d1723cecf5c', '0', null, '日志列表', null, null, '0', '/platform/test/sysLog', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', 'Test', null);
+INSERT INTO `sys_operate` VALUES ('2be34991827e4e8da8e92f9b9e8bce25', '0', null, 'treeTableSub', null, null, '0', '/platform/dict/treeTable', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '字典', null);
+INSERT INTO `sys_operate` VALUES ('2c2063e17dc742a3b9c330b84c5dfa6a', '0', null, '自动补全', null, null, '0', '/platform/test/autoComplete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', 'Test', null);
+INSERT INTO `sys_operate` VALUES ('2c91467f905a4f5ba9f52830131c8ad9', '0', null, '默认分组列表', null, null, '0', '/wx/group', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '分组管理', null);
+INSERT INTO `sys_operate` VALUES ('2e32e08e495b4ccea6148774e9f91182', '0', null, '查看', null, null, '0', '/platform/param/view', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '参数管理', null);
+INSERT INTO `sys_operate` VALUES ('2fbbc9cfb0bf4b5bb504ead155c3423c', '0', null, '保存', null, null, '0', '/platform/station/save', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '岗位', null);
+INSERT INTO `sys_operate` VALUES ('2fee901117c64e18873f60e8f800713d', '0', null, '单选', null, null, '0', '/platform/station/radio.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '岗位', null);
+INSERT INTO `sys_operate` VALUES ('3085a3b0c20d4f3aaa7c2d27fe986aba', '0', null, '博客添加', null, null, '0', '/test/blog/add.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '博客', null);
+INSERT INTO `sys_operate` VALUES ('30bf01ffe1cb4ed39e92c6600ea39e93', '0', null, '添加', null, null, '0', '/platform/groupRole/addRole', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '分组角色', null);
+INSERT INTO `sys_operate` VALUES ('32a3e59964204a3c8848e84b864306ae', '0', null, '删除', null, null, '0', '/platform/systems/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '系统', null);
+INSERT INTO `sys_operate` VALUES ('3329f58a0eed44e195dec78bddc591b8', '0', null, '验证文件md5', null, null, '0', '/platform/upload/md5', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '上传文件', null);
+INSERT INTO `sys_operate` VALUES ('335d1f8f46eb47a18001889f8cc21348', '0', null, '删除', null, null, '0', '/platform/role/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '角色', null);
+INSERT INTO `sys_operate` VALUES ('351851fb7fce48f9a0ff6747971715ac', '0', null, 'lucene', null, null, '0', '/platform/test/lucene', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', 'Test', null);
+INSERT INTO `sys_operate` VALUES ('362cf247241c4d12b6242301e4a73516', '0', null, '删除', null, null, '0', '/platform/station/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '岗位', null);
+INSERT INTO `sys_operate` VALUES ('37218fb52ec94fb4bf76209a17916094', '0', null, '默认树', null, null, '0', '/platform/module', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '模块', null);
+INSERT INTO `sys_operate` VALUES ('39d82b5574b540b88d3723b36eb3e577', '0', null, '验证手机号是否存在', null, null, '0', '/platform/login/valiMobile', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '登陆', null);
+INSERT INTO `sys_operate` VALUES ('3da96263a14343eaa7b409a93ec9e1db', '0', null, 'treeTable', null, null, '0', '/platform/param/treeTable', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '参数管理', null);
+INSERT INTO `sys_operate` VALUES ('3dd486cd58da467dbd83ae420db14815', '0', null, '准备添加', null, null, '0', '/weiXin/keyword/add.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '自动回复', null);
+INSERT INTO `sys_operate` VALUES ('3e4e9e72dab243d38a1785d157c24cb6', '0', null, '博客更新', null, null, '0', '/test/blog/update', '0dd06fb576ba4c24b36f7e4f0799d17c', '1', '0', '1', '博客', null);
+INSERT INTO `sys_operate` VALUES ('3ee5f986289d4a1990f4e42c9a0caadb', '0', null, '准备添加', null, null, '0', '/platform/group/add.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '分组', null);
+INSERT INTO `sys_operate` VALUES ('420d8ebc68ad44dc8188d4c27dc585d1', '0', null, '位置默认列表', null, null, '0', '/wx/location', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '位置管理', null);
+INSERT INTO `sys_operate` VALUES ('423e8c2e2a644bbda0803f46ea8f31e2', '0', null, '准备国际化编辑', null, null, '0', '/platform/menu/toEdit', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '菜单', null);
+INSERT INTO `sys_operate` VALUES ('4376888fd74f4247a926529e5da03442', '0', null, 'treeData', null, null, '0', '/platform/user/treeData', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户', null);
+INSERT INTO `sys_operate` VALUES ('437e05d09dd94720b67c4f230cdebe58', '0', null, '更新', null, null, '0', '/platform/module/update', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '模块', null);
+INSERT INTO `sys_operate` VALUES ('46b7269a26044dfebb4edd06a2f9cd83', '0', null, '博客列表', null, null, '0', '/test/blog', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '博客', null);
+INSERT INTO `sys_operate` VALUES ('46e00ef0fd234e9dbf68ed9bbb437d0f', '0', null, '多选', null, null, '0', '/platform/department/checkbox.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '部门', null);
+INSERT INTO `sys_operate` VALUES ('481d4d5c0a634c4085c72c990260e58d', '0', null, '微信管理主页', null, null, '0', '/wx/index/content', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '主页管理', null);
+INSERT INTO `sys_operate` VALUES ('483bdacba04f4663986e6339166e8321', '0', null, '验证账号是否存在', null, null, '0', '/platform/login/valiUserName', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '登陆', null);
+INSERT INTO `sys_operate` VALUES ('48db51f20b504c4ab489b1dcfd3ecbd9', '0', null, '密码变更', null, null, '0', '/platform/user/passChange.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户', null);
+INSERT INTO `sys_operate` VALUES ('4959d88b8ca64eb19310c30799faa07c', '0', null, '准备添加', null, null, '0', '/platform/param/add.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '参数管理', null);
+INSERT INTO `sys_operate` VALUES ('4a6544ae7a2548ad81c0e3994999023c', '0', null, '准备设置菜单功能', null, null, '0', '/platform/menu/operatorTree.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '菜单', null);
+INSERT INTO `sys_operate` VALUES ('4bebccaa8f0c4bfbaa2ff89f00706100', '0', null, '博客编辑', null, null, '0', '/test/blog/edit', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '博客', null);
+INSERT INTO `sys_operate` VALUES ('4df80521e66447618796c3cfe02bf239', '0', null, '默认treeTable', null, null, '0', '/platform/dict', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '字典', null);
+INSERT INTO `sys_operate` VALUES ('4e03be6af2c74dae99a131a1ab3569f6', '0', null, '编辑', null, null, '0', '/platform/param/edit', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '参数管理', null);
+INSERT INTO `sys_operate` VALUES ('5148ea207b974ee197f0bc57060ab1ad', '0', null, '删除', null, null, '0', '/wx/location/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '位置管理', null);
+INSERT INTO `sys_operate` VALUES ('58a85040aa9f40cca0bdba6e23e30363', '0', null, '保存', null, null, '0', '/platform/dept/save', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '部门', null);
+INSERT INTO `sys_operate` VALUES ('5b249ad344d948b99f58768c323f5f71', '0', null, '准备添加', null, null, '0', '/platform/systems/add.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '系统', null);
+INSERT INTO `sys_operate` VALUES ('5b47ae382f42421682852f889c176d49', '0', null, '验证身份证是否存在', null, null, '0', '/platform/login/valiIdcard', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '登陆', null);
+INSERT INTO `sys_operate` VALUES ('5c2bdc059ae24ffda2758a2781bb46da', '0', null, 'log4jServlet', null, null, '0', '/se/log4j', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', 'Log4j', null);
+INSERT INTO `sys_operate` VALUES ('5d6f2bb8faa948108081492179d0c0ad', '0', null, '删除', null, null, '0', '/platform/upload/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '文件上传', null);
+INSERT INTO `sys_operate` VALUES ('5fcac107c80d493d91b53a815d4b297a', '0', null, '保存', null, null, '0', '/platform/user/save', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户', null);
+INSERT INTO `sys_operate` VALUES ('61da3d9c60704621aa60d1da4553a264', '0', null, '添加', null, null, '0', '/platform/userGroup/addGroup', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户分组', null);
+INSERT INTO `sys_operate` VALUES ('6324ff9e83654aa0bf7f9d918b636b55', '0', null, '查看字典', null, null, '0', '/platform/dict/view', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '字典', null);
+INSERT INTO `sys_operate` VALUES ('6566adb7fc6347e7b01a3c47129b5eb5', '0', null, 'ueditor', null, null, '0', '/platform/ueditor', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', 'Ueditor', null);
+INSERT INTO `sys_operate` VALUES ('6569e0d9f2cd4e3a97af4e1b0cd8d2f7', '0', null, '删除', null, null, '0', '/platform/dict/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '字典', null);
+INSERT INTO `sys_operate` VALUES ('671ce1e6167840baaa6d27f4f04574c9', '0', null, '主页', null, null, '0', '/platform/param', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '参数管理', null);
+INSERT INTO `sys_operate` VALUES ('6b527ed138c343a89ddf73cf16fef565', '0', null, '更新', null, null, '0', '/wx/keyword/update', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '自动回复', null);
+INSERT INTO `sys_operate` VALUES ('6daed51284f94923b1c8a6414e646959', '0', null, 'treeData', null, null, '0', '/platform/operator/treeData', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '功能', null);
+INSERT INTO `sys_operate` VALUES ('721f7255449c445faf36607c254eea06', '0', null, 'iframe', null, null, '0', '/platform/log4j/iframe.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', 'Log4j', null);
+INSERT INTO `sys_operate` VALUES ('77823e12391a47729a1f82a00bc15c5b', '0', null, '准备更新', null, null, '0', '/wx/keyword/edit', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '自动回复', null);
+INSERT INTO `sys_operate` VALUES ('78c6026c6af44b41a6bef4cdb4cfb414', '0', null, '获取角色功能', null, null, '0', '/platform/role/getOperator', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '角色', null);
+INSERT INTO `sys_operate` VALUES ('79039a2260da46b0aabb5a62e8db6c87', '0', null, '查看', null, null, '0', '/platform/user/view', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户', null);
+INSERT INTO `sys_operate` VALUES ('7ae62737df444d619f8fd376360d160c', '0', null, '默认列表', null, null, '0', '/platform/role', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '角色', null);
+INSERT INTO `sys_operate` VALUES ('7b4281dd247c4624bee0d8f84c2c2715', '0', null, '保存', null, null, '0', '/platform/systems/save', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '系统', null);
+INSERT INTO `sys_operate` VALUES ('7bd7ca42560140ee8573b2ade6388f3e', '0', null, '用户分组选择', null, null, '0', '/platform/userGroup/select', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户分组', null);
+INSERT INTO `sys_operate` VALUES ('7cc12b5c154a4a9782c518c57e8ab3aa', '0', null, '准备更新', null, null, '0', '/platform/role/edit', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '角色', null);
+INSERT INTO `sys_operate` VALUES ('7eab5f800bab4efb8df1b2e8a0575f73', '0', null, '默认列表', null, null, '0', '/platform/systems', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '系统', null);
+INSERT INTO `sys_operate` VALUES ('7ed5eefbbf3d4aa78d0c5b99f3b7010c', '0', null, '登陆验证', null, null, '0', '/platform/login/vali', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '0', '登陆', null);
+INSERT INTO `sys_operate` VALUES ('827a7067a28d442da3ddd834677127af', '0', null, '国际化编辑', null, null, '0', '/platform/menu/edit', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '菜单', null);
+INSERT INTO `sys_operate` VALUES ('8329f58a0eed44e195dec78bddc591b5', '0', null, '上传', null, null, '0', '/platform/upload', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '文件上传', null);
+INSERT INTO `sys_operate` VALUES ('83ef85fd17804bb195d0ad3c07f88c30', '0', null, '准备更新', null, null, '0', '/platform/operator/edit', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '功能', null);
+INSERT INTO `sys_operate` VALUES ('88298fbd650d49f492e268816feffd15', '0', null, '验证邮箱是否存在', null, null, '0', '/platform/login/valiMailBox', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '登陆', null);
+INSERT INTO `sys_operate` VALUES ('886bd497064b4c9f87d8461ebba421d1', '0', null, '首页', null, null, '0', '/platform/index', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '登陆', null);
+INSERT INTO `sys_operate` VALUES ('8897dbe85b3e4e6989d662495272cf26', '0', null, 'Iframe', null, null, '0', '/platform/dict/treeTableIframe.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '字典', null);
+INSERT INTO `sys_operate` VALUES ('8b1c1c86385642f2b6c97930b44bbbcf', '0', null, '单选', null, null, '0', '/platform/param/radio.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '参数管理', null);
+INSERT INTO `sys_operate` VALUES ('8bd9c0e14df941cdaf6253cd08dbd9cd', '0', null, '准备更新', null, null, '0', '/platform/systems/edit', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '系统', null);
+INSERT INTO `sys_operate` VALUES ('8ca8af501522439d8c9249e00db5d78d', '0', null, '查看', null, null, '0', '/platform/sysLog/view', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '日志', null);
+INSERT INTO `sys_operate` VALUES ('8f79857b31d4475a94c712e997e89c99', '0', null, '更新', null, null, '0', '/platform/dict/update', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '字典', null);
+INSERT INTO `sys_operate` VALUES ('90c3cee940ea4211a714f5111d24ff5d', '0', null, 'treeData', null, null, '0', '/platform/param/treeData', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '参数管理', null);
+INSERT INTO `sys_operate` VALUES ('910955c2192a418995eeab8bf15372e9', '0', null, '准备添加', null, null, '0', '/platform/operator/add.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '功能', null);
+INSERT INTO `sys_operate` VALUES ('91baed789bc14efdbebb10b49c69ee5b', '0', null, '默认主页列表', null, null, '0', '/platform/user', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户', null);
+INSERT INTO `sys_operate` VALUES ('9750ea3ee4474711b9acbda8d5b87ee7', '0', null, '删除', null, null, '0', '/platform/groupRole/delRole', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '分组角色', null);
+INSERT INTO `sys_operate` VALUES ('9765e6bb76eb40ab800cb8954822190e', '0', null, '删除', null, null, '0', '/wx/keyword/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '自动回复', null);
+INSERT INTO `sys_operate` VALUES ('9a708f39e123455e84b6125774bab1ea', '0', null, 'treeData', null, null, '0', '/platform/module/treeData', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '模块', null);
+INSERT INTO `sys_operate` VALUES ('9adcc4c40e3148988e5003aaedbb4948', '0', null, 'treeTableIframe', null, null, '0', '/platform/param/treeTableIframe.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '参数管理', null);
+INSERT INTO `sys_operate` VALUES ('9c0ae757fc564f27860b975e5792ae6a', '0', null, 'log4jhtml', null, null, '0', '/platform/log4j/log4j.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', 'Log4j', null);
+INSERT INTO `sys_operate` VALUES ('9f75b47bdc0249e2b493c47384785a72', '0', null, '保存', null, null, '0', '/platform/menu/save', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '菜单', null);
+INSERT INTO `sys_operate` VALUES ('a0c01a5248cd4bf38e57945dbb2b98c5', '0', null, '更新', null, null, '0', '/platform/group/update', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '分组', null);
+INSERT INTO `sys_operate` VALUES ('a0d2897ee9194378819e78538189faa0', '0', null, '列表', null, null, '0', '/platform/stationOperator', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '岗位功能', null);
+INSERT INTO `sys_operate` VALUES ('a1ff68acf9b24c34b347ff21e333cb70', '0', null, '设置菜单功能', null, null, '0', '/platform/menu/setOperator', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '菜单', null);
+INSERT INTO `sys_operate` VALUES ('a2727f19f7cd4a038dd1a94f042a8cf1', '0', null, '博客保存', null, null, '0', '/test/blog/save', '0dd06fb576ba4c24b36f7e4f0799d17c', '1', '0', '1', '博客', null);
+INSERT INTO `sys_operate` VALUES ('a498a20dd4824b8fb103202360669de4', '0', null, '菜单功能设置', null, null, '0', '/platform/menu/set', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '菜单', null);
+INSERT INTO `sys_operate` VALUES ('a5289b2638d845fbb06dedbcdd517f97', '0', null, '删除', null, null, '0', '/platform/group/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '分组', null);
+INSERT INTO `sys_operate` VALUES ('a6623c65480f4f2cb63a4d7673f81e3a', '0', null, 'treeData', null, null, '0', '/platform/menu/treeData', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '菜单', null);
+INSERT INTO `sys_operate` VALUES ('aa126932641f4e068ed8278a332de85d', '0', null, '默认主页', null, null, '0', '/platform/index/content', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '登陆', null);
+INSERT INTO `sys_operate` VALUES ('acbceb432b5849aca9e9b284240281ec', '0', null, '分组角色下拉选择', null, null, '0', '/platform/role/select', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '角色', null);
+INSERT INTO `sys_operate` VALUES ('ad09a1b897744812875c752c2d70f11a', '0', null, '默认树', null, null, '0', '/platform/dept', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '部门', null);
+INSERT INTO `sys_operate` VALUES ('ad51a6ca95c646ce9c03778eda715734', '0', null, '保存', null, null, '0', '/platform/operator/save', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '功能', null);
+INSERT INTO `sys_operate` VALUES ('b13b002e2fad4e95bbe0e4dbc9fbdfe1', '0', null, '保存', null, null, '0', '/platform/module/save', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '模块', null);
+INSERT INTO `sys_operate` VALUES ('b23b17d4c83242e8a1a8ee8cfcde9907', '0', null, '查看', null, null, '0', '/platform/operator/view', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '功能', null);
+INSERT INTO `sys_operate` VALUES ('b4ee4ae4391f4243be69e838545d2131', '0', null, 'treeData', null, null, '0', '/platform/dept/treeData', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '部门', null);
+INSERT INTO `sys_operate` VALUES ('b8218945b8e743f29651569950014511', '0', null, '单选', null, null, '0', '/platform/department/radio.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '部门', null);
+INSERT INTO `sys_operate` VALUES ('b82d86fb7b64498a9c2b8b9a99b3fbeb', '0', null, '删除', null, null, '0', '/platform/menu/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '菜单', null);
+INSERT INTO `sys_operate` VALUES ('b8339f29d8d84a4ead6454295f87b79c', '0', null, '人员分组设置', null, null, '0', '/platform/group/select', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '分组', null);
+INSERT INTO `sys_operate` VALUES ('bc2c865be6af42cf861294d446fb1c6f', '0', null, '单选', null, null, '0', '/platform/user/radio.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户', null);
+INSERT INTO `sys_operate` VALUES ('c04adcd019e04cf3ba7c66af721a18dc', '0', null, '删除', null, null, '0', '/platform/user/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户', null);
+INSERT INTO `sys_operate` VALUES ('c05642442e0a468ebe4f0b7771a803ae', '0', null, '更新', null, null, '0', '/platform/systems/update', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '系统', null);
+INSERT INTO `sys_operate` VALUES ('c081c50918f4459f8e36ab8cb4151a61', '0', null, '准备岗位功能设置', null, null, '0', '/platform/station/operatorTree.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '岗位', null);
+INSERT INTO `sys_operate` VALUES ('c0ccfcd127c347a8b9db140e5aa62188', '0', null, '准备添加', null, null, '0', '/platform/role/add.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '角色', null);
+INSERT INTO `sys_operate` VALUES ('c1e991d1f56749298c18ff69d7777e0b', '0', null, '删除', null, null, '0', '/platform/module/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '模块', null);
+INSERT INTO `sys_operate` VALUES ('c29ea4cbd9044bc786e9f4584ad840ff', '0', null, '获取岗位功能', null, null, '0', '/platform/station/getOperator', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '岗位', null);
+INSERT INTO `sys_operate` VALUES ('c7132250f5054b808bb119122a6ecb52', '0', null, '设置岗位功能', null, null, '0', '/platform/station/setOperator', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '岗位', null);
+INSERT INTO `sys_operate` VALUES ('c9d013d14cbd4f148fb4562c91803ee8', '0', null, '准备更新', null, null, '0', '/platform/group/edit', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '分组', null);
+INSERT INTO `sys_operate` VALUES ('ca0f6da01ada419eaa7739d9790e5b88', '0', null, '准备角色功能设置', null, null, '0', '/platform/role/operatorTree.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '角色', null);
+INSERT INTO `sys_operate` VALUES ('cc6bcbee40ab43b2bd5aff6d9385e1fc', '0', null, '删除', null, null, '0', '/platform/operator/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '功能', null);
+INSERT INTO `sys_operate` VALUES ('cc88acee3a664c58861a872c351385e6', '0', null, '选择', null, null, '0', '/platform/groupRole/select', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '分组角色', null);
+INSERT INTO `sys_operate` VALUES ('ccf9b69e151840a28be75d8443b70273', '0', null, '更新', null, null, '0', '/platform/param/update', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '参数管理', null);
+INSERT INTO `sys_operate` VALUES ('cf26c1d2baa24a8791b3d264154b80d4', '0', null, '默认树', null, null, '0', '/platform/menu', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '菜单', null);
+INSERT INTO `sys_operate` VALUES ('d115d08591ef4c0eaebef15f8294b287', '0', null, '准备设置部门负责人', null, null, '0', '/platform/department/userTree.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '部门', null);
+INSERT INTO `sys_operate` VALUES ('d247fb45be724ed2a2bb5c92d73bf6cf', '0', null, '设置用户的组', null, null, '0', '/platform/user/setGroup', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户', null);
+INSERT INTO `sys_operate` VALUES ('d479dbdc901f4d85a207b9bace6465ac', '0', null, '更新', null, null, '0', '/platform/user/update', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户', null);
+INSERT INTO `sys_operate` VALUES ('d496b161d2564111992687b948862244', '0', null, 'iframe', null, null, '0', '/platform/druid/iframe.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '数据源', null);
+INSERT INTO `sys_operate` VALUES ('d5c8bdf7a49a4e46b776c05dc9ead484', '0', null, 'treeData', null, null, '0', '/platform/dict/treeData', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '字典', null);
+INSERT INTO `sys_operate` VALUES ('d646da8707ae41838fd2ec9bf0d467ee', '0', null, '设置角色功能', null, null, '0', '/platform/role/setOperator', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '角色', null);
+INSERT INTO `sys_operate` VALUES ('da6077ec1f354a409d0385b2c063e044', '0', null, '添加功能', null, null, '0', '/platform/roleOperator/add', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '角色功能', null);
+INSERT INTO `sys_operate` VALUES ('dc750e57b54f4baca78d66969321ee51', '0', null, '更新', null, null, '0', '/platform/station/update', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '岗位', null);
+INSERT INTO `sys_operate` VALUES ('df0aa534655242e4a0bcd638b51a4e03', '0', null, '更新', null, null, '0', '/platform/menu/update', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '菜单', null);
+INSERT INTO `sys_operate` VALUES ('dfc7af0979a54e8e9a3f18b7a5d66030', '0', null, '查看', null, null, '0', '/wx/keyword/view', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '自动回复', null);
+INSERT INTO `sys_operate` VALUES ('dfe9d74fe0ef4220bfcfe6d7bb2f9436', '0', null, '默认用户列表', null, null, '0', '/wx/user', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户管理', null);
+INSERT INTO `sys_operate` VALUES ('e037e0bae9a94e549d6b647db49a64a1', '0', null, '角色设置', null, null, '0', '/platform/group/setRole', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '分组', null);
+INSERT INTO `sys_operate` VALUES ('e1ac811d2a16495d927f994dd006e824', '0', null, '删除', null, null, '0', '/platform/param/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '参数管理', null);
+INSERT INTO `sys_operate` VALUES ('e2cead0f68ac4a2d98765264578a9f83', '0', null, '删除', null, null, '0', '/platform/userGroup/delGroup', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户分组', null);
+INSERT INTO `sys_operate` VALUES ('e4f182b4009e48a58673134324b2ec56', '0', null, '资源负载', null, null, '0', '/platform/resources', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '资源负载', null);
+INSERT INTO `sys_operate` VALUES ('e754dfdb794d4e7db6023c9b089a340c', '0', null, '多选', null, null, '0', '/platform/user/checkbox.html', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户', null);
+INSERT INTO `sys_operate` VALUES ('ee27f5c23b6d4217b3b66295a3506a40', '0', null, '删除功能', null, null, '0', '/platform/roleOperator/del', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '角色功能', null);
+INSERT INTO `sys_operate` VALUES ('f1f6f2c8f026498c8ee64b7a918d06df', '0', null, '准备更新', null, null, '0', '/platform/user/edit', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '用户', null);
+INSERT INTO `sys_operate` VALUES ('f604f021cba44b6fb96115265e557521', '0', null, '添加', null, null, '0', '/platform/stationOperator/add', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '岗位功能', null);
+INSERT INTO `sys_operate` VALUES ('f771691134c34174a819b5990310d000', '0', null, '首页', null, null, '0', '/platform/', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '登陆', null);
+INSERT INTO `sys_operate` VALUES ('f771691134c34174a819b5990310da56', '0', null, '注销', null, null, '0', '/platform/login/logout', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '登陆', null);
+INSERT INTO `sys_operate` VALUES ('f82c021dc443419fb2469032af73bf3e', '0', null, '删除', null, null, '0', '/platform/dept/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '部门', null);
+INSERT INTO `sys_operate` VALUES ('fb487ba403254ce8843b39a768422f04', '0', null, '保存', null, null, '0', '/platform/param/save', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '参数管理', null);
+INSERT INTO `sys_operate` VALUES ('fb6a0c1e618041bcbbf8cfd41311b1fa', '0', null, '准备登陆', null, null, '0', '/platform/login', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '0', '登陆', null);
+INSERT INTO `sys_operate` VALUES ('fd9978df5c5a47f298e2d28e21e70b15', '0', null, '删除', null, null, '0', '/platform/sysLog/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '日志', null);
+INSERT INTO `sys_operate` VALUES ('fdaeeb41691d460b8f142066d1f79927', '0', null, '博客删除', null, null, '0', '/test/blog/delete', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '博客', null);
+INSERT INTO `sys_operate` VALUES ('ff91363b32424fa399e44cc0dfd688e9', '0', null, '博客查看', null, null, '0', '/test/blog/view', '0dd06fb576ba4c24b36f7e4f0799d17c', '0', '0', '1', '博客', null);
 
 -- ----------------------------
 -- Table structure for sys_role

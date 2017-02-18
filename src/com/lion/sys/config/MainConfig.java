@@ -23,6 +23,7 @@ import com.lion.sys.mvc.home.HomeController;
 import com.lion.sys.mvc.login.LoginController;
 import com.lion.sys.mvc.menu.MenuController;
 import com.lion.sys.mvc.module.ModuleController;
+import com.lion.sys.mvc.operate.OperateController;
 import com.lion.sys.mvc.user.UserController;
 import com.lion.sys.mvc.workflow.WorkFlowController;
 import com.lion.sys.mvc.workflow.main.StencilsetRestResource;
@@ -120,13 +121,14 @@ public class MainConfig extends JFinalConfig {
 	public void configRoute(Routes me) {
 		this.routes = me;//shiro使用
 		//功能路由
-		me.add("/admin/login", LoginController.class);
-		me.add("/admin/home", HomeController.class);
-		me.add("/admin/user", UserController.class);
-		me.add("/admin/menu", MenuController.class);
-		me.add("/admin/workflow",WorkFlowController.class);
-		me.add("/admin/model",ModelController.class);
-		me.add("/admin/module",ModuleController.class);
+		me.add("/admin/login", LoginController.class);//登陆
+		me.add("/admin/home", HomeController.class);//首页
+		me.add("/admin/user", UserController.class);//用户
+		me.add("/admin/menu", MenuController.class);//菜单
+		me.add("/admin/workflow",WorkFlowController.class);//工作流
+		me.add("/admin/model",ModelController.class);//工作流-模型
+		me.add("/admin/module",ModuleController.class);//模块
+		me.add("/admin/operate",OperateController.class);//执行对象-功能
 		//流程在线编辑器和流程跟踪所用路由
 		me.add("/admin/process-instance/highlights",ProcessInstanceHighlightsResource.class);//modeler
 		me.add("/admin/process-instance/diagram-layout",ProcessInstanceDiagramLayoutResource.class);//modeler

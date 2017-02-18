@@ -51,8 +51,8 @@ public class ModuleController extends BaseController {
     /***
      * 获取选择父级页面
      */
-    public void getSelectParentPage(){
-    	render("/WEB-INF/admin/module/selectParent.html");
+    public void getSelectPage(){
+    	render("/WEB-INF/admin/module/selectModule.html");
     }
     /***
      * 返回所有菜单
