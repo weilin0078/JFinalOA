@@ -37,10 +37,7 @@
 						<td>{{ item.createtime?item.createtime:"" }}</td>
 						<td>{{ item.order }}</td>
 						<td>
-							<a href="javascript:void(0);" onclick="selectOperate('{{ item.id?item.id:"" }}')" class="layui-btn layui-btn-normal layui-btn-mini">选择对应功能</a>
-							<a href="" class="layui-btn layui-btn-mini">编辑</a>
-							<a href="javascript:void(0);" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
-						</td>
+							<a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>						</td>
 					</tr>
 				{{# }); }}
 		</script>
