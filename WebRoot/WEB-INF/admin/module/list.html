@@ -3,10 +3,10 @@
 	<blockquote class="layui-elem-quote">
 					<span>主页<span><span>/</span><a href="#(ctx??)/admin/module/getListPage">模块管理</a><span>/</span><span class="curr">模块</span>
 					<div class="func-right">
-						<a href="#(ctx??)/admin/module/getEditPage" class="layui-btn layui-btn-small" id="add">
+						<a href="#(ctx??)/admin/module/getEditPage" class="layui-btn layui-btn-small">
 							<i class="layui-icon">&#xe608;</i> 添加模块
 						</a>
-						<a href="javascript:void(0);" onclick="deleteAll()" class="layui-btn layui-btn-small" id="add">
+						<a href="javascript:void(0);" onclick="deleteAll()" class="layui-btn layui-btn-small">
 							<i class="layui-icon">&#x1006;</i> 删除
 						</a>
 					</div>
@@ -84,18 +84,23 @@ function getPageData(pid){
 }
 //删除
 function deleteModule(ids){
-	var r = ajax.ajaxFunc(ctx+"/admin/module/delete",{"ids":ids},"json",null);
-	if(r.success){
-		layer.alert(r.message);
-		refresh();
-	}else{
-		layer.alert(r.message);
-	}
+	parent.layer.confirm('确定要删除吗?', function(index){
+		parent.layer.close(index);
+		var r = ajax.ajaxFunc(ctx+"/admin/module/delete",{"ids":ids},"json",null);
+		if(r.success){
+			parent.layer.alert(r.message);
+			refresh();
+		}else{
+			parent.layer.alert("操作失败!");
+		}
+		
+	});       
+	
 }
 //删除所选
 function deleteAll(){
 	var data = [];
-	$.each($(".icheckbox_flat-green :checked"),function(i,d){
+	$.each($(":checked"),function(i,d){
 		data.push($(d).val());
 	});
 	var ids = data.join(",");

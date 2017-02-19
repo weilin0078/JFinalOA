@@ -1,11 +1,12 @@
 /** index.js By Beginner Emain:zheng_jinfan@126.com HomePage:http://www.zhengjinfan.cn */
+var tab;
 layui.config({
 	base: ctx+'/common/js/'
 }).use(['element', 'layer', 'navbar', 'tab'], function() {
 	var element = layui.element(),
 		$ = layui.jquery,
 		layer = layui.layer,
-		navbar = layui.navbar(),
+		navbar = layui.navbar();
 		tab = layui.tab({
 			elem: '.admin-nav-card' //设置选项卡容器
 		});

@@ -108,7 +108,9 @@ public class ModuleController extends BaseController {
     		List<SysModule> list = SysModule.dao.getChildrenByPid(id);
     		if(list.size()<=0){
     			SysModule module = SysModule.dao.getById(id);
-    			module.delete();//删除
+    			if(module!=null){
+    				module.delete();//删除
+    			}
     		}else{
     			renderError("有子模块,不允许删除!");
     			return;

@@ -116,11 +116,15 @@ layui.define(['element', 'common'], function(exports) {
 			}
 		}
 	};
+	
 	Tab.prototype.on = function(events, callback) {
 
 	}
-
+	
 	var tab = new Tab();
+	Tab.prototype.getTabIndex = function(data) {
+		return globalTabIdIndex;
+	}
 	exports(mod_name, function(options) {
 		return tab.set(options);
 	});

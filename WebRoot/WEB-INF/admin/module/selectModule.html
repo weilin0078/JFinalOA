@@ -16,7 +16,8 @@ layui.config({
 		    elem: '#menuTree' //传入元素选择器
 		    ,nodes: d.data
 		    ,click: function(node){
-		    	parent.setSelectedParent(node);
+		    	//父页面赋值
+		    	$(window.parent.document).find("iframe[data-id="+parent.parent.tab.getTabIndex()+"]")[0].contentWindow.setSelectedParent(node);
 		    	parent.layer.closeAll();
 		    }  
 		});

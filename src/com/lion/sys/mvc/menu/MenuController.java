@@ -38,7 +38,9 @@ public class MenuController extends BaseController {
     	rootList.add(root);
     	renderSuccess(rootList, null);
     }
-    
+    /***
+     * 获取分页数据
+     */
     public void listData(){
     	String curr = getPara("pageIndex");
     	String pageSize = getPara("pageSize");
@@ -48,5 +50,11 @@ public class MenuController extends BaseController {
     	}
     	Page<SysMenu> page = SysMenu.dao.getChildrenPageByPid(Integer.valueOf(curr),Integer.valueOf(pageSize),pid);
     	renderPage(page.getList(),"" ,page.getTotalRow());
+    }
+    /***
+     * 获取选择对应功能页面
+     */
+    public void getSelectOperate(){
+    	render("/WEB-INF/admin/menu/selectOperate.html");
     }
 }

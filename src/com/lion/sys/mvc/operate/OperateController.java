@@ -5,21 +5,14 @@
  */
 package com.lion.sys.mvc.operate;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.jfinal.aop.Before;
-import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.lion.sys.dto.LayTreeNode;
 import com.lion.sys.mvc.base.BaseController;
-import com.lion.sys.mvc.menu.SysMenu;
 import com.lion.sys.mvc.module.SysModule;
-import com.lion.sys.mvc.operate.SysOperate;
 import com.lion.sys.tool.UuidUtil;
 
 /***
@@ -89,7 +82,9 @@ public class OperateController extends BaseController {
     	String idarr[] = ids.split(",");
     	for(String id : idarr){
     		SysOperate oper = SysOperate.dao.getById(id);
-    		oper.delete();
+    		if(oper!=null){
+    			oper.delete();
+    		}
     	}
     	renderSuccess();
     }

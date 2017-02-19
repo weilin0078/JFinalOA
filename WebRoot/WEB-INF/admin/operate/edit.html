@@ -17,8 +17,8 @@
 			<label class="layui-form-label">所属模块</label>
 			<div class="layui-input-inline">
 				<input type="text" id="moduleName" value="#(module?module.name:'根目录')"  class="layui-input">
-				<input type="text" id="moduleId" name="sysOperate.module_id" value="#(oper?oper.module_id:'#root')" lay-verify="title" lay-verify="required"  class="layui-input">
-				<input type="text" name = "sysOperate.id" value="#(oper?oper.id:'')">
+				<input type="hidden" id="moduleId" name="sysOperate.module_id" value="#(oper?oper.module_id:'#root')" lay-verify="title" lay-verify="required"  class="layui-input">
+				<input type="hidden" name = "sysOperate.id" value="#(oper?oper.id:'')">
 			</div>
 			<div class="layui-input-inline">
 				<a class="layui-btn layui-btn-small" onclick="selectModule()">选择</a>
@@ -81,7 +81,7 @@ layui.config({
 		});
 });
 function selectModule(){
-	layer.open({
+	parent.layer.open({
 	  type: 2, 
 	  title:"选择父级模块",
 	  area: ['300px', '400px'],

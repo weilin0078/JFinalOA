@@ -1,7 +1,7 @@
 	#include("/common/include/include.html")
 <div class="admin-main">
 	<blockquote class="layui-elem-quote">
-					主页<span class="navi-xiegang">/</span>系统设置<span class="navi-xiegang">/</span>菜单管理  
+					<span>主页<span><span>/</span><a href="#(ctx??)/admin/menu/getListPage">菜单管理</a><span>/</span><span class="curr">菜单</span>
 					<div class="func-right">
 						<a href="javascript:;" class="layui-btn layui-btn-small" id="add">
 							<i class="layui-icon">&#xe608;</i> 添加菜单
@@ -37,9 +37,9 @@
 						<td>{{ item.createtime?item.createtime:"" }}</td>
 						<td>{{ item.order }}</td>
 						<td>
-							<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
-							<a href="/manage/article_edit_1" class="layui-btn layui-btn-mini">编辑</a>
-							<a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+							<a href="javascript:void(0);" onclick="selectOperate('{{ item.id?item.id:"" }}')" class="layui-btn layui-btn-normal layui-btn-mini">选择对应功能</a>
+							<a href="" class="layui-btn layui-btn-mini">编辑</a>
+							<a href="javascript:void(0);" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
 						</td>
 					</tr>
 				{{# }); }}
@@ -88,5 +88,12 @@ function getPageData(pid){
 	});
 }
 
-
+function selectOperate(mid){
+	parent.layer.open({
+		  type: 2, 
+		  title:"选择父级模块",
+		  area: ['1000px', '500px'],
+		  content: ctx+'/admin/menu/getSelectOperate'
+	}); 
+}
 </script>

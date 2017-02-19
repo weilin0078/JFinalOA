@@ -1,26 +1,15 @@
 	#include("/common/include/include.html")
 <div class="admin-main">
-	<blockquote class="layui-elem-quote">
-					<span>主页<span><span>/</span><a href="#(ctx??)/admin/operate/getListPage">功能管理</a><span>/</span><span class="curr">功能</span>
-					<div class="func-right">
-						<a href="#(ctx??)/admin/operate/getEditPage" class="layui-btn layui-btn-small" id="add">
-							<i class="layui-icon">&#xe608;</i> 添加功能
-						</a>
-						<a href="javascript:void(0);" onclick="deleteAll()" class="layui-btn layui-btn-small" id="add">
-							<i class="layui-icon">&#x1006;</i> 删除
-						</a>
-					</div>
-	</blockquote>
-	<div class="site-block-full navi-left">
+	<div class="site-block-full navi-left" style="top: 0px;">
 		<fieldset><legend>菜单导航</legend>
 			<ul id="menuTree"></ul>
 		</fieldset>
 	</div>
-	<div class="site-block-full main-right">
+	<div class="site-block-full main-right" style="top: 0px;">
 		<fieldset><legend>数据列表</legend>
 			<table class="site-table table-hover">
 				  <thead>
-					    <tr><th style="width: 12px;padding-left: 15px;"><input type="checkbox" id="selected-all"></th><th>功能名称</th><th>所属模块</th><th>地址</th><th>描述信息</th><th>排序</th><th>操作</th></tr> 
+					    <tr><th style="width: 12px;padding-left: 15px;"><input type="checkbox" id="selected-all"></th><th>功能名称</th><th>所属模块</th><th>地址</th></tr> 
 				  </thead>
 				  <tbody id = "tableBody"></tbody>
 			</table>           
@@ -36,12 +25,6 @@
 						<td>{{ item.name?item.name:"" }}</td>
 						<td>{{ item.mname?item.mname:"" }}</td>
 						<td style="text-align: left;">{{ item.url?item.url:"" }}</td>
-						<td>{{ item.description?item.description:"" }}</td>
-						<td>{{ item.sort?item.sort:"" }}</td>
-						<td>
-							<a href="#(ctx??)/admin/operate/getEditPage?id={{ item.id?item.id:"" }}" class="layui-btn layui-btn-mini">编辑</a>
-							<a href="javascript:void(0);" onclick="deleteOperate('{{ item.id?item.id:"" }}')" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
-						</td>
 					</tr>
 				{{# }); }}
 		</script>
@@ -70,7 +53,6 @@
 		    }  
 		});
 	}
-	//获取分页数据
 	function getPageData(mid){
 		paging.init({
 			url: ctx+"/admin/operate/listData",  //地址
