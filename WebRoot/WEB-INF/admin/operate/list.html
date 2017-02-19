@@ -12,17 +12,21 @@
 					</div>
 	</blockquote>
 	
-	<div class="site-block-full" style="float: left;width: 200px;">
-		<ul id="menuTree"></ul>
+	<div class="site-block-full navi-left">
+		<fieldset><legend>菜单导航</legend>
+			<ul id="menuTree"></ul>
+		</fieldset>
 	</div>
-	<div class="site-block-full" style="width: auto;margin-left: 260px;">
-		<table class="site-table table-hover" lay-even>
-			  <thead>
-				    <tr><th style="width: 12px;padding-left: 15px;"><input type="checkbox" id="selected-all"></th><th>功能名称</th><th>所属模块</th><th>地址</th><th>描述信息</th><th>排序</th><th>操作</th></tr> 
-			  </thead>
-			  <tbody id = "tableBody"></tbody>
-		</table>           
-		  <div id="pages" class = "pages"></div>
+	<div class="site-block-full main-right">
+		<fieldset><legend>数据列表</legend>
+			<table class="site-table table-hover">
+				  <thead>
+					    <tr><th style="width: 12px;padding-left: 15px;"><input type="checkbox" id="selected-all"></th><th>功能名称</th><th>所属模块</th><th>地址</th><th>描述信息</th><th>排序</th><th>操作</th></tr> 
+				  </thead>
+				  <tbody id = "tableBody"></tbody>
+			</table>           
+	     	<div class="admin-table-page"><div id="pages" class = "pages"></div></div>
+		</fieldset>
 	</div>
 </div>
 		<!--模板-->

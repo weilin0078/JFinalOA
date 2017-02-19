@@ -12,10 +12,19 @@
 */
 body,td,th,a {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 14px;color: #777777;} 
 input,textarea{color: #555555;}
-/* 导航 */
+/* 面包屑导航 */
 .layui-elem-quote span{padding: 0px 5px;}
 .layui-elem-quote .curr{color: #1AA094;}
 .layui-elem-quote .func-right{Float:right}
+/* 左侧导航 */
+.navi-left{float: left; width: 230px; position: absolute; bottom: 0px; top: 70px; padding-bottom: 0px;}
+.navi-left fieldset{position: absolute; top: 0px; bottom: 5px; right: 0px; left: 0px;border-width: 1px;border-color: #ccc;}
+/* 右侧列表 */
+.main-right{top: 70px; bottom: 0px; position: absolute; left: 250px; right: 12px;}
+.main-right fieldset{top: 0px; position: absolute; right: 0px; left: 0px; bottom: 5px;border-width: 1px;border-color: #ccc;}
+/* 全屏时候导航 */
+.main-full{top: 70px; bottom: 0px; position: absolute; left: 12px; right: 12px;}
+.main-full fieldset{top: 0px; position: absolute; right: 0px; left: 0px; bottom: 5px;border-width: 1px;border-color: #ccc;}
 /**
 	自定义 - end
 */
@@ -338,10 +347,7 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 /*table*/
 .site-table tbody tr td {text-align: center;}
 .site-table tbody tr td .layui-btn+.layui-btn{margin-left: 0px;}
-.admin-table-page {position: fixed;z-index: 19940201;bottom: 0;width: 100%;background-color: #eee;border-bottom: 1px solid #ddd;left: 0px;}
-.admin-table-page .page{padding-left:20px;}
-.admin-table-page .page .layui-laypage {margin: 6px 0 0 0;}
-
+.admin-table-page {position: absolute;bottom: 0px;}
 /**/
 .admin-main {margin: 15px;}
 
