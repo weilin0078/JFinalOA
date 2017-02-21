@@ -9,12 +9,17 @@
 		<fieldset><legend>数据列表</legend>
 			<table class="site-table table-hover">
 				  <thead>
-					    <tr><th style="width: 12px;padding-left: 15px;"><input type="checkbox" id="selected-all"></th><th>功能名称</th><th>所属模块</th><th>地址</th></tr> 
+					    <tr><th style="width: 12px;padding-left: 15px;"></th><th>功能名称</th><th>所属模块</th><th>地址</th></tr> 
 				  </thead>
 				  <tbody id = "tableBody"></tbody>
 			</table>           
 	     	<div class="admin-table-page"><div id="pages" class = "pages"></div></div>
 		</fieldset>
+	</div>
+	<div class = "selecterBtnDiv">
+		<a href="javascript:;" class="layui-btn layui-btn-small" onclick="selectOneOperate()">
+			<i class="layui-icon">&#xe608;</i> 确定
+		</a>
 	</div>
 </div>
 		<!--模板-->
@@ -53,6 +58,7 @@
 		    }  
 		});
 	}
+	//获取分页数据
 	function getPageData(mid){
 		paging.init({
 			url: ctx+"/admin/operate/listData",  //地址
@@ -65,26 +71,8 @@
 			}
 		});
 	}
-	//删除
-	function deleteOperate(ids){
-		parent.layer.confirm('确定要删除吗?', function(index){
-			parent.layer.close(index);
-			var r = ajax.ajaxFunc(ctx+"/admin/operate/delete",{"ids":ids},"json",null);
-			if(r.success){
-				parent.layer.alert(r.message);
-				refresh();
-			}else{
-				parent.layer.alert("操作失败!");
-			}
-		});
-	}
-	//删除所选
-	function deleteAll(){
-		var data = [];
-		$.each($(":checked"),function(i,d){
-			data.push($(d).val());
-		});
-		var ids = data.join(",");
-		deleteOperate(ids);
+	//选择一个功能
+	function selectOneOperate(){
+		
 	}
 </script>

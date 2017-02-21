@@ -12,5 +12,27 @@
 		$ = layui.jquery,
 		layer = layui.layer;
 		ajax = layui.ajax;
+		
+		$(document).ready(function(){
+			var winHeight = getWinHeight()-100;
+			$(".site-block-full fieldset").attr("style","min-height:"+winHeight+"px;")
+		});
 	});
+	//主页面布局的时候,获取屏幕高度,设置左右高度
+	function getWinHeight(){
+		//初始化列表页面高度
+		  var winH;
+		  if(window.innerHeight) {// all except IE
+			   winH = window.innerHeight;
+		  } else if (document.documentElement && document.documentElement.clientHeight) {// IE 6 Strict Mode
+			   winH = document.documentElement.clientHeight;
+		  } else if (document.body) { // other
+			   winH = document.body.clientHeight;
+		  }  // for small pages with total size less then the viewport
+		  return winH;
+	}
+	//列表上设置单选方法
+	/* function selectOne(o){
+		$(o).siblings().find(".icheckbox_flat-green").removeClass("checked");//移除所有选择
+	} */
 </script>

@@ -23,9 +23,9 @@ public class SysOperate extends BaseSysOperate<SysOperate> {
 		return SysOperate.dao.findById(id);
 	}
 	public Page<Record> getPage(int pnum,int psize,String mid){
-		String sql = " from sys_operate o , sys_module m where o.module_id = m.id ";
+		String sql = " from sys_operate o , sys_module m where 1=1 and o.module_id = m.id ";
 		if(StringUtils.isNotBlank(mid)){
-			sql = sql + " and o.module_id = '"+mid+"'";
+			sql = sql + "  and o.module_id = '"+mid+"'";
 		}
 		sql = sql + " order by o.sort";
 		return Db.paginate(pnum, psize, "select m.name mname,o.* ", sql);

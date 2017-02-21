@@ -6,7 +6,7 @@ layui.define(['element', 'common'], function(exports) {
 		$ = layui.jquery,
 		element = layui.element(),
 		commom = layui.common,
-		globalTabIdIndex = 0,
+		globalTabIdIndex = 0,//全局页签数
 		Tab = function() {
 			this.config = {
 				elem: undefined,
@@ -75,8 +75,8 @@ layui.define(['element', 'common'], function(exports) {
 	Tab.prototype.tabAdd = function(data) {
 		var that = this;
 		var _config = that.config;
-		var tabIndex = that.exists(data.title);
-		if(tabIndex === -1) {
+		var tabIndex = that.exists(data.title);//获取当前点击的tab
+		if(tabIndex === -1) {//如果页签不存在,则新增一个
 			globalTabIdIndex++;
 			var content = '<iframe src="' + data.href + '" data-id="' + globalTabIdIndex + '"></iframe>';
 			var title = '';
@@ -122,7 +122,9 @@ layui.define(['element', 'common'], function(exports) {
 	}
 	
 	var tab = new Tab();
-	Tab.prototype.getTabIndex = function(data) {
+	
+	//获取当前页签编号
+	Tab.prototype.getGlobalTabIndex = function(data) {
 		return globalTabIdIndex;
 	}
 	exports(mod_name, function(options) {

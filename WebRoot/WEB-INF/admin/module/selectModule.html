@@ -17,7 +17,7 @@ layui.config({
 		    ,nodes: d.data
 		    ,click: function(node){
 		    	//父页面赋值
-		    	$(window.parent.document).find("iframe[data-id="+parent.parent.tab.getTabIndex()+"]")[0].contentWindow.setSelectedParent(node);
+		    	$(window.parent.document).find("iframe[data-id="+parent.parent.getTabIndex()+"]")[0].contentWindow.setSelectedParent(node);
 		    	parent.layer.closeAll();
 		    }  
 		});

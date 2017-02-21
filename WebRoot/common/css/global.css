@@ -18,13 +18,14 @@ input,textarea{color: #555555;}
 .layui-elem-quote .func-right{Float:right}
 /* 左侧导航 */
 .navi-left{float: left; width: 230px; position: absolute; bottom: 0px; top: 70px; padding-bottom: 0px;}
-.navi-left fieldset{position: absolute; top: 0px; bottom: 5px; right: 0px; left: 0px;border-width: 1px;border-color: #ccc;}
+.navi-left fieldset{margin-bottom: 5px;border-width: 1px;border-color: #ccc;}
 /* 右侧列表 */
 .main-right{top: 70px; bottom: 0px; position: absolute; left: 250px; right: 12px;}
-.main-right fieldset{top: 0px; position: absolute; right: 0px; left: 0px; bottom: 5px;border-width: 1px;border-color: #ccc;}
+.main-right fieldset{margin-bottom: 5px;border-width: 1px;border-color: #ccc;}
 /* 全屏时候导航 */
 .main-full{top: 70px; bottom: 0px; position: absolute; left: 12px; right: 12px;}
-.main-full fieldset{top: 0px; position: absolute; right: 0px; left: 0px; bottom: 5px;border-width: 1px;border-color: #ccc;}
+.main-full fieldset{margin-bottom: 5px;border-width: 1px;border-color: #ccc;}
+.selecterBtnDiv{position: absolute;bottom: 12px;right: 12px;}
 /**
 	自定义 - end
 */
