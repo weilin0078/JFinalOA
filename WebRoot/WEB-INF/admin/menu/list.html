@@ -3,8 +3,11 @@
 	<blockquote class="layui-elem-quote">
 					<span>主页<span><span>/</span><a href="#(ctx??)/admin/menu/getListPage">菜单管理</a><span>/</span><span class="curr">菜单</span>
 					<div class="func-right">
-						<a href="javascript:;" class="layui-btn layui-btn-small" id="add">
+						<a href="#(ctx??)/admin/menu/getEditPage" class="layui-btn layui-btn-small" id="add">
 							<i class="layui-icon">&#xe608;</i> 添加菜单
+						</a>
+						<a href="javascript:void(0);" onclick="deleteAll()" class="layui-btn layui-btn-small">
+							<i class="layui-icon">&#x1006;</i> 删除
 						</a>
 					</div>
 	</blockquote>
@@ -18,7 +21,7 @@
 		<fieldset><legend>数据列表</legend>
 			<table class="site-table table-hover" lay-even>
 				  <thead>
-					    <tr><th style="width: 12px;padding-left: 15px;"><input type="checkbox" id="selected-all"></th><th>菜单名称</th><th>功能名称</th><th>对应URL</th><th>父级</th><th>排序</th><th>操作</th></tr> 
+					    <tr><th style="width: 12px;padding-left: 15px;"><input type="checkbox" id="selected-all"></th><th>菜单名称</th><th>图标</th><th>功能名称</th><th>对应URL</th><th>排序</th><th>操作</th></tr> 
 				  </thead>
 				  <tbody id = "tableBody"></tbody>
 			</table>           
@@ -30,16 +33,17 @@
 		<script type="text/html" id="conTemp">
 				{{# layui.each(d.data, function(index, item){ }}
 					<tr>
-						<td><input type="checkbox" class="icheckbox_flat-green"></td>
+						<td><input type="checkbox" class="icheckbox_flat-green" value="{{ item.id?item.id:"" }}"></td>
 						<td>{{ item.name?item.name:"" }}</td>
-						<td>{{ item.age?item.age:"" }}</td>
-						<td>{{ item.createtime?item.createtime:"" }}</td>
-						<td>{{ item.createtime?item.createtime:"" }}</td>
-						<td>{{ item.order }}</td>
+						<td>{{ item.icon?item.icon:"" }}</td>
+						<td>{{ item.oname?item.oname:"" }}</td>
+						<td>{{ item.url?item.url:"" }}</td>
+						<td>{{ item.sort }}</td>
 						<td>
-							<a href="javascript:void(0);" onclick="selectOperate('{{ item.id?item.id:"" }}')" class="layui-btn layui-btn-normal layui-btn-mini">选择对应功能</a>
-							<a href="javascript:void(0);" class="layui-btn layui-btn-mini">编辑</a>
-							<a href="javascript:void(0);" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>					
+							<a href="#(ctx??)/admin/menu/getEditPage?parentid={{ item.id?item.id:"" }}" class="layui-btn layui-btn-normal layui-btn-mini">添加子菜单</a>
+							<a href="javascript:void(0);" onclick="selectOperate('{{ item.id?item.id:"" }}')" class="layui-btn layui-btn-normal layui-btn-mini">绑定功能</a>
+							<a href="#(ctx??)/admin/menu/getEditPage?id={{ item.id?item.id:"" }}" class="layui-btn layui-btn-mini">编辑</a>
+							<a href="javascript:void(0);" onclick="deleteMenu('{{ item.id?item.id:"" }}')" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>					
 						</td>
 					</tr>
 				{{# }); }}
@@ -52,20 +56,25 @@ layui.config({
 		 ajax = layui.ajax;
 		 tree = layui.tree;
 		 paging = layui.paging();
-		//初始化左侧菜单树
-		var d = ajax.ajaxFunc(ctx+"/admin/menu/getAllMenuTree",null,"json",null);
-		layui.tree({
-		    elem: '#menuTree' //传入元素选择器
-		    ,nodes: d.data
-		    ,click: function(node){
-		    	getPageData(node.id);
-		    }  
-		});
-		//分页
-		getPageData("");
-		 
+		 refresh();
 });
 
+function refresh(){
+	initTree();
+	getPageData("");
+}
+//初始化左侧菜单树
+function initTree(){
+	$("#menuTree").html("")
+	var d = ajax.ajaxFunc(ctx+"/admin/menu/getAllMenuTree",null,"json",null);
+	layui.tree({
+	    elem: '#menuTree' //传入元素选择器
+	    ,nodes: d.data
+	    ,click: function(node){
+	    	getPageData(node.id);
+	    }  
+	});
+}
 function getPageData(pid){
 	paging.init({
 		url: ctx+"/admin/menu/listData",  //地址
@@ -93,7 +102,32 @@ function selectOperate(mid){
 		  type: 2, 
 		  title:"选择对应功能",
 		  area: ['1000px', '500px'],
-		  content: ctx+'/admin/menu/getSelectOperate'
+		  content: ctx+'/admin/menu/getSelectOperate?mid='+mid
 	}); 
+}
+
+//删除
+function deleteMenu(ids){
+	parent.layer.confirm('确定要删除吗?', function(index){
+		parent.layer.close(index);
+		var r = ajax.ajaxFunc(ctx+"/admin/menu/delete",{"ids":ids},"json",null);
+		if(r.success){
+			parent.layer.alert(r.message);
+			refresh();
+		}else{
+			parent.layer.alert("操作失败!");
+		}
+		
+	});       
+	
+}
+//删除所选
+function deleteAll(){
+	var data = [];
+	$.each($(".icheckbox_flat-green.checked"),function(i,d){
+		data.push($(d).find("input").val());
+	});
+	var ids = data.join(",");
+	deleteMenu(ids);
 }
 </script>

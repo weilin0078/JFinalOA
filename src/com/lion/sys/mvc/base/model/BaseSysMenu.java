@@ -71,5 +71,11 @@ public abstract class BaseSysMenu<M extends BaseSysMenu<M>> extends Model<M> imp
 	public java.lang.String getIsparent() {
 		return get("isparent");
 	}
+	public void setDescription(java.lang.String description) {
+		set("description", description);
+	}
 
+	public java.lang.String getDescription() {
+		return get("description");
+	}
 }

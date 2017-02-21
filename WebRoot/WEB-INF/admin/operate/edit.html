@@ -27,7 +27,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">名称</label>
 			<div class="layui-input-inline">
-				<input type="text" name="sysOperate.name" value="#(oper?oper.name:'')"  placeholder="请输入名称" lay-verify="title" lay-verify="required" class="layui-input">
+				<input type="text" name="sysOperate.name" value="#(oper?oper.name:'')"  placeholder="请输入名称" lay-verify="name" class="layui-input">
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -66,6 +66,11 @@ layui.config({
 				title: function(value) {
 					if(value.length > 50){
 						return '最多50个字符!';
+					}
+				},
+				name: function(value){
+					if(value.length<=2){
+						return '请填写至少两个字符的名称!';
 					}
 				}
 		 });

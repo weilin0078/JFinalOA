@@ -61,7 +61,7 @@
 	//初始化左侧菜单树
 	function initTree(){
 		$("#menuTree").html("")
-		var d = ajax.ajaxFunc(ctx+"/admin/module/getAllMenuTree",null,"json",null);
+		var d = ajax.ajaxFunc(ctx+"/admin/module/getAllModuleTree",null,"json",null);
 		layui.tree({
 		    elem: '#menuTree' //传入元素选择器
 		    ,nodes: d.data

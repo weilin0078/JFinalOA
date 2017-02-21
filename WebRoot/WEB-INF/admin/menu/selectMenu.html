@@ -11,7 +11,7 @@ layui.config({
 }).use(['tree','ajax'], function(){
 		 ajax = layui.ajax;
 		 tree = layui.tree;
-		var d = ajax.ajaxFunc(ctx+"/admin/module/getAllModuleTree",null,"json",null);
+		var d = ajax.ajaxFunc(ctx+"/admin/menu/getAllMenuTree",null,"json",null);
 		layui.tree({
 		    elem: '#menuTree' //传入元素选择器
 		    ,nodes: d.data

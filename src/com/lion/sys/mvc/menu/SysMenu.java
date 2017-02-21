@@ -3,7 +3,9 @@ package com.lion.sys.mvc.menu;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.lion.sys.dto.LayTreeNode;
 import com.lion.sys.mvc.base.model.BaseSysMenu;
 
@@ -13,6 +15,12 @@ import com.lion.sys.mvc.base.model.BaseSysMenu;
 @SuppressWarnings("serial")
 public class SysMenu extends BaseSysMenu<SysMenu> {
 	public static final SysMenu dao = new SysMenu();
+	/***
+	 * 根据主键查询
+	 */
+	public SysMenu getById(String id){
+		return SysMenu.dao.findById(id);
+	}
 	/***
 	 * 根据id 查询孩子
 	 * @param id
@@ -26,8 +34,8 @@ public class SysMenu extends BaseSysMenu<SysMenu> {
 	 * @param id
 	 * @return
 	 */
-	public Page<SysMenu> getChildrenPageByPid(int pnum,int psize, String pid){
-		return SysMenu.dao.paginate(pnum, psize, "select * ", " from sys_menu m where m.parent_id='"+pid+"'");
+	public Page<Record> getChildrenPageByPid(int pnum,int psize, String pid){
+		return Db.paginate(pnum, psize, "select m.* , o.name oname , o.url url ", " from sys_menu m LEFT JOIN sys_operate o ON m.operatorid = o.id WHERE m.parent_id='"+pid+"'");
 	}
 	/***
 	 * 菜单转成LayTreeNode
