@@ -56,12 +56,12 @@
 		<div class="layui-form-item layui-form-text">
 			<label class="layui-form-label">描述信息</label>
 			<div class="layui-input-block">
-				<textarea placeholder="请输入内容" class="layui-textarea" name="sysMenu.description">#(menu&&menu.sort?menu.description:'')</textarea>
+				<textarea placeholder="请输入内容" class="layui-textarea" name="sysMenu.description">#(menu&&menu.description?menu.description:'')</textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-input-block">
-				<button class="layui-btn" lay-submit="" lay-filter="submitFormFilter">立即提交</button>
+				<button class="layui-btn" lay-submit="" lay-filter="submitFormFilter">保存</button>
 				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 			</div>
 		</div>
@@ -109,20 +109,3 @@ function setSelectedParent(data){
 	$("#parentName").val(data.name);
 }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

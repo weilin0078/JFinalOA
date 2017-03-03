@@ -68,11 +68,11 @@ public abstract class BaseSysModule<M extends BaseSysModule<M>> extends Model<M>
 		return get("name");
 	}
 
-	public void setSort(java.lang.String sort) {
+	public void setSort(java.lang.Integer sort) {
 		set("sort", sort);
 	}
 
-	public java.lang.String getSort() {
+	public java.lang.Integer getSort() {
 		return get("sort");
 	}
 
