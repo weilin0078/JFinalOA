@@ -3,7 +3,6 @@
  */
 package com.lion.sys.mvc.workflow.model;
 
-import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
 import com.lion.sys.mvc.base.BaseController;
 
@@ -26,10 +25,6 @@ public class ModelController extends BaseController{
     public void listData(){
     	String curr = getPara("pageIndex");
     	String pageSize = getPara("pageSize");
-    	String pid = getPara("pid");
-    	if(StrKit.isBlank(pid)){
-    		pid = "#root";
-    	}
     	Page<ActReModel> page = ActReModel.dao.getModelPage(Integer.valueOf(curr),Integer.valueOf(pageSize));
     	renderPage(page.getList(),"" ,page.getTotalRow());
     }

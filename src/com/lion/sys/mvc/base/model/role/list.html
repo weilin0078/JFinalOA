@@ -1,0 +1,108 @@
+	#include("/common/include/include.html")
+<div class="admin-main">
+	<blockquote class="layui-elem-quote">
+					<span>主页<span><span>/</span><a href="#(ctx??)/admin/operate/getListPage">功能管理</a><span>/</span><span class="curr">功能</span>
+					<div class="func-right">
+						<a href="#(ctx??)/admin/operate/getEditPage" class="layui-btn layui-btn-small" id="add">
+							<i class="layui-icon">&#xe608;</i> 添加功能
+						</a>
+						<a href="javascript:void(0);" onclick="deleteAll()" class="layui-btn layui-btn-small" id="add">
+							<i class="layui-icon">&#x1006;</i> 删除
+						</a>
+					</div>
+	</blockquote>
+	<div class="site-block-full navi-left">
+		<fieldset><legend>模块导航</legend>
+			<ul id="menuTree"></ul>
+		</fieldset>
+	</div>
+	<div class="site-block-full main-right">
+		<fieldset><legend>数据列表</legend>
+			<table class="site-table table-hover">
+				  <thead>
+					    <tr><th style="width: 12px;padding-left: 15px;"><input type="checkbox" id="selected-all"></th><th>功能名称</th><th>所属模块</th><th>地址</th><th>描述信息</th><th>排序</th><th>操作</th></tr> 
+				  </thead>
+				  <tbody id = "tableBody"></tbody>
+			</table>           
+	     	<div class="admin-table-page"><div id="pages" class = "pages"></div></div>
+		</fieldset>
+	</div>
+</div>
+		<!--模板-->
+		<script type="text/html" id="conTemp">
+				{{# layui.each(d.data, function(index, item){ }}
+					<tr>
+						<td><input type="checkbox" class="icheckbox_flat-green" value="{{ item.id?item.id:"" }}"></td>
+						<td>{{ item.name?item.name:"" }}</td>
+						<td>{{ item.mname?item.mname:"" }}</td>
+						<td style="text-align: left;">{{ item.url?item.url:"" }}</td>
+						<td>{{ item.description?item.description:"" }}</td>
+						<td>{{ item.sort?item.sort:"" }}</td>
+						<td>
+							<a href="#(ctx??)/admin/operate/getEditPage?id={{ item.id?item.id:"" }}" class="layui-btn layui-btn-mini">编辑</a>
+							<a href="javascript:void(0);" onclick="deleteOperate('{{ item.id?item.id:"" }}')" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+						</td>
+					</tr>
+				{{# }); }}
+		</script>
+<script>
+	layui.config({
+		  base: ctx+'/common/js/'
+	}).use(['tree','ajax','paging'], function(){
+			 ajax = layui.ajax;
+			 tree = layui.tree;
+			 paging = layui.paging();
+			 refresh();
+	});
+	function refresh(){
+		initTree();
+		getPageData("");
+	}
+	//初始化左侧菜单树
+	function initTree(){
+		$("#menuTree").html("")
+		var d = ajax.ajaxFunc(ctx+"/admin/module/getAllModuleTree",null,"json",null);
+		layui.tree({
+		    elem: '#menuTree' //传入元素选择器
+		    ,nodes: d.data
+		    ,click: function(node){
+		    	getPageData(node.id);
+		    }  
+		});
+	}
+	//获取分页数据
+	function getPageData(mid){
+		paging.init({
+			url: ctx+"/admin/operate/listData",  //地址
+			elem: '#tableBody',
+			tempElem: '#conTemp',  //模块容器
+			pageConfig: {        //分页参数配置
+				elem: '#pages',  //分页容器
+				pageSize: 10,     //分页大小
+				mid:mid
+			}
+		});
+	}
+	//删除
+	function deleteOperate(ids){
+		parent.layer.confirm('确定要删除吗?', function(index){
+			parent.layer.close(index);
+			var r = ajax.ajaxFunc(ctx+"/admin/operate/delete",{"ids":ids},"json",null);
+			if(r.success){
+				parent.layer.alert(r.message);
+				refresh();
+			}else{
+				parent.layer.alert("操作失败!");
+			}
+		});
+	}
+	//删除所选
+	function deleteAll(){
+		var data = [];
+		$.each($(":checked"),function(i,d){
+			data.push($(d).val());
+		});
+		var ids = data.join(",");
+		deleteOperate(ids);
+	}
+</script>

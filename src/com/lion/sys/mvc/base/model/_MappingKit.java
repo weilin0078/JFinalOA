@@ -9,6 +9,7 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.lion.sys.mvc.menu.SysMenu;
 import com.lion.sys.mvc.module.SysModule;
 import com.lion.sys.mvc.operate.SysOperate;
+import com.lion.sys.mvc.role.SysRole;
 import com.lion.sys.mvc.user.SysUser;
 import com.lion.sys.mvc.workflow.model.ActReModel;
 
@@ -16,11 +17,12 @@ import com.lion.sys.mvc.workflow.model.ActReModel;
 public class _MappingKit {
 
 	public static void mapping(ActiveRecordPlugin arp) {
-		arp.addMapping("sys_user", "id", SysUser.class);
-		arp.addMapping("sys_menu", "id", SysMenu.class);
-		arp.addMapping("act_re_model", "ID_", ActReModel.class);
-		arp.addMapping("sys_module", "id", SysModule.class);
-		arp.addMapping("sys_operate", "id", SysOperate.class);
+		arp.addMapping("sys_user", "id", SysUser.class);//用户
+		arp.addMapping("sys_menu", "id", SysMenu.class);//菜单
+		arp.addMapping("act_re_model", "ID_", ActReModel.class);//模型
+		arp.addMapping("sys_module", "id", SysModule.class);//模块
+		arp.addMapping("sys_operate", "id", SysOperate.class);//功能
+		arp.addMapping("sys_role", "id", SysRole.class);//角色
 	}
 }
 

@@ -17,7 +17,6 @@ import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.lion.sys.dto.LayTreeNode;
 import com.lion.sys.mvc.base.BaseController;
-import com.lion.sys.mvc.module.SysModule;
 import com.lion.sys.tool.UuidUtil;
 
 /***

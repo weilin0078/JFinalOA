@@ -1,7 +1,7 @@
 	#include("/common/include/include.html")
 <div class="admin-main">
 	<div class="site-block-full navi-left" style="top: 0px;">
-		<fieldset><legend>菜单导航</legend>
+		<fieldset><legend>模块导航</legend>
 			<ul id="menuTree"></ul>
 		</fieldset>
 	</div>
@@ -50,7 +50,7 @@
 	//初始化左侧菜单树
 	function initTree(){
 		$("#menuTree").html("")
-		var d = ajax.ajaxFunc(ctx+"/admin/module/getAllMenuTree",null,"json",null);
+		var d = ajax.ajaxFunc(ctx+"/admin/module/getAllModuleTree",null,"json",null);
 		layui.tree({
 		    elem: '#menuTree' //传入元素选择器
 		    ,nodes: d.data

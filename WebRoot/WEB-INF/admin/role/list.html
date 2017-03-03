@@ -1,0 +1,94 @@
+	#include("/common/include/include.html")
+<style>
+	.breadcrumb li{
+		float:left;
+	}
+</style>
+<div class="admin-main">
+	<blockquote class="layui-elem-quote">
+					<span>主页<span><span>/</span><a href="#(ctx??)/admin/role/getListPage">角色管理</a><span>/</span><span class="curr">角色</span>
+					<div class="func-right">
+						<a href="#(ctx??)/admin/role/getEditPage" class="layui-btn layui-btn-small" id="add">
+							<i class="layui-icon">&#xe608;</i> 添加新角色
+						</a>
+					</div>
+	</blockquote>
+	<div class="site-block-full main-full">
+		<fieldset><legend>数据列表</legend>
+			<table class="site-table table-hover" lay-even>
+				  <thead>
+					    <tr><th style="width: 12px;padding-left: 15px;"><input type="checkbox" id="selected-all"></th><th>角色标识</th><th>角色名称</th><th>角色描述</th><th>操作</th></tr> 
+				  </thead>
+				  <tbody id = "tableBody"></tbody>
+			</table>           
+		  <div id="pages" class = "pages"></div>
+		</fieldset>
+	</div>
+</div>
+		<!--模板-->
+		<script type="text/html" id="conTemp">
+				{{# layui.each(d.data, function(index, item){ }}
+					<tr>
+						<td><input type="checkbox" class="icheckbox_flat-green"></td>
+						<td>{{ item.key?item.key:"" }}</td>
+						<td>{{ item.name?item.name:"" }}</td>
+						<td>{{ item.description?item.description:"" }}</td>
+						<td>
+							<a href="javascript:void(0);" onclick="selectOperate('{{ item.id?item.id:"" }}')" class="layui-btn layui-btn-normal layui-btn-mini">角色授权</a>
+							<a href="#(ctx??)/admin/role/getEditPage?id={{ item.id?item.id:"" }}" class="layui-btn layui-btn-mini">编辑</a>
+							<a href="javascript:void(0);" onclick="deleteRole('{{ item.id?item.id:"" }}')" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+						</td>
+					</tr>
+				{{# }); }}
+		</script>
+
+<script>
+layui.config({
+	  base: ctx+'/common/js/'
+}).use(['tree','ajax','paging'], function(){
+		 ajax = layui.ajax;
+		 tree = layui.tree;
+		 paging = layui.paging();
+		refresh();
+});
+function refresh(){
+	getPageData("");
+}
+function getPageData(pid){
+	paging.init({
+		url: ctx+"/admin/role/listData",  //地址
+		elem: '#tableBody',
+		tempElem: '#conTemp',  //模块容器
+		pageConfig: {        //分页参数配置
+			elem: '#pages',  //分页容器
+			pageSize: 10,     //分页大小
+			pid:pid
+		},
+		success:function(){   //渲染成功的回调
+			//alert('渲染成功');
+		},
+		fail:function(msg){       //获取数据失败的回调
+			//alert('获取数据失败')
+		},
+		complate:function(){     //完成的回调
+			//alert('处理完成');
+		}
+	});
+}
+
+//删除
+function deleteRole(ids){
+	parent.layer.confirm('确定要删除吗?', function(index){
+		parent.layer.close(index);
+		var r = ajax.ajaxFunc(ctx+"/admin/role/delete",{"ids":ids},"json",null);
+		if(r.success){
+			parent.layer.alert(r.message);
+			refresh();
+		}else{
+			parent.layer.alert("操作失败!");
+		}
+		
+	});       
+	
+}
+</script>
