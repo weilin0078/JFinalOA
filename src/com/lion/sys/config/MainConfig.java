@@ -36,6 +36,7 @@ import com.lion.sys.mvc.workflow.rest.ProcessInstanceDiagramLayoutResource;
 import com.lion.sys.mvc.workflow.rest.ProcessInstanceHighlightsResource;
 import com.lion.sys.plugin.activiti.ActivitiPlugin;
 import com.lion.sys.plugin.shiro.ShiroInterceptor;
+import com.lion.sys.plugin.shiro.ShiroKit;
 import com.lion.sys.plugin.shiro.ShiroPlugin;
 
 public class MainConfig extends JFinalConfig {
@@ -63,7 +64,6 @@ public class MainConfig extends JFinalConfig {
         // 获取GroupTemplate ,可以设置共享变量等操作
 //        @SuppressWarnings("unused")
 //		GroupTemplate groupTemplate = BeetlRenderFactory.groupTemplate ;
-		
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class MainConfig extends JFinalConfig {
 		ShiroPlugin shiroPlugin = new ShiroPlugin(this.routes);
 	    shiroPlugin.setLoginUrl("/login.html");//登陆url：未验证成功跳转
 	    shiroPlugin.setSuccessUrl("/admin/index");//登陆成功url：验证成功自动跳转
-	    shiroPlugin.setUnauthorizedUrl("/login/needPermission");//授权url：未授权成功自动跳转
+	    shiroPlugin.setUnauthorizedUrl("/admin/login/needPermission");//授权url：未授权成功自动跳转
 	    me.add(shiroPlugin);
 	}
 	
@@ -142,7 +142,6 @@ public class MainConfig extends JFinalConfig {
 	
 	@Override
 	public void configEngine(Engine me) {
-		// TODO Auto-generated method stub
-		
+		me.addSharedObject("shiro",new ShiroKit());
 	}
 }

@@ -17,6 +17,30 @@ public class LayTreeNode {
 	private List<LayTreeNode> children;//孩子
 	private String href;//跳转地址
 	private Boolean spread;//是否展开
+	private Boolean checked;
+	private String checkboxValue;
+	private String datatype;
+	private String checkboxStyle;
+	
+	
+	public String getCheckboxStyle() {
+		return checkboxStyle;
+	}
+	public void setCheckboxStyle(String checkboxStyle) {
+		this.checkboxStyle = checkboxStyle;
+	}
+	public String getCheckboxValue() {
+		return checkboxValue;
+	}
+	public void setCheckboxValue(String checkboxValue) {
+		this.checkboxValue = checkboxValue;
+	}
+	public String getDatatype() {
+		return datatype;
+	}
+	public void setDatatype(String datatype) {
+		this.datatype = datatype;
+	}
 	public String getId() {
 		return id;
 	}
@@ -52,6 +76,12 @@ public class LayTreeNode {
 	}
 	public void setSpread(Boolean spread) {
 		this.spread = spread;
+	}
+	public Boolean getChecked() {
+		return checked;
+	}
+	public void setChecked(Boolean checked) {
+		this.checked = checked;
 	}
 	
 }

@@ -47,7 +47,6 @@ public class SysModule extends BaseSysModule<SysModule> {
 		LayTreeNode node = new LayTreeNode();
 		node.setId(menu.getId());
 		node.setName(menu.getName());
-//		node.setChildren(children);
 		return node;
 	}
 	/***
@@ -69,7 +68,7 @@ public class SysModule extends BaseSysModule<SysModule> {
 	 * 获取所有菜单
 	 * @return
 	 */
-	public List<SysModule> getAllMenu(){
+	public List<SysModule> getAllModule(){
 		List<SysModule> list =  getChildrenAll("#root");
 		return list;
 	}

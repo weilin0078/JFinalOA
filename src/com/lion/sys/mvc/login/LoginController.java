@@ -31,6 +31,9 @@ public class LoginController extends BaseController {
     private static final int DEFAULT_CAPTCHA_LEN = 4;//验证码长度
     private static final String LOGIN_URL = "/admin/login";
     
+    /***
+     * 首页或者登陆
+     */
     public void index(){
     	this.createToken("loginToken");
     	Subject subject = ThreadContext.getSubject();
@@ -39,6 +42,12 @@ public class LoginController extends BaseController {
     	}else{
     		this.render("/login.html");
     	}
+    }
+    /***
+     * 没有权限访问的
+     */
+    public void needPermission(){
+    	render("/error/needPermission.html");
     }
     
     /**

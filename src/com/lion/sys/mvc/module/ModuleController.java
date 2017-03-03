@@ -58,7 +58,7 @@ public class ModuleController extends BaseController {
      * 返回所有菜单
      */
     public void getAllModuleTree(){
-    	List<SysModule> menuList = SysModule.dao.getAllMenu();
+    	List<SysModule> menuList = SysModule.dao.getAllModule();
     	List<LayTreeNode> nodelist = SysModule.dao.toLayTreeNode(menuList,true);//数据库中的菜单
     	List<LayTreeNode> rootList = new ArrayList<LayTreeNode>();//页面展示的,带根节点
     	//声明根节点

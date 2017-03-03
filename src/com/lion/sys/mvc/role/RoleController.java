@@ -9,7 +9,6 @@ import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.lion.sys.mvc.base.BaseController;
-import com.lion.sys.mvc.menu.SysMenu;
 import com.lion.sys.tool.UuidUtil;
 
 /**
@@ -75,5 +74,23 @@ public class RoleController extends BaseController{
 			}
     	}
     	renderSuccess();
+    }
+    
+    /***
+     * 给角色赋权
+     */
+    public void operatePermisstion(){
+    	setAttr("id", getPara("id"));
+    	render("/WEB-INF/admin/role/operatePermisstion.html");
+    }
+    
+    
+    /***
+     * 给角色赋权
+     */
+    public void addRolePermisstion(){
+    	String data = getPara("data");
+    	String roleid = getPara("roleid");
+    	SysRole.dao.addRolePermisstion(roleid,data);
     }
 }

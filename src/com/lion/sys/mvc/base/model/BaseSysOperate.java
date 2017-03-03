@@ -9,6 +9,14 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseSysOperate<M extends BaseSysOperate<M>> extends Model<M> implements IBean {
 
+	public void setPermission(java.lang.String permission){
+		set("permission",permission);
+	}
+	
+	public java.lang.String getPermission(){
+		return get("permission");
+	}
+	
 	public void setId(java.lang.String id) {
 		set("id", id);
 	}

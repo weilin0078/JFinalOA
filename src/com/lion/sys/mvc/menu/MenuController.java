@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 
 import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
@@ -24,6 +25,7 @@ import com.lion.sys.tool.UuidUtil;
  */
 public class MenuController extends BaseController {
 	
+	@RequiresPermissions("admin:menu:list")
     public void getListPage(){
     	render("/WEB-INF/admin/menu/list.html");
     }

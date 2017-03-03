@@ -1,5 +1,7 @@
 package com.lion.sys.plugin.shiro.ext;
 
+import java.util.List;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -18,6 +20,7 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
 import com.jfinal.kit.StrKit;
+import com.lion.sys.mvc.operate.SysOperate;
 import com.lion.sys.mvc.user.SysUser;
 
 
@@ -68,36 +71,22 @@ public class ShiroDbRealm extends AuthorizingRealm {
      * 授权查询回调函数, 进行鉴权但缓存中无用户的授权信息时调用.
      */
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        //User user = (User) principals.fromRealm(getName()).iterator().next();
     	SimpleUser simpleUser = (SimpleUser) principals.fromRealm(getName()).iterator().next();
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-//        if( null == simpleUser){
-//        	return info;
-//        }
-//        User user = User.DAO.findById(simpleUser.getId());
-//        if( null == user){
-//        	return info;
-//        }
-//        List<Role> roles = user.getRoles();
-//        if(ArrayKit.isNotEmpty(roles)){
-//            for(Role role : roles){
-//                //角色的名称及时角色的值
-//                info.addRole(role.getStr("name"));
-//                addResourceOfRole(role,info);
-//            }
-//        }
+    	SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        if( null == simpleUser){
+        	return info;
+        }
+        SysUser user = SysUser.dao.findById(simpleUser.getId());
+        if( null == user){
+        	return info;
+        }
+        List<SysOperate> oplist = SysOperate.dao.getOperateByUserId(user.getId());//获取用户所有的功能权限
+        for(SysOperate o :oplist){
+        	info.addStringPermission(o.getPermission());//获取资源名称
+        }
         return info;
     }
     
-//    private void addResourceOfRole(Role role, SimpleAuthorizationInfo info){
-//    	List<Resource> resources = role.getResources();
-//        if(ArrayKit.isNotEmpty(resources)){
-//            for(Resource resource : resources ){
-//                //资源代码就是权限值，类似user：list
-//                info.addStringPermission(resource.getStr("code"));
-//            }
-//        }
-//    }
 
     /**
      * 更新用户授权信息缓存.

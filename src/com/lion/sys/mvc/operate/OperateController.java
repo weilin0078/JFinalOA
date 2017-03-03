@@ -5,12 +5,16 @@
  */
 package com.lion.sys.mvc.operate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.lion.sys.dto.LayTreeNode;
 import com.lion.sys.mvc.base.BaseController;
 import com.lion.sys.mvc.module.SysModule;
 import com.lion.sys.tool.UuidUtil;
@@ -87,5 +91,16 @@ public class OperateController extends BaseController {
     		}
     	}
     	renderSuccess();
+    }
+    
+    
+    /***
+     * 返回所有功能树
+     * 包含模块
+     */
+    public void getAllOperatePermisstion(){
+    	String id = getPara("id");
+    	List<LayTreeNode> list = SysOperate.dao.getAllOperatePermisstion(id);
+    	renderSuccess(list, null);
     }
 }

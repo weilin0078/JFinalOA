@@ -14,6 +14,8 @@ import com.lion.sys.mvc.base.model.BaseSysMenu;
  */
 @SuppressWarnings("serial")
 public class SysMenu extends BaseSysMenu<SysMenu> {
+
+
 	public static final SysMenu dao = new SysMenu();
 	/***
 	 * 根据主键查询
@@ -87,5 +89,22 @@ public class SysMenu extends BaseSysMenu<SysMenu> {
 		return menuList;
 	}
 	
+	/***
+	 * 获取我的菜单
+	 * @param userid
+	 * @return
+	 */
+	public List<Record> getMenuByUserId(String userid){
+		List<Record> result = new ArrayList<Record>();//返回结果
+		List<Record> rootList = Db.find("select * from sys_menu m where m.parent_id='#root'");//根目录树结构
+		for(Record m : rootList){
+			List<Record> childList = Db.find("SELECT 	 m.*,o.url url FROM 	sys_menu m,	sys_userrole u,	sys_role r,	sys_roleoperator ro,	sys_operate o WHERE	m.operatorid = o.id AND o.id = ro.operator_id AND ro.role_id = r.id AND u.role_id = r.id AND u.user_id = '"+userid+"' AND m.parent_id = '"+m.getStr("id")+"' ");
+			if(childList!=null&&childList.size()>0){//有孩子
+				m.set("children", childList);
+				result.add(m);
+			}
+		}
+		return result;
+	}
 
 }

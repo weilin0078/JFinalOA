@@ -91,4 +91,15 @@ function deleteRole(ids){
 	});       
 	
 }
+
+
+//选择功能
+function selectOperate(id){
+	parent.layer.open({
+		  type: 2, 
+		  title:"角色赋权",
+		  area: ['350px', '800px'],
+		  content: ctx+'/admin/role/operatePermisstion?id='+id
+	}); 
+}
 </script>

@@ -1,21 +1,11 @@
-/**
- * Copyright (c) 2011-2013, dafei 李飞 (myaniu AT gmail DOT com)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.lion.sys.plugin.shiro;
 
 import java.util.concurrent.ConcurrentMap;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+
+import com.lion.sys.plugin.shiro.ext.SimpleUser;
 
 
 /**
@@ -56,7 +46,7 @@ public class ShiroKit {
 	/**
 	 * 禁止初始化
 	 */
-	private ShiroKit() {}
+	public ShiroKit() {}
 
 	static void init(ConcurrentMap<String, AuthzHandler> maps) {
 		authzMaps = maps;
@@ -99,5 +89,36 @@ public class ShiroKit {
 	 */
 	public static final String getSavedRequestKey(){
 		return SAVED_REQUEST_KEY;
+	}
+	
+	/***
+	 * 获取登陆用户信息
+	 * @return
+	 */
+	public static SimpleUser getLoginUser(){
+		Subject subject = SecurityUtils.getSubject();
+		if(subject!=null){
+			return (SimpleUser)subject.getPrincipal();
+		}else{
+			SecurityUtils.getSubject().logout();
+			return null;
+		}
+	}
+	
+	/***
+	 * 判断是否有资源权限
+	 * @param p
+	 * @return
+	 */
+	public static boolean hasPermission(String p) {
+		Subject subject = SecurityUtils.getSubject();
+		Boolean result = false;
+		try {
+			result = ((subject != null) && (subject.isPermitted(p)));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false; 
+		}
+		return result;
 	}
 }
