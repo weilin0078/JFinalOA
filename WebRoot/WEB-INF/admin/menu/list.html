@@ -40,7 +40,7 @@
 						<td>{{ item.url?item.url:"" }}</td>
 						<td>{{ item.sort }}</td>
 						<td>
-							<a href="#(ctx??)/admin/menu/getEditPage?parentid={{ item.id?item.id:"" }}" class="layui-btn layui-btn-normal layui-btn-mini">添加子菜单</a>
+							<a href="#(ctx??)/admin/menu/getEditPage?parentid={{ item.id?item.id:"" }}" onclick="return addChildren('{{ item.parent_id}}')" class="layui-btn layui-btn-normal layui-btn-mini">添加子菜单</a>
 							<a href="javascript:void(0);" onclick="selectOperate('{{ item.id?item.id:"" }}')" class="layui-btn layui-btn-normal layui-btn-mini">选择对应功能</a>
 							<a href="#(ctx??)/admin/menu/getEditPage?id={{ item.id?item.id:"" }}" class="layui-btn layui-btn-mini">编辑</a>
 							<a href="javascript:void(0);" onclick="deleteMenu('{{ item.id?item.id:"" }}')" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>					
@@ -120,6 +120,15 @@ function deleteMenu(ids){
 		
 	});       
 	
+}
+//校验添加子菜单
+function addChildren(p){
+	if("#root"==p){
+		return true;
+	}else{
+		parent.layer.alert("暂时只支持两级菜单!");
+		return false;
+	}
 }
 //删除所选
 function deleteAll(){

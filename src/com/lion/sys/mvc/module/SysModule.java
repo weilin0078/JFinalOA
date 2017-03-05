@@ -58,7 +58,9 @@ public class SysModule extends BaseSysModule<SysModule> {
 		List<LayTreeNode> list = new ArrayList<LayTreeNode>();
 		for(SysModule menu : menuList){
 			LayTreeNode node = toLayTreeNode(menu);
-			node.setChildren(toLayTreeNode(menu.getChildren(),spread));
+			if(menu.getChildren()!=null&&menu.getChildren().size()>0){
+				node.setChildren(toLayTreeNode(menu.getChildren(),spread));
+			}
 			node.setSpread(spread);
 			list.add(node);
 		}

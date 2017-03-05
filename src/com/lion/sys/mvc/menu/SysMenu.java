@@ -29,7 +29,7 @@ public class SysMenu extends BaseSysMenu<SysMenu> {
 	 * @return
 	 */
 	public List<SysMenu> getChildrenByPid(String id){
-		return SysMenu.dao.find("select * from sys_menu m where m.parent_id='"+id+"'");
+		return SysMenu.dao.find("select * from sys_menu m where m.parent_id='"+id+"' order by m.sort");
 	}
 	/***
 	 * 根据id 查询孩子分页
@@ -37,7 +37,7 @@ public class SysMenu extends BaseSysMenu<SysMenu> {
 	 * @return
 	 */
 	public Page<Record> getChildrenPageByPid(int pnum,int psize, String pid){
-		return Db.paginate(pnum, psize, "select m.* , o.name oname , o.url url ", " from sys_menu m LEFT JOIN sys_operate o ON m.operatorid = o.id WHERE m.parent_id='"+pid+"'");
+		return Db.paginate(pnum, psize, "select m.* , o.name oname , o.url url ", " from sys_menu m LEFT JOIN sys_operate o ON m.operatorid = o.id WHERE m.parent_id='"+pid+"' order by m.sort");
 	}
 	/***
 	 * 菜单转成LayTreeNode
@@ -60,7 +60,9 @@ public class SysMenu extends BaseSysMenu<SysMenu> {
 		List<LayTreeNode> list = new ArrayList<LayTreeNode>();
 		for(SysMenu menu : menuList){
 			LayTreeNode node = toLayTreeNode(menu);
-			node.setChildren(toLayTreeNode(menu.getChildren(),spread));
+			if(menu.getChildren()!=null&&menu.getChildren().size()>0){
+				node.setChildren(toLayTreeNode(menu.getChildren(),spread));
+			}
 			node.setSpread(spread);
 			list.add(node);
 		}
@@ -96,9 +98,9 @@ public class SysMenu extends BaseSysMenu<SysMenu> {
 	 */
 	public List<Record> getMenuByUserId(String userid){
 		List<Record> result = new ArrayList<Record>();//返回结果
-		List<Record> rootList = Db.find("select * from sys_menu m where m.parent_id='#root'");//根目录树结构
+		List<Record> rootList = Db.find("select * from sys_menu m where m.parent_id='#root' order by m.sort");//根目录树结构
 		for(Record m : rootList){
-			List<Record> childList = Db.find("SELECT 	 m.*,o.url url FROM 	sys_menu m,	sys_userrole u,	sys_role r,	sys_roleoperator ro,	sys_operate o WHERE	m.operatorid = o.id AND o.id = ro.operator_id AND ro.role_id = r.id AND u.role_id = r.id AND u.user_id = '"+userid+"' AND m.parent_id = '"+m.getStr("id")+"' ");
+			List<Record> childList = Db.find("SELECT 	 m.*,o.url url FROM sys_menu m,	sys_userrole u,	sys_role r,	sys_roleoperator ro,sys_operate o WHERE	m.operatorid = o.id AND o.id = ro.operator_id AND ro.role_id = r.id AND u.role_id = r.id AND u.user_id = '"+userid+"' AND m.parent_id = '"+m.getStr("id")+"' order by m.sort");
 			if(childList!=null&&childList.size()>0){//有孩子
 				m.set("children", childList);
 				result.add(m);

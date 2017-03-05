@@ -38,7 +38,7 @@
 						<td>{{ item.image?item.image:"" }}</td>
 						<td>{{ item.sort?item.sort:"" }}</td>
 						<td>
-							<a href="#(ctx??)/admin/module/getEditPage?parentid={{ item.id?item.id:"" }}" class="layui-btn layui-btn-normal layui-btn-mini">添加子模块</a>
+							<a href="#(ctx??)/admin/module/getEditPage?parentid={{ item.id?item.id:"" }}" onclick="return addChildren('{{ item.parent_id}}')" class="layui-btn layui-btn-normal layui-btn-mini">添加子模块</a>
 							<a href="#(ctx??)/admin/module/getEditPage?id={{ item.id?item.id:"" }}" class="layui-btn layui-btn-mini">编辑</a>
 							<a href="javascript:void(0);" onclick="deleteModule('{{ item.id?item.id:"" }}')" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
 						</td>
@@ -61,7 +61,7 @@ function refresh(){
 //初始化左侧菜单树
 function initTree(){
 	$("#menuTree").html("")
-	var d = ajax.ajaxFunc(ctx+"/admin/module/getAllModuleTree",null,"json",null);
+	var d = ajax.ajaxFunc(ctx+"/admin/module/getModuleTree",null,"json",null);
 	layui.tree({
 	    elem: '#menuTree' //传入元素选择器
 	    ,nodes: d.data
@@ -106,5 +106,14 @@ function deleteAll(){
 	var ids = data.join(",");
 	deleteModule(ids);
 }
-
+//检查添加孩子
+//校验添加子菜单
+function addChildren(p){
+	if("#root"==p){
+		return true;
+	}else{
+		parent.layer.alert("暂时只支持两级菜单!");
+		return false;
+	}
+}
 </script>

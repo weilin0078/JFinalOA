@@ -60,7 +60,7 @@
 		});
 	}
 	//获取分页数据
-	function getPageData(mid){
+	function getPageData(id){
 		paging.init({
 			url: ctx+"/admin/operate/listData",  //地址
 			elem: '#tableBody',
@@ -68,7 +68,7 @@
 			pageConfig: {        //分页参数配置
 				elem: '#pages',  //分页容器
 				pageSize: 10,     //分页大小
-				mid:mid
+				mid:id
 			}
 		});
 	}

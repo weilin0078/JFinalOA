@@ -25,17 +25,6 @@
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">对应功能</label>
-			<div class="layui-input-inline">
-				<input type="text" id="parentName" value="#(parent?parent.name:'根目录')"  class="layui-input">
-				<input type="hidden" id="parentId" name="sysMenu.parent_id" value="#(parent?parent.id:'#root')" lay-verify="title" lay-verify="required"  class="layui-input">
-				<input type="hidden" name = "sysMenu.id" value="#(menu?menu.id:'')">
-			</div>
-			<div class="layui-input-inline">
-				<a class="layui-btn layui-btn-small" onclick="selectMenu()">选择</a>
-			</div>
-		</div>
-		<div class="layui-form-item">
 			<label class="layui-form-label">名称</label>
 			<div class="layui-input-inline">
 				<input type="text"  lay-verify="name" name="sysMenu.name" value="#(menu?menu.name:'')"  placeholder="请输入名称" class="layui-input">
@@ -107,5 +96,14 @@ function selectMenu(){
 function setSelectedParent(data){
 	$("#parentId").val(data.id);
 	$("#parentName").val(data.name);
+}
+
+function selectOperate(mid){
+	parent.layer.open({
+		  type: 2, 
+		  title:"选择对应功能",
+		  area: ['1000px', '500px'],
+		  content: ctx+'/admin/menu/getSelectOperate?mid='+mid
+	}); 
 }
 </script>

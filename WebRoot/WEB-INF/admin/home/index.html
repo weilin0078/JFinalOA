@@ -50,19 +50,6 @@
 			<div class="layui-side layui-bg-black" id="admin-side">
 				<div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side">
 				<ul class="layui-nav layui-nav-tree">
-							
-							<li class="layui-nav-item">
-								<a href="javascript:;"><i class="fa fa-cubes" aria-hidden="true" data-icon="fa-cubes"></i><cite>正在开发模块</cite><span class="layui-nav-more"></span></a>
-								<dl class="layui-nav-child">
-										<dd><a href="javascript:;" data-url="#(ctx??)/admin/module/getListPage"><i class="layui-icon" data-icon="&#xe60c;">&#xe60c;</i><cite>模块管理</cite></a></dd>
-										<dd><a href="javascript:;" data-url="#(ctx??)/admin/operate/getListPage"><i class="layui-icon" data-icon="&#xe614;">&#xe614;</i><cite>功能管理</cite></a></dd>
-											#if(shiro.hasPermission("admin:menu:list"))
-												<dd><a href="javascript:;" data-url="#(ctx??)/admin/menu/getListPage"><i class="layui-icon" data-icon="&#xe617;">&#xe617;</i><cite>菜单管理</cite></a></dd>
-											#end
-										<dd><a href="javascript:;" data-url="#(ctx??)/admin/model/getListPage"><i class="layui-icon" data-icon="&#xe620;">&#xe620;</i><cite>模型管理</cite></a></dd>
-										<dd><a href="javascript:;" data-url="#(ctx??)/admin/role/getListPage"><i class="layui-icon" data-icon="&#xe620;">&#xe620;</i><cite>角色管理</cite></a></dd>
-								</dl>
-							</li>
 						#for(m:menu)
 							<li class="layui-nav-item">
 								<a href="javascript:;"><i class="fa fa-cubes" aria-hidden="true" data-icon="fa-cubes"></i><cite>#(m.name)</cite><span class="layui-nav-more"></span></a>

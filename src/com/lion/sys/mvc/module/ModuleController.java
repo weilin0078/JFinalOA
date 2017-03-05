@@ -57,9 +57,23 @@ public class ModuleController extends BaseController {
     /***
      * 返回所有菜单
      */
+    public void getModuleTree(){
+//    	List<SysModule> menuList = SysModule.dao.getAllModule();
+    	List<SysModule> list = SysModule.dao.getChildrenByPid("#root");
+    	List<LayTreeNode> nodelist = SysModule.dao.toLayTreeNode(list,true);//数据库中的菜单
+    	List<LayTreeNode> rootList = new ArrayList<LayTreeNode>();//页面展示的,带根节点
+    	//声明根节点
+    	LayTreeNode root = new LayTreeNode();
+    	root.setId("#root");
+    	root.setName("根目录");
+    	root.setChildren(nodelist);
+    	root.setSpread(true);
+    	rootList.add(root);
+    	renderSuccess(rootList, null);
+    }
     public void getAllModuleTree(){
-    	List<SysModule> menuList = SysModule.dao.getAllModule();
-    	List<LayTreeNode> nodelist = SysModule.dao.toLayTreeNode(menuList,true);//数据库中的菜单
+    	List<SysModule> list = SysModule.dao.getAllModule();
+    	List<LayTreeNode> nodelist = SysModule.dao.toLayTreeNode(list,true);//数据库中的菜单
     	List<LayTreeNode> rootList = new ArrayList<LayTreeNode>();//页面展示的,带根节点
     	//声明根节点
     	LayTreeNode root = new LayTreeNode();
