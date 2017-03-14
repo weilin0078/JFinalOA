@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50610
 File Encoding         : 65001
 
-Date: 2017-03-05 20:39:40
+Date: 2017-03-14 16:25:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -725,6 +725,7 @@ INSERT INTO `sys_menu` VALUES ('2', '权限管理', '0', '#root', 'false', '2', 
 INSERT INTO `sys_menu` VALUES ('22', '角色管理', '847faa0e5c1c45ca9d93921e992ab70f', '2', 'false', '3', null, null);
 INSERT INTO `sys_menu` VALUES ('22dbf72b7f3a45f1ab96d3c469ccaacc', '模块管理', '8ef57c6468434b5ca2778eacfc0c6281', '2', null, '1', null, '模块管理');
 INSERT INTO `sys_menu` VALUES ('3', '内容管理', '0', '#root', 'false', '3', null, null);
+INSERT INTO `sys_menu` VALUES ('3f0d0b7d23104c82acaa59e33cd2d20d', '用户管理', null, '#root', null, '5', null, null);
 INSERT INTO `sys_menu` VALUES ('4', '流程管理', '0', '#root', 'false', '99', null, null);
 INSERT INTO `sys_menu` VALUES ('42', '模型管理', 'c36e438a5c3043a893ccb94961140ad4', '4', 'false', '0', null, null);
 INSERT INTO `sys_menu` VALUES ('5e94601e6981471bad51720e2bc88b0f', '用户管理', 'cbd7ce182bf84cc599084f7d7b9ec496', '1', null, '2', null, null);
@@ -800,7 +801,7 @@ INSERT INTO `sys_operate` VALUES ('1d43c5350d46472cb7bfedb7435c69c7', null, 'adm
 INSERT INTO `sys_operate` VALUES ('847faa0e5c1c45ca9d93921e992ab70f', null, 'admin:role:list', '角色管理-查询角色列表', '查询角色列表', null, null, null, '/admin/role/getListPage', '7208ed07a2d74eec9dc17f89d50bdf5a', '0', '0', '1', null, '0');
 INSERT INTO `sys_operate` VALUES ('8ef57c6468434b5ca2778eacfc0c6281', null, 'admin:module:list', '模块管理-模块查询列表', '模块查询列表', null, null, null, '/admin/module/getListPage', '7ffc0a07fa014b4d86db6f5325b6671e', '0', '0', '1', null, '0');
 INSERT INTO `sys_operate` VALUES ('c36e438a5c3043a893ccb94961140ad4', null, 'admin:model:list', '模型管理-模型查询列表', '模型查询列表', null, null, null, '/admin/model/getListPage', 'ebc31da9d364434290e4d1ea4ad7fd6c', '0', '0', '1', null, '0');
-INSERT INTO `sys_operate` VALUES ('cbd7ce182bf84cc599084f7d7b9ec496', null, null, '用户管理-查询列表', '查询列表', null, null, null, '/admin/user/getListPage', '70db0f59266340b1b920f0700686f6e9', '0', '0', '1', null, '0');
+INSERT INTO `sys_operate` VALUES ('cbd7ce182bf84cc599084f7d7b9ec496', null, 'admin:user:list', '用户管理-查询列表', '查询列表', null, null, null, '/admin/user/getListPage', '70db0f59266340b1b920f0700686f6e9', '0', '0', '1', null, '0');
 INSERT INTO `sys_operate` VALUES ('e014ddc2059840e892e52e913771ab07', null, 'admin:menu:list', '菜单管理-查询列表', '查询列表', null, null, null, '/admin/menu/getListPage', '79e798cb6e49498ca1930163183192c6', '0', '0', '1', null, '1');
 
 -- ----------------------------
@@ -827,21 +828,21 @@ INSERT INTO `sys_role` VALUES ('c65364171504454daa4c614f5d941848', null, 'WorkFl
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_roleoperator`;
 CREATE TABLE `sys_roleoperator` (
-  `id` varchar(32) COLLATE utf8_bin NOT NULL COMMENT '??',
-  `role_id` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '??ids',
-  `operator_id` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '??ids',
+  `id` varchar(32) COLLATE utf8_bin NOT NULL,
+  `role_id` varchar(32) COLLATE utf8_bin DEFAULT NULL,
+  `operator_id` varchar(32) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='????';
 
 -- ----------------------------
 -- Records of sys_roleoperator
 -- ----------------------------
-INSERT INTO `sys_roleoperator` VALUES ('1035438d01e4496795e031069a8f009e', '8a40c0353fa828a6013fa898d4ac0023', 'cbd7ce182bf84cc599084f7d7b9ec496');
-INSERT INTO `sys_roleoperator` VALUES ('44598022cdcb43de9d445244430f75ad', '8a40c0353fa828a6013fa898d4ac0023', '1d43c5350d46472cb7bfedb7435c69c7');
-INSERT INTO `sys_roleoperator` VALUES ('8a758d67267042f683ad6cd9d65bbb6b', '8a40c0353fa828a6013fa898d4ac0023', 'e014ddc2059840e892e52e913771ab07');
-INSERT INTO `sys_roleoperator` VALUES ('c9a762d22aee42a99b3db7edc8b100f0', '8a40c0353fa828a6013fa898d4ac0023', '847faa0e5c1c45ca9d93921e992ab70f');
-INSERT INTO `sys_roleoperator` VALUES ('eaf22e3bff4942caaf1f2b919c0c636e', '8a40c0353fa828a6013fa898d4ac0023', 'c36e438a5c3043a893ccb94961140ad4');
-INSERT INTO `sys_roleoperator` VALUES ('ef7a00ca2fe249559f27b38e3c162db2', '8a40c0353fa828a6013fa898d4ac0023', '8ef57c6468434b5ca2778eacfc0c6281');
+INSERT INTO `sys_roleoperator` VALUES ('0f848d620f2741468db9823bc68b50be', '8a40c0353fa828a6013fa898d4ac0023', '1d43c5350d46472cb7bfedb7435c69c7');
+INSERT INTO `sys_roleoperator` VALUES ('12fe469604494bf48595d3cb84178d8e', '8a40c0353fa828a6013fa898d4ac0023', 'e014ddc2059840e892e52e913771ab07');
+INSERT INTO `sys_roleoperator` VALUES ('2b42abb77d2943249ff1c4d504a3de00', '8a40c0353fa828a6013fa898d4ac0023', '847faa0e5c1c45ca9d93921e992ab70f');
+INSERT INTO `sys_roleoperator` VALUES ('359d6382d9fd43ff8916aea2d91f18dd', '8a40c0353fa828a6013fa898d4ac0023', 'cbd7ce182bf84cc599084f7d7b9ec496');
+INSERT INTO `sys_roleoperator` VALUES ('ab535ed8e4954d5d9687c9e50bc5e72c', '8a40c0353fa828a6013fa898d4ac0023', 'c36e438a5c3043a893ccb94961140ad4');
+INSERT INTO `sys_roleoperator` VALUES ('d686b68112844729aa3401fa23dd945c', '8a40c0353fa828a6013fa898d4ac0023', '8ef57c6468434b5ca2778eacfc0c6281');
 
 -- ----------------------------
 -- Table structure for sys_user
