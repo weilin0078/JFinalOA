@@ -1,123 +1,166 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>JFinalOA</title>
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="format-detection" content="telephone=no">
-			#include("/common/include/include.html")
-	</head>
+<html lang="en">
 
-	<body>
-		<div class="layui-layout layui-layout-admin">
-			<div class="layui-header header header-demo">
-				<div class="layui-main">
-					<div class="admin-login-box">
-						<a class="logo" style="left: 0;" href="#">
-							<span style="font-size: 22px;">JFinalOA</span>
-						</a>
-						<div class="admin-side-toggle">
-							<i class="fa fa-bars" aria-hidden="true"></i>
-						</div>
-					</div>
-					
-					<ul class="layui-nav admin-header-item">
-						<li class="layui-nav-item layui-nav-bar-no-anim">
-							<a href="javascript:;" id= "siteMessage" onclick="openSiteMessageTip()"><i class="fa fa-envelope-o" aria-hidden="true" style="padding-right: 5px;font-size: 17px;"></i></a>
-						</li>
-						<li class="layui-nav-item">
-							<a href="javascript:;" class="admin-header-user">
-								<img src="/JFinalOA/common/images/user/0.jpg" />
-								<span>JFinalOA</span>
-							</a>
-							<dl class="layui-nav-child">
-								<dd><a href="javascript:;"><i class="fa fa-user-circle" aria-hidden="true"></i> 个人信息</a></dd>
-								<dd><a href="javascript:;"><i class="fa fa-gear" aria-hidden="true"></i> 设置</a></dd>
-								<dd id="lock"><a href="javascript:;"><i class="fa fa-lock" aria-hidden="true" style="padding-right: 3px;padding-left: 1px;"></i> 锁屏 (Alt+L)</a></dd>
-								<dd><a href="#(ctx??)/admin/login/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a></dd>
-							</dl>
-						</li>
-					</ul>
-					<ul class="layui-nav admin-header-item-mobile">
-						<li class="layui-nav-item"><a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="layui-side layui-bg-black" id="admin-side">
-				<div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side">
-				<ul class="layui-nav layui-nav-tree">
-						#for(m:menu)
-							<li class="layui-nav-item">
-								<a href="javascript:;"><i class="fa fa-cubes" aria-hidden="true" data-icon="fa-cubes"></i><cite>#(m.name)</cite><span class="layui-nav-more"></span></a>
-								<dl class="layui-nav-child">
-									#for(c:m.children)
-										<dd><a href="javascript:;" data-url="#(ctx??)#(c.url)"><i class="layui-icon" data-icon=""></i><cite>#(c.name)</cite></a></dd>
-									#end
-								</dl>
-							</li>
-						#end
-					</ul>
-				</div>
-			</div>
-			<div class="layui-body" style="bottom: 0;border-left: solid 2px #1AA094;" id="admin-body">
-				<div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
-					<ul class="layui-tab-title" id="naviTabUl">
-						<li class="layui-this">
-							<i class="fa fa-dashboard" aria-hidden="true"></i>
-							<cite>控制面板</cite>
-						</li>
-					</ul>
-					<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
-						<div class="layui-tab-item layui-show">
-							<iframe src="#(ctx??)/admin/home/getMainPage" ></iframe>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="layui-footer footer footer-demo" id="admin-footer">
-				<div class="layui-main">
-					<p>2017 &copy;
-						<a href="javascript:void(0);">JFinalOA</a> GPL license
-					</p>
-				</div>
-			</div>
-			<div class="site-tree-mobile layui-hide">
-				<i class="layui-icon">&#xe602;</i>
-			</div>
-			<div class="site-mobile-shade"></div>
-			
-			<!--锁屏模板 start-->
-			<script type="text/template" id="lock-temp">
-				<div class="admin-header-lock" id="lock-box">
-					<div class="admin-header-lock-img">
-						<img src="#(ctx??)/common/images/user/0.jpg"/>
-					</div>
-					<div class="admin-header-lock-name" id="lockUserName">beginner</div>
-					<input type="text" class="admin-header-lock-input" value="输入密码解锁.." name="lockPwd" id="lockPwd" />
-					<button class="layui-btn layui-btn-small" id="unlock">解锁</button>
-				</div>
-			</script>
-			<!--锁屏模板 end -->
-			<script type="text/javascript" src="#(ctx??)/common/js/navbar.js"></script>
-			<script type="text/javascript" src="#(ctx??)/common/js/index.js"></script>
-			<script>
-				function openSiteMessageTip(){
-					layer.tips(ajax.ajaxFunc(ctx+'/admin/home/getSiteMessageTipPage',null,null,null), '#siteMessage', {
-						  tips: [3,'#f2f2f2'],area: ['510px', 'auto'],time: 0,shadeClose: true,shade: [0.0000001, '#fff'],moveOut: true
-					});					
-				}
-				
-				//获取tab页面序号  用tab对象tab.getTabIndex()
-				function getTabIndex(){
-					return $("#naviTabUl").children(".layui-this").find(".layui-tab-close").attr("data-id");
-				}
-			</script>
-			
-		</div>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点狮 | Point Lion</title>
 
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+
+    #include("/common/include/include.html")
+
+	<!-- 动态主题 -->
+	#if(setting.color_theme!=null)
+		<link id="theme" href="#(ctx)#(setting.color_theme)" rel="stylesheet">
+	#end
+	
+    <!--=================================================-->
+    
+    <!--Demo script [ DEMONSTRATION ]-->
+    <script src="#(ctx)/common/js/demo/nifty-demo.js"></script>
+
+    
+    <!--Morris.js [ OPTIONAL ]-->
+    <script src="#(ctx)/common/plugins/morris-js/morris.min.js"></script>
+	<script src="#(ctx)/common/plugins/morris-js/raphael-js/raphael.min.js"></script>
+
+
+    <!--Sparkline [ OPTIONAL ]-->
+    <script src="#(ctx)/common/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+
+    <!--=================================================
+
+    REQUIRED  必须的
+    You must include this in your project.
+
+
+    RECOMMENDED 推荐的
+    This category must be included but you may modify which plugins or components which should be included in your project.
+
+
+    OPTIONAL  可选的
+    Optional plugins. You may choose whether to include it in your project or not.
+
+
+    DEMONSTRATION 例子
+    This is to be removed, used for demonstration purposes only. This category must not be included in your project.
+
+
+    SAMPLE  样品
+    Some script samples which explain how to initialize plugins or components. This category should not be included in your project.
+
+
+    Detailed information and more samples can be found in the document.
+
+    =================================================-->
+        
+</head>
+<!--TIPS-->
+<!--You may remove all ID or Class names which contain "demo-", they are only used for demonstration. -->
+<body>
+    <div id="container" class="    
+	    	#if(setting.box_lay=='1') boxed-layout #end     
+	    	#if(setting.animate=='1') effect #(setting.animate_type) #end
+	    	#if(setting.fixed_navbar=='1') navbar-fixed #end
+	    	#if(setting.fixed_footer=='1') footer-fixed #end
+	    	#if(setting.fixed_nav=='1') mainnav-fixed #end
+	    	#if(setting.show_asd=='1') aside-in #end
+	    	#if(setting.fixed_asd=='1') aside-fixed #end
+	    	#if(setting.left_asd=='1') aside-left #end
+	    	#if(setting.float_asd=='1') aside-float #end
+	    	#if(setting.dark_asd=='0') aside-bright #end
+	    	#if(setting.nav_coll=='1') mainnav-sm #else mainnav-lg #end
+    	"  
+    	#if(setting.box_lay=='1'&&setting.box_back_img!=null&&setting.box_back_img!='') 
+    		style="background-image: url(#(setting.box_back_img));background-repeat: no-repeat;background-size: cover;"  
+    	#end> 
+        
+        <!--NAVBAR-->
+        <!--===================================================-->
+        #include("/common/include/header.html")
+        <!--===================================================-->
+        <!--END NAVBAR-->
+		
+        <div class="boxed">
+
+            <!--CONTENT CONTAINER-->
+            <!--===================================================-->
+            <div id="content-container">
+            	#include("/common/include/main.html")
+            </div>
+            <!--===================================================-->
+            <!--END CONTENT CONTAINER-->
+
+
+            
+            <!--ASIDE-->
+            <!--===================================================-->
+            #include("/common/include/aside.html")
+            <!--===================================================-->
+            <!--END ASIDE-->
+
+            
+            <!--MAIN NAVIGATION-->
+            <!--===================================================-->
+            #include("/common/include/nav.html")
+            <!--===================================================-->
+            <!--END MAIN NAVIGATION-->
+
+        </div>
+
+        
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        #include("/common/include/footer.html")
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+
+        <!-- SCROLL PAGE BUTTON -->
+        <!--===================================================-->
+        <button class="scroll-top btn">
+            <i class="pci-chevron chevron-up"></i>
+        </button>
+        <!--===================================================-->
+
+
+
+    </div>
+    <!--===================================================-->
+    <!-- END OF CONTAINER -->
+
+	#include("/common/include/setting.html")
+    
+        <!-- SETTINGS - DEMO PURPOSE ONLY -->
+    <!--===================================================-->
+    
+    <!--===================================================-->
+    <!-- END SETTINGS -->
+	
+	<!-- 个性化配置代码 -->
+
+	<script>
+			//PJax
+			function doPjax(url){
+				$(document).on('pjax:start', function () {
+					history.replaceState({},"",ctx+"/admin/home");
+		        });
+				$(document).on('pjax:end', function () {
+					history.replaceState({},"",ctx+"/admin/home");
+	        	});
+				$.pjax({'url': url, container: '#content-container'});
+			}
+			//初始化高度
+			function initFullHeight(){
+				var clientW = document.body.clientHeight-160;
+				$(".lion-fullHeight").css("height",clientW+"px");
+			}
+			
+	</script>
+</body>
 </html>

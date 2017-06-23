@@ -1,5 +1,0 @@
-/*table*/
-.site-table tbody tr td {text-align: center;}
-.site-table tbody tr td .layui-btn+.layui-btn{margin-left: 0px;}
-.admin-table-page {position: absolute;bottom: 0px;}
-.table-hover tbody tr:hover{ background-color: #EEEEEE; }

@@ -21,5 +21,5 @@
 var ACTIVITI = ACTIVITI || {};
 
 ACTIVITI.CONFIG = {
-	'contextRoot' : '/JFinalOA/admin',
+	'contextRoot' : '/PointLion/admin',
 };

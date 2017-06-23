@@ -111,9 +111,9 @@ $(document).ready(function(){
   baseUrl = baseUrl + shortenedUrl.substring(0, shortenedUrl.indexOf("/"));
   
   ActivitiRest.options = {
-    processInstanceHighLightsUrl: baseUrl + "/jf/process-instance/highlights/getHighlighted?processDefinitionId="+processDefinitionId+"&processInstanceId="+processInstanceId,
-    processDefinitionUrl: baseUrl +       "/jf/process-definition/diagram-layout/getDiagram?processDefinitionId="+processDefinitionId+"&processInstanceId="+processInstanceId,
-    processDefinitionByKeyUrl: baseUrl + "/jf/process-definition/diagram-layout/getDiagram?processDefinitionId="+processDefinitionId+"&processInstanceId="+processInstanceId
+    processInstanceHighLightsUrl: baseUrl + "/admin/process-instance/highlights/getHighlighted?processDefinitionId="+processDefinitionId+"&processInstanceId="+processInstanceId,
+    processDefinitionUrl: baseUrl +       "/admin/process-definition/diagram-layout/getDiagram?processDefinitionId="+processDefinitionId+"&processInstanceId="+processInstanceId,
+    processDefinitionByKeyUrl: baseUrl + "/admin/process-definition/diagram-layout/getDiagram?processDefinitionId="+processDefinitionId+"&processInstanceId="+processInstanceId
   };
   if (processDefinitionId) {
     ProcessDiagramGenerator.drawDiagram(processDefinitionId);

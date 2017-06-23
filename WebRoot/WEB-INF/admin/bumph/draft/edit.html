@@ -1,0 +1,211 @@
+	#include("/common/include/pageTitleBread.html")
+	<div id="page-content">
+			<div class="col-lg-12">
+		        <div class="panel">
+		            <div class="panel-heading">
+		                <h3 class="panel-title">
+		                	公文起草
+		                	<a href="#(ctx)/admin/bumph/export?id=#(o.id)" target="_blank" style="position: absolute;right: 10px">
+		                		<button class="btn btn-warning" type="button">导出</button>
+		                	</a>
+		                </h3>
+		                
+		            </div>
+		            <form id="editForm" class="panel-body form-horizontal form-padding">
+		            	<input type="hidden" name="oaBumph.id" value="#(o?o.id:'')">
+		            	<div class="form-group">
+		                    <label class="col-md-2 control-label" for="demo-text-input">公文文号</label>
+		                    <div class="col-md-3" style="padding-left: 15px;">
+				                    <select class="selectpicker" name="oaBumph.doc_type" #if(view=="detail") disabled #end>
+		                                <option value="0">呈批文</option>
+		                            </select>
+		                    </div>
+		                    <div class="col-md-3">
+			                    <input type="text" name="oaBumph.doc_num_year" value="#(o.doc_num_year)"  class="form-control" readonly>
+		                    </div>
+		                    <div class="col-md-1">
+			                    <input type="text" name="oaBumph.doc_num_n" value="2" class="form-control" #if(view=="detail") readonly #end>
+		                    </div>
+		                    <div class="col-md-1" style="line-height: 32px;">
+			                    	号文
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-md-2 control-label" for="demo-text-input">起草部门</label>
+		                    <div class="col-md-3">
+		                    	<input type="hidden" name="oaBumph.sender_orgid" value="#(o.sender_orgid)">
+		                        <input type="text" name="oaBumph.sender_orgname" value="#(o.sender_orgname)" readonly class="form-control">
+		                    </div>
+		                    <div class="col-md-3">
+		                    	<input type="hidden" name="oaBumph.sender_id" value="#(o.sender_id)">
+		                        <input type="text" name="oaBumph.sender_name" value="#(o.sender_name)" readonly class="form-control">
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-md-2 control-label" for="demo-text-input">标题</label>
+		                    <div class="col-md-8">
+		                        <input type="text"  name="oaBumph.title" class="form-control"  value="#(o?o.title:'')" #if(view=="detail") readonly #end />
+		                        <small class="help-block">请输入公文标题</small>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-md-2 control-label" for="demo-textarea-input">主送</label>
+		                    <div class="col-md-8" style="line-height: 30px;">
+		                    	<div #if(view!="detail") class="input-group mar-btm" #end>
+		                    		<input type="hidden" id="firstOrgId" name="firstOrgId" value="#(firstOrgId)">
+			                        <input type="text"   id="firstOrgName" name="firstOrgName" value="#(firstOrgName)" readonly class="form-control">
+			                        #if(view!="detail") 
+				                        <span class="input-group-btn">
+				                            <button class="btn btn-mint" type="button" onclick="selectFirst()">选择</button>
+				                        </span>
+				                    #end
+			                    </div>
+		                        <small class="help-block">请输选择主送单位</small>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-md-2 control-label" for="demo-text-input">抄送</label>
+		                    <div class="col-md-8" style="line-height: 30px;">
+		                    	<div #if(view!="detail") class="input-group mar-btm" #end>
+			                        <input type="hidden" id="secondOrgId" name="secondOrgId" value="#(secondOrgId)">
+			                        <input type="text"   id="secondOrgName" name="secondOrgName" value="#(secondOrgName)" readonly class="form-control">
+			                        #if(view!="detail") 
+			                        	<span class="input-group-btn">
+				                            <button class="btn btn-mint" type="button" onclick="selectSecond()">选择</button>
+				                        </span> 
+			                        #end 
+			                    </div>
+		                        <small class="help-block">请输选择抄送单位</small>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-md-2 control-label" for="demo-text-input">公文正文</label>
+		                    <div class="col-md-8">
+		                        <textarea name="oaBumph.content" rows="12" class="form-control" #if(view=="detail") readonly #end>#(o?o.content:'')</textarea>
+		                        <small class="help-block">请输入公文正文</small>
+		                    </div>
+		                </div>
+		                
+		                #if(view=="detail")
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label" for="demo-text-input">部门领导批示信息</label>
+			                    <div class="col-md-8">
+			                        <textarea rows="8" class="form-control" readonly>#(o?o.first_leader_audit:'')</textarea>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label" for="demo-text-input">公司领导批示信息</label>
+			                    <div class="col-md-8">
+			                        <textarea rows="8" class="form-control"  readonly>#(o?o.second_leader_audit:'')</textarea>
+			                    </div>
+			                </div>
+			            #end
+			            
+		                #if(view!="detail") 
+			                <div class="panel-footer">
+			                    <div class="row">
+			                        <div class="col-sm-9 col-sm-offset-3">
+			                            <button class="btn btn-warning" type="reset">重置</button>
+			                            <button class="btn btn-mint" type="submit" >保存</button>
+			                        </div>
+			                    </div>
+			                </div>
+			            #end
+		            </form>
+		        </div>
+		    </div>
+	</div>
+	<script>
+		function save(){
+			var data = common_ajax.ajaxFunc("/admin/bumph/draftSave", $('#editForm').serialize(), "json", null);
+			if(data.success){
+				pointLion.alertMsg("保存成功!" , "success" , "small" , function(){
+					doPjax(ctx+'/admin/bumph/getDraftListPage');//跳转到列表页
+				});
+			}
+		}
+		//选择主送单位
+		function selectFirst(){
+			pointLion.selectManyOrg(function(orgNode){
+				var firstId = [];
+				var firstName = [];
+				$.each(orgNode,function(i,d){
+					firstId.push(d.id);
+					firstName.push(d.name);
+				});
+				$("#firstOrgId").val(firstId.join(","));
+				$("#firstOrgName").val(firstName.join(","));
+				//重新校验
+				$("#editForm").data('bootstrapValidator').destroy();
+		        $('#editForm').data('bootstrapValidator', null);
+		        formValidate();
+			});
+		}
+		//选择抄送单位
+		function selectSecond(){
+			pointLion.selectManyOrg(function(orgNode){
+				var firstId = [];
+				var firstName = [];
+				$.each(orgNode,function(i,d){
+					firstId.push(d.id);
+					firstName.push(d.name);
+				});
+				$("#secondOrgId").val(firstId.join(","));
+				$("#secondOrgName").val(firstName.join(","));
+				
+			});
+		}
+		//表单校验
+		function formValidate(){
+			$('#editForm').bootstrapValidator({
+	    		excluded:[":disabled"],
+	            fields: {
+	            	"oaBumph.doc_num_n": {
+	                    validators: {
+	                        notEmpty: {
+	                            message: '*公文文号不能为空'
+	                        },
+	                        lessThan: {
+	        					inclusive:true,
+	        					value: 99999999,
+	        					message: '*请输入小于99999999的数字'
+	        				}
+	                    }
+	                },
+	            	"oaBumph.title": {
+	                    validators: {
+	                        notEmpty: {
+	                            message: '*公文标题不能为空'
+	                        },
+	                        stringLength: {
+	                            max: 25,
+	                            message: '*公文标题长度必须小于25'
+	                        }
+	                    }
+	                },
+	                "firstOrgId": {
+	                    validators: {
+	                    	notEmpty: {
+	                            message: '*主送单位不能为空'
+	                        }
+	                    }
+	                },
+	                "oaBumph.content": {
+	                    validators: {
+	                    	notEmpty: {
+	                            message: '*公文正文不能为空'
+	                        }
+	                    }
+	                }
+	            }
+	        }).on("success.form.bv", function (e) {
+	            save();
+	            return false;//阻止表单跳转
+	        });
+		}
+		$(document).ready(function() {
+			$(".selectpicker").selectpicker({});
+			$(".bootstrap-select").attr("style","width:100%;");
+			formValidate();
+		});
+	</script>

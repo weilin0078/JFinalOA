@@ -1,77 +1,130 @@
+
 <!DOCTYPE html>
+<html lang="en">
 
-<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 | 点狮</title>
 
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<title>登录</title>
-		<link rel="stylesheet" type="text/css" href="#(ctx)/common/lib/layui/css/layui.css" />
-		<link rel="stylesheet" type="text/css" href="#(ctx)/common/css/login.css" />
-	</head>
 
-	<body class="beg-login-bg">
-		<div class="beg-login-box">
-			<header>
-				<h1>后台登录</h1>
-			</header>
-			<div class="beg-login-main">
-				<form action="#(ctx)/admin/login/doLogin" class="layui-form" method="post">
-					<div class="layui-form-item">
-						<label class="beg-login-icon">
-	                        <i class="layui-icon">&#xe612;</i>
-	                    </label>
-						<input type="text" name="username" lay-verify="userName" autocomplete="off" placeholder="这里输入登录名" class="layui-input">
-					</div>
-					<div class="layui-form-item">
-						<label class="beg-login-icon">
-	                        <i class="layui-icon">&#xe642;</i>
-	                    </label>
-						<input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="这里输入密码" class="layui-input">
-					</div>
-					<div class="layui-input-inline"style="width: 100px;">
-				    	<input type="text" name="captcha" required  lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
-				    </div>
-				    <div class="layui-input-inline"style="width: 0px;">
-				      	<img alt="验证码出错啦~!" src="#(ctx??)/admin/login/img">
-				    </div>
-					<div class="layui-form-item">
-						<div class="beg-pull-left beg-login-remember">
-							<label>记住帐号？</label>
-							<input type="checkbox" name="rememberMe" value="true" lay-skin="switch" checked title="记住帐号">
-						</div>
-						<div class="beg-pull-right">
-							<button class="layui-btn layui-btn-primary" lay-submit lay-filter="login">
-                            <i class="layui-icon">&#xe650;</i> 登录
-                        </button>
-						</div>
-						<div class="beg-clear"></div>
-					</div>
-				</form>
-			</div>
-			<footer>
-				<!-- <p>Beginner © www.zhengjinfan.cn</p> -->
-			</footer>
+    <!--STYLESHEET-->
+    <!--=================================================-->
+	#include("/common/include/include.html")
+    
+    <!--=================================================
+
+    REQUIRED
+    You must include this in your project.
+
+
+    RECOMMENDED
+    This category must be included but you may modify which plugins or components which should be included in your project.
+
+
+    OPTIONAL
+    Optional plugins. You may choose whether to include it in your project or not.
+
+
+    Detailed information and more samples can be found in the document.
+
+    =================================================-->
+        
+
+
+
+    <!-- Create your own class to load custum image [ SAMPLE ]-->
+    <style>
+        .demo-my-bg{
+            background-image : url("#(ctx)/common/img/balloon.jpg");
+        }
+    </style>
+
+
+    
+</head>
+
+<!--TIPS-->
+<!--You may remove all ID or Class names which contain "demo-", they are only used for demonstration. -->
+
+<body>
+    <div id="container" class="cls-container">
+        
+		<!-- BACKGROUND IMAGE -->
+		<!--===================================================-->
+		<div id="bg-overlay" class="bg-img" style="background-image: url(#(ctx)/common/img/bg-img/bg-img-3.jpg)"></div>
+		
+		
+		<!-- LOGIN FORM -->
+		<!--===================================================-->
+		<div class="cls-content">
+		    <div class="cls-content-sm panel">
+		        <div class="panel-body">
+		            <div class="mar-ver pad-btm">
+		                <h3 class="h4 mar-no">登录</h3>
+		                <p class="text-muted">使用您的帐号密码进行登录</p>
+		            </div>
+		            <form action="#(ctx)/admin/login/doLogin">
+		                <div class="form-group">
+		                    <input type="text" name="username" class="form-control" placeholder="用户名" autofocus>
+		                </div>
+		                <div class="form-group">
+		                    <input type="password" name="password" class="form-control" placeholder="密码">
+		                </div>
+		                <div class="checkbox pad-btm text-left">
+		                    <input type="text" name="captcha" class="form-control" placeholder="验证码" style="float: left;width: 162px;margin-right: 40px;">
+		                    <img alt="验证码出错啦~!" src="#(ctx??)/admin/login/img">
+		                </div>
+		                <div class="checkbox pad-btm text-left">
+		                    <input id="demo-form-checkbox" class="magic-checkbox" type="checkbox">
+		                    <label for="demo-form-checkbox">记住我</label>
+		                </div>
+		                <button class="btn btn-primary btn-lg btn-block" type="submit">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</button>
+		            </form>
+		        </div>
+		
+		        <div class="pad-all">
+		            <a href="#" class="btn-link mar-rgt">忘记密码 ?</a>
+		            <a href="#" class="btn-link mar-lft">注册新账号</a>
+		
+		            <div class="media pad-top bord-top">
+		                <div class="pull-right">
+		                    <a href="#" class="pad-rgt"><i class="ti-facebook icon-lg text-primary"></i></a>
+		                    <a href="#" class="pad-rgt"><i class="ti-twitter-alt icon-lg text-info"></i></a>
+		                    <a href="#" class="pad-rgt"><i class="ti-google icon-lg text-danger"></i></a>
+		                </div>
+		                <div class="media-body text-left">
+		                    	其他方式登陆
+		                </div>
+		            </div>
+		        </div>
+		    </div>
 		</div>
-		<script type="text/javascript" src="#(ctx??)/common/lib/layui/layui.js"></script>
+		<!--===================================================-->
+		
+		
+		
+    </div>
+    <!--===================================================-->
+    <!-- END OF CONTAINER -->
 		<script>
-			layui.use(['layer', 'form'], function() {
-				var layer = layui.layer,
-					$ = layui.jquery,
-					form = layui.form();
-					layer.alert("用户名:li<br/>密码:liyang");
-				  //监听提交
-				  form.on('submit(login)', function(data){
-				    return true;
-				  });
-				  
-				  var err = "#(error??)";
-				  if(err){
-					  layer.msg(err, {icon: 5,anim:6}); 
-				  }
-			});
+		$.niftyNoty({
+            type: 'primary',
+            message : '用户名:admin<br/>,密码:admin',
+            container : 'floating',
+            timer : 5000
+        });
+			  var err = "#(error??)";
+			  if(err){
+				  $.niftyNoty({
+                      type: 'danger',
+                      message : err,
+                      container : 'floating',
+                      timer : 5000
+                  });
+			  }
 		</script>
-	</body>
 
+    </body>
 </html>
+

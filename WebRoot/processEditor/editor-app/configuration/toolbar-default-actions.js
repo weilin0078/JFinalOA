@@ -261,7 +261,9 @@ KISBPM.TOOLBAR = {
         },
         
         closeEditor: function(services) {
-        	window.location.href = "./";
+        	//window.location.href = "./";
+        	if(window.confirm('请确认数据是否已经保存，确定要关闭编辑器吗？'))
+    		window.close();
         },
         
         /**
@@ -326,7 +328,9 @@ var SaveModelCtrl = [ '$rootScope', '$scope', '$http', '$route', '$location',
 
     $scope.saveAndClose = function () {
     	$scope.save(function() {
-    		window.location.href = "./";
+    		//window.location.href = "./";
+    		if(window.confirm('请确认数据是否已经保存，确定要关闭编辑器吗？'))
+    		window.close();
     	});
     };
     $scope.save = function (successCallback) {

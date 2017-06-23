@@ -1,6 +1,3 @@
-/.classpath
-/.gitignore
-/.project
-/.settings
-/WebRoot/META-INF
+/bin/
+/WebRoot/WEB-INF/classes/*.class
 /WebRoot/WEB-INF/classes
