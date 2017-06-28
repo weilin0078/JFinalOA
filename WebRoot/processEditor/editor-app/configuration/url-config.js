@@ -21,7 +21,7 @@ var KISBPM = KISBPM || {};
 KISBPM.URL = {
 
     getModel: function(modelId) {
-        return ACTIVITI.CONFIG.contextRoot + '/model/json/getEditorJson2?modelId=' + modelId ;
+        return ACTIVITI.CONFIG.contextRoot + '/modelEditor/json/getEditorJson2?modelId=' + modelId ;
     },
 
     getStencilSet: function() {
@@ -29,6 +29,6 @@ KISBPM.URL = {
     },
 
     putModel: function(modelId) {
-        return ACTIVITI.CONFIG.contextRoot + '/model/save/saveModel?modelId='+ modelId;
+        return ACTIVITI.CONFIG.contextRoot + '/modelEditor/save/saveModel?modelId='+ modelId;
     }
 };
