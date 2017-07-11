@@ -5,26 +5,26 @@ var pointLion = function(){
 		var selectOneOrgNode={};//机构数据
 		var selectOneOrg = function(callback){
 			layer.open({
-			  type: 2,
-			  title: false, //不显示标题栏
-			  area: ['300px', '550px'],
-			  shade: 0.8,
-			  id: 'selectOneOrg', //设定一个id，防止重复弹出
-			  resize: false,
-			  closeBtn: false,
-			  isOutAnim : false , 
-			  btn: ['确定', '取消'], 
-			  btnAlign: 'c',
-			  content: ctx+'/admin/org/getSelectOneOrgPage',
-			  success: function(layero){
-				  
-			  },
-			  yes: function(){
-				  if( callback != null ){
-					  callback(selectOneOrgNode);
+				  type: 2,
+				  title: false, //不显示标题栏
+				  area: ['300px', '550px'],
+				  shade: 0.8,
+				  id: 'selectOneOrg', //设定一个id，防止重复弹出
+				  resize: false,
+				  closeBtn: false,
+				  isOutAnim : false , 
+				  btn: ['确定', '取消'], 
+				  btnAlign: 'c',
+				  content: ctx+'/admin/org/getSelectOneOrgPage',
+				  success: function(layero){
+					  
+				  },
+				  yes: function(){
+					  if( callback != null ){
+						  callback(selectOneOrgNode);
+					  }
+					  layer.closeAll();
 				  }
-				  layer.closeAll();
-			  }
 			});
 			
 		};
