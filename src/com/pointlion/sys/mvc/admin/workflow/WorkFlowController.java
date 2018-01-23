@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
 import com.pointlion.sys.interceptor.MainPageTitleInterceptor;
-import com.pointlion.sys.mvc.base.BaseController;
+import com.pointlion.sys.mvc.common.base.BaseController;
 
 /**
  * @author Lion

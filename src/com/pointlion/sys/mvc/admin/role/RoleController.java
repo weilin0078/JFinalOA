@@ -11,8 +11,8 @@ import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
 import com.pointlion.sys.interceptor.MainPageTitleInterceptor;
-import com.pointlion.sys.mvc.base.BaseController;
-import com.pointlion.sys.tool.UuidUtil;
+import com.pointlion.sys.mvc.common.base.BaseController;
+import com.pointlion.sys.mvc.common.utils.UuidUtil;
 
 /**
  * @author Lion

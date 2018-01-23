@@ -16,7 +16,7 @@ import com.pointlion.sys.mvc.admin.menu.SysMenu;
 import com.pointlion.sys.mvc.admin.notice.NoticeService;
 import com.pointlion.sys.mvc.admin.role.SysRole;
 import com.pointlion.sys.mvc.admin.user.SysUser;
-import com.pointlion.sys.mvc.base.BaseController;
+import com.pointlion.sys.mvc.common.base.BaseController;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
 import com.pointlion.sys.plugin.shiro.ext.SimpleUser;
 

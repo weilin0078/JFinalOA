@@ -1,6 +1,6 @@
 package com.pointlion.sys.mvc.admin.notice;
 
-import com.pointlion.sys.tool.Constants;
+import com.pointlion.sys.mvc.common.utils.Constants;
 
 public class NoticeConstants extends Constants{
 	

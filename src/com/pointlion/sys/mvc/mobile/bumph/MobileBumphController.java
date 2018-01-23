@@ -9,7 +9,7 @@ import com.jfinal.aop.Clear;
 import com.jfinal.kit.StrKit;
 import com.pointlion.sys.mvc.admin.bumph.OaBumph;
 import com.pointlion.sys.mvc.admin.user.SysUser;
-import com.pointlion.sys.mvc.base.BaseController;;
+import com.pointlion.sys.mvc.common.base.BaseController;;
 
 /***
  * 通知公告控制器（手机端）

@@ -5,9 +5,9 @@
  */
 package com.pointlion.sys.mvc.admin.cstmsetting;
 
-import com.pointlion.sys.mvc.base.BaseController;
+import com.pointlion.sys.mvc.common.base.BaseController;
+import com.pointlion.sys.mvc.common.utils.UuidUtil;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
-import com.pointlion.sys.tool.UuidUtil;
 
 /***
  * 首页控制器

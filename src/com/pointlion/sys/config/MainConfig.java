@@ -37,7 +37,7 @@ import com.pointlion.sys.mvc.admin.workflow.model.ModelSaveRestResource;
 import com.pointlion.sys.mvc.admin.workflow.rest.ProcessDefinitionDiagramLayoutResource;
 import com.pointlion.sys.mvc.admin.workflow.rest.ProcessInstanceDiagramLayoutResource;
 import com.pointlion.sys.mvc.admin.workflow.rest.ProcessInstanceHighlightsResource;
-import com.pointlion.sys.mvc.base.model._MappingKit;
+import com.pointlion.sys.mvc.common.model._MappingKit;
 import com.pointlion.sys.mvc.mobile.bumph.MobileBumphController;
 import com.pointlion.sys.mvc.mobile.login.MobileLoginController;
 import com.pointlion.sys.mvc.mobile.notice.MobileNoticeController;

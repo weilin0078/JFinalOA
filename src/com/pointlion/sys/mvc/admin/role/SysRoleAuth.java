@@ -2,7 +2,7 @@ package com.pointlion.sys.mvc.admin.role;
 
 import java.util.List;
 
-import com.pointlion.sys.mvc.base.model.BaseSysRoleoperator;
+import com.pointlion.sys.mvc.common.base.model.BaseSysRoleoperator;
 
 
 

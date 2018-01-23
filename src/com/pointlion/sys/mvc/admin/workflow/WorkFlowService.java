@@ -35,9 +35,9 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.pointlion.sys.mvc.common.utils.Constants;
 import com.pointlion.sys.plugin.activiti.ActivitiPlugin;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
-import com.pointlion.sys.tool.Constants;
 
 public class WorkFlowService {
 	public static final WorkFlowService me = new WorkFlowService();

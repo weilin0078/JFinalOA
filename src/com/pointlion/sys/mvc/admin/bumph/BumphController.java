@@ -17,10 +17,10 @@ import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.sys.mvc.admin.org.SysOrg;
 import com.pointlion.sys.mvc.admin.user.SysUser;
 import com.pointlion.sys.mvc.admin.workflow.WorkFlowService;
-import com.pointlion.sys.mvc.base.BaseController;
+import com.pointlion.sys.mvc.common.base.BaseController;
+import com.pointlion.sys.mvc.common.utils.DateUtil;
+import com.pointlion.sys.mvc.common.utils.StringUtil;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
-import com.pointlion.sys.tool.DateUtil;
-import com.pointlion.sys.tool.StringUtil;
 
 /***
  * 用户管理控制器

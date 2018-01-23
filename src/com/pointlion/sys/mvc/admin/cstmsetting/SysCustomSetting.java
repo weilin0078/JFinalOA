@@ -1,6 +1,6 @@
 package com.pointlion.sys.mvc.admin.cstmsetting;
 
-import com.pointlion.sys.mvc.base.model.BaseSysCustomSetting;
+import com.pointlion.sys.mvc.common.base.model.BaseSysCustomSetting;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
 
 /**

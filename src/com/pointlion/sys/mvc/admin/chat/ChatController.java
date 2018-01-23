@@ -6,7 +6,7 @@
 package com.pointlion.sys.mvc.admin.chat;
 
 import com.pointlion.sys.mvc.admin.user.SysUser;
-import com.pointlion.sys.mvc.base.BaseController;
+import com.pointlion.sys.mvc.common.base.BaseController;
 
 /***
  * 首页控制器

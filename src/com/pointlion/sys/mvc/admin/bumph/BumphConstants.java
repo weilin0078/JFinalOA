@@ -1,6 +1,6 @@
 package com.pointlion.sys.mvc.admin.bumph;
 
-import com.pointlion.sys.tool.Constants;
+import com.pointlion.sys.mvc.common.utils.Constants;
 
 public class BumphConstants extends Constants{
 	public static final String DEFKEY_BUMPH="Bumph";

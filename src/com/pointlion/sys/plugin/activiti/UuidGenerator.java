@@ -2,7 +2,7 @@ package com.pointlion.sys.plugin.activiti;
 
 import org.activiti.engine.impl.cfg.IdGenerator;
 
-import com.pointlion.sys.tool.UuidUtil;
+import com.pointlion.sys.mvc.common.utils.UuidUtil;
 
 
 /**

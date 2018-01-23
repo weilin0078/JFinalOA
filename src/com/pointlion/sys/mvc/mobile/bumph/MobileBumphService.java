@@ -7,7 +7,7 @@ import com.pointlion.sys.mvc.admin.bumph.BumphConstants;
 import com.pointlion.sys.mvc.admin.bumph.BumphService;
 import com.pointlion.sys.mvc.admin.bumph.OaBumph;
 import com.pointlion.sys.mvc.admin.bumph.OaBumphOrg;
-import com.pointlion.sys.tool.StringUtil;
+import com.pointlion.sys.mvc.common.utils.StringUtil;
 
 /***
  * 手机端通知公告调用服务

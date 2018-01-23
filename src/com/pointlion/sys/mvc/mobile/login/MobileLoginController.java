@@ -10,7 +10,7 @@ import org.apache.shiro.authc.credential.PasswordService;
 
 import com.jfinal.aop.Clear;
 import com.pointlion.sys.mvc.admin.user.SysUser;
-import com.pointlion.sys.mvc.base.BaseController;
+import com.pointlion.sys.mvc.common.base.BaseController;
 
 /***
  * 通知公告控制器（手机端）

@@ -7,8 +7,8 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.pointlion.sys.mvc.admin.user.SysUser;
-import com.pointlion.sys.tool.DateUtil;
-import com.pointlion.sys.tool.UuidUtil;
+import com.pointlion.sys.mvc.common.utils.DateUtil;
+import com.pointlion.sys.mvc.common.utils.UuidUtil;
 
 /***
  * web端通知公告调用服务

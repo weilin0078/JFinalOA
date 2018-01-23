@@ -21,9 +21,9 @@ import com.pointlion.sys.mvc.admin.org.SysOrg;
 import com.pointlion.sys.mvc.admin.user.SysUser;
 import com.pointlion.sys.mvc.admin.workflow.WorkFlowService;
 import com.pointlion.sys.mvc.admin.workflow.model.VTasklist;
+import com.pointlion.sys.mvc.common.utils.DateUtil;
+import com.pointlion.sys.mvc.common.utils.UuidUtil;
 import com.pointlion.sys.plugin.activiti.ActivitiPlugin;
-import com.pointlion.sys.tool.DateUtil;
-import com.pointlion.sys.tool.UuidUtil;
 
 public class BumphService {
 	public static final BumphService me = new BumphService();
