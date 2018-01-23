@@ -182,7 +182,6 @@ public class BumphController extends BaseController {
      * 取到办理页面
      */
     public void getDoTaskPage(){
-    	
     	String parentPath = this.getRequest().getServletPath().substring(0,this.getRequest().getServletPath().lastIndexOf("/")+1); 
     	String taskid = getPara("taskid");
     	String id = getPara("id");
