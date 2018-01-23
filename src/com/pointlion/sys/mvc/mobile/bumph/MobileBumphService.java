@@ -1,4 +1,4 @@
-package com.pointlion.sys.mobile.bumph;
+package com.pointlion.sys.mvc.mobile.bumph;
 
 import java.util.ArrayList;
 import java.util.List;

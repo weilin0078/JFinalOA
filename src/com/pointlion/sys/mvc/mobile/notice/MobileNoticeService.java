@@ -1,4 +1,4 @@
-package com.pointlion.sys.mobile.notice;
+package com.pointlion.sys.mvc.mobile.notice;
 
 import com.pointlion.sys.mvc.admin.notice.NoticeService;
 
