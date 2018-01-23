@@ -1,4 +1,4 @@
-package com.pointlion.sys.mvc.admin.bumph;
+package com.pointlion.sys.mvc.common.model;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,7 +9,7 @@ import java.util.Map;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import com.jfinal.plugin.activerecord.Page;
-import com.pointlion.sys.mvc.common.base.model.BaseOaBumph;
+import com.pointlion.sys.mvc.common.model.base.BaseOaBumph;
 import com.pointlion.sys.mvc.common.utils.POITemplateUtil;
 
 /**

@@ -9,14 +9,14 @@ import java.util.List;
 
 import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.sys.mvc.admin.bumph.BumphService;
-import com.pointlion.sys.mvc.admin.chat.SysFriend;
-import com.pointlion.sys.mvc.admin.cstmsetting.SysCustomSetting;
 import com.pointlion.sys.mvc.admin.login.SessionUtil;
-import com.pointlion.sys.mvc.admin.menu.SysMenu;
 import com.pointlion.sys.mvc.admin.notice.NoticeService;
-import com.pointlion.sys.mvc.admin.role.SysRole;
-import com.pointlion.sys.mvc.admin.user.SysUser;
 import com.pointlion.sys.mvc.common.base.BaseController;
+import com.pointlion.sys.mvc.common.model.SysCustomSetting;
+import com.pointlion.sys.mvc.common.model.SysFriend;
+import com.pointlion.sys.mvc.common.model.SysMenu;
+import com.pointlion.sys.mvc.common.model.SysRole;
+import com.pointlion.sys.mvc.common.model.SysUser;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
 import com.pointlion.sys.plugin.shiro.ext.SimpleUser;
 

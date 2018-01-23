@@ -1,4 +1,4 @@
-package com.pointlion.sys.mvc.admin.role;
+package com.pointlion.sys.mvc.common.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,8 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.pointlion.sys.mvc.admin.menu.SysMenu;
-import com.pointlion.sys.mvc.common.base.model.BaseSysRole;
 import com.pointlion.sys.mvc.common.dto.ZtreeNode;
+import com.pointlion.sys.mvc.common.model.base.BaseSysRole;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 
 /**

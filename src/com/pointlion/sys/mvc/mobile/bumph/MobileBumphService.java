@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.pointlion.sys.mvc.admin.bumph.BumphConstants;
 import com.pointlion.sys.mvc.admin.bumph.BumphService;
-import com.pointlion.sys.mvc.admin.bumph.OaBumph;
-import com.pointlion.sys.mvc.admin.bumph.OaBumphOrg;
+import com.pointlion.sys.mvc.common.model.OaBumph;
+import com.pointlion.sys.mvc.common.model.OaBumphOrg;
 import com.pointlion.sys.mvc.common.utils.StringUtil;
 
 /***

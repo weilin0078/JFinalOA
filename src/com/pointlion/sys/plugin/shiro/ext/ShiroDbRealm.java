@@ -20,9 +20,9 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
 import com.jfinal.kit.StrKit;
-import com.pointlion.sys.mvc.admin.menu.SysMenu;
-import com.pointlion.sys.mvc.admin.role.SysRole;
-import com.pointlion.sys.mvc.admin.user.SysUser;
+import com.pointlion.sys.mvc.common.model.SysMenu;
+import com.pointlion.sys.mvc.common.model.SysRole;
+import com.pointlion.sys.mvc.common.model.SysUser;
 
 
 public class ShiroDbRealm extends AuthorizingRealm {

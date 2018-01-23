@@ -1,4 +1,4 @@
-package com.pointlion.sys.mvc.common.base.model;
+package com.pointlion.sys.mvc.common.model.base;
 
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.IBean;

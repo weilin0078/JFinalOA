@@ -19,6 +19,7 @@ import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.sys.interceptor.MainPageTitleInterceptor;
 import com.pointlion.sys.mvc.common.base.BaseController;
 import com.pointlion.sys.mvc.common.dto.ZtreeNode;
+import com.pointlion.sys.mvc.common.model.SysMenu;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 
 /***

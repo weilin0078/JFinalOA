@@ -10,9 +10,10 @@ import java.util.Map;
 
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
-import com.pointlion.sys.mvc.admin.org.SysOrg;
-import com.pointlion.sys.mvc.admin.user.SysUser;
 import com.pointlion.sys.mvc.common.base.BaseController;
+import com.pointlion.sys.mvc.common.model.OaNotice;
+import com.pointlion.sys.mvc.common.model.SysOrg;
+import com.pointlion.sys.mvc.common.model.SysUser;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
 
 /***

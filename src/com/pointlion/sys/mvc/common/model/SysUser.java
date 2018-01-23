@@ -1,4 +1,4 @@
-package com.pointlion.sys.mvc.admin.user;
+package com.pointlion.sys.mvc.common.model;
 
 import java.util.List;
 
@@ -8,8 +8,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.pointlion.sys.mvc.admin.role.SysRole;
-import com.pointlion.sys.mvc.common.base.model.BaseSysUser;
+import com.pointlion.sys.mvc.common.model.base.BaseSysUser;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 
 /**

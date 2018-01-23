@@ -3,12 +3,12 @@
  * @date 2017年1月24日 下午12:02:35
  * @qq 439635374
  */
-package com.pointlion.sys.mvc.common.base.model;
+package com.pointlion.sys.mvc.common.model.base;
 
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Model;
-import com.pointlion.sys.mvc.admin.menu.SysMenu;
+import com.pointlion.sys.mvc.common.model.SysMenu;
 import com.jfinal.plugin.activerecord.IBean;
 
 @SuppressWarnings("serial")

@@ -6,6 +6,7 @@
 package com.pointlion.sys.mvc.admin.cstmsetting;
 
 import com.pointlion.sys.mvc.common.base.BaseController;
+import com.pointlion.sys.mvc.common.model.SysCustomSetting;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
 

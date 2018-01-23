@@ -7,8 +7,8 @@ package com.pointlion.sys.mvc.mobile.notice;
 
 import com.jfinal.aop.Clear;
 import com.jfinal.kit.StrKit;
-import com.pointlion.sys.mvc.admin.notice.OaNotice;
-import com.pointlion.sys.mvc.common.base.BaseController;;
+import com.pointlion.sys.mvc.common.base.BaseController;
+import com.pointlion.sys.mvc.common.model.OaNotice;;
 
 /***
  * 通知公告控制器（手机端）
