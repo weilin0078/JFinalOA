@@ -19,12 +19,18 @@ import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.template.Engine;
 import com.pointlion.sys.handler.GlobalHandler;
+import com.pointlion.sys.mobile.bumph.MobileBumphController;
+import com.pointlion.sys.mobile.login.MobileLoginController;
+import com.pointlion.sys.mobile.notice.MobileNoticeController;
+import com.pointlion.sys.mobile.user.MobileUserController;
 import com.pointlion.sys.mvc.base.model._MappingKit;
+import com.pointlion.sys.mvc.bumph.BumphController;
 import com.pointlion.sys.mvc.chat.ChatController;
 import com.pointlion.sys.mvc.cstmsetting.CustomSettingController;
 import com.pointlion.sys.mvc.home.HomeController;
 import com.pointlion.sys.mvc.login.LoginController;
 import com.pointlion.sys.mvc.menu.MenuController;
+import com.pointlion.sys.mvc.notice.NoticeController;
 import com.pointlion.sys.mvc.org.OrgController;
 import com.pointlion.sys.mvc.role.RoleController;
 import com.pointlion.sys.mvc.user.UserController;
@@ -133,13 +139,22 @@ public class MainConfig extends JFinalConfig {
 		me.add("/admin/customsetting",CustomSettingController.class);//执行对象-功能
 		me.add("/admin/model",ModelController.class);//工作流-模型
 		me.add("/admin/workflow",WorkFlowController.class);//工作流
+		//在线办公
+		me.add("/admin/bumph",BumphController.class);//公文管理---内部发文，收文转发
+		me.add("/admin/notice",NoticeController.class);//通知公告
 		//流程在线编辑器和流程跟踪所用路由
 		me.add("/admin/process-instance/highlights",ProcessInstanceHighlightsResource.class);//modeler
 		me.add("/admin/process-instance/diagram-layout",ProcessInstanceDiagramLayoutResource.class);//modeler
 		me.add("/admin/process-definition/diagram-layout",ProcessDefinitionDiagramLayoutResource.class);//modeler
-		me.add("/admin/modelEditor/save",ModelSaveRestResource.class);
+		me.add("/admin/model/save",ModelSaveRestResource.class);
 		me.add("/admin/editor/stencilset",StencilsetRestResource.class);
-		me.add("/admin/modelEditor/json",ModelEditorJsonRestResource.class);
+		me.add("/admin/model/json",ModelEditorJsonRestResource.class);
+		
+		//手机端接口
+		me.add("/mobile/notice",MobileNoticeController.class);
+		me.add("/mobile/user",MobileUserController.class);
+		me.add("/mobile/bumph",MobileBumphController.class);
+		me.add("/mobile/login",MobileLoginController.class);
 	}
 	
 	@Override

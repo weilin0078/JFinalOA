@@ -7,11 +7,14 @@ package com.pointlion.sys.mvc.home;
 
 import java.util.List;
 
+import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.sys.mvc.base.BaseController;
+import com.pointlion.sys.mvc.bumph.BumphService;
 import com.pointlion.sys.mvc.chat.SysFriend;
 import com.pointlion.sys.mvc.cstmsetting.SysCustomSetting;
 import com.pointlion.sys.mvc.login.SessionUtil;
 import com.pointlion.sys.mvc.menu.SysMenu;
+import com.pointlion.sys.mvc.notice.NoticeService;
 import com.pointlion.sys.mvc.role.SysRole;
 import com.pointlion.sys.mvc.user.SysUser;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
@@ -21,6 +24,8 @@ import com.pointlion.sys.plugin.shiro.ext.SimpleUser;
  * 首页控制器
  */
 public class HomeController extends BaseController {
+	static BumphService bumphService = new BumphService();
+	static NoticeService noticeService = new NoticeService();
 	/***
 	 * 登陆成功获取首页
 	 */
@@ -40,6 +45,11 @@ public class HomeController extends BaseController {
     	setAttr("friends", friends);//我的好友
     	setAttr("userName", user.getName());//我的姓名
     	setAttr("userEmail", user.getEmail());//我的邮箱
+    	//内部发文待办
+    	List<Record> BumphList = bumphService.getToDoListByKey(username);
+    	setAttr("BumphList", BumphList);
+    	//获取首页通知公告
+    	setAttr("NoticeList",noticeService.getMyNotice(user.getId()));
     	//查询所有有权限的菜单
     	List<SysMenu> mlist = SysRole.dao.getRoleAuthByUserid(u.getId(), "1","#root");//规定只有四级菜单 在这里暂定为A,B,C,D
     	for(SysMenu a : mlist){
