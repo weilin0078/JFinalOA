@@ -1,6 +1,6 @@
 package com.pointlion.sys.mobile.user;
 
-import com.pointlion.sys.mvc.user.SysUserService;
+import com.pointlion.sys.mvc.admin.user.SysUserService;
 
 
 public class MobileUserService extends SysUserService{

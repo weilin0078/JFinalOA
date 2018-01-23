@@ -3,10 +3,10 @@ package com.pointlion.sys.mobile.bumph;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.pointlion.sys.mvc.bumph.BumphConstants;
-import com.pointlion.sys.mvc.bumph.BumphService;
-import com.pointlion.sys.mvc.bumph.OaBumph;
-import com.pointlion.sys.mvc.bumph.OaBumphOrg;
+import com.pointlion.sys.mvc.admin.bumph.BumphConstants;
+import com.pointlion.sys.mvc.admin.bumph.BumphService;
+import com.pointlion.sys.mvc.admin.bumph.OaBumph;
+import com.pointlion.sys.mvc.admin.bumph.OaBumphOrg;
 import com.pointlion.sys.tool.StringUtil;
 
 /***

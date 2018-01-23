@@ -6,22 +6,22 @@
 package com.pointlion.sys.mvc.base.model;
 
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
-import com.pointlion.sys.mvc.bumph.OaBumph;
-import com.pointlion.sys.mvc.bumph.OaBumphOrg;
-import com.pointlion.sys.mvc.bumph.OaBumphOrgUser;
-import com.pointlion.sys.mvc.chat.SysFriend;
-import com.pointlion.sys.mvc.cstmsetting.SysCustomSetting;
-import com.pointlion.sys.mvc.menu.SysMenu;
-import com.pointlion.sys.mvc.notice.OaNotice;
-import com.pointlion.sys.mvc.notice.OaNoticeUser;
-import com.pointlion.sys.mvc.org.SysOrg;
-import com.pointlion.sys.mvc.role.SysRole;
-import com.pointlion.sys.mvc.role.SysRoleAuth;
-import com.pointlion.sys.mvc.user.SysUser;
-import com.pointlion.sys.mvc.user.SysUserRole;
-import com.pointlion.sys.mvc.workflow.ActReProcdef;
-import com.pointlion.sys.mvc.workflow.model.ActReModel;
-import com.pointlion.sys.mvc.workflow.model.VTasklist;
+import com.pointlion.sys.mvc.admin.bumph.OaBumph;
+import com.pointlion.sys.mvc.admin.bumph.OaBumphOrg;
+import com.pointlion.sys.mvc.admin.bumph.OaBumphOrgUser;
+import com.pointlion.sys.mvc.admin.chat.SysFriend;
+import com.pointlion.sys.mvc.admin.cstmsetting.SysCustomSetting;
+import com.pointlion.sys.mvc.admin.menu.SysMenu;
+import com.pointlion.sys.mvc.admin.notice.OaNotice;
+import com.pointlion.sys.mvc.admin.notice.OaNoticeUser;
+import com.pointlion.sys.mvc.admin.org.SysOrg;
+import com.pointlion.sys.mvc.admin.role.SysRole;
+import com.pointlion.sys.mvc.admin.role.SysRoleAuth;
+import com.pointlion.sys.mvc.admin.user.SysUser;
+import com.pointlion.sys.mvc.admin.user.SysUserRole;
+import com.pointlion.sys.mvc.admin.workflow.ActReProcdef;
+import com.pointlion.sys.mvc.admin.workflow.model.ActReModel;
+import com.pointlion.sys.mvc.admin.workflow.model.VTasklist;
 
 
 public class _MappingKit {

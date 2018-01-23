@@ -1,6 +1,6 @@
 package com.pointlion.sys.mobile.notice;
 
-import com.pointlion.sys.mvc.notice.NoticeService;
+import com.pointlion.sys.mvc.admin.notice.NoticeService;
 
 /***
  * 手机端通知公告调用服务

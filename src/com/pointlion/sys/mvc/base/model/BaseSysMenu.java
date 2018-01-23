@@ -8,8 +8,8 @@ package com.pointlion.sys.mvc.base.model;
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Model;
+import com.pointlion.sys.mvc.admin.menu.SysMenu;
 import com.jfinal.plugin.activerecord.IBean;
-import com.pointlion.sys.mvc.menu.SysMenu;
 
 @SuppressWarnings("serial")
 public abstract class BaseSysMenu<M extends BaseSysMenu<M>> extends Model<M> implements IBean {
