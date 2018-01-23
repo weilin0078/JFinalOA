@@ -153,7 +153,7 @@
 				$(document).on('pjax:end', function () {
 					history.replaceState({},"",ctx+"/admin/home");
 	        	});
-				$.pjax({'url': url, container: '#content-container'});
+				$.pjax({'url': url, container: '#content-container',timeout:999999});
 			}
 			//初始化高度
 			function initFullHeight(){
