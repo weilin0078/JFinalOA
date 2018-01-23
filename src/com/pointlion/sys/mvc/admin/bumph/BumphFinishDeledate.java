@@ -4,6 +4,7 @@ import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
 import org.activiti.engine.runtime.ProcessInstance;
 
+import com.pointlion.sys.mvc.common.model.OaBumph;
 import com.pointlion.sys.plugin.activiti.ActivitiPlugin;
 
 /***

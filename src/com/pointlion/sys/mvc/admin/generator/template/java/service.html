@@ -1,0 +1,55 @@
+package #(package);
+
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Page;
+import com.demo.common.model.#(className);
+
+/**
+ * #(className) 管理	
+ * 描述：
+ */
+public class #(className)Service {
+
+	//private static final Log log = Log.getLog(#(className)Service.class);
+	
+	public static final #(className)Service me = new #(className)Service();
+	private final #(className) dao = new #(className)().dao();
+	
+	
+	/**
+	* 列表-分页
+	*/
+	public Page<#(className)> paginate(int pageNumber, int pageSize) {
+		return dao.paginate(pageNumber, pageSize, "SELECT * ", "FROM #(tableName)");
+	}
+	
+	/**
+	* 保存
+	*/
+	public void save(#(className) #(classNameSmall)) {
+		#(classNameSmall).save();
+	}
+	
+	/**
+	* 更新
+	*/
+	public void update(#(className) #(classNameSmall)) {
+		#(classNameSmall).update();
+	}
+	
+	/**
+	* 查询
+	*/
+	public #(className) findById(int #(classNameSmall)Id) {
+		return dao.findFirst("select * from #(tableName) where id=?", #(classNameSmall)Id);
+	}
+	
+	/**
+	* 删除
+	*/
+	public void delete(int #(classNameSmall)Id) {
+		Db.update("delete from #(tableName) where id=?", #(classNameSmall)Id);
+	}
+	
+	
+}

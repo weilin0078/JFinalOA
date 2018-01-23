@@ -7,9 +7,9 @@ package com.pointlion.sys.mvc.mobile.bumph;
 
 import com.jfinal.aop.Clear;
 import com.jfinal.kit.StrKit;
-import com.pointlion.sys.mvc.admin.bumph.OaBumph;
-import com.pointlion.sys.mvc.admin.user.SysUser;
-import com.pointlion.sys.mvc.common.base.BaseController;;
+import com.pointlion.sys.mvc.common.base.BaseController;
+import com.pointlion.sys.mvc.common.model.OaBumph;
+import com.pointlion.sys.mvc.common.model.SysUser;;
 
 /***
  * 通知公告控制器（手机端）

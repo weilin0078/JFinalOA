@@ -6,7 +6,9 @@ import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.pointlion.sys.mvc.admin.user.SysUser;
+import com.pointlion.sys.mvc.common.model.OaNotice;
+import com.pointlion.sys.mvc.common.model.OaNoticeUser;
+import com.pointlion.sys.mvc.common.model.SysUser;
 import com.pointlion.sys.mvc.common.utils.DateUtil;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 

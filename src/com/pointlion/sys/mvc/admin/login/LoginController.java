@@ -17,9 +17,9 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ThreadContext;
 
 import com.jfinal.aop.Before;
-import com.pointlion.sys.mvc.admin.cstmsetting.SysCustomSetting;
-import com.pointlion.sys.mvc.admin.user.SysUser;
 import com.pointlion.sys.mvc.common.base.BaseController;
+import com.pointlion.sys.mvc.common.model.SysCustomSetting;
+import com.pointlion.sys.mvc.common.model.SysUser;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
 import com.pointlion.sys.plugin.shiro.ext.CaptchaFormAuthenticationInterceptor;
 import com.pointlion.sys.plugin.shiro.ext.CaptchaRender;

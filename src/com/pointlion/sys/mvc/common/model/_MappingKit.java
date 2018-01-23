@@ -6,22 +6,7 @@
 package com.pointlion.sys.mvc.common.model;
 
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
-import com.pointlion.sys.mvc.admin.bumph.OaBumph;
-import com.pointlion.sys.mvc.admin.bumph.OaBumphOrg;
-import com.pointlion.sys.mvc.admin.bumph.OaBumphOrgUser;
-import com.pointlion.sys.mvc.admin.chat.SysFriend;
-import com.pointlion.sys.mvc.admin.cstmsetting.SysCustomSetting;
-import com.pointlion.sys.mvc.admin.menu.SysMenu;
-import com.pointlion.sys.mvc.admin.notice.OaNotice;
-import com.pointlion.sys.mvc.admin.notice.OaNoticeUser;
-import com.pointlion.sys.mvc.admin.org.SysOrg;
-import com.pointlion.sys.mvc.admin.role.SysRole;
-import com.pointlion.sys.mvc.admin.role.SysRoleAuth;
-import com.pointlion.sys.mvc.admin.user.SysUser;
-import com.pointlion.sys.mvc.admin.user.SysUserRole;
 import com.pointlion.sys.mvc.admin.workflow.ActReProcdef;
-import com.pointlion.sys.mvc.admin.workflow.model.ActReModel;
-import com.pointlion.sys.mvc.admin.workflow.model.VTasklist;
 
 
 public class _MappingKit {

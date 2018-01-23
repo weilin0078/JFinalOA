@@ -2,6 +2,8 @@ package com.pointlion.sys.mvc.admin.user;
 
 import java.util.List;
 
+import com.pointlion.sys.mvc.common.model.SysUser;
+
 
 public class SysUserService {
 	public static final SysUserService me = new SysUserService();

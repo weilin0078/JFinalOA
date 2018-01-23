@@ -12,6 +12,8 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
 import com.pointlion.sys.interceptor.MainPageTitleInterceptor;
 import com.pointlion.sys.mvc.common.base.BaseController;
+import com.pointlion.sys.mvc.common.model.SysRole;
+import com.pointlion.sys.mvc.common.model.SysRoleAuth;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 
 /**
