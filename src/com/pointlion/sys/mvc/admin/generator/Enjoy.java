@@ -22,7 +22,7 @@ public class Enjoy {
      * @param filePath          输出目录
      * @return 
      */
-    public boolean render(String templateFileName, Kv kv, StringBuilder filePath)  {
+    public boolean render(String templateFileName, Kv kv, String filePath)  {
         BufferedWriter output = null;
         try {
             String baseTemplatePath = new StringBuilder(PathKit.getRootClassPath())
