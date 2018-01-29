@@ -155,6 +155,16 @@
 	        	});
 				$.pjax({'url': url, container: '#content-container',timeout:999999});
 			}
+			//PJax-可传递容器
+			function doPjaxC(url,container){
+				$(document).on('pjax:start', function () {
+					history.replaceState({},"",ctx+"/admin/home");
+		        });
+				$(document).on('pjax:end', function () {
+					history.replaceState({},"",ctx+"/admin/home");
+	        	});
+				$.pjax({'url': url, container: container,timeout:999999});
+			}
 			//初始化高度
 			function initFullHeight(){
 				var clientW = document.body.clientHeight-160;

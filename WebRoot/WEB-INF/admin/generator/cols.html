@@ -1,0 +1,12 @@
+#for(c:cols)
+	<tr>
+		  <td style="text-align: center;">
+		  		#(c.column_name)
+		  </td>
+		  <td style="text-align: center;"><input type="checkbox" value="#(c.column_name)" name="ifShowOnCol"/></td>
+		  <td style="text-align: center;"><input type="checkbox" value="#(c.column_name)" name="ifUserForQuery"/></td>
+		  <td style="text-align: center;">#(c.data_type)</td>
+		  <td style="text-align: center;">#(c.character_maximum_length)</td>
+		  <td style="text-align: center;">#(c.column_comment)</td>
+	</tr>
+#end 

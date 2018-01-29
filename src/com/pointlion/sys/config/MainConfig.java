@@ -22,6 +22,7 @@ import com.pointlion.sys.handler.GlobalHandler;
 import com.pointlion.sys.mvc.admin.bumph.BumphController;
 import com.pointlion.sys.mvc.admin.chat.ChatController;
 import com.pointlion.sys.mvc.admin.cstmsetting.CustomSettingController;
+import com.pointlion.sys.mvc.admin.generator.GeneratorController;
 import com.pointlion.sys.mvc.admin.home.HomeController;
 import com.pointlion.sys.mvc.admin.login.LoginController;
 import com.pointlion.sys.mvc.admin.menu.MenuController;
@@ -139,6 +140,8 @@ public class MainConfig extends JFinalConfig {
 		me.add("/admin/customsetting",CustomSettingController.class);//执行对象-功能
 		me.add("/admin/model",ModelController.class);//工作流-模型
 		me.add("/admin/workflow",WorkFlowController.class);//工作流
+		//代码生成器
+		me.add("/admin/generator",GeneratorController.class);//工作流
 		//在线办公
 		me.add("/admin/bumph",BumphController.class);//公文管理---内部发文，收文转发
 		me.add("/admin/notice",NoticeController.class);//通知公告
