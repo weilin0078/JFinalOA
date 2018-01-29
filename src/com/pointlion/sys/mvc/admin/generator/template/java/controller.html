@@ -1,15 +1,7 @@
-/**
- * @author Lion
- * @date 2017年1月24日 下午12:02:35
- * @qq 439635374
- */
 package #(package);
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.shiro.authc.credential.DefaultPasswordService;
-import org.apache.shiro.authc.credential.PasswordService;
 
 import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
@@ -17,7 +9,6 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.sys.interceptor.MainPageTitleInterceptor;
 import com.pointlion.sys.mvc.common.base.BaseController;
-import com.pointlion.sys.mvc.common.model.SysOrg;
 import #(package).SysUser;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 
@@ -36,8 +27,7 @@ public class #(className)Controller extends BaseController {
     public void listData(){
     	String curr = getPara("pageNumber");
     	String pageSize = getPara("pageSize");
-    	String orgid = getPara("orgid");
-    	Page<Record> page = #(className).dao.getPage(Integer.valueOf(curr),Integer.valueOf(pageSize),orgid);
+    	Page<Record> page = #(className).dao.getPage(Integer.valueOf(curr),Integer.valueOf(pageSize));
     	renderPage(page.getList(),"",page.getTotalRow());
     }
     /***

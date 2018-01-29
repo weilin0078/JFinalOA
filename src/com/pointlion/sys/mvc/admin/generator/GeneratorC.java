@@ -17,21 +17,17 @@ public class GeneratorC {
 
     
     public static final GeneratorC me  = new GeneratorC();
+    public static final GeneratorService service = GeneratorService.me;
     protected final Enjoy enjoy    = new Enjoy();
     
     protected Kv tablemetaMap       = null;
     protected String packageBase    = "com.pointlion.sys.mvc.admin.generator.generated";
     protected String srcFolder      = "src";
-    protected String basePath       = "";
     protected final static String workSpacePath = PropKit.get("workSpacepath");//工作空间路径
     
     /************固有属性START******************/
     public void setPackageBase(String packageBase){
         this.packageBase = packageBase;
-    }
-    
-    public void setBasePath(String basePath){
-        this.basePath = basePath;
     }
     
     public void setSrcFolder(String srcFolder){
@@ -57,7 +53,8 @@ public class GeneratorC {
     public void javaRender(String tableName) {
         //刷新 映射对象
 //        _JFinalDemoGenerator.main(null);
-//        controller(tableName);
+        controller(tableName);
+        model(tableName);
     	generatorAllModel();
 //        validator(tableName);
 //        service(tableName);
@@ -75,9 +72,8 @@ public class GeneratorC {
         Kv kv = new Kv();
         kv.set("package", packages);
         kv.set("className", className);
-        kv.set("classNameSmall", toClassNameSmall(className));
-        kv.set("classNameCamel", toClassNameCamel(className));
-        kv.set("basePath", basePath );
+        kv.set("classNameSmall", toNameSmall(className));
+        kv.set("classNameCamel", toNameCamel(className));
         String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Controller.java";
         enjoy.render("/java/controller.html", kv, filePath);
     }
@@ -91,11 +87,11 @@ public class GeneratorC {
         Kv kv = new Kv();
         kv.set("package", packages);
         kv.set("className", className);
-        kv.set("classNameSmall", toClassNameSmall(className));
-        kv.set("classNameCamel", toClassNameCamel(className));
-        kv.set("basePath", basePath );
-        String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Controller.java";
-        enjoy.render("/java/controller.html", kv, filePath);
+        kv.set("classNameSmall", toNameSmall(className));
+        kv.set("classNameCamel", toNameCamel(className));
+        kv.set("tableName", tableName);
+        String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+".java";
+        enjoy.render("/java/model.html", kv, filePath);
     }
     
     /**
@@ -108,8 +104,8 @@ public class GeneratorC {
         Kv kv = new Kv();
         kv.set("package", packages);
         kv.set("className", className);
-        kv.set("classNameSmall", toClassNameSmall(className));
-        kv.set("classNameCamel", toClassNameCamel(className));
+        kv.set("classNameSmall", toNameSmall(className));
+        kv.set("classNameCamel", toNameCamel(className));
         String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Validator.java";
         enjoy.render("/java/validator.html", kv,filePath);
     }
@@ -125,8 +121,8 @@ public class GeneratorC {
         Kv kv = new Kv();
         kv.set("package", packages);
         kv.set("className", className);
-        kv.set("classNameSmall", toClassNameSmall(className));
-        kv.set("classNameCamel", toClassNameCamel(className));
+        kv.set("classNameSmall", toNameSmall(className));
+        kv.set("classNameCamel", toNameCamel(className));
         kv.set("tableName", tableName);
         String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Service.java";
         enjoy.render("/java/service.html", kv, filePath);
@@ -142,13 +138,11 @@ public class GeneratorC {
     }
     public void htmlList(String className, TableMeta tablemeta){
         String packages = toPackages(className);
-        String classNameSmall = toClassNameCamel(className);
-        String basePathUrl = basePath.replace('.', '/');
+        String classNameSmall = toNameCamel(className);
         Kv kv = new Kv();
         kv.set("package", packages);
         kv.set("className", className);
         kv.set("classNameSmall", classNameSmall);
-        kv.set("basePath", basePathUrl );
         String filePath = System.getProperty("user.dir")+"/"+srcFolder+"/"+packages.replace(".", "/")+className+"Service.java";
         enjoy.render("/html/list.html", kv, filePath);
     }
@@ -175,7 +169,7 @@ public class GeneratorC {
      * @param className
      * @return
      */
-    private String toClassNameCamel(String className) {
+    private String toNameCamel(String className) {
         return new StringBuffer(className.substring(0, 1).toLowerCase()).append(className.substring(1)).toString();
     }
     /***
@@ -183,7 +177,7 @@ public class GeneratorC {
      * @param className
      * @return
      */
-    private String toClassNameSmall(String className) {
+    private String toNameSmall(String className) {
         return new StringBuffer(className.substring(0, 1).toLowerCase()).append(className.substring(1)).toString();
     }
     /***
@@ -248,7 +242,7 @@ public class GeneratorC {
 		// 设置是否在 Model 中生成 dao 对象
 		generator.setGenerateDaoInModel(true);
 		// 设置是否生成链式 setter 方法
-		generator.setGenerateChainSetter(true);
+		generator.setGenerateChainSetter(false);
 		// 设置是否生成字典文件
 		generator.setGenerateDataDictionary(false);
 		// 设置需要被移除的表名前缀用于生成modelName。例如表名 "osc_user"，移除前缀 "osc_"后生成的model名为 "User"而非 OscUser
