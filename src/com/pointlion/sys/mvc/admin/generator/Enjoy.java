@@ -28,7 +28,7 @@ public class Enjoy {
             String baseTemplatePath = new StringBuilder(PathKit.getRootClassPath())
             .append("/")
             .append(PathKit.getPackagePath(this))
-            .append("/tpl")
+            .append("/template")
             .toString();
             
             File file = new File(filePath.toString());

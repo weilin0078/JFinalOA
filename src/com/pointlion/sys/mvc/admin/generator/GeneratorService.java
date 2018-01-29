@@ -5,6 +5,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import com.jfinal.kit.Kv;
+import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.generator.DataDictionaryGenerator;
@@ -18,10 +19,10 @@ public class GeneratorService {
     protected final Enjoy enjoy    = new Enjoy();
     
     protected Kv tablemetaMap       = null;
-    protected String packageBase    = "com.momathink";
+    protected String packageBase    = "com.pointlion.sys.mvc.admin.generator.generated";
     protected String srcFolder      = "src";
-    protected String viewFolder     = "_view";
     protected String basePath       = "";
+    private String workSpacePath = PropKit.get("workSpacepath");//工作空间路径
     
     /************固有属性START******************/
     public void setPackageBase(String packageBase){
@@ -36,9 +37,6 @@ public class GeneratorService {
         this.srcFolder = srcFolder;
     }
     
-    public void setViewFolder(String viewFolder){
-        this.viewFolder = viewFolder;
-    }
     /************固有属性END******************/
     
     
@@ -69,7 +67,8 @@ public class GeneratorService {
      * 生成Controller
      * @param className         类名称
      */
-    public void controller(String className){
+    public void controller(String tableName){
+    	String className = tableNameToClassName(tableName);
         String packages = toPackages(className);
         String classNameSmall = toClassNameCamel(className);
         Kv kv = new Kv();
@@ -77,7 +76,7 @@ public class GeneratorService {
         kv.set("className", className);
         kv.set("classNameSmall", classNameSmall);
         kv.set("basePath", basePath );
-        String filePath = System.getProperty("user.dir")+"/"+srcFolder+"/"+packages.replace(".", "/")+className+"Controller.java";
+        String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Controller.java";
         enjoy.render("/java/controller.html", kv, filePath);
     }
     
@@ -85,14 +84,15 @@ public class GeneratorService {
      * 生成validator
      * @param className         类名称
      */
-    public void validator(String className){
+    public void validator(String tableName){
+    	String className = tableNameToClassName(tableName);
         String packages = toPackages(className);
         String classNameSmall = toClassNameCamel(className);
         Kv kv = new Kv();
         kv.set("package", packages);
         kv.set("className", className);
         kv.set("classNameSmall", classNameSmall);
-        String filePath = System.getProperty("user.dir")+"/"+srcFolder+"/"+packages.replace(".", "/")+className+"Validator.java";
+        String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Validator.java";
         enjoy.render("/java/validator.html", kv,filePath);
     }
     
@@ -110,7 +110,7 @@ public class GeneratorService {
         kv.set("className", className);
         kv.set("classNameSmall", classNameSmall);
         kv.set("tableName", tableName);
-        String filePath = System.getProperty("user.dir")+"/"+srcFolder+"/"+packages.replace(".", "/")+className+"Service.java";
+        String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Service.java";
         enjoy.render("/java/service.html", kv, filePath);
     }
     
