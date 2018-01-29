@@ -9,20 +9,21 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.generator.DataDictionaryGenerator;
+import com.jfinal.plugin.activerecord.generator.Generator;
 import com.jfinal.plugin.activerecord.generator.MetaBuilder;
 import com.jfinal.plugin.activerecord.generator.TableMeta;
 
-public class Generator {
+public class GeneratorC {
 
     
-    public static final Generator me  = new Generator();
+    public static final GeneratorC me  = new GeneratorC();
     protected final Enjoy enjoy    = new Enjoy();
     
     protected Kv tablemetaMap       = null;
     protected String packageBase    = "com.pointlion.sys.mvc.admin.generator.generated";
     protected String srcFolder      = "src";
     protected String basePath       = "";
-    private String workSpacePath = PropKit.get("workSpacepath");//工作空间路径
+    protected final static String workSpacePath = PropKit.get("workSpacepath");//工作空间路径
     
     /************固有属性START******************/
     public void setPackageBase(String packageBase){
@@ -56,18 +57,35 @@ public class Generator {
     public void javaRender(String tableName) {
         //刷新 映射对象
 //        _JFinalDemoGenerator.main(null);
-        controller(tableName);
-        validator(tableName);
-        service(tableName);
+//        controller(tableName);
+    	generatorAllModel();
+//        validator(tableName);
+//        service(tableName);
     }
     /*************脚手架END******************/
    
     
     /**
      * 生成Controller
-     * @param className         类名称
+     * @param tableName         表名称
      */
     public void controller(String tableName){
+    	String className = tableNameToClassName(tableName);
+        String packages = toPackages(className);
+        Kv kv = new Kv();
+        kv.set("package", packages);
+        kv.set("className", className);
+        kv.set("classNameSmall", toClassNameSmall(className));
+        kv.set("classNameCamel", toClassNameCamel(className));
+        kv.set("basePath", basePath );
+        String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Controller.java";
+        enjoy.render("/java/controller.html", kv, filePath);
+    }
+    /**
+     * 生成Model
+     * @param tableName         表名称
+     */
+    public void model(String tableName){
     	String className = tableNameToClassName(tableName);
         String packages = toPackages(className);
         Kv kv = new Kv();
@@ -82,7 +100,7 @@ public class Generator {
     
     /**
      * 生成validator
-     * @param className         类名称
+     * @param tableName         表名称
      */
     public void validator(String tableName){
     	String className = tableNameToClassName(tableName);
@@ -174,8 +192,7 @@ public class Generator {
      * @return
      */
     private String toPackages(String className) {
-        return new StringBuffer(packageBase).append(".").append(basePath)
-                .append(".").append(className.toLowerCase()).toString();
+    	return packageBase+"."+className.toLowerCase();
     }
     
     
@@ -208,7 +225,37 @@ public class Generator {
         return (TableMeta) tablemetaMap.get(tableName);
     }
     /****************工具类END*************************/
-    
+
+    public void generatorAllModel(){
+    	String modelPackageName = packageBase+".model";
+    	// base model 所使用的包名
+		String baseModelPackageName = modelPackageName+".base";
+		// base model 文件保存路径
+		String baseModelOutputDir = GeneratorC.workSpacePath + "/src/"+baseModelPackageName.replace(".", "/");
+		
+		// model 所使用的包名 (MappingKit 默认使用的包名)
+		// model 文件保存路径 (MappingKit 与 DataDictionary 文件默认保存路径)
+		String modelOutputDir = baseModelOutputDir + "/..";
+		
+		// 创建生成器
+		Generator generator = new Generator(DbKit.getConfig().getDataSource(), baseModelPackageName, baseModelOutputDir, modelPackageName, modelOutputDir);
+		// 设置是否生成链式 setter 方法
+		generator.setGenerateChainSetter(false);
+		// 添加不需要生成的表名
+		generator.addExcludedTable("v_tasklist");
+		generator.addExcludedTable("v_tasklist_candidate");
+		generator.addExcludedTable("v_tasklist_candidate_d");
+		// 设置是否在 Model 中生成 dao 对象
+		generator.setGenerateDaoInModel(true);
+		// 设置是否生成链式 setter 方法
+		generator.setGenerateChainSetter(true);
+		// 设置是否生成字典文件
+		generator.setGenerateDataDictionary(false);
+		// 设置需要被移除的表名前缀用于生成modelName。例如表名 "osc_user"，移除前缀 "osc_"后生成的model名为 "User"而非 OscUser
+		generator.setRemovedTableNamePrefixes("t_");
+		// 生成
+		generator.generate();
+    }
     
     public static void main(String[] args) {
 		System.out.println(me.tableNameToClassName("sys_user"));

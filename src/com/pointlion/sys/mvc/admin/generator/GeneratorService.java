@@ -8,7 +8,7 @@ import com.jfinal.plugin.activerecord.Record;
 
 public class GeneratorService {
 	public static final GeneratorService me  = new GeneratorService();
-	public static final Generator generator  = Generator.me;
+	public static final GeneratorC generator  = GeneratorC.me;
 	/***
 	 * 自动生成
 	 */

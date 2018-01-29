@@ -30,21 +30,17 @@ public class Enjoy {
             .append(PathKit.getPackagePath(this))
             .append("/template")
             .toString();
-            
             File file = new File(filePath.toString());
-            
             File path = new File(file.getParent());
             if ( ! path.exists() ) {
                 path.mkdirs();
             }
             output = new BufferedWriter(new FileWriter(file));
-            
             Engine.use()
             .setBaseTemplatePath(baseTemplatePath)
             //.setSourceFactory(new ClassPathSourceFactory())
             .getTemplate(templateFileName)
             .render(kv, output);
-            
             return true;
         } catch (IOException e) {
             e.printStackTrace();
