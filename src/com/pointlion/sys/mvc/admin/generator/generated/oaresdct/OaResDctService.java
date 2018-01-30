@@ -7,7 +7,6 @@ import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.pointlion.sys.mvc.common.model.OaResDct;
 
-@SuppressWarnings("serial")
 public class OaResDctService{
 	public static final OaResDctService me = new OaResDctService();
 	

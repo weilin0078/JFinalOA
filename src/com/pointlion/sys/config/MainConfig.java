@@ -152,7 +152,6 @@ public class MainConfig extends JFinalConfig {
 		me.add("/admin/modelEditor/save",ModelSaveRestResource.class);
 		me.add("/admin/editor/stencilset",StencilsetRestResource.class);
 		me.add("/admin/modelEditor/json",ModelEditorJsonRestResource.class);
-		
 		//手机端接口
 		me.add("/mobile/notice",MobileNoticeController.class);
 		me.add("/mobile/user",MobileUserController.class);
