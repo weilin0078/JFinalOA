@@ -149,9 +149,9 @@ public class MainConfig extends JFinalConfig {
 		me.add("/admin/process-instance/highlights",ProcessInstanceHighlightsResource.class);//modeler
 		me.add("/admin/process-instance/diagram-layout",ProcessInstanceDiagramLayoutResource.class);//modeler
 		me.add("/admin/process-definition/diagram-layout",ProcessDefinitionDiagramLayoutResource.class);//modeler
-		me.add("/admin/model/save",ModelSaveRestResource.class);
+		me.add("/admin/modelEditor/save",ModelSaveRestResource.class);
 		me.add("/admin/editor/stencilset",StencilsetRestResource.class);
-		me.add("/admin/model/json",ModelEditorJsonRestResource.class);
+		me.add("/admin/modelEditor/json",ModelEditorJsonRestResource.class);
 		
 		//手机端接口
 		me.add("/mobile/notice",MobileNoticeController.class);

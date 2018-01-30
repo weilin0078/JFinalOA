@@ -5,7 +5,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.pointlion.sys.mvc.common.model.#(className)
+import com.pointlion.sys.mvc.common.model.#(className);
 
 @SuppressWarnings("serial")
 public class #(className)Service{
@@ -34,7 +34,7 @@ public class #(className)Service{
 	public void deleteByIds(String ids){
     	String idarr[] = ids.split(",");
     	for(String id : idarr){
-    		#(className) o = #(className).dao.getById(id);
+    		#(className) o = me.getById(id);
     		o.delete();
     	}
 	}

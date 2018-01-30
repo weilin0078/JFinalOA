@@ -1,4 +1,4 @@
-package #(package);
+package com.pointlion.sys.mvc.admin.generator.generated.oaresdct;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,17 +9,17 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.sys.interceptor.MainPageTitleInterceptor;
 import com.pointlion.sys.mvc.common.base.BaseController;
-import com.pointlion.sys.mvc.common.model.#(className);
+import com.pointlion.sys.mvc.common.model.OaResDct;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 
 @Before(MainPageTitleInterceptor.class)
-public class #(className)Controller extends BaseController {
-	public static final #(className)Service service = #(className)Service.me;
+public class OaResDctController extends BaseController {
+	public static final OaResDctService service = OaResDctService.me;
 	/***
 	 * 列表页面
 	 */
 	public void getListPage(){
-    	render("/WEB-INF/admin/#(classNameSmall)/list.html");
+    	render("/WEB-INF/admin/oaResDct/list.html");
     }
 	/***
      * 获取分页数据
@@ -34,7 +34,7 @@ public class #(className)Controller extends BaseController {
      * 保存
      */
     public void save(){
-    	#(className) o = getModel(#(className).class);
+    	OaResDct o = getModel(OaResDct.class);
     	if(StrKit.notBlank(o.getId())){
     		o.update();
     	}else{
@@ -50,7 +50,7 @@ public class #(className)Controller extends BaseController {
     	//添加和修改
     	String id = getPara("id");
     	if(StrKit.notBlank(id)){//修改
-    		#(className) o = service.getById(id);
+    		OaResDct o = service.getById(id);
     		setAttr("o", o);
     	}
     	render("/WEB-INF/admin/user/edit.html");
