@@ -1,4 +1,4 @@
-package com.pointlion.sys.mvc.admin.generator.generated.oaresdct;
+package com.pointlion.sys.mvc.admin.resget;
 
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;

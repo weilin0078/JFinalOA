@@ -140,6 +140,7 @@ public class MainConfig extends JFinalConfig {
 		me.add("/admin/customsetting",CustomSettingController.class);//执行对象-功能
 		me.add("/admin/model",ModelController.class);//工作流-模型
 		me.add("/admin/workflow",WorkFlowController.class);//工作流
+		me.add("/admin/resGet",WorkFlowController.class);//工作流
 		//代码生成器
 		me.add("/admin/generator",GeneratorController.class);//工作流
 		//在线办公

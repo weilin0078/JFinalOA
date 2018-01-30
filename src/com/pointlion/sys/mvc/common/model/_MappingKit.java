@@ -33,6 +33,7 @@ public class _MappingKit {
 		arp.addMapping("v_tasklist", "TASKID", VTasklist.class);//任务--视图
 		arp.addMapping("sys_custom_setting", "id", SysCustomSetting.class);//自定义设置
 		arp.addMapping("oa_res_dct", "id", OaResDct.class);
+		arp.addMapping("oa_res_get", "id", OaResGet.class);
 	}
 }
 

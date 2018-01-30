@@ -12,6 +12,24 @@ import com.jfinal.plugin.activerecord.generator.DataDictionaryGenerator;
 import com.jfinal.plugin.activerecord.generator.Generator;
 import com.jfinal.plugin.activerecord.generator.MetaBuilder;
 import com.jfinal.plugin.activerecord.generator.TableMeta;
+import com.pointlion.sys.mvc.common.model.ActReModel;
+import com.pointlion.sys.mvc.common.model.ActReProcdef;
+import com.pointlion.sys.mvc.common.model.OaBumph;
+import com.pointlion.sys.mvc.common.model.OaBumphOrg;
+import com.pointlion.sys.mvc.common.model.OaBumphOrgUser;
+import com.pointlion.sys.mvc.common.model.OaNotice;
+import com.pointlion.sys.mvc.common.model.OaNoticeUser;
+import com.pointlion.sys.mvc.common.model.OaResDct;
+import com.pointlion.sys.mvc.common.model.OaResGet;
+import com.pointlion.sys.mvc.common.model.SysCustomSetting;
+import com.pointlion.sys.mvc.common.model.SysFriend;
+import com.pointlion.sys.mvc.common.model.SysMenu;
+import com.pointlion.sys.mvc.common.model.SysOrg;
+import com.pointlion.sys.mvc.common.model.SysRole;
+import com.pointlion.sys.mvc.common.model.SysRoleAuth;
+import com.pointlion.sys.mvc.common.model.SysUser;
+import com.pointlion.sys.mvc.common.model.SysUserRole;
+import com.pointlion.sys.mvc.common.model.VTasklist;
 
 public class GeneratorC {
 
@@ -238,6 +256,21 @@ public class GeneratorC {
 		// 设置是否生成链式 setter 方法
 		generator.setGenerateChainSetter(false);
 		// 添加不需要生成的表名
+		generator.addExcludedTable("sys_user");//用户
+		generator.addExcludedTable("sys_user_role");//用户角色
+		generator.addExcludedTable("sys_menu");//菜单
+		generator.addExcludedTable("sys_role");//角色
+		generator.addExcludedTable("sys_role_auth");//角色对应功能权限
+		generator.addExcludedTable("sys_org");//组织结构
+		generator.addExcludedTable("sys_friend");//用户好友
+		generator.addExcludedTable("oa_notice");
+		generator.addExcludedTable("oa_notice_user");
+		generator.addExcludedTable("oa_bumph");
+		generator.addExcludedTable("oa_bumph_org");
+		generator.addExcludedTable("oa_bumph_org_user");
+		generator.addExcludedTable("act_re_model");//流程模型
+		generator.addExcludedTable("act_re_procdef");
+		generator.addExcludedTable("sys_custom_setting");//自定义设置
 		generator.addExcludedTable("v_tasklist");
 		generator.addExcludedTable("v_tasklist_candidate");
 		generator.addExcludedTable("v_tasklist_candidate_d");
