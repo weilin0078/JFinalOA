@@ -57,11 +57,11 @@ public abstract class BaseOaResGet<M extends BaseOaResGet<M>> extends Model<M> i
 		return get("res_name");
 	}
 
-	public void setGetSum(java.lang.Integer getSum) {
+	public void setGetSum(java.lang.String getSum) {
 		set("get_sum", getSum);
 	}
 
-	public java.lang.Integer getGetSum() {
+	public java.lang.String getGetSum() {
 		return get("get_sum");
 	}
 

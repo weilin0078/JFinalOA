@@ -46,20 +46,50 @@
 	}
 	//进行代码生成
 	function doGenerate(){
-		var ifShowOnColArr = $("input[name='ifShowOnCol']:checked");
-		var ifShowOnColA = [];
-		var ifUserForQueryArr = $("input[name='ifUserForQuery']:checked");
-		var ifUserForQueryA = []; 
+		var ifShowOnColArr = $("input[name='ifShowOnCol']:checked");//是否显示在列
+		var ifShowOnColA = [];//是否显示在列字段
+		var ifShowOnColN = [];//是否显示在列字段注释-用来显示标题
+		
+		var ifUseForQueryArr = $("input[name='ifUseForQuery']:checked");//是否用来查询
+		var ifUseForQueryA = [];//是否用来查询
+		var ifUseForQueryN = [];//是否用来查询字段注释-用来显示标题
+		var vali = true;//校验
 		$.each(ifShowOnColArr,function(){
-			ifShowOnColA.push($(this).val());
-			ifUserForQueryA.push($(this).val());
+			var c = $(this).attr("data-comment");
+			if(c){
+				ifShowOnColA.push($(this).val());
+				ifShowOnColN.push(c);
+			}else{
+				vali = false;
+			}
 		});
-		var result = common_ajax.ajaxFunc("/admin/generator/doGenerate",{"tableName":$("#selectTable").val(),"ifUserForQuery":ifUserForQueryA.join(","),"ifShowOnCol":ifShowOnColA.join(",")}, "json", null);
-		if(result.success){
-			pointLion.alertMsg(result.message, "success" , "small" , function(){});
+		$.each(ifUseForQueryArr,function(){
+			var c = $(this).attr("data-comment");
+			if(c){
+				ifUseForQueryA.push($(this).val());
+				ifUseForQueryN.push(c)
+			}else{
+				vali = false;
+			}
+		});
+		if(vali){
+			var result = common_ajax.ajaxFunc("/admin/generator/doGenerate",{
+				"tableName":$("#selectTable").val(),
+				"ifShowOnColA":ifShowOnColA.join(","),
+				"ifShowOnColN":ifShowOnColN.join(","),
+				"ifUseForQueryA":ifUseForQueryA.join(","),
+				"ifUseForQueryN":ifUseForQueryN.join(",")
+			},
+			"json", null);
+			if(result.success){
+				pointLion.alertMsg(result.message, "success" , "small" , null);
+			}else{
+				pointLion.alertMsg(result.message,"danger","small",null);
+			}
 		}else{
-			pointLion.alertMsg(result.message,"danger","small",null);
+			pointLion.alertMsg("请补全表中注释信息！","danger","small",null);
 		}
+		
 	}
 	$(document).ready(function() {
 		$(".selectpicker").selectpicker({});

@@ -43,23 +43,23 @@ public class GeneratorC {
     /**
      * 生成手脚架代码
      */
-    public String allRender(String tableName,String ifShowOnCol,String ifUserForQuery) {
-        String result = me.javaRender(tableName);
-        result = result + me.htmlRender(tableName,ifShowOnCol,ifUserForQuery);
+    public String allRender(String tableName,HtmlGenerateBean b) {
+        String result = me.javaRender(tableName,b);
+        result = result + me.htmlRender(tableName,b);
         return result;
     }
     
     /**
      * java 代码生成
      * */
-    public String javaRender(String tableName) {
+    public String javaRender(String tableName,HtmlGenerateBean b) {
         String result = "";
-        if(controller(tableName)){
+        if(controller(tableName,b)){
         	result = result + "controller生成成功<br/>";
         }else{
         	result = result + "controller生成失败<br/>";
         }
-        if(service(tableName)){
+        if(service(tableName,b)){
         	result = result + "service生成成功<br/>";
         }else{
         	result = result + "service生成失败<br/>";
@@ -72,12 +72,17 @@ public class GeneratorC {
      * html 代码生成
      * @param tableName
      */
-    public String htmlRender(String tableName,String ifShowOnCol,String ifUserForQuery){
+    public String htmlRender(String tableName,HtmlGenerateBean b){
     	String result = "";
-        if(htmlList(tableName,ifShowOnCol,ifUserForQuery)){
-        	result = "html生成成功<br/>";
+        if(htmlList(tableName,b)){
+        	result = result + "html生成成功<br/>";
         }else{
-        	result = "html生成失败<br/>";
+        	result = result + "html生成失败<br/>";
+        }
+        if(htmlEdit(tableName,b)){
+        	result = result + "edit生成成功<br/>";
+        }else{
+        	result = result + "edit生成失败<br/>";
         }
         return result;
     }
@@ -88,15 +93,10 @@ public class GeneratorC {
      * 生成Controller
      * @param tableName         表名称
      */
-    public Boolean controller(String tableName){
+    public Boolean controller(String tableName,HtmlGenerateBean b){
     	String className = tableNameToClassName(tableName);
         String packages = toPackages(className);
-        Kv kv = new Kv();
-        kv.set("package", packages);
-        kv.set("className", className);
-        kv.set("classNameSmall", toNameSmall(className));
-        kv.set("classNameCamel", toNameCamel(className));
-        kv.set("pageFilePath",getPageFilePath(className));
+        Kv kv = getKv(className,b);
         String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Controller.java";
         return enjoy.render("/java/controller.html", kv, filePath);
     }
@@ -113,36 +113,44 @@ public class GeneratorC {
      * @param className         类名称
      * @param tableName         表名
      */
-    public Boolean service(String tableName){
+    public Boolean service(String tableName,HtmlGenerateBean b){
     	String className = tableNameToClassName(tableName);
-        String packages = toPackages(className);
-        Kv kv = new Kv();
-        kv.set("package", packages);
-        kv.set("className", className);
-        kv.set("classNameSmall", toNameSmall(className));
-        kv.set("classNameCamel", toNameCamel(className));
-        kv.set("tableName", tableName);
+    	String packages = toPackages(className);
+    	Kv kv = getKv(className,b);
         String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Service.java";
         return enjoy.render("/java/service.html", kv, filePath);
     }
     
-    public Boolean htmlList(String tableName,String ifShowOnCol,String ifUserForQuery){
+    public Boolean htmlList(String tableName,HtmlGenerateBean b){
     	String className = tableNameToClassName(tableName);
-        String packages = toPackages(className);
-        String classNameSmall = toNameCamel(className);
-        Kv kv = new Kv();
-        kv.set("package", packages);
-        kv.set("className", className);
-        kv.set("classNameSmall", classNameSmall);
-        kv.set("ifShowOnCol",ifShowOnCol.split(","));
-        kv.set("ifUserForQuery",ifUserForQuery.split(","));
+        Kv kv = getKv(className,b);
         String filePath = workSpacePath+sourceFolder+getPageFilePath(className)+"/list.html";
         return enjoy.render("/html/list.html", kv, filePath);
     }
     
+    public Boolean htmlEdit(String tableName,HtmlGenerateBean b){
+    	String className = tableNameToClassName(tableName);
+        Kv kv = getKv(className,b);
+        String filePath = workSpacePath+sourceFolder+getPageFilePath(className)+"/edit.html";
+        return enjoy.render("/html/edit.html", kv, filePath);
+    }
     
 
     /****************工具类START*************************/
+    private Kv getKv(String className,HtmlGenerateBean b){
+    	String packages = toPackages(className);
+    	Kv kv = new Kv();
+        kv.set("package", packages);
+        kv.set("className", className);
+        kv.set("classNameSmall", toNameSmall(className));
+        kv.set("classNameCamel", toNameCamel(className));
+        kv.set("parentPackageName", getParentPackageName(className));
+        kv.set("ifShowOnColA",b.getIfShowOnColA().split(","));
+        kv.set("ifShowOnColN",b.getIfShowOnColN().split(","));
+        kv.set("ifUseForQueryA",b.getIfUserForQueryA().split(","));
+        kv.set("ifUseForQueryN",b.getIfUserForQueryN().split(","));
+        return kv;
+    }
     /***
      * 表名转类名
      * @param tableName

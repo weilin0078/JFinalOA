@@ -12,8 +12,8 @@ public class GeneratorService {
 	/***
 	 * 自动生成
 	 */
-	public String doGenerator(String tableName,String ifShowOnCol,String ifUserForQuery){
-		return generator.allRender(tableName,ifShowOnCol,ifUserForQuery);
+	public String doGenerator(String tableName,HtmlGenerateBean b){
+		return generator.allRender(tableName,b);
 	}
 	
 	/***

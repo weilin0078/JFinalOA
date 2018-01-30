@@ -1,0 +1,103 @@
+	#include("/common/include/pageTitleBread.html")
+	<div id="page-content">
+			<div class="col-lg-12">
+		        <div class="panel">
+		            <div class="panel-heading">
+		                <h3 class="panel-title">添加</h3>
+		            </div>
+		            <form id="editForm" class="panel-body form-horizontal form-padding">
+						<input type="hidden"  name="oaResGet.id" class="form-control" value="">
+			                <div class="form-group">
+			                    <label class="col-md-3 control-label" for="demo-text-input">主键</label>
+			                    <div class="col-md-9">
+			                        <input type="text"  name="oaResGet.id" class="form-control"  value="">
+			                        <small class="help-block">请输入主键</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-3 control-label" for="demo-text-input">标题</label>
+			                    <div class="col-md-9">
+			                        <input type="text"  name="oaResGet.title" class="form-control"  value="">
+			                        <small class="help-block">请输入标题</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-3 control-label" for="demo-text-input">领用人</label>
+			                    <div class="col-md-9">
+			                        <input type="text"  name="oaResGet.get_user_id" class="form-control"  value="">
+			                        <small class="help-block">请输入领用人</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-3 control-label" for="demo-text-input">领用人名称</label>
+			                    <div class="col-md-9">
+			                        <input type="text"  name="oaResGet.get_user_name" class="form-control"  value="">
+			                        <small class="help-block">请输入领用人名称</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-3 control-label" for="demo-text-input">物品id</label>
+			                    <div class="col-md-9">
+			                        <input type="text"  name="oaResGet.res_id" class="form-control"  value="">
+			                        <small class="help-block">请输入物品id</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-3 control-label" for="demo-text-input">物品名称</label>
+			                    <div class="col-md-9">
+			                        <input type="text"  name="oaResGet.res_name" class="form-control"  value="">
+			                        <small class="help-block">请输入物品名称</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-3 control-label" for="demo-text-input">领用数量</label>
+			                    <div class="col-md-9">
+			                        <input type="text"  name="oaResGet.get_sum" class="form-control"  value="">
+			                        <small class="help-block">请输入领用数量</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-3 control-label" for="demo-text-input">领用时间</label>
+			                    <div class="col-md-9">
+			                        <input type="text"  name="oaResGet.get_time" class="form-control"  value="">
+			                        <small class="help-block">请输入领用时间</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-3 control-label" for="demo-text-input">归还时间</label>
+			                    <div class="col-md-9">
+			                        <input type="text"  name="oaResGet.back_time" class="form-control"  value="">
+			                        <small class="help-block">请输入归还时间</small>
+			                    </div>
+			                </div>
+		                <div class="panel-footer">
+		                    <div class="row">
+		                        <div class="col-sm-9 col-sm-offset-3">
+		                            <button class="btn btn-warning" type="reset">重置</button>
+		                            <button class="btn btn-mint" type="submit" >保存</button>
+		                        </div>
+		                    </div>
+		                </div>
+		            </form>
+		        </div>
+		    </div>
+	</div>
+	<script>
+		function save(){
+			var data = common_ajax.ajaxFunc("/admin/resget/save", $('#editForm').serialize(), "json", null);
+			if(data.success){
+				pointLion.alertMsg("保存成功!" , "success" , "small" , function(){
+					doPjax(ctx+'/admin/resget/getListPage');//跳转到列表页
+				});
+			}
+		}
+		$(document).ready(function() {
+			$('#editForm').bootstrapValidator({
+	            fields: {
+	            }
+	        }).on("success.form.bv", function (e) {
+	            save();
+	            return false;//阻止表单跳转
+	        });
+		});
+	</script>

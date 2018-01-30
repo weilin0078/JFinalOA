@@ -3,7 +3,7 @@
 			        <div class="col-sm-12 eq-box-sm">
 			        	<div class="panel lion-fullHeight">
 						    <div class="panel-body">
-						        <a id="add" class="btn btn-info data-toolbar" onclick="doPjax('#('#')(ctx)/admin/#(classNameSmall)/getEditPage')" href="javascript:void(0);"><i class="demo-pli-add"></i> 添加</a>
+						        <a id="add" class="btn btn-info data-toolbar" onclick="doPjax('#('#')(ctx)/admin/#(parentPackageName)/getEditPage')" href="javascript:void(0);"><i class="demo-pli-add"></i> 添加</a>
 								<a id="del" class="btn btn-danger data-toolbar" onclick="delSel()" href="javascript:void(0);"><i class="demo-pli-cross"></i> 批量删除</a>
 						        <table id="pageTable" class="demo-add-niftycheck" data-toolbar="#del,#add"
 						               data-search="true"
@@ -23,36 +23,30 @@
 	       field: 'checked',
 	       checkbox : true,
 	       align: 'center'
-	   },{
-	       field: 'id',
-	       title: 'id',
-	       align: 'center'
-	   }, {
-	       field: 'name',
-	       title: '角色名称',
-	       align: 'center'
-	   }, {
-	       field: 'key',
-	       title: '角色标识',
-	       align: 'center'
-	   }, {
-	       field: 'description',
-	       title: '描述信息',
-	       align: 'center'
-	   }, {
+	   },
+	   
+	   #for(col:ifShowOnColA)
+		   {
+		       field: '#(col)',
+		       title: '#(ifShowOnColN[for.index])',
+		       align: 'center'
+		   },
+	   #end
+	   
+	   
+	   {
 	       field: 'control',
 	       title: '操作',
 	       align: 'center',
 	       width:'440',
 	       formatter:function(value,row,index){
-	           //通过formatter可以自定义列显示的内容
-	           //value：当前field的值，即id
-	           //row：当前行的数据
-	           var a = '<a class="label label-table label-info" onclick="giveAuth(\''+row.id+'\')" href="javascript:void(0);" >授权</a>&nbsp;';
-					a = a + '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/role/getEditPage?id='+row.id+'\')" href="javascript:void(0);" >编辑</a>&nbsp;';
-					a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>';
-	           return a;
-	       } 
+	           	//通过formatter可以自定义列显示的内容
+	           	//value：当前field的值，即id
+	           	//row：当前行的数据
+	           	var a = '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/#(parentPackageName)/getEditPage?id='+row.id+'\')" href="javascript:void(0);" >编辑</a>&nbsp;';
+				a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>';
+	           	return a;
+	       }
 	   }];
 	var opt = {
 		    //请求方法
@@ -76,7 +70,7 @@
 			   //可供选择的每页的行数（*）    
 			   pageList: [10, 25, 50, 100],
 			   //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据  
-			   url: ctx+"/admin/role/listData",
+			   url: ctx+"/admin/#(parentPackageName)/listData",
 			   //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
 			   //queryParamsType:'',   
 			   ////查询参数,每次调用是会带上这个参数，可自定义                         
@@ -124,58 +118,19 @@
 	function del(ids){
 		pointLion.confimMsg("您是否要删除所选信息 ?<br/> 点击确认进行删除 , 点击取消取消该操作",null,function(){
 			//执行删除
-			var data = common_ajax.ajaxFunc("/admin/role/delete",{"ids":ids}, "json", null);
+			var data = common_ajax.ajaxFunc("/admin/#(parentPackageName)/delete",{"ids":ids}, "json", null);
 			//删除结果
 			if(data.success){
 				pointLion.alertMsg(data.message,"success",null,function(){
-					doPjax(ctx+'/admin/role/getListPage');//跳转到列表页
+					doPjax(ctx+'/admin/#(parentPackageName)/getListPage');//跳转到列表页
 				});
 			}else{
 				pointLion.alertMsg(data.message,"success",null,null);
 			}
 		});
 	};
-	//选择权限
-	var giveAuthIframe;
-	function giveAuth(roleid){
-			var index = layer.open({
-							  type: 2,
-							  title: false, //不显示标题栏
-							  area: ['370px', '650px'],
-							  shade: 0.8,
-							  id: 'selectOneMenu', //设定一个id，防止重复弹出
-							  resize: false,
-							  closeBtn: false,
-							  isOutAnim : false , 
-							  btn: ['确定', '取消'], 
-							  btnAlign: 'c',
-							  content: ctx+'/admin/role/getGiveAuthPage?roleid='+roleid,
-							  success: function(layero){
-								  giveAuthIframe = window[layero.find('iframe')[0]['name']]; 
-							  },
-							  yes: function(){
-								  	var nodes = giveAuthIframe.getCheckedNodes();
-								  	var nodestr = [];
-								  	$.each(nodes,function(i,o){
-								  		nodestr.push(o.id);
-								  	})
-								  	var data = nodestr.join(",");
-								  	var result = common_ajax.ajaxFunc("/admin/role/changeRoleAuth",{"data":data,"roleid":roleid}, "json", null);//保存所选角色权限
-								  	if(result.success){
-								  		pointLion.alertMsg("保存成功","success",null,null);
-								  	}else{
-								  		pointLion.alertMsg("保存失败","danger",null,null);
-								  	}
-								  	layer.closeAll();
-							  }
-						});
-	}
-	var roleAuth;
-	function setRoleAuth(data){
-		roleAuth = data;
-	}
 	$(document).ready(function(){
 		initFullHeight();//初始化高度
-		initTable();//初始化树
+		initTable();//初始化
 	});
 </script>
