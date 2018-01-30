@@ -26,8 +26,10 @@ public class GeneratorController extends BaseController{
 	 */
 	public void doGenerate(){
 		String tableName = getPara("tableName");
-		generatorService.doGenerator(tableName);
-		renderSuccess();
+		String ifShowOnCol = getPara("ifShowOnCol");//用于显示到列上
+		String ifUserForQuery = getPara("ifUserForQuery");//用于查询
+		String result = generatorService.doGenerator(tableName,ifShowOnCol,ifUserForQuery);
+		renderSuccess(result);
 	}
 	
 	/***

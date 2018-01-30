@@ -19,7 +19,7 @@ public class #(className)Controller extends BaseController {
 	 * 列表页面
 	 */
 	public void getListPage(){
-    	render("/WEB-INF/admin/#(classNameSmall)/list.html");
+    	render("#(pageFilePath)/list.html");
     }
 	/***
      * 获取分页数据
@@ -53,7 +53,7 @@ public class #(className)Controller extends BaseController {
     		#(className) o = service.getById(id);
     		setAttr("o", o);
     	}
-    	render("/WEB-INF/admin/user/edit.html");
+    	render("#(pageFilePath)/edit.html");
     }
     /***
      * 删除

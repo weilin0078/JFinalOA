@@ -31,6 +31,9 @@ public class Enjoy {
             .append("/template")
             .toString();
             File file = new File(filePath.toString());
+            if(file.exists()){//如果已经存在了
+            	return false;
+            }
             File path = new File(file.getParent());
             if ( ! path.exists() ) {
                 path.mkdirs();

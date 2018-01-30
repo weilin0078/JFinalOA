@@ -12,8 +12,8 @@ public class GeneratorService {
 	/***
 	 * 自动生成
 	 */
-	public void doGenerator(String tableName){
-		generator.javaRender(tableName);
+	public String doGenerator(String tableName,String ifShowOnCol,String ifUserForQuery){
+		return generator.allRender(tableName,ifShowOnCol,ifUserForQuery);
 	}
 	
 	/***

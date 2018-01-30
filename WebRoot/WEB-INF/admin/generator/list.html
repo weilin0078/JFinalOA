@@ -46,7 +46,15 @@
 	}
 	//进行代码生成
 	function doGenerate(){
-		var result = common_ajax.ajaxFunc("/admin/generator/doGenerate",{"tableName":$("#selectTable").val()}, "json", null);
+		var ifShowOnColArr = $("input[name='ifShowOnCol']:checked");
+		var ifShowOnColA = [];
+		var ifUserForQueryArr = $("input[name='ifUserForQuery']:checked");
+		var ifUserForQueryA = []; 
+		$.each(ifShowOnColArr,function(){
+			ifShowOnColA.push($(this).val());
+			ifUserForQueryA.push($(this).val());
+		});
+		var result = common_ajax.ajaxFunc("/admin/generator/doGenerate",{"tableName":$("#selectTable").val(),"ifUserForQuery":ifUserForQueryA.join(","),"ifShowOnCol":ifShowOnColA.join(",")}, "json", null);
 		if(result.success){
 			pointLion.alertMsg(result.message, "success" , "small" , function(){});
 		}else{

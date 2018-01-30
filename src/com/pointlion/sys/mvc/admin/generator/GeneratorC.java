@@ -1,35 +1,9 @@
 package com.pointlion.sys.mvc.admin.generator;
 
-import java.util.List;
-
-import javax.sql.DataSource;
-
 import com.jfinal.kit.Kv;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.DbKit;
-import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
-import com.jfinal.plugin.activerecord.generator.DataDictionaryGenerator;
 import com.jfinal.plugin.activerecord.generator.Generator;
-import com.jfinal.plugin.activerecord.generator.MetaBuilder;
-import com.jfinal.plugin.activerecord.generator.TableMeta;
-import com.pointlion.sys.mvc.common.model.ActReModel;
-import com.pointlion.sys.mvc.common.model.ActReProcdef;
-import com.pointlion.sys.mvc.common.model.OaBumph;
-import com.pointlion.sys.mvc.common.model.OaBumphOrg;
-import com.pointlion.sys.mvc.common.model.OaBumphOrgUser;
-import com.pointlion.sys.mvc.common.model.OaNotice;
-import com.pointlion.sys.mvc.common.model.OaNoticeUser;
-import com.pointlion.sys.mvc.common.model.OaResDct;
-import com.pointlion.sys.mvc.common.model.OaResGet;
-import com.pointlion.sys.mvc.common.model.SysCustomSetting;
-import com.pointlion.sys.mvc.common.model.SysFriend;
-import com.pointlion.sys.mvc.common.model.SysMenu;
-import com.pointlion.sys.mvc.common.model.SysOrg;
-import com.pointlion.sys.mvc.common.model.SysRole;
-import com.pointlion.sys.mvc.common.model.SysRoleAuth;
-import com.pointlion.sys.mvc.common.model.SysUser;
-import com.pointlion.sys.mvc.common.model.SysUserRole;
-import com.pointlion.sys.mvc.common.model.VTasklist;
 
 public class GeneratorC {
 
@@ -38,10 +12,13 @@ public class GeneratorC {
     public static final GeneratorService service = GeneratorService.me;
     protected final Enjoy enjoy    = new Enjoy();
     
-    protected Kv tablemetaMap       = null;
-    protected String packageBase    = "com.pointlion.sys.mvc.admin.generator.generated";
-    protected String srcFolder      = "src";
-    protected String prefixes = "";//生成model的时候去掉的表名前缀
+    protected Kv tablemetaMap        = null;
+    protected String packageBase     = "com.pointlion.sys.mvc.admin";
+    protected String srcFolder       = "src";
+    protected String sourceFolder    = "/WebRoot";
+    protected String pageFolder      = "/WEB-INF/admin/";
+    protected String modelPrefixes   = "";//生成model的时候去掉的表名前缀
+    protected String packagePrefixes = "Oa";//生成model的时候去掉的ClassName前缀
     protected final static String workSpacePath = PropKit.get("workSpacepath");//工作空间路径
     
     /************固有属性START******************/
@@ -51,32 +28,58 @@ public class GeneratorC {
     public void setSrcFolder(String srcFolder){
         this.srcFolder = srcFolder;
     }
-	public void setPrefixes(String prefixes) {
-		this.prefixes = prefixes;
+	public void setModelPrefixes(String modelPrefixes) {
+		this.modelPrefixes = modelPrefixes;
+	}
+	public void setPageFolder(String pageFolder) {
+		this.pageFolder = pageFolder;
+	}
+	public void setPackagePrefixes(String packagePrefixes) {
+		this.packagePrefixes = packagePrefixes;
 	}
     /************固有属性END******************/
-
 
 	/*************脚手架START******************/
     /**
      * 生成手脚架代码
      */
-    public void allRender(String className, String tableName) {
-        me.javaRender(tableName);
-        me.htmlRender(className, tableName);
+    public String allRender(String tableName,String ifShowOnCol,String ifUserForQuery) {
+        String result = me.javaRender(tableName);
+        result = result + me.htmlRender(tableName,ifShowOnCol,ifUserForQuery);
+        return result;
     }
     
     /**
      * java 代码生成
      * */
-    public void javaRender(String tableName) {
-        //刷新 映射对象
-//        _JFinalDemoGenerator.main(null);
-        controller(tableName);
-        service(tableName);
-//        model(tableName);
-    	generatorModel(tableName);
-//        validator(tableName);
+    public String javaRender(String tableName) {
+        String result = "";
+        if(controller(tableName)){
+        	result = result + "controller生成成功<br/>";
+        }else{
+        	result = result + "controller生成失败<br/>";
+        }
+        if(service(tableName)){
+        	result = result + "service生成成功<br/>";
+        }else{
+        	result = result + "service生成失败<br/>";
+        }
+        model(tableName);
+        result = result + "model生成成功<br/>";
+        return result;
+    }
+    /***
+     * html 代码生成
+     * @param tableName
+     */
+    public String htmlRender(String tableName,String ifShowOnCol,String ifUserForQuery){
+    	String result = "";
+        if(htmlList(tableName,ifShowOnCol,ifUserForQuery)){
+        	result = "html生成成功<br/>";
+        }else{
+        	result = "html生成失败<br/>";
+        }
+        return result;
     }
     /*************脚手架END******************/
    
@@ -85,7 +88,7 @@ public class GeneratorC {
      * 生成Controller
      * @param tableName         表名称
      */
-    public void controller(String tableName){
+    public Boolean controller(String tableName){
     	String className = tableNameToClassName(tableName);
         String packages = toPackages(className);
         Kv kv = new Kv();
@@ -93,40 +96,16 @@ public class GeneratorC {
         kv.set("className", className);
         kv.set("classNameSmall", toNameSmall(className));
         kv.set("classNameCamel", toNameCamel(className));
+        kv.set("pageFilePath",getPageFilePath(className));
         String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Controller.java";
-        enjoy.render("/java/controller.html", kv, filePath);
+        return enjoy.render("/java/controller.html", kv, filePath);
     }
     /**
      * 生成Model
      * @param tableName         表名称
      */
     public void model(String tableName){
-    	String className = tableNameToClassName(tableName);
-        String packages = toPackages(className);
-        Kv kv = new Kv();
-        kv.set("package", packages);
-        kv.set("className", className);
-        kv.set("classNameSmall", toNameSmall(className));
-        kv.set("classNameCamel", toNameCamel(className));
-        kv.set("tableName", tableName);
-        String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+".java";
-        enjoy.render("/java/model.html", kv, filePath);
-    }
-    
-    /**
-     * 生成validator
-     * @param tableName         表名称
-     */
-    public void validator(String tableName){
-    	String className = tableNameToClassName(tableName);
-        String packages = toPackages(className);
-        Kv kv = new Kv();
-        kv.set("package", packages);
-        kv.set("className", className);
-        kv.set("classNameSmall", toNameSmall(className));
-        kv.set("classNameCamel", toNameCamel(className));
-        String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Validator.java";
-        enjoy.render("/java/validator.html", kv,filePath);
+    	generatorModel(tableName);
     }
     
     /**
@@ -134,7 +113,7 @@ public class GeneratorC {
      * @param className         类名称
      * @param tableName         表名
      */
-    public void service(String tableName){
+    public Boolean service(String tableName){
     	String className = tableNameToClassName(tableName);
         String packages = toPackages(className);
         Kv kv = new Kv();
@@ -144,26 +123,21 @@ public class GeneratorC {
         kv.set("classNameCamel", toNameCamel(className));
         kv.set("tableName", tableName);
         String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Service.java";
-        enjoy.render("/java/service.html", kv, filePath);
+        return enjoy.render("/java/service.html", kv, filePath);
     }
     
-    /**
-     * @param className 
-     * @param tableName 
-     * */
-    public void htmlRender(String className, String tableName){
-        TableMeta tablemeta = getTableMeta(tableName);
-        htmlList(className, tablemeta);
-    }
-    public void htmlList(String className, TableMeta tablemeta){
+    public Boolean htmlList(String tableName,String ifShowOnCol,String ifUserForQuery){
+    	String className = tableNameToClassName(tableName);
         String packages = toPackages(className);
         String classNameSmall = toNameCamel(className);
         Kv kv = new Kv();
         kv.set("package", packages);
         kv.set("className", className);
         kv.set("classNameSmall", classNameSmall);
-        String filePath = System.getProperty("user.dir")+"/"+srcFolder+"/"+packages.replace(".", "/")+className+"Service.java";
-        enjoy.render("/html/list.html", kv, filePath);
+        kv.set("ifShowOnCol",ifShowOnCol.split(","));
+        kv.set("ifUserForQuery",ifUserForQuery.split(","));
+        String filePath = workSpacePath+sourceFolder+getPageFilePath(className)+"/list.html";
+        return enjoy.render("/html/list.html", kv, filePath);
     }
     
     
@@ -205,37 +179,28 @@ public class GeneratorC {
      * @return
      */
     private String toPackages(String className) {
-    	return packageBase+"."+className.toLowerCase();
+    	return packageBase+"."+getParentPackageName(className);
+    }
+    /***
+     * 获取类名父级包名
+     * @param className
+     * @return
+     */
+    private String getParentPackageName(String className){
+    	if(className.indexOf(packagePrefixes)==0){
+    		return className.replace(packagePrefixes, "").toLowerCase();
+    	}else{
+    		return className.toLowerCase();
+    	}
     }
     
-    
-    protected class DataGenerator extends DataDictionaryGenerator {
-        public DataGenerator(DataSource dataSource, String dataDictionaryOutputDir) {
-            super(dataSource, dataDictionaryOutputDir);
-        }
-        public void rebuildColumnMetas(List<TableMeta> tableMetas) {
-            super.rebuildColumnMetas(tableMetas);
-        }
-    };    
-    public TableMeta getTableMeta(String tableName){
-        if( tablemetaMap == null ){
-            DataSource dataSource = DbKit.getConfig().getDataSource();
-            MetaBuilder metaBuilder = new MetaBuilder(dataSource);
-            metaBuilder.setDialect(new MysqlDialect());
-            //metaBuilder.addExcludedTable(_JFinalDemoGenerator.excludedTable);
-            List<TableMeta> tableMetas = metaBuilder.build();
-            new DataGenerator(dataSource, null).rebuildColumnMetas(tableMetas);
-            if (tableMetas.size() == 0) {
-                System.out.println("TableMeta 数量为 0，不生成任何文件");
-                return null;
-            }
-            Kv kv = Kv.create();
-            for (TableMeta tableMeta : tableMetas) {
-                kv.set(tableMeta.name, tableMeta);
-            }
-            tablemetaMap = kv;
-        }
-        return (TableMeta) tablemetaMap.get(tableName);
+    /***
+     * 获取前台文件统一路径
+     * @param className
+     * @return
+     */
+    private String getPageFilePath(String className){
+    	return pageFolder+getParentPackageName(className);
     }
     /****************工具类END*************************/
 
@@ -279,7 +244,7 @@ public class GeneratorC {
 		// 设置是否生成字典文件
 		generator.setGenerateDataDictionary(false);
 		// 设置需要被移除的表名前缀用于生成modelName。例如表名 "osc_user"，移除前缀 "osc_"后生成的model名为 "User"而非 OscUser
-		generator.setRemovedTableNamePrefixes(prefixes);
+		generator.setRemovedTableNamePrefixes(modelPrefixes);
 		ModelBulid modelBulid=new ModelBulid(DbKit.getConfig().getDataSource(), tableName,PropKit.get("dbType"));
 		generator.setMetaBuilder(modelBulid);
 		MappingKitBulid mappingKitBulid=new MappingKitBulid(modelPackageName, modelOutputDir);

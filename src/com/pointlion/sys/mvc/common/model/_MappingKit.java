@@ -34,6 +34,7 @@ public class _MappingKit {
 		arp.addMapping("sys_custom_setting", "id", SysCustomSetting.class);//自定义设置
 		arp.addMapping("oa_res_dct", "id", OaResDct.class);
 		arp.addMapping("oa_res_get", "id", OaResGet.class);
+		arp.addMapping("act_evt_log", "LOG_NR_", ActEvtLog.class);
 	}
 }
 
