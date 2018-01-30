@@ -1,55 +1,42 @@
 package #(package);
 
+import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
-import com.demo.common.model.#(className);
+import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.activerecord.tx.Tx;
+import com.pointlion.sys.mvc.common.model.#(className)
 
-/**
- * #(className) 管理	
- * 描述：
- */
-public class #(className)Service {
-
-	//private static final Log log = Log.getLog(#(className)Service.class);
-	
+@SuppressWarnings("serial")
+public class #(className)Service{
 	public static final #(className)Service me = new #(className)Service();
-	private final #(className) dao = new #(className)().dao();
 	
-	
-	/**
-	* 列表-分页
-	*/
-	public Page<#(className)> paginate(int pageNumber, int pageSize) {
-		return dao.paginate(pageNumber, pageSize, "SELECT * ", "FROM #(tableName)");
+	/***
+	 * 根据主键查询
+	 */
+	public #(className) getById(String id){
+		return #(className).dao.findById(id);
 	}
 	
-	/**
-	* 保存
-	*/
-	public void save(#(className) #(classNameSmall)) {
-		#(classNameSmall).save();
+	/***
+	 * 获取分页
+	 */
+	public Page<Record> getPage(int pnum,int psize){
+		String sql  = " from #(tableName) o ";
+		return Db.paginate(pnum, psize, " select * ", sql);
 	}
 	
-	/**
-	* 更新
-	*/
-	public void update(#(className) #(classNameSmall)) {
-		#(classNameSmall).update();
+	/***
+	 * 删除
+	 * @param ids
+	 */
+	@Before(Tx.class)
+	public void deleteByIds(String ids){
+    	String idarr[] = ids.split(",");
+    	for(String id : idarr){
+    		#(className) o = #(className).dao.getById(id);
+    		o.delete();
+    	}
 	}
-	
-	/**
-	* 查询
-	*/
-	public #(className) findById(int #(classNameSmall)Id) {
-		return dao.findFirst("select * from #(tableName) where id=?", #(classNameSmall)Id);
-	}
-	
-	/**
-	* 删除
-	*/
-	public void delete(int #(classNameSmall)Id) {
-		Db.update("delete from #(tableName) where id=?", #(classNameSmall)Id);
-	}
-	
 	
 }

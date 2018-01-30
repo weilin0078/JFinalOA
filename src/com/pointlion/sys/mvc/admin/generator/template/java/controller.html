@@ -9,12 +9,12 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.sys.interceptor.MainPageTitleInterceptor;
 import com.pointlion.sys.mvc.common.base.BaseController;
-import #(package).SysUser;
+import com.pointlion.sys.mvc.common.model.#(className);
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 
 @Before(MainPageTitleInterceptor.class)
 public class #(className)Controller extends BaseController {
-	
+	public static final #(className)Service service = #(className)Service.me;
 	/***
 	 * 列表页面
 	 */
@@ -50,7 +50,7 @@ public class #(className)Controller extends BaseController {
     	//添加和修改
     	String id = getPara("id");
     	if(StrKit.notBlank(id)){//修改
-    		SysUser o = SysUser.dao.getById(id);
+    		#(className) o = #(className).dao.getById(id);
     		setAttr("o", o);
     	}
     	render("/WEB-INF/admin/user/edit.html");

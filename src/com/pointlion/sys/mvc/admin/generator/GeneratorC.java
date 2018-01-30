@@ -23,22 +23,23 @@ public class GeneratorC {
     protected Kv tablemetaMap       = null;
     protected String packageBase    = "com.pointlion.sys.mvc.admin.generator.generated";
     protected String srcFolder      = "src";
+    protected String prefixes = "";//生成model的时候去掉的表名前缀
     protected final static String workSpacePath = PropKit.get("workSpacepath");//工作空间路径
     
     /************固有属性START******************/
     public void setPackageBase(String packageBase){
         this.packageBase = packageBase;
     }
-    
     public void setSrcFolder(String srcFolder){
         this.srcFolder = srcFolder;
     }
-    
+	public void setPrefixes(String prefixes) {
+		this.prefixes = prefixes;
+	}
     /************固有属性END******************/
-    
-    
-    
-    /*************脚手架START******************/
+
+
+	/*************脚手架START******************/
     /**
      * 生成手脚架代码
      */
@@ -54,10 +55,10 @@ public class GeneratorC {
         //刷新 映射对象
 //        _JFinalDemoGenerator.main(null);
         controller(tableName);
-        model(tableName);
-    	generatorAllModel();
+        service(tableName);
+//        model(tableName);
+    	generatorModel(tableName);
 //        validator(tableName);
-//        service(tableName);
     }
     /*************脚手架END******************/
    
@@ -220,8 +221,9 @@ public class GeneratorC {
     }
     /****************工具类END*************************/
 
-    public void generatorAllModel(){
-    	String modelPackageName = packageBase+".model";
+    public void generatorModel(String tableName){
+    	String pkgBase = "com.pointlion.sys.mvc.common"; 
+    	String modelPackageName = pkgBase+".model";
     	// base model 所使用的包名
 		String baseModelPackageName = modelPackageName+".base";
 		// base model 文件保存路径
@@ -241,12 +243,14 @@ public class GeneratorC {
 		generator.addExcludedTable("v_tasklist_candidate_d");
 		// 设置是否在 Model 中生成 dao 对象
 		generator.setGenerateDaoInModel(true);
-		// 设置是否生成链式 setter 方法
-		generator.setGenerateChainSetter(false);
 		// 设置是否生成字典文件
 		generator.setGenerateDataDictionary(false);
 		// 设置需要被移除的表名前缀用于生成modelName。例如表名 "osc_user"，移除前缀 "osc_"后生成的model名为 "User"而非 OscUser
-		generator.setRemovedTableNamePrefixes("t_");
+		generator.setRemovedTableNamePrefixes(prefixes);
+		ModelBulid modelBulid=new ModelBulid(DbKit.getConfig().getDataSource(), tableName,PropKit.get("dbType"));
+		generator.setMetaBuilder(modelBulid);
+		MappingKitBulid mappingKitBulid=new MappingKitBulid(modelPackageName, modelOutputDir);
+		generator.setMappingKitGenerator(mappingKitBulid);
 		// 生成
 		generator.generate();
     }
