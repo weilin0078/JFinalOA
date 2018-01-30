@@ -28,6 +28,7 @@ import com.pointlion.sys.mvc.admin.login.LoginController;
 import com.pointlion.sys.mvc.admin.menu.MenuController;
 import com.pointlion.sys.mvc.admin.notice.NoticeController;
 import com.pointlion.sys.mvc.admin.org.OrgController;
+import com.pointlion.sys.mvc.admin.resget.OaResGetController;
 import com.pointlion.sys.mvc.admin.role.RoleController;
 import com.pointlion.sys.mvc.admin.user.UserController;
 import com.pointlion.sys.mvc.admin.workflow.WorkFlowController;
@@ -140,7 +141,7 @@ public class MainConfig extends JFinalConfig {
 		me.add("/admin/customsetting",CustomSettingController.class);//执行对象-功能
 		me.add("/admin/model",ModelController.class);//工作流-模型
 		me.add("/admin/workflow",WorkFlowController.class);//工作流
-		me.add("/admin/resGet",WorkFlowController.class);//工作流
+		me.add("/admin/resget",OaResGetController.class);//物品领用
 		//代码生成器
 		me.add("/admin/generator",GeneratorController.class);//工作流
 		//在线办公

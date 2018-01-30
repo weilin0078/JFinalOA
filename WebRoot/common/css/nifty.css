@@ -4279,7 +4279,7 @@ a.list-group-item-dark:focus {
 .label-table {
   display: inline-block;
   /* width: 80%; */
-  min-width: 8ex;
+  min-width: 6ex;
   font-size: 1em;
   max-width: 100px;
   padding: 5px;
