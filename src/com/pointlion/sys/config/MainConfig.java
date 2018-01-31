@@ -16,7 +16,7 @@ import com.jfinal.ext.handler.UrlSkipHandler;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
-import com.jfinal.plugin.c3p0.C3p0Plugin;
+import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
 import com.pointlion.sys.handler.GlobalHandler;
 import com.pointlion.sys.mvc.admin.bumph.BumphController;
@@ -86,9 +86,9 @@ public class MainConfig extends JFinalConfig {
 	@Override
 	public void configPlugin(Plugins me) {
 		//配置数据库连接池插件
-		C3p0Plugin c3p0Plugin=new C3p0Plugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
+		DruidPlugin druidPlugin =new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
 		//orm映射 配置ActiveRecord插件
-		ActiveRecordPlugin arp=new ActiveRecordPlugin(c3p0Plugin);
+		ActiveRecordPlugin arp=new ActiveRecordPlugin(druidPlugin);
 		arp.setShowSql(PropKit.getBoolean("devMode"));
 		arp.setDialect(new MysqlDialect());
 		_MappingKit.mapping(arp);
@@ -98,7 +98,7 @@ public class MainConfig extends JFinalConfig {
 	    shiroPlugin.setSuccessUrl("/admin/index");//登陆成功url：验证成功自动跳转
 	    shiroPlugin.setUnauthorizedUrl("/admin/login/needPermission");//授权url：未授权成功自动跳转
 	    //添加到插件列表中
-	    me.add(c3p0Plugin);
+	    me.add(druidPlugin);
 	    me.add(arp);
 	    me.add(acitivitiPlugin);
 	    me.add(shiroPlugin);

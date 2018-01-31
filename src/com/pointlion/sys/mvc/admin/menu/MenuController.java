@@ -28,7 +28,7 @@ import com.pointlion.sys.mvc.common.utils.UuidUtil;
 @Before(MainPageTitleInterceptor.class)
 public class MenuController extends BaseController {
 	
-	@RequiresPermissions("admin:menu:list")
+//	@RequiresPermissions("admin:menu:list")
     public void getListPage(){
     	setAttr("menu", SysMenu.dao.getAllMenu());
     	render("/WEB-INF/admin/menu/list.html");

@@ -67,7 +67,7 @@ public class OaResGetController extends BaseController {
     }
     
     /**************************************************************************/
-	private String pageTitle = "请设置功能名称";//模块页面标题
+	private String pageTitle = "物品领用";//模块页面标题
 	private String breadHomeMethod = "getListPage";//面包屑首页方法
 	
 	public Map<String,String> getPageTitleBread() {

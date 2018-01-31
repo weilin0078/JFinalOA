@@ -27,5 +27,6 @@ public class CustomSettingController extends BaseController {
 			newSet.setId(userSet.getId());
 			newSet.update();
 		}
+		renderSuccess();
 	}
 }

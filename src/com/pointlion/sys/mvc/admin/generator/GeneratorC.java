@@ -19,7 +19,7 @@ public class GeneratorC {
     protected String pageFolder      = "/WEB-INF/admin/";
     protected String modelPrefixes   = "";//生成model的时候去掉的表名前缀
     protected String packagePrefixes = "Oa";//生成model的时候去掉的ClassName前缀
-    protected final static String workSpacePath = PropKit.get("workSpacepath");//工作空间路径
+    protected final static String workSpacePath = PropKit.get("workSpacePath");//工作空间路径
     
     /************固有属性START******************/
     public void setPackageBase(String packageBase){
