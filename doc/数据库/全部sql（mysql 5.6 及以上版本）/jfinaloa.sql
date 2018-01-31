@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50610
 File Encoding         : 65001
 
-Date: 2018-01-23 10:03:48
+Date: 2018-01-31 09:12:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -916,6 +916,46 @@ INSERT INTO `oa_notice_user` VALUES ('76eff72ffbff445ea75678032331742b', 'd44e96
 INSERT INTO `oa_notice_user` VALUES ('ec7b3a8b97134a71ad9efcd2cfaa03fb', '7ac6e4c544634e179f78803d5ba2d0ca', '管理员', 'ee9d8f8f83b74ce1a5b9c56f5908143c', '1', '2017-06-04 16:56:04');
 
 -- ----------------------------
+-- Table structure for oa_res_dct
+-- ----------------------------
+DROP TABLE IF EXISTS `oa_res_dct`;
+CREATE TABLE `oa_res_dct` (
+  `id` varchar(32) NOT NULL,
+  `name` varchar(100) DEFAULT NULL COMMENT '物品名称',
+  `sum` int(11) DEFAULT NULL COMMENT '数量',
+  `manufacture_time` varchar(32) DEFAULT NULL COMMENT '生产日期',
+  `create_time` varchar(32) DEFAULT NULL COMMENT '入库时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of oa_res_dct
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for oa_res_get
+-- ----------------------------
+DROP TABLE IF EXISTS `oa_res_get`;
+CREATE TABLE `oa_res_get` (
+  `id` varchar(32) NOT NULL COMMENT '主键',
+  `title` varchar(500) DEFAULT NULL COMMENT '标题',
+  `get_user_id` varchar(50) DEFAULT NULL COMMENT '领用人',
+  `get_user_name` varchar(100) DEFAULT NULL COMMENT '领用人名称',
+  `res_id` varchar(32) DEFAULT NULL COMMENT '物品id',
+  `res_name` varchar(50) DEFAULT NULL COMMENT '物品名称',
+  `get_sum` varchar(50) DEFAULT NULL COMMENT '领用数量',
+  `get_time` varchar(50) DEFAULT NULL COMMENT '领用时间',
+  `back_time` varchar(50) DEFAULT NULL COMMENT '归还时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of oa_res_get
+-- ----------------------------
+INSERT INTO `oa_res_get` VALUES ('2df38f07e63e49b4abbecccb1cd3605f', '1', null, null, null, null, null, null, null);
+INSERT INTO `oa_res_get` VALUES ('7cb04d2107244241a250ccbfce46d7e2', '123', '123', '123', '123', '123', '123', '123', '123');
+
+-- ----------------------------
 -- Table structure for sys_custom_setting
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_custom_setting`;
@@ -1016,78 +1056,42 @@ CREATE TABLE `sys_menu` (
 -- Records of sys_menu
 -- ----------------------------
 INSERT INTO `sys_menu` VALUES ('011c41bf7cba494d8292fe98819a3699', '菜单管理', '1', null, '1', '', '菜单管理', '1', null, '/admin/menu/getListPage');
-INSERT INTO `sys_menu` VALUES ('04fc413feffa47c09327464cf00dc5f3', '删除', '1d362c1f895a481e92731f7a9b7e9e5e', null, '3', '', null, '0', null, null);
-INSERT INTO `sys_menu` VALUES ('0f575d3267254ed495e3446237026549', '查询', 'dc3898c989a24e69a1f2a8d109f330ac', null, null, '', null, '0', null, null);
 INSERT INTO `sys_menu` VALUES ('1', '系统设置', 'ed88adeda00d4ddcad1e544ef09f2044', '', '1', 'ti-save', '系统设置', '1', null, null);
 INSERT INTO `sys_menu` VALUES ('109881b8a1204a97bb525eca435cc1c7', '计划管理', 'da92bb0b66404db38346005d2edf40d1', null, '2', '', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('12d152d562e74eda9974959a48687040', '内部发文', '2fdffbd68dd74942ad50a52f0f3a56cb', null, '1', 'ti-calendar', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('14ff83d0b3324bbe8dc476b42dcb1069', '删除', 'dc3898c989a24e69a1f2a8d109f330ac', null, '3', '', null, '0', null, null);
-INSERT INTO `sys_menu` VALUES ('17551eaa81284535a7293b1e9b1e40db', '删除', '396414867f9440a88bb40e15bf8e3925', null, '3', null, null, '0', 'admin:org:delete', null);
-INSERT INTO `sys_menu` VALUES ('17c7cac8e44f42bb86ccf2cd889a6f15', '查询', '22', null, '1', null, null, '0', 'admin:role:list', null);
-INSERT INTO `sys_menu` VALUES ('19cfd309feed481585980ecca724b234', '查询', 'f3bd49e93c534d779a522a493c2e3afc', null, '1', '', null, '0', null, null);
+INSERT INTO `sys_menu` VALUES ('12d152d562e74eda9974959a48687040', '发文管理', '2fdffbd68dd74942ad50a52f0f3a56cb', null, '1', 'ti-calendar', null, '1', null, null);
 INSERT INTO `sys_menu` VALUES ('1d362c1f895a481e92731f7a9b7e9e5e', '发文起草', '12d152d562e74eda9974959a48687040', null, '1', '', null, '1', null, '/admin/bumph/getDraftListPage');
 INSERT INTO `sys_menu` VALUES ('1e53c84f98554d03a84c570b904738bc', '发布新公告', 'ba50ce6094004e79a6df9fcd7fffc987', null, '1', '', null, '1', null, '/admin/notice/getListPage');
 INSERT INTO `sys_menu` VALUES ('2', '权限管理', 'ed88adeda00d4ddcad1e544ef09f2044', '', '2', 'ti-ruler-alt-2', '权限管理', '1', '', null);
-INSERT INTO `sys_menu` VALUES ('21829e1db2d94a6ab7b2e3b62b27afaf', '历史转发', '5ad222efc1954c3eb22b1177722bc9db', null, '3', '', null, '1', null, null);
 INSERT INTO `sys_menu` VALUES ('22', '角色管理', '2', '', '1', null, null, '1', null, '/admin/role/getListPage');
 INSERT INTO `sys_menu` VALUES ('238688ff8048470fb653031b260968ff', '栏目管理', '714d63b7e1014c1a9faf7bd29e876f27', null, '1', 'ti-tablet', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('28bf0178593d4ffe83b8b3aebb9cea87', '删除', 'fe517e4a7ada4046b058f3b3f11b3216', null, '3', '', null, '0', null, null);
 INSERT INTO `sys_menu` VALUES ('29ffc31c67254bfe80618e0171704540', '内容管理', '714d63b7e1014c1a9faf7bd29e876f27', null, '2', 'ti-menu', null, '1', null, null);
 INSERT INTO `sys_menu` VALUES ('2be45266b2e54779ba3f998ba5c6fa82', '收到的公告', 'ba50ce6094004e79a6df9fcd7fffc987', null, '2', '', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('2f28dd6b2f354715844b676524b1da47', '修改', '22', null, '2', null, null, '0', 'admin:role:update', null);
 INSERT INTO `sys_menu` VALUES ('2fdffbd68dd74942ad50a52f0f3a56cb', '在线办公', '#root', null, '1', null, '在线办公', '1', null, null);
-INSERT INTO `sys_menu` VALUES ('33dfe1d14dcb4f58aa9f5bbd33b6232c', '查询', 'fe517e4a7ada4046b058f3b3f11b3216', null, '1', '', null, '0', null, null);
-INSERT INTO `sys_menu` VALUES ('342f8d641b9f40ddaa989e5a750dd5c6', '删除', '011c41bf7cba494d8292fe98819a3699', null, '3', null, null, '0', 'admin:menu:delete', null);
 INSERT INTO `sys_menu` VALUES ('396414867f9440a88bb40e15bf8e3925', '组织结构', '1', null, '3', null, null, '1', null, '/admin/org/getListPage');
 INSERT INTO `sys_menu` VALUES ('3f3c021b2dc64817b9d2ea3772d736aa', '备忘录', 'c27b1a054ed84b4193208a33dca8ca1c', null, '1', '', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('3f4bf4bfffcb49b4974d8bdd53cef366', '删除', '22', null, '3', null, null, '0', 'admin:role:delete', null);
-INSERT INTO `sys_menu` VALUES ('3fc17bea832140b9b3737b701b80b0f8', '删除', '1e53c84f98554d03a84c570b904738bc', null, '3', '', null, '0', null, null);
 INSERT INTO `sys_menu` VALUES ('3fff3fd1dfc4438f955d4bf2d72ff679', '员工考勤查询', 'eb43a2accb2e46689fbfbbb08b31ca61', null, '1', '', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('4', '流程管理', 'ed88adeda00d4ddcad1e544ef09f2044', '', '20', 'ti-pencil-alt', null, '1', '', null);
-INSERT INTO `sys_menu` VALUES ('402ccbe4cbe2475aad30210db76f1d58', '用章申请', '2fdffbd68dd74942ad50a52f0f3a56cb', null, '4', 'ti-stamp', null, '1', null, null);
+INSERT INTO `sys_menu` VALUES ('4', '流程管理', 'ed88adeda00d4ddcad1e544ef09f2044', '', '3', 'ti-pencil-alt', null, '1', null, null);
+INSERT INTO `sys_menu` VALUES ('402ccbe4cbe2475aad30210db76f1d58', '物品领用', '2fdffbd68dd74942ad50a52f0f3a56cb', null, '4', 'ti-link', null, '1', null, null);
 INSERT INTO `sys_menu` VALUES ('42', '模型管理', '4', '', '2', null, null, '1', null, '/admin/model/getListPage');
 INSERT INTO `sys_menu` VALUES ('525b8647d2fb4d458a76f26270e59943', '我的日志', 'bec02fd65e22416cb74fa48db665028e', null, '1', 'ti-layout', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('54f7f159f8c94e1fa1e90065eb336784', '正在运行的流程', '4', null, '1', null, '正在运行的流程', '1', null, '/admin/workflow/getListPage');
-INSERT INTO `sys_menu` VALUES ('577b927f1b584ab7a91e0339cf055bc1', '查询', '2be45266b2e54779ba3f998ba5c6fa82', null, '1', '', null, '0', null, null);
-INSERT INTO `sys_menu` VALUES ('5ad222efc1954c3eb22b1177722bc9db', '来文转发', '2fdffbd68dd74942ad50a52f0f3a56cb', null, '2', '', null, '1', null, null);
+INSERT INTO `sys_menu` VALUES ('54f7f159f8c94e1fa1e90065eb336784', '运行流程', '4', null, '1', null, '正在运行的流程', '1', null, '/admin/workflow/getListPage');
+INSERT INTO `sys_menu` VALUES ('5991ab2c3e14459f840f4c6ad27c8c69', '代码生成', 'ed88adeda00d4ddcad1e544ef09f2044', null, '4', 'ti-wand', null, '1', null, null);
 INSERT INTO `sys_menu` VALUES ('5e94601e6981471bad51720e2bc88b0f', '用户管理', '1', null, '2', null, null, '1', null, '/admin/user/getListPage');
-INSERT INTO `sys_menu` VALUES ('6560e703724f43758833655efb819d6f', '查询', '1d362c1f895a481e92731f7a9b7e9e5e', null, '1', '', null, '0', null, null);
 INSERT INTO `sys_menu` VALUES ('714d63b7e1014c1a9faf7bd29e876f27', '网站管理', '#root', null, '2', '', '网站管理', '0', null, null);
-INSERT INTO `sys_menu` VALUES ('735648c369174d87899efd6169125c67', '查询', '5e94601e6981471bad51720e2bc88b0f', null, '1', null, null, '0', 'admin:user:list', null);
-INSERT INTO `sys_menu` VALUES ('85017c2610c246cbab0d76f22c8fcaf1', '修改', 'b93ccac6f62e43b38fd76d158b69d49e', null, '2', '', null, '0', null, null);
-INSERT INTO `sys_menu` VALUES ('8d02ac12f7744e13a5c3d34ebeb442ff', '查询', '1e53c84f98554d03a84c570b904738bc', null, '1', '', null, '0', null, null);
-INSERT INTO `sys_menu` VALUES ('8d0d76068c1a4a1585bd6c649d9a89d7', '修改', '011c41bf7cba494d8292fe98819a3699', null, '2', null, null, '0', 'admin:menu:update', null);
-INSERT INTO `sys_menu` VALUES ('9002fd35e9064e5ba7c6ebefec612337', '申请制单', '402ccbe4cbe2475aad30210db76f1d58', null, '1', '', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('929a17d55e434418bfdbd18247bc267f', '历史申请', '9002fd35e9064e5ba7c6ebefec612337', null, '3', '', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('9853a796499b47e0a14e43517fd9a494', '删除', 'f3bd49e93c534d779a522a493c2e3afc', null, '3', '', null, '0', null, null);
-INSERT INTO `sys_menu` VALUES ('a0a1acf979e6475f85fb7581d94c0cbc', '删除', 'b93ccac6f62e43b38fd76d158b69d49e', null, '3', '', null, '0', null, null);
+INSERT INTO `sys_menu` VALUES ('9002fd35e9064e5ba7c6ebefec612337', '申请制单', '402ccbe4cbe2475aad30210db76f1d58', null, '1', '', null, '1', null, '/admin/resget/getListPage');
 INSERT INTO `sys_menu` VALUES ('af28bc606b274f3b85bd372cd071782d', '新增计划', 'da92bb0b66404db38346005d2edf40d1', null, '1', '', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('b3058e8bf64541d684e9660be7e8a4ef', '转发起草', '5ad222efc1954c3eb22b1177722bc9db', null, '1', '', null, '1', null, null);
 INSERT INTO `sys_menu` VALUES ('b93ccac6f62e43b38fd76d158b69d49e', '收文历史', '12d152d562e74eda9974959a48687040', null, '3', '', null, '1', null, '/admin/bumph/getHistoryBumphPage');
 INSERT INTO `sys_menu` VALUES ('ba50ce6094004e79a6df9fcd7fffc987', '通知公告', '2fdffbd68dd74942ad50a52f0f3a56cb', null, '3', 'ti-signal', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('bb4f108e541c4971818280fb9c131cc1', '修改', '5e94601e6981471bad51720e2bc88b0f', null, '2', null, null, '0', 'admin:user:update', null);
-INSERT INTO `sys_menu` VALUES ('bd9e15ec237349e0b47e998e924047a5', '修改', '396414867f9440a88bb40e15bf8e3925', null, '2', null, null, '0', 'admin:org:update', null);
 INSERT INTO `sys_menu` VALUES ('bec02fd65e22416cb74fa48db665028e', '我的空间', '#root', null, '3', null, '我的空间', '0', null, null);
 INSERT INTO `sys_menu` VALUES ('c27b1a054ed84b4193208a33dca8ca1c', '备忘录', '2fdffbd68dd74942ad50a52f0f3a56cb', null, '5', 'ti-bookmark-alt', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('c7f22e1471a5484187eb40f035d8839d', '修改', 'fe517e4a7ada4046b058f3b3f11b3216', null, '2', '', null, '0', null, null);
-INSERT INTO `sys_menu` VALUES ('ce19ced66a4d42afafe0416169001597', '修改', '1d362c1f895a481e92731f7a9b7e9e5e', null, '2', '', null, '0', null, null);
-INSERT INTO `sys_menu` VALUES ('d7ca5370bb4c47fba2eae8763e1cdb3d', '查询', '011c41bf7cba494d8292fe98819a3699', null, '1', null, '菜单管理-查询', '0', 'admin:menu:list', null);
-INSERT INTO `sys_menu` VALUES ('d92317198c6d4e25b89fac0c56efab4b', '申请制单', '9002fd35e9064e5ba7c6ebefec612337', null, '1', '', null, '1', null, null);
+INSERT INTO `sys_menu` VALUES ('d18dc65e5cd9478990d8a7d317b53840', '代码生成', '5991ab2c3e14459f840f4c6ad27c8c69', null, '1', '', null, '1', null, '/admin/generator/getListPage');
 INSERT INTO `sys_menu` VALUES ('da92bb0b66404db38346005d2edf40d1', '工作计划', '2fdffbd68dd74942ad50a52f0f3a56cb', null, '6', 'ti-layers', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('db32e77d676a4427aa890cba368bd092', '查询', 'b93ccac6f62e43b38fd76d158b69d49e', null, '1', '', null, '0', null, null);
 INSERT INTO `sys_menu` VALUES ('dc3898c989a24e69a1f2a8d109f330ac', '栏目管理', '238688ff8048470fb653031b260968ff', null, '1', '', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('df68534e9b0c4b8a87bee724e5b85399', '修改', '1e53c84f98554d03a84c570b904738bc', null, '2', '', null, '0', null, null);
 INSERT INTO `sys_menu` VALUES ('e0d392c88f3b4526a1fdfdb829f64ae2', '我的相册', 'bec02fd65e22416cb74fa48db665028e', null, '2', 'ti-camera', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('eaeb96d2afd245bea237e4e1a4d412b7', '删除', '5e94601e6981471bad51720e2bc88b0f', null, '3', null, null, '0', 'admin:user:delete', null);
-INSERT INTO `sys_menu` VALUES ('eafb638f24b7424f8bfb5ad15d4e9a32', '查询', '396414867f9440a88bb40e15bf8e3925', null, '1', null, null, '0', 'admin:org:list', null);
-INSERT INTO `sys_menu` VALUES ('eb092364e77348ad93c8a1594263bd4f', '用章审批', '9002fd35e9064e5ba7c6ebefec612337', null, '2', '', null, '1', null, null);
 INSERT INTO `sys_menu` VALUES ('eb43a2accb2e46689fbfbbb08b31ca61', '考勤管理', '2fdffbd68dd74942ad50a52f0f3a56cb', null, '7', 'ti-zip', null, '1', null, null);
 INSERT INTO `sys_menu` VALUES ('ed88adeda00d4ddcad1e544ef09f2044', '系统管理', '#root', null, '4', '', '系统管理', '1', null, null);
 INSERT INTO `sys_menu` VALUES ('f2bf32b4772c438781cb841f68ca424e', '考勤统计', 'eb43a2accb2e46689fbfbbb08b31ca61', null, '2', '', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('f2df619cd9d24321bb29e76c59a5df60', '修改', 'f3bd49e93c534d779a522a493c2e3afc', null, '2', '', null, '0', null, null);
 INSERT INTO `sys_menu` VALUES ('f3bd49e93c534d779a522a493c2e3afc', '内容管理', '29ffc31c67254bfe80618e0171704540', null, '1', '', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('f5dcb8389b964bb5a1dc28d369df2851', '修改', 'dc3898c989a24e69a1f2a8d109f330ac', null, '2', '', null, '0', null, null);
-INSERT INTO `sys_menu` VALUES ('fd4d2c190aba4186b03e7cc0f73eee56', '转发审核', '5ad222efc1954c3eb22b1177722bc9db', null, '2', '', null, '1', null, null);
 INSERT INTO `sys_menu` VALUES ('fe517e4a7ada4046b058f3b3f11b3216', '发文审批', '12d152d562e74eda9974959a48687040', null, '2', '', null, '1', null, '/admin/bumph/getToDoPage');
 
 -- ----------------------------
@@ -1256,107 +1260,71 @@ CREATE TABLE `sys_role_auth` (
 -- ----------------------------
 -- Records of sys_role_auth
 -- ----------------------------
-INSERT INTO `sys_role_auth` VALUES ('0330f319e0184c458b561704bf943ba7', '8a40c0353fa828a6013fa898d4ac0023', 'ce19ced66a4d42afafe0416169001597');
-INSERT INTO `sys_role_auth` VALUES ('039b8b5c823449e18ae31247390d4a67', '8a40c0353fa828a6013fa898d4ac0023', '735648c369174d87899efd6169125c67');
+INSERT INTO `sys_role_auth` VALUES ('01a323dde54445ac93a291259eace93a', '8a40c0353fa828a6013fa898d4ac0023', '3f3c021b2dc64817b9d2ea3772d736aa');
 INSERT INTO `sys_role_auth` VALUES ('047a24e0e9ad4e63843d9babcccb8474', 'c65364171504454daa4c614f5d941848', '1d362c1f895a481e92731f7a9b7e9e5e');
-INSERT INTO `sys_role_auth` VALUES ('07e397edd7e44617bd2adf0484139292', '8a40c0353fa828a6013fa898d4ac0023', 'af28bc606b274f3b85bd372cd071782d');
-INSERT INTO `sys_role_auth` VALUES ('0b73057127754b4a9ad3fb15da763a2d', '8a40c0353fa828a6013fa898d4ac0023', 'bec02fd65e22416cb74fa48db665028e');
-INSERT INTO `sys_role_auth` VALUES ('10ea4750eaa44371b68d5bff34f8ce6b', '8a40c0353fa828a6013fa898d4ac0023', 'd7ca5370bb4c47fba2eae8763e1cdb3d');
+INSERT INTO `sys_role_auth` VALUES ('14602c21c244433db3c367cffd6f0e3f', '8a40c0353fa828a6013fa898d4ac0023', '22');
+INSERT INTO `sys_role_auth` VALUES ('14625b89acfc4e76b516a9c2dabd756c', '8a40c0353fa828a6013fa898d4ac0023', '2fdffbd68dd74942ad50a52f0f3a56cb');
 INSERT INTO `sys_role_auth` VALUES ('15ea22f252c24ceaaafdc400749efc1a', 'c65364171504454daa4c614f5d941848', '42');
-INSERT INTO `sys_role_auth` VALUES ('183f21af489c425dbdd702681731d472', '8a40c0353fa828a6013fa898d4ac0023', 'b3058e8bf64541d684e9660be7e8a4ef');
-INSERT INTO `sys_role_auth` VALUES ('1bf850277da64382a0b62139b0654ed6', '8a40c0353fa828a6013fa898d4ac0023', '396414867f9440a88bb40e15bf8e3925');
-INSERT INTO `sys_role_auth` VALUES ('1c48d31ee302421887c077345475f18c', '8a40c0353fa828a6013fa898d4ac0023', '2fdffbd68dd74942ad50a52f0f3a56cb');
-INSERT INTO `sys_role_auth` VALUES ('1e319d0363e24435bb05168e14ace9d9', '8a40c0353fa828a6013fa898d4ac0023', 'c7f22e1471a5484187eb40f035d8839d');
-INSERT INTO `sys_role_auth` VALUES ('239442d4806b430ab2485fdc543c7a0c', '8a40c0353fa828a6013fa898d4ac0023', '12d152d562e74eda9974959a48687040');
+INSERT INTO `sys_role_auth` VALUES ('16238dd240e3496ea4adcfd84270bf31', '8a40c0353fa828a6013fa898d4ac0023', 'da92bb0b66404db38346005d2edf40d1');
+INSERT INTO `sys_role_auth` VALUES ('16da24d50cde4b549d08581671341ef6', '8a40c0353fa828a6013fa898d4ac0023', 'ba50ce6094004e79a6df9fcd7fffc987');
+INSERT INTO `sys_role_auth` VALUES ('2360e03756aa46ae9315435d6e1313ba', '8a40c0353fa828a6013fa898d4ac0023', '714d63b7e1014c1a9faf7bd29e876f27');
+INSERT INTO `sys_role_auth` VALUES ('245030131f0047f59dcf151ed1909bba', '8a40c0353fa828a6013fa898d4ac0023', 'e0d392c88f3b4526a1fdfdb829f64ae2');
 INSERT INTO `sys_role_auth` VALUES ('24c9b4bcf02b4727ae03e6adb32e6c2a', 'c65364171504454daa4c614f5d941848', 'ce19ced66a4d42afafe0416169001597');
-INSERT INTO `sys_role_auth` VALUES ('268674ab8ced4bfa84fafaac4a6c094f', '8a40c0353fa828a6013fa898d4ac0023', 'eaeb96d2afd245bea237e4e1a4d412b7');
-INSERT INTO `sys_role_auth` VALUES ('26d026bc12fd40a0a8728d5e298193e0', '8a40c0353fa828a6013fa898d4ac0023', '3f3c021b2dc64817b9d2ea3772d736aa');
 INSERT INTO `sys_role_auth` VALUES ('276259cab62342059afa099759efbf43', 'c65364171504454daa4c614f5d941848', '85017c2610c246cbab0d76f22c8fcaf1');
-INSERT INTO `sys_role_auth` VALUES ('281b99812c0d4388b0017eaba61af162', '8a40c0353fa828a6013fa898d4ac0023', 'fd4d2c190aba4186b03e7cc0f73eee56');
-INSERT INTO `sys_role_auth` VALUES ('2a53cd82d6d54b25bd4105e876c6b12f', '8a40c0353fa828a6013fa898d4ac0023', 'eb092364e77348ad93c8a1594263bd4f');
-INSERT INTO `sys_role_auth` VALUES ('2cd8013d99044a2c83c375b6a349c83e', '8a40c0353fa828a6013fa898d4ac0023', 'bb4f108e541c4971818280fb9c131cc1');
-INSERT INTO `sys_role_auth` VALUES ('2f1257dc01d84690a96990a3bb8bfd63', '8a40c0353fa828a6013fa898d4ac0023', '42');
-INSERT INTO `sys_role_auth` VALUES ('310d5d8bbfea4999b728b2a005cc7c65', '8a40c0353fa828a6013fa898d4ac0023', '14ff83d0b3324bbe8dc476b42dcb1069');
-INSERT INTO `sys_role_auth` VALUES ('3297cc8b5a8e4c14ae4007ee731de139', '8a40c0353fa828a6013fa898d4ac0023', '2f28dd6b2f354715844b676524b1da47');
-INSERT INTO `sys_role_auth` VALUES ('3b400f72148a4bb9ac74fb697a33bdec', '8a40c0353fa828a6013fa898d4ac0023', '1');
-INSERT INTO `sys_role_auth` VALUES ('3ca72be9ce724980968b6b2b33729de9', '8a40c0353fa828a6013fa898d4ac0023', '19cfd309feed481585980ecca724b234');
-INSERT INTO `sys_role_auth` VALUES ('3e507640c53f42aca7f5ecfee267a17b', '8a40c0353fa828a6013fa898d4ac0023', 'dc3898c989a24e69a1f2a8d109f330ac');
-INSERT INTO `sys_role_auth` VALUES ('3e69261d2e1f4213baf5e719cfbe3f6c', '8a40c0353fa828a6013fa898d4ac0023', '8d0d76068c1a4a1585bd6c649d9a89d7');
-INSERT INTO `sys_role_auth` VALUES ('3fa225535f1348a2b91fe705ccc2f29e', '8a40c0353fa828a6013fa898d4ac0023', 'd92317198c6d4e25b89fac0c56efab4b');
-INSERT INTO `sys_role_auth` VALUES ('4277d31c09884f3e8ed4cfc0870971b6', '8a40c0353fa828a6013fa898d4ac0023', 'c27b1a054ed84b4193208a33dca8ca1c');
-INSERT INTO `sys_role_auth` VALUES ('4900aed8abe5497c8aee25e571a14be0', '8a40c0353fa828a6013fa898d4ac0023', '04fc413feffa47c09327464cf00dc5f3');
-INSERT INTO `sys_role_auth` VALUES ('4c6d86c10ea44a1a8751f8eee1ea973b', '8a40c0353fa828a6013fa898d4ac0023', '85017c2610c246cbab0d76f22c8fcaf1');
-INSERT INTO `sys_role_auth` VALUES ('4d21465fc0b54894ab9abb3535d5dea0', '8a40c0353fa828a6013fa898d4ac0023', '929a17d55e434418bfdbd18247bc267f');
-INSERT INTO `sys_role_auth` VALUES ('534c458d906245e98e73739fb5716b47', '8a40c0353fa828a6013fa898d4ac0023', 'da92bb0b66404db38346005d2edf40d1');
-INSERT INTO `sys_role_auth` VALUES ('5521da73213c4e58861a5fca2acc90cf', '8a40c0353fa828a6013fa898d4ac0023', '714d63b7e1014c1a9faf7bd29e876f27');
-INSERT INTO `sys_role_auth` VALUES ('57b1210b1d3d43afb5d65b39c466f56f', '8a40c0353fa828a6013fa898d4ac0023', '8d02ac12f7744e13a5c3d34ebeb442ff');
-INSERT INTO `sys_role_auth` VALUES ('57ef8d404b9047728be03a8fc4909ad6', '8a40c0353fa828a6013fa898d4ac0023', 'eafb638f24b7424f8bfb5ad15d4e9a32');
-INSERT INTO `sys_role_auth` VALUES ('58df8cfc5f354073ace86d207d78f039', '8a40c0353fa828a6013fa898d4ac0023', '525b8647d2fb4d458a76f26270e59943');
+INSERT INTO `sys_role_auth` VALUES ('35272d9a5f79434cad163c7bc2a21203', '8a40c0353fa828a6013fa898d4ac0023', '54f7f159f8c94e1fa1e90065eb336784');
+INSERT INTO `sys_role_auth` VALUES ('3d7b630f888f4fc483161084550c4f99', '8a40c0353fa828a6013fa898d4ac0023', '1');
+INSERT INTO `sys_role_auth` VALUES ('3d977c1095f54533a7bfae55c45f2dd6', '8a40c0353fa828a6013fa898d4ac0023', '3fff3fd1dfc4438f955d4bf2d72ff679');
+INSERT INTO `sys_role_auth` VALUES ('4c10e16b77e844abacf318e8c14dfac9', '8a40c0353fa828a6013fa898d4ac0023', '525b8647d2fb4d458a76f26270e59943');
+INSERT INTO `sys_role_auth` VALUES ('4c4137505b564f858d27ac032fb6ed1f', '8a40c0353fa828a6013fa898d4ac0023', '#root');
+INSERT INTO `sys_role_auth` VALUES ('51d43fd094de422e9e19244352c145a4', '8a40c0353fa828a6013fa898d4ac0023', 'd18dc65e5cd9478990d8a7d317b53840');
+INSERT INTO `sys_role_auth` VALUES ('55aa37b9efbe4fd787e4dd605fe8a585', '8a40c0353fa828a6013fa898d4ac0023', '1d362c1f895a481e92731f7a9b7e9e5e');
+INSERT INTO `sys_role_auth` VALUES ('593a1acba48c42e3a268dceada6a65de', '8a40c0353fa828a6013fa898d4ac0023', 'b93ccac6f62e43b38fd76d158b69d49e');
 INSERT INTO `sys_role_auth` VALUES ('5b29bb8d186847549366d36d46ba52e7', 'c65364171504454daa4c614f5d941848', 'df68534e9b0c4b8a87bee724e5b85399');
-INSERT INTO `sys_role_auth` VALUES ('5d1dadf69f5b4ba9bcf923889e9739da', '8a40c0353fa828a6013fa898d4ac0023', 'db32e77d676a4427aa890cba368bd092');
+INSERT INTO `sys_role_auth` VALUES ('5f246d32476c4ded9e8ab7416f765043', '8a40c0353fa828a6013fa898d4ac0023', '238688ff8048470fb653031b260968ff');
 INSERT INTO `sys_role_auth` VALUES ('64c6c3bae76b48e7b9a02b6b669de55d', 'c65364171504454daa4c614f5d941848', 'b93ccac6f62e43b38fd76d158b69d49e');
-INSERT INTO `sys_role_auth` VALUES ('6542e1e2260148c8b539d43eeec10c5a', '8a40c0353fa828a6013fa898d4ac0023', '17c7cac8e44f42bb86ccf2cd889a6f15');
-INSERT INTO `sys_role_auth` VALUES ('6775eb530f2b442081b4c1430452c30a', '8a40c0353fa828a6013fa898d4ac0023', '22');
-INSERT INTO `sys_role_auth` VALUES ('6c55697b7ea942d79d3d62596803b059', '8a40c0353fa828a6013fa898d4ac0023', 'f2bf32b4772c438781cb841f68ca424e');
+INSERT INTO `sys_role_auth` VALUES ('673ec3679e2a42dc8b19802fbfbb6e66', '8a40c0353fa828a6013fa898d4ac0023', '011c41bf7cba494d8292fe98819a3699');
+INSERT INTO `sys_role_auth` VALUES ('6b8a73e11ddf46d8b8303be8d825b429', '8a40c0353fa828a6013fa898d4ac0023', '12d152d562e74eda9974959a48687040');
+INSERT INTO `sys_role_auth` VALUES ('6d39d17bc96f4aecbc06f4178657aeb6', '8a40c0353fa828a6013fa898d4ac0023', '5e94601e6981471bad51720e2bc88b0f');
 INSERT INTO `sys_role_auth` VALUES ('6d87b1d544a8446089094ef89ae35279', 'c65364171504454daa4c614f5d941848', 'ba50ce6094004e79a6df9fcd7fffc987');
-INSERT INTO `sys_role_auth` VALUES ('773a55f03bf84423be6861d987c295ff', '8a40c0353fa828a6013fa898d4ac0023', '6560e703724f43758833655efb819d6f');
-INSERT INTO `sys_role_auth` VALUES ('77bcce14c43b47ec9193d468991812cc', '8a40c0353fa828a6013fa898d4ac0023', 'a0a1acf979e6475f85fb7581d94c0cbc');
+INSERT INTO `sys_role_auth` VALUES ('6ebd523e85aa4ae586bb56c6b836c47e', '8a40c0353fa828a6013fa898d4ac0023', 'bec02fd65e22416cb74fa48db665028e');
+INSERT INTO `sys_role_auth` VALUES ('772d7804be834d9bbb8d6c5216d8bce6', '8a40c0353fa828a6013fa898d4ac0023', 'eb43a2accb2e46689fbfbbb08b31ca61');
 INSERT INTO `sys_role_auth` VALUES ('79dff52a996343ada796ff7a04ffad1f', 'c65364171504454daa4c614f5d941848', '#root');
-INSERT INTO `sys_role_auth` VALUES ('7bc9095e33d040a19b30e1ef300d6b4f', '8a40c0353fa828a6013fa898d4ac0023', '3f4bf4bfffcb49b4974d8bdd53cef366');
-INSERT INTO `sys_role_auth` VALUES ('7caf3c73df7e48be880893c3c70eaeef', '8a40c0353fa828a6013fa898d4ac0023', '4');
-INSERT INTO `sys_role_auth` VALUES ('7f4c4383c09d44cd8df0dbfd6a57dd6e', '8a40c0353fa828a6013fa898d4ac0023', 'df68534e9b0c4b8a87bee724e5b85399');
-INSERT INTO `sys_role_auth` VALUES ('7f608766a5594cc1b96ebb842ba7fced', '8a40c0353fa828a6013fa898d4ac0023', 'bd9e15ec237349e0b47e998e924047a5');
 INSERT INTO `sys_role_auth` VALUES ('7fd22f480fec4ef49c626dc66941f3e9', 'c65364171504454daa4c614f5d941848', '6560e703724f43758833655efb819d6f');
 INSERT INTO `sys_role_auth` VALUES ('80ad017539a84045b70047036c1751fa', 'c65364171504454daa4c614f5d941848', '8d02ac12f7744e13a5c3d34ebeb442ff');
+INSERT INTO `sys_role_auth` VALUES ('82540394fda9458084d99b72636b5a04', '8a40c0353fa828a6013fa898d4ac0023', '42');
 INSERT INTO `sys_role_auth` VALUES ('8515dadf3635485b8b4603aa98ddac3c', 'c65364171504454daa4c614f5d941848', '04fc413feffa47c09327464cf00dc5f3');
-INSERT INTO `sys_role_auth` VALUES ('8518fccbe02a4317ae606a22af3fe1b9', '8a40c0353fa828a6013fa898d4ac0023', '28bf0178593d4ffe83b8b3aebb9cea87');
-INSERT INTO `sys_role_auth` VALUES ('8768b05e879942be87a9f838ed977a4a', '8a40c0353fa828a6013fa898d4ac0023', 'b93ccac6f62e43b38fd76d158b69d49e');
-INSERT INTO `sys_role_auth` VALUES ('88bca22afacc46559a46f30c80c059d5', '8a40c0353fa828a6013fa898d4ac0023', '33dfe1d14dcb4f58aa9f5bbd33b6232c');
-INSERT INTO `sys_role_auth` VALUES ('8adf72435fdc4017b3bd8cbfbfec989a', '8a40c0353fa828a6013fa898d4ac0023', '577b927f1b584ab7a91e0339cf055bc1');
+INSERT INTO `sys_role_auth` VALUES ('85c6b4b287084e8b8aeaa36c73f2252e', '8a40c0353fa828a6013fa898d4ac0023', 'fe517e4a7ada4046b058f3b3f11b3216');
+INSERT INTO `sys_role_auth` VALUES ('8e013045e9db4cb4a8f6af273a16972d', '8a40c0353fa828a6013fa898d4ac0023', 'af28bc606b274f3b85bd372cd071782d');
+INSERT INTO `sys_role_auth` VALUES ('8f4e0a4fcf89491d9636043e04b5d49f', '8a40c0353fa828a6013fa898d4ac0023', '2be45266b2e54779ba3f998ba5c6fa82');
+INSERT INTO `sys_role_auth` VALUES ('929807b2067f4f90bad3f0bdf2d110bd', '8a40c0353fa828a6013fa898d4ac0023', 'f2bf32b4772c438781cb841f68ca424e');
 INSERT INTO `sys_role_auth` VALUES ('933e2536a4a74ba9b7723b2e54a31e47', 'c65364171504454daa4c614f5d941848', '28bf0178593d4ffe83b8b3aebb9cea87');
 INSERT INTO `sys_role_auth` VALUES ('955c539719f5429cb5172a2e539ed247', 'c65364171504454daa4c614f5d941848', 'ed88adeda00d4ddcad1e544ef09f2044');
-INSERT INTO `sys_role_auth` VALUES ('959d582bf5d74d0e8335e61295345107', '8a40c0353fa828a6013fa898d4ac0023', '109881b8a1204a97bb525eca435cc1c7');
 INSERT INTO `sys_role_auth` VALUES ('a1cc6c2ba02d459698802fb0e5ac0c88', 'c65364171504454daa4c614f5d941848', 'fe517e4a7ada4046b058f3b3f11b3216');
-INSERT INTO `sys_role_auth` VALUES ('a410ba7977a241ee93307dade3337e81', '8a40c0353fa828a6013fa898d4ac0023', '2be45266b2e54779ba3f998ba5c6fa82');
-INSERT INTO `sys_role_auth` VALUES ('a8bc3242814746bdb6e566ca9f4df3af', '8a40c0353fa828a6013fa898d4ac0023', '54f7f159f8c94e1fa1e90065eb336784');
-INSERT INTO `sys_role_auth` VALUES ('a9f66ef5096144a79b17c6cc92ec78be', '8a40c0353fa828a6013fa898d4ac0023', '5e94601e6981471bad51720e2bc88b0f');
-INSERT INTO `sys_role_auth` VALUES ('aabc0b5ec02049739d812fb8c2eb597b', '8a40c0353fa828a6013fa898d4ac0023', 'ed88adeda00d4ddcad1e544ef09f2044');
-INSERT INTO `sys_role_auth` VALUES ('ae9bb3b17ac54658a3d5aa75e5d4b51b', '8a40c0353fa828a6013fa898d4ac0023', '402ccbe4cbe2475aad30210db76f1d58');
-INSERT INTO `sys_role_auth` VALUES ('aead4a5bb3cf40d59dadfa518bbbe6cc', '8a40c0353fa828a6013fa898d4ac0023', '1e53c84f98554d03a84c570b904738bc');
-INSERT INTO `sys_role_auth` VALUES ('b916a165fa774b59a0b1c77399540fdb', '8a40c0353fa828a6013fa898d4ac0023', 'eb43a2accb2e46689fbfbbb08b31ca61');
-INSERT INTO `sys_role_auth` VALUES ('bd972260f57c4c61ae03ea0d1af2f3e2', '8a40c0353fa828a6013fa898d4ac0023', '#root');
+INSERT INTO `sys_role_auth` VALUES ('a688b16662724db8993fbc14b7a8d4a2', '8a40c0353fa828a6013fa898d4ac0023', '9002fd35e9064e5ba7c6ebefec612337');
+INSERT INTO `sys_role_auth` VALUES ('a9232b94d9fb407183242dd0b44804e4', '8a40c0353fa828a6013fa898d4ac0023', '4');
+INSERT INTO `sys_role_auth` VALUES ('b700db6a09fc478e87d545bedd05275d', '8a40c0353fa828a6013fa898d4ac0023', '109881b8a1204a97bb525eca435cc1c7');
+INSERT INTO `sys_role_auth` VALUES ('ba182ce9d7b94b1bb0c810d2d9e5d92c', '8a40c0353fa828a6013fa898d4ac0023', 'c27b1a054ed84b4193208a33dca8ca1c');
+INSERT INTO `sys_role_auth` VALUES ('ba1c1129dbb04ae78cb992c7e97968ae', '8a40c0353fa828a6013fa898d4ac0023', '5991ab2c3e14459f840f4c6ad27c8c69');
 INSERT INTO `sys_role_auth` VALUES ('c14362f024d242c994e658e5e24110be', 'c65364171504454daa4c614f5d941848', 'a0a1acf979e6475f85fb7581d94c0cbc');
 INSERT INTO `sys_role_auth` VALUES ('c1b866f5cb6c42f3aa9b32d4618f25c4', 'c65364171504454daa4c614f5d941848', '3fc17bea832140b9b3737b701b80b0f8');
-INSERT INTO `sys_role_auth` VALUES ('c2db30df5c2e4031a9b587ecf3d5b5e5', '8a40c0353fa828a6013fa898d4ac0023', '21829e1db2d94a6ab7b2e3b62b27afaf');
-INSERT INTO `sys_role_auth` VALUES ('c7d9ccd36f48445699126e5fe8a68866', '8a40c0353fa828a6013fa898d4ac0023', 'f3bd49e93c534d779a522a493c2e3afc');
+INSERT INTO `sys_role_auth` VALUES ('c2a385834190476c8307c848bc472934', '8a40c0353fa828a6013fa898d4ac0023', 'dc3898c989a24e69a1f2a8d109f330ac');
+INSERT INTO `sys_role_auth` VALUES ('c5e9ed53d81f44f0b56a12eee973dc58', '8a40c0353fa828a6013fa898d4ac0023', '29ffc31c67254bfe80618e0171704540');
 INSERT INTO `sys_role_auth` VALUES ('c8c8a8590b9a4cbfad1522ae8dfaa861', 'c65364171504454daa4c614f5d941848', '4');
 INSERT INTO `sys_role_auth` VALUES ('c90138374eef4b7c83ebb2af535407d5', 'c65364171504454daa4c614f5d941848', '1e53c84f98554d03a84c570b904738bc');
 INSERT INTO `sys_role_auth` VALUES ('c9a442a164de4c65a8d9c16e3e9b0da6', 'c65364171504454daa4c614f5d941848', '577b927f1b584ab7a91e0339cf055bc1');
-INSERT INTO `sys_role_auth` VALUES ('c9c206f7ce944274b89245ae9c263abd', '8a40c0353fa828a6013fa898d4ac0023', 'e0d392c88f3b4526a1fdfdb829f64ae2');
-INSERT INTO `sys_role_auth` VALUES ('ced95dc0a78b4cef90782186d4962e84', '8a40c0353fa828a6013fa898d4ac0023', 'fe517e4a7ada4046b058f3b3f11b3216');
-INSERT INTO `sys_role_auth` VALUES ('d26274f7d5fe44a29a17dd775788c263', '8a40c0353fa828a6013fa898d4ac0023', '0f575d3267254ed495e3446237026549');
-INSERT INTO `sys_role_auth` VALUES ('d2fb6702facf4ecd9736d09cf17a759a', '8a40c0353fa828a6013fa898d4ac0023', 'ba50ce6094004e79a6df9fcd7fffc987');
+INSERT INTO `sys_role_auth` VALUES ('cf7bb9520c484b7a89b84e2505e84cbd', '8a40c0353fa828a6013fa898d4ac0023', 'f3bd49e93c534d779a522a493c2e3afc');
 INSERT INTO `sys_role_auth` VALUES ('d4d5cca80b6947e286049b871bfe967c', 'c65364171504454daa4c614f5d941848', 'c7f22e1471a5484187eb40f035d8839d');
-INSERT INTO `sys_role_auth` VALUES ('d87accefe07249f2b2abdbe124657244', '8a40c0353fa828a6013fa898d4ac0023', 'f2df619cd9d24321bb29e76c59a5df60');
-INSERT INTO `sys_role_auth` VALUES ('d87d8afc369e488e95fd1b8184a87348', '8a40c0353fa828a6013fa898d4ac0023', '342f8d641b9f40ddaa989e5a750dd5c6');
-INSERT INTO `sys_role_auth` VALUES ('db0094e0695f4e118da291e750337792', '8a40c0353fa828a6013fa898d4ac0023', '9853a796499b47e0a14e43517fd9a494');
-INSERT INTO `sys_role_auth` VALUES ('dfe9c5ad0f344c18b3e2f64a62d92c20', '8a40c0353fa828a6013fa898d4ac0023', '5ad222efc1954c3eb22b1177722bc9db');
+INSERT INTO `sys_role_auth` VALUES ('d563c6db40a74e87aa0c9073240111b4', '8a40c0353fa828a6013fa898d4ac0023', '396414867f9440a88bb40e15bf8e3925');
+INSERT INTO `sys_role_auth` VALUES ('dcf633e957e9431dbd4169e499ca53bc', '8a40c0353fa828a6013fa898d4ac0023', '2');
 INSERT INTO `sys_role_auth` VALUES ('dfe9e5fae0574ce2a01244da15584064', 'c65364171504454daa4c614f5d941848', '12d152d562e74eda9974959a48687040');
-INSERT INTO `sys_role_auth` VALUES ('e4557ab514ed43d3b0ab7aea1f490960', '8a40c0353fa828a6013fa898d4ac0023', '2');
 INSERT INTO `sys_role_auth` VALUES ('e4d8da53d5034ec2894f01f17f9f3cae', 'c65364171504454daa4c614f5d941848', '54f7f159f8c94e1fa1e90065eb336784');
-INSERT INTO `sys_role_auth` VALUES ('e62fa42526404ee79745d3bb34e0e45c', '8a40c0353fa828a6013fa898d4ac0023', '9002fd35e9064e5ba7c6ebefec612337');
 INSERT INTO `sys_role_auth` VALUES ('e8b7d840e1b24c259d669add1ed748e5', 'c65364171504454daa4c614f5d941848', '33dfe1d14dcb4f58aa9f5bbd33b6232c');
 INSERT INTO `sys_role_auth` VALUES ('e99bbb294fd043ea8c7d533b415cba26', 'c65364171504454daa4c614f5d941848', 'db32e77d676a4427aa890cba368bd092');
-INSERT INTO `sys_role_auth` VALUES ('ec2e2a3ee9264821ac80ebbd401edba5', '8a40c0353fa828a6013fa898d4ac0023', '3fff3fd1dfc4438f955d4bf2d72ff679');
+INSERT INTO `sys_role_auth` VALUES ('e9f60b0a98ea407b9bb721d5dd29efa9', '8a40c0353fa828a6013fa898d4ac0023', '1e53c84f98554d03a84c570b904738bc');
 INSERT INTO `sys_role_auth` VALUES ('ece02e4c56f04a5f92397642218a001f', 'c65364171504454daa4c614f5d941848', '2be45266b2e54779ba3f998ba5c6fa82');
-INSERT INTO `sys_role_auth` VALUES ('f46ae4fbcea148afa278ca440ccdee6f', '8a40c0353fa828a6013fa898d4ac0023', '011c41bf7cba494d8292fe98819a3699');
 INSERT INTO `sys_role_auth` VALUES ('f48c37898ecb4e1da2d6a2031eb107f2', 'c65364171504454daa4c614f5d941848', '2fdffbd68dd74942ad50a52f0f3a56cb');
-INSERT INTO `sys_role_auth` VALUES ('f7d21433a08d4239ba447d68e3ba25c3', '8a40c0353fa828a6013fa898d4ac0023', '1d362c1f895a481e92731f7a9b7e9e5e');
-INSERT INTO `sys_role_auth` VALUES ('f9011216658e44ed93c403a7b12a9075', '8a40c0353fa828a6013fa898d4ac0023', '238688ff8048470fb653031b260968ff');
-INSERT INTO `sys_role_auth` VALUES ('f96518d84f9e45098a63b61d97a4df77', '8a40c0353fa828a6013fa898d4ac0023', 'f5dcb8389b964bb5a1dc28d369df2851');
-INSERT INTO `sys_role_auth` VALUES ('fa01739a7a274bf7b854886e2ba09833', '8a40c0353fa828a6013fa898d4ac0023', '3fc17bea832140b9b3737b701b80b0f8');
-INSERT INTO `sys_role_auth` VALUES ('fb6e0357accd4103a2609471c5068f9f', '8a40c0353fa828a6013fa898d4ac0023', '29ffc31c67254bfe80618e0171704540');
-INSERT INTO `sys_role_auth` VALUES ('fd94076137b741e0a26f73bf344dcecc', '8a40c0353fa828a6013fa898d4ac0023', '17551eaa81284535a7293b1e9b1e40db');
+INSERT INTO `sys_role_auth` VALUES ('f8e90afca3f340e9ac43e59aae31a9bc', '8a40c0353fa828a6013fa898d4ac0023', 'ed88adeda00d4ddcad1e544ef09f2044');
+INSERT INTO `sys_role_auth` VALUES ('fe81e80921374d8d8cd754e56b615cc0', '8a40c0353fa828a6013fa898d4ac0023', '402ccbe4cbe2475aad30210db76f1d58');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -1441,73 +1409,6 @@ CREATE TABLE `sys_user_role` (
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('68fc8a5dbbd840979eaa73ad24bc58d6', 'd44e967339b44e7090ce944432c4b1c0', 'c65364171504454daa4c614f5d941848');
 INSERT INTO `sys_user_role` VALUES ('d9f2a799ce0d47108c7fe70a0b219e62', '7ac6e4c544634e179f78803d5ba2d0ca', '8a40c0353fa828a6013fa898d4ac0023');
-
--- ----------------------------
--- Table structure for tax_user
--- ----------------------------
-DROP TABLE IF EXISTS `tax_user`;
-CREATE TABLE `tax_user` (
-  `id` varchar(32) COLLATE utf8_bin NOT NULL,
-  `username` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `password` varchar(500) COLLATE utf8_bin DEFAULT NULL,
-  `name` varchar(25) COLLATE utf8_bin DEFAULT NULL COMMENT '姓名',
-  `sex` varchar(1) COLLATE utf8_bin DEFAULT '1' COMMENT '0:女',
-  `status` char(1) COLLATE utf8_bin DEFAULT '1' COMMENT '0:禁用',
-  `orgid` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '部门ID',
-  `stationid` text COLLATE utf8_bin COMMENT '岗位ID',
-  `email` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `idcard` varchar(25) COLLATE utf8_bin DEFAULT NULL COMMENT '身份证号',
-  `is_admin` varchar(1) COLLATE utf8_bin DEFAULT '0' COMMENT '是否是管理员',
-  `sort` bigint(99) DEFAULT NULL,
-  `mobile` varchar(15) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `usernameindex` (`username`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
--- Records of tax_user
--- ----------------------------
-INSERT INTO `tax_user` VALUES ('7ac6e4c544634e179f78803d5ba2d0ca', 'admin', '$shiro1$SHA-256$500000$a/K3p1Mfd5fqjIEyLhMPZQ==$coTCpp+Ks+wO4ouWnWS+Gukkl26U52oUGI5AWk0ugKk=', '管理员', '1', '1', '641b22494b73468099685b50da0b8cdc', null, 'guanliyuan@qq.com', null, '0', '1', '18678837899');
-INSERT INTO `tax_user` VALUES ('c00aeba5714847dd9e5979d53cc73103', 'jinty', '$shiro1$SHA-256$500000$I9/IUUmUNRLxanN0yJc3fg==$W8JwvjS8JE84ydyOwfXNVIOrw7Wgnl5hfKPm8RoWkEU=', '金桐宇', '0', '1', '36fec324e7ea4b0e8258fdb90470481f', null, 'jintongyu@qq.com', null, '0', '2', '18975485525');
-INSERT INTO `tax_user` VALUES ('d44e967339b44e7090ce944432c4b1c0', 'li', '$shiro1$SHA-256$500000$d3KIfAtLHirN4X9r4AvxrA==$C3Hb2u/WTNudF0Tj0GP66qDavmGQtqYWnPRJAB+QTIY=', '李阳', '1', '1', '641b22494b73468099685b50da0b8cdc', null, 'liyang@qq.com', null, '0', '3', '15877774774');
-INSERT INTO `tax_user` VALUES ('ebc53b69032341338a77459eccae1974', 'test', '$shiro1$SHA-256$500000$fP6twUUoFYppKG6rQQYtkQ==$oYW70c1/35TKKaNiTsCKM6w5OT9EasjxUdZ4D2dYNDw=', '测试管理员', '1', '1', '641b22494b73468099685b50da0b8cdc', null, 'ceshiguanliyuan@qq.com', null, '0', '4', '18765847922');
-
--- ----------------------------
--- Table structure for tax_user_info
--- ----------------------------
-DROP TABLE IF EXISTS `tax_user_info`;
-CREATE TABLE `tax_user_info` (
-  `id` varchar(32) COLLATE utf8_bin NOT NULL,
-  `address` varchar(300) COLLATE utf8_bin DEFAULT NULL COMMENT '家庭住址',
-  `post_code` varchar(6) COLLATE utf8_bin DEFAULT NULL COMMENT '邮编',
-  `height` varchar(5) COLLATE utf8_bin DEFAULT NULL COMMENT '身高',
-  `weight` varchar(5) COLLATE utf8_bin DEFAULT NULL COMMENT '体重',
-  `birthday` date DEFAULT NULL COMMENT '出生日期',
-  `blood` varchar(15) COLLATE utf8_bin DEFAULT NULL COMMENT '血型',
-  `culture` varchar(30) COLLATE utf8_bin DEFAULT NULL COMMENT '文化程度',
-  `finish_school_date` date DEFAULT NULL,
-  `folk` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '民族',
-  `government` varchar(25) COLLATE utf8_bin DEFAULT NULL COMMENT '党员关系',
-  `homepage` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '个人主页',
-  `householder` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '户主',
-  `marriage` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '婚否',
-  `msn` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT 'MSN',
-  `nativity_address` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '出生地',
-  `qq` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT 'QQ',
-  `speciality` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '特长',
-  `description` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '描述信息',
-  `version` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `bloodgroupindex` (`blood`) USING BTREE,
-  KEY `msnindex` (`msn`) USING BTREE,
-  KEY `nativityaddressindex` (`nativity_address`) USING BTREE,
-  KEY `postboyindex` (`post_code`) USING BTREE,
-  KEY `specialityindex` (`speciality`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
--- Records of tax_user_info
--- ----------------------------
 
 -- ----------------------------
 -- View structure for v_tasklist
