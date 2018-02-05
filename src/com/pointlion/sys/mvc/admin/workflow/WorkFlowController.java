@@ -26,6 +26,7 @@ import com.pointlion.sys.mvc.common.model.ActReProcdef;
  */
 @Before(MainPageTitleInterceptor.class)
 public class WorkFlowController extends BaseController{
+	private static final WorkFlowService me = WorkFlowService.me;
 	/***
 	 * 流程页面
 	 */
@@ -104,7 +105,14 @@ public class WorkFlowController extends BaseController{
 		renderSuccess("删除成功");
 	}
 	
-	
+	/***
+	 * 删除流程实例
+	 */
+	public void deleteIns(){
+		String insid = getPara("insid");
+		me.deleteIns(insid);
+		renderSuccess();
+	}
 	
     /**************************************************************************/
 	private String pageTitle = "流程管理";//模块页面标题

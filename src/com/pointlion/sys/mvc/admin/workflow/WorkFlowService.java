@@ -259,4 +259,13 @@ public class WorkFlowService {
 	public List<Record> getHisTaskParter(String insid){
 		return Db.find("select i.*,u.name from act_hi_identitylink i,sys_user u where u.username=i.USER_ID_ AND PROC_INST_ID_='"+insid+"'");
 	}
+	
+	/***
+	 * 删除流程实例
+	 */
+	public void deleteIns(String procid){
+		ProcessEngine pe = ActivitiPlugin.buildProcessEngine();
+		pe.getRuntimeService().deleteProcessInstance(procid, "删除流程实例");
+    	pe.getHistoryService().deleteHistoricProcessInstance(procid);
+	}
 }

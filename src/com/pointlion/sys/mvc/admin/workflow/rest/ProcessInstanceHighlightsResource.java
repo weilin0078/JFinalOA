@@ -24,15 +24,17 @@ import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.history.HistoricActivityInstance;
+import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.pvm.PvmTransition;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
-import org.activiti.engine.runtime.ProcessInstance;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.sys.plugin.activiti.ActivitiPlugin;
 
 public class ProcessInstanceHighlightsResource extends Controller{
@@ -48,38 +50,32 @@ public class ProcessInstanceHighlightsResource extends Controller{
 
 	public void getHighlighted() {
 		String processInstanceId = getPara("processInstanceId");
-		 String callback = getPara("callback").toString();
-	  ObjectNode responseJSON = objectMapper.createObjectNode();
-		
+		String callback = getPara("callback").toString();
+		ObjectNode responseJSON = objectMapper.createObjectNode();
 		responseJSON.put("processInstanceId", processInstanceId);
-		
 		ArrayNode activitiesArray = objectMapper.createArrayNode();
 		ArrayNode flowsArray = objectMapper.createArrayNode();
-		
 		try {
-			ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+//			ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+			HistoricProcessInstance processInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
 			ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) repositoryService.getProcessDefinition(processInstance.getProcessDefinitionId());
-			
 			responseJSON.put("processDefinitionId", processInstance.getProcessDefinitionId());
-			
-			List<String> highLightedActivities = runtimeService.getActiveActivityIds(processInstanceId);
-			List<String> highLightedFlows = getHighLightedFlows(processDefinition, processInstanceId);
-			
-			for (String activityId : highLightedActivities) {
-				activitiesArray.add(activityId);
+			List<Record> list = Db.find("select * from act_ru_task t where t.PROC_INST_ID_='"+processInstanceId+"'");
+			if(list!=null&&list.size()>0){
+				List<String> highLightedActivities = runtimeService.getActiveActivityIds(processInstanceId);
+				for (String activityId : highLightedActivities) {
+					activitiesArray.add(activityId);
+				}
 			}
-			
+			List<String> highLightedFlows = getHighLightedFlows(processDefinition, processInstanceId);
 			for (String flow : highLightedFlows) {
 				flowsArray.add(flow);
 			}
-			
 		} catch (Exception e) {
 		  e.printStackTrace();
 		}
-		
 		responseJSON.put("activities", activitiesArray);
 		responseJSON.put("flows", flowsArray);
-		
 		renderJson(callback+"("+responseJSON.toString()+")");
 	}
 	
