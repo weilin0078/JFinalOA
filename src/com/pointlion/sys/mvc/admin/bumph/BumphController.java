@@ -177,7 +177,7 @@ public class BumphController extends BaseController {
     public void bumphToDoListData(){
     	String curr = getPara("pageNumber");
     	String pageSize = getPara("pageSize");
-    	Page<Record> page = service.getToDoPageByKey(Integer.valueOf(curr),Integer.valueOf(pageSize), ShiroKit.getUsername());
+    	Page<Record> page = wfservice.getToDoPageByKey(Integer.valueOf(curr),Integer.valueOf(pageSize),BumphConstants.BUSINESS_TABLENAME,BumphConstants.DEFKEY_BUMPH, ShiroKit.getUsername());
     	renderPage(page.getList(),"",page.getTotalRow());
     }
     /***

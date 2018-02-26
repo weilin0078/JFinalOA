@@ -19,6 +19,7 @@ public class #(className)Controller extends BaseController {
 	 * 列表页面
 	 */
 	public void getListPage(){
+		setBread("功能名称",this.getRequest().getServletPath(),"管理");
     	render("#(pageFilePath)/list.html");
     }
 	/***
@@ -67,13 +68,11 @@ public class #(className)Controller extends BaseController {
     }
     
     /**************************************************************************/
-	private String pageTitle = "请设置功能名称";//模块页面标题
-	private String breadHomeMethod = "getListPage";//面包屑首页方法
-	
-	public Map<String,String> getPageTitleBread() {
+	public void setBread(String name,String url,String nowBread){
 		Map<String,String> pageTitleBread = new HashMap<String,String>();
-		pageTitleBread.put("pageTitle", pageTitle);
-		pageTitleBread.put("breadHomeMethod", breadHomeMethod);
-		return pageTitleBread;
+		pageTitleBread.put("pageTitle", name);
+		pageTitleBread.put("url", url);
+		pageTitleBread.put("nowBread", nowBread);
+		this.setAttr("pageTitleBread", pageTitleBread);
 	}
 }

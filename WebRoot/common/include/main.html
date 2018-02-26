@@ -51,11 +51,22 @@
 				                                <i class="demo-pli-laptop text-main icon-3x"></i>
 				                            </div>
 				                            <div class="media-body">
-				                                <p class="text-main text-lg mar-no">来文转发</p>
-				                                <small>您收到<span class="padding-lr10 text-pink">0</span>条通知来文转发审批任务，请及时办理</small>
+				                                <p class="text-main text-lg mar-no">物品领用</p>
+				                                <small>您收到<span class="padding-lr10 text-pink">#(resGetList?resGetList.size():"0")</span>条内部发文审批任务，请及时办理</small>
 				                            </div>
 				                        </div>
-				                        <p>暂无任务......</p>
+				                        #if(resGetList&&resGetList.size()>0)
+					                        #for(t:resGetList)
+					                        	<p>
+					                        		<span class="text-success padding-lr10">#(t.title)</span>
+					                        		<small class="text-mint padding-lr10">#(t.get_user_name)</small>
+					                        		<small>#(t.create_time)</small>
+					                        	</p>
+					                        #end
+					                        <p><a class="text-primary" href="javascript:void(0)" onclick="doPjax('#(ctx)/admin/resget/getToDoPage')">查看全部</a></p>
+					                    #else
+					                    	<p>暂无任务......</p>
+				                        #end
 					                    
 					                    <div class="media" style="margin-bottom: 15px;">
 				                            <div class="media-left">

@@ -8,9 +8,11 @@ package com.pointlion.sys.mvc.admin.home;
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Record;
-import com.pointlion.sys.mvc.admin.bumph.BumphService;
+import com.pointlion.sys.mvc.admin.bumph.BumphConstants;
 import com.pointlion.sys.mvc.admin.login.SessionUtil;
 import com.pointlion.sys.mvc.admin.notice.NoticeService;
+import com.pointlion.sys.mvc.admin.resget.OaResGetConstants;
+import com.pointlion.sys.mvc.admin.workflow.WorkFlowService;
 import com.pointlion.sys.mvc.common.base.BaseController;
 import com.pointlion.sys.mvc.common.model.SysCustomSetting;
 import com.pointlion.sys.mvc.common.model.SysFriend;
@@ -24,7 +26,7 @@ import com.pointlion.sys.plugin.shiro.ext.SimpleUser;
  * 首页控制器
  */
 public class HomeController extends BaseController {
-	static BumphService bumphService = new BumphService();
+	static WorkFlowService workflowService = WorkFlowService.me;
 	static NoticeService noticeService = new NoticeService();
 	/***
 	 * 登陆成功获取首页
@@ -46,8 +48,11 @@ public class HomeController extends BaseController {
     	setAttr("userName", user.getName());//我的姓名
     	setAttr("userEmail", user.getEmail());//我的邮箱
     	//内部发文待办
-    	List<Record> BumphList = bumphService.getToDoListByKey(username);
-    	setAttr("BumphList", BumphList);
+    	List<Record> bumphList = workflowService.getToDoListByKey("oa_bumph",BumphConstants.DEFKEY_BUMPH,username);
+    	setAttr("BumphList", bumphList);
+    	//内部发文待办
+    	List<Record> resGetList = workflowService.getToDoListByKey("oa_res_get",OaResGetConstants.DEFKEY_RESGET,username);
+    	setAttr("resGetList", resGetList);
     	//获取首页通知公告
     	setAttr("NoticeList",noticeService.getMyNotice(user.getId()));
     	//查询所有有权限的菜单

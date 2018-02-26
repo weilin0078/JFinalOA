@@ -21,7 +21,7 @@ public class BumphFinishDeledate implements JavaDelegate{
 		ProcessInstance instance = ActivitiPlugin.buildProcessEngine().getRuntimeService().createProcessInstanceQuery().processInstanceId(execution.getProcessInstanceId()).singleResult();
 		String id = instance.getBusinessKey();
 		OaBumph bumph = OaBumph.dao.findById(id);
-		bumph.setIfComplete(BumphConstants.BUMPH_IF_COMPLETE_YES);
+		bumph.setIfComplete(BumphConstants.IF_COMPLETE_YES);
 		bumph.update();
 	}
 

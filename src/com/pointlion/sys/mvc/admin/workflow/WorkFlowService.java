@@ -33,6 +33,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.pointlion.sys.mvc.common.utils.Constants;
@@ -245,6 +246,28 @@ public class WorkFlowService {
 			var = new HashMap<String,Object>();
 		}
 		service.complete(taskid, var);
+	}
+	/***
+	 * 查询某人的所有公文待办
+	 * --首页使用
+	 */
+	public List<Record> getToDoListByKey(String tableName ,String key,String username){
+		String sql = "select * from v_tasklist t ,"+tableName+" b where t.INSID=b.proc_ins_id and  t.DEFKEY='"+key+"'";
+		if(StrKit.notBlank(username)){
+			sql = sql + " and (t.ASSIGNEE='"+username+"' or t.CANDIDATE='"+username+"')";
+		}
+		return Db.find(sql);
+	}
+	/***
+	 * 查询某人的待办条目
+	 * --管理页面使用
+	 */
+	public Page<Record> getToDoPageByKey(int pnum,int psize,String tableName,String key ,String username){
+		String sql = "select * from v_tasklist t ,"+tableName+" b ";
+		if(StrKit.notBlank(username)){
+			sql = sql + " and (t.ASSIGNEE='"+username+"' or t.CANDIDATE='"+username+"')";
+		}
+		return Db.paginate(pnum, psize, "select * "," from v_tasklist t ,"+tableName+" b where t.INSID=b.proc_ins_id and  t.DEFKEY='"+key+"'");
 	}
 	/***
 	 * 获取流转历史

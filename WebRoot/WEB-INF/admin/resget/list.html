@@ -43,6 +43,29 @@
 		       field: 'get_sum',
 		       title: '领用数量',
 		       align: 'center'
+		   }, {
+		       field: 'if_submit',
+		       title: '是否提交',
+		       align: 'center',
+		       formatter:function(value,row,index){
+		    	   if(value=='0'){//未提交
+		    		   return "未提交";
+		    	   }else{
+		    		   return "已提交";
+		    	   }
+		       }
+		   },
+		   {
+		       field: 'if_complete',
+		       title: '是否完成',
+		       align: 'center',
+		       formatter:function(value,row,index){
+		    	   if(value=='0'){//未提交
+		    		   return "未完成";
+		    	   }else{
+		    		   return "已完成";
+		    	   }
+		       }
 		   },
 		   {
 		       field: 'get_time',
@@ -64,7 +87,8 @@
 		           //value：当前field的值，即id
 		           //row：当前行的数据
 		           var a = '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/resget/getEditPage?id='+row.id+'\')" href="javascript:void(0);" >编辑</a>&nbsp;';
-						a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>';
+						a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>&nbsp;';
+						a = a + '<a class="label label-table label-success" onclick="startProcess(\''+row.id+'\')" href="javascript:void(0);" >提交</a>&nbsp;';
 		           return a;
 		       } 
 		   }];
@@ -149,6 +173,32 @@
 			}
 		});
 	};
+	//提交，启动流程
+	function startProcess(id){
+			pointLion.confimMsg("您将要提交该单据！并且启动流程<br/><span style='color:green;'>您将无法进行修改和删除！！！</span> <br/>点击确认进行提交 , 点击取消取消该操作",null,function(){
+				var data = common_ajax.ajaxFunc("/admin/resget/startProcess",{"id":id}, "json", null);
+				if(data.success){
+					pointLion.alertMsg(data.message,"success",null,function(){
+						doPjax(ctx+'/admin/resget/getDraftListPage');//跳转到列表页
+					});
+				}
+			});
+	}
+	//撤回
+	function callBack(id){
+		pointLion.confimMsg("您将要撤回该单据流程！<br/><span style='color:red;'>该操作将取回单据，您将可以对单据进行修改，并可将单据重新送交审批。</span> <br/>点击确认进行撤回单据 , 点击取消取消该操作",null,function(){
+			//执行删除
+			var data = common_ajax.ajaxFunc("/admin/bumph/callBack",{"id":id}, "json", null);
+			//删除结果
+			if(data.success){
+				pointLion.alertMsg(data.message,"success",null,function(){
+					doPjax(ctx+'/admin/bumph/getDraftListPage');//跳转到列表页
+				});
+			}else{
+				pointLion.alertMsg(data.message,"danger",null,null);
+			}
+		});
+	}
 	$(document).ready(function(){
 		initFullHeight();//初始化高度
 		initTable();//初始化

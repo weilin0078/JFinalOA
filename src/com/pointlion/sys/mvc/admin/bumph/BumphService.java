@@ -108,6 +108,7 @@ public class BumphService {
 		bumph.setIfSubmit(BumphConstants.IF_SUBMIT_YES);
 		bumph.update();
 	}
+	
 	@Before(Tx.class)
 	public void callBack(String id){
 		OaBumph bumph = OaBumph.dao.findById(id);
@@ -120,29 +121,6 @@ public class BumphService {
     	ProcessEngine pe = ActivitiPlugin.buildProcessEngine();
     	pe.getRuntimeService().deleteProcessInstance(procid, "删除流程实例");
     	pe.getHistoryService().deleteHistoricProcessInstance(procid);
-	}
-	
-	/***
-	 * 查询某人的所有公文待办
-	 * --首页使用
-	 */
-	public List<Record> getToDoListByKey(String username){
-		String sql = "select * from v_tasklist t ,oa_bumph b where t.INSID=b.proc_ins_id and  t.DEFKEY='"+BumphConstants.DEFKEY_BUMPH+"'";
-		if(StrKit.notBlank(username)){
-			sql = sql + " and (t.ASSIGNEE='"+username+"' or t.CANDIDATE='"+username+"')";
-		}
-		return Db.find(sql);
-	}
-	/***
-	 * 查询某人的待办条目
-	 * --管理页面使用
-	 */
-	public Page<Record> getToDoPageByKey(int pnum,int psize,String username){
-		String sql = "select * from v_tasklist t ,oa_bumph b ";
-		if(StrKit.notBlank(username)){
-			sql = sql + " and (t.ASSIGNEE='"+username+"' or t.CANDIDATE='"+username+"')";
-		}
-		return Db.paginate(pnum, psize, "select * "," from v_tasklist t ,oa_bumph b where t.INSID=b.proc_ins_id and  t.DEFKEY='"+BumphConstants.DEFKEY_BUMPH+"'");
 	}
 	
 	/***
@@ -214,4 +192,7 @@ public class BumphService {
 			return null;
 		}
 	}
+
+
+
 }

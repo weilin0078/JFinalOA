@@ -88,4 +88,36 @@ public abstract class BaseOaResGet<M extends BaseOaResGet<M>> extends Model<M> i
 	public java.lang.String getDes() {
 		return get("des");
 	}
+	
+	public void setIfSubmit(java.lang.String ifsubmit) {
+		set("if_submit", ifsubmit);
+	}
+
+	public java.lang.String getIfSubmit() {
+		return get("if_submit");
+	}
+	
+	public void setIfComplete(java.lang.String ifagree) {
+		set("if_complete", ifagree);
+	}
+
+	public java.lang.String getIfComplete() {
+		return get("if_complete");
+	}
+	
+	public void setIfAgree(java.lang.String ifagree) {
+		set("if_agree", ifagree);
+	}
+
+	public java.lang.String getIfAgree() {
+		return get("if_agree");
+	}
+	
+	public void setProcInsId(java.lang.String o) {
+		set("proc_ins_id", o);
+	}
+
+	public java.lang.String getProcInsId() {
+		return get("proc_ins_id");
+	}
 }
