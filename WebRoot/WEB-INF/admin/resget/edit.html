@@ -8,13 +8,6 @@
 		            <form id="editForm" class="panel-body form-horizontal form-padding">
 						<input type="hidden"  name="oaResGet.id" class="form-control" value="">
 			                <div class="form-group">
-			                    <label class="col-md-3 control-label" for="demo-text-input">主键</label>
-			                    <div class="col-md-9">
-			                        <input type="text"  name="oaResGet.id" class="form-control"  value="">
-			                        <small class="help-block">请输入主键</small>
-			                    </div>
-			                </div>
-			                <div class="form-group">
 			                    <label class="col-md-3 control-label" for="demo-text-input">标题</label>
 			                    <div class="col-md-9">
 			                        <input type="text"  name="oaResGet.title" class="form-control"  value="">
@@ -22,24 +15,30 @@
 			                    </div>
 			                </div>
 			                <div class="form-group">
-			                    <label class="col-md-3 control-label" for="demo-text-input">领用人</label>
-			                    <div class="col-md-9">
-			                        <input type="text"  name="oaResGet.get_user_id" class="form-control"  value="">
-			                        <small class="help-block">请输入领用人</small>
+			                	<label class="col-md-3 control-label" for="demo-text-input">领用数量</label>
+			                	<div class="col-md-3">
+			                        <select class="selectpicker" name="oaResGet.get_sum" #if(view=="detail") disabled #end>
+		                                <option value="1">1</option>
+		                                <option value="2">2</option>
+		                                <option value="3">3</option>
+		                                <option value="4">4</option>
+		                                <option value="5">5</option>
+		                                <option value="6">6</option>
+		                                <option value="7">7</option>
+		                                <option value="8">8</option>
+		                                <option value="9">9</option>
+		                                <option value="10">10</option>
+		                                <option value="11">11</option>
+		                                <option value="12">12</option>
+		                                <option value="13">13</option>
+		                                <option value="14">14</option>
+		                                <option value="15">15</option>
+		                            </select>
 			                    </div>
-			                </div>
-			                <div class="form-group">
-			                    <label class="col-md-3 control-label" for="demo-text-input">领用人名称</label>
-			                    <div class="col-md-9">
-			                        <input type="text"  name="oaResGet.get_user_name" class="form-control"  value="">
-			                        <small class="help-block">请输入领用人名称</small>
-			                    </div>
-			                </div>
-			                <div class="form-group">
-			                    <label class="col-md-3 control-label" for="demo-text-input">物品id</label>
-			                    <div class="col-md-9">
-			                        <input type="text"  name="oaResGet.res_id" class="form-control"  value="">
-			                        <small class="help-block">请输入物品id</small>
+			                    <label class="col-md-1 control-label" for="demo-text-input">领用人</label>
+			                    <div class="col-md-3">
+			                        <input type="hidden"  name="oaResGet.get_user_id" class="form-control"  value="#(username)">
+			                        <input type="text" disabled="disabled" name="oaResGet.get_user_name" class="form-control"  value="#(caption)">
 			                    </div>
 			                </div>
 			                <div class="form-group">
@@ -50,34 +49,20 @@
 			                    </div>
 			                </div>
 			                <div class="form-group">
-			                    <label class="col-md-3 control-label" for="demo-text-input">领用数量</label>
+			                    <label class="col-md-3 control-label" for="demo-text-input">领用原因</label>
 			                    <div class="col-md-9">
-			                        <input type="text"  name="oaResGet.get_sum" class="form-control"  value="">
-			                        <small class="help-block">请输入领用数量</small>
+					                <textarea rows="8" name="oaBumph.des" class="form-control">#(o?o.des:'')</textarea>
+			                        <small class="help-block">请输入领用原因</small>
 			                    </div>
 			                </div>
-			                <div class="form-group">
-			                    <label class="col-md-3 control-label" for="demo-text-input">领用时间</label>
-			                    <div class="col-md-9">
-			                        <input type="text"  name="oaResGet.get_time" class="form-control"  value="">
-			                        <small class="help-block">请输入领用时间</small>
+			                <div class="panel-footer">
+			                    <div class="row">
+			                        <div class="col-sm-9 col-sm-offset-3">
+			                            <button class="btn btn-warning" type="reset">重置</button>
+			                            <button class="btn btn-mint" type="submit" >保存</button>
+			                        </div>
 			                    </div>
 			                </div>
-			                <div class="form-group">
-			                    <label class="col-md-3 control-label" for="demo-text-input">归还时间</label>
-			                    <div class="col-md-9">
-			                        <input type="text"  name="oaResGet.back_time" class="form-control"  value="">
-			                        <small class="help-block">请输入归还时间</small>
-			                    </div>
-			                </div>
-		                <div class="panel-footer">
-		                    <div class="row">
-		                        <div class="col-sm-9 col-sm-offset-3">
-		                            <button class="btn btn-warning" type="reset">重置</button>
-		                            <button class="btn btn-mint" type="submit" >保存</button>
-		                        </div>
-		                    </div>
-		                </div>
 		            </form>
 		        </div>
 		    </div>
@@ -92,6 +77,7 @@
 			}
 		}
 		$(document).ready(function() {
+			$(".selectpicker").selectpicker({});
 			$('#editForm').bootstrapValidator({
 	            fields: {
 	            }

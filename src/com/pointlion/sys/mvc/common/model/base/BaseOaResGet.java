@@ -81,4 +81,11 @@ public abstract class BaseOaResGet<M extends BaseOaResGet<M>> extends Model<M> i
 		return get("back_time");
 	}
 
+	public void setDes(java.lang.String des) {
+		set("des", des);
+	}
+
+	public java.lang.String getDes() {
+		return get("des");
+	}
 }

@@ -30,6 +30,7 @@ public class GlobalHandler extends Handler {
 		SimpleUser user = ShiroKit.getLoginUser();
 		if(user!=null){
 			request.setAttribute("username", user.getUsername());//设置全局userid
+			request.setAttribute("caption", user.getName());//设置全局名称
 		}
 
 //		log.debug("设置Header");
