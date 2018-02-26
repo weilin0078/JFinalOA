@@ -50,6 +50,7 @@ public class BumphController extends BaseController {
     	Page<OaBumph> page = OaBumph.dao.getPage(Integer.valueOf(curr),Integer.valueOf(pageSize));
     	renderPage(page.getList(),"" ,page.getTotalRow());
     }
+    
 	/***
 	 * 编辑公文起草页面
 	 */
