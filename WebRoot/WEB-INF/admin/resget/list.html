@@ -20,11 +20,10 @@
                 </div>
 <script>
 	var col = [{
-	       field: 'checked',
-	       checkbox : true,
-	       align: 'center'
-	   },
-	   
+		       field: 'checked',
+		       checkbox : true,
+		       align: 'center'
+	   	   },
 		   {
 		       field: 'id',
 		       title: '主键',
@@ -36,23 +35,8 @@
 		       align: 'center'
 		   },
 		   {
-		       field: 'get_user_id',
-		       title: '领用人',
-		       align: 'center'
-		   },
-		   {
 		       field: 'get_user_name',
-		       title: '领用人名称',
-		       align: 'center'
-		   },
-		   {
-		       field: 'res_id',
-		       title: '物品id',
-		       align: 'center'
-		   },
-		   {
-		       field: 'res_name',
-		       title: '物品名称',
+		       title: '领用人',
 		       align: 'center'
 		   },
 		   {
@@ -70,22 +54,20 @@
 		       title: '归还时间',
 		       align: 'center'
 		   },
-	   
-	   
-	   {
-	       field: 'control',
-	       title: '操作',
-	       align: 'center',
-	       width:'440',
-	       formatter:function(value,row,index){
-	           //通过formatter可以自定义列显示的内容
-	           //value：当前field的值，即id
-	           //row：当前行的数据
-	           var a = '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/resget/getEditPage?id='+row.id+'\')" href="javascript:void(0);" >编辑</a>&nbsp;';
-					a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>';
-	           return a;
-	       } 
-	   }];
+		   {
+		       field: 'control',
+		       title: '操作',
+		       align: 'center',
+		       width:'440',
+		       formatter:function(value,row,index){
+		           //通过formatter可以自定义列显示的内容
+		           //value：当前field的值，即id
+		           //row：当前行的数据
+		           var a = '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/resget/getEditPage?id='+row.id+'\')" href="javascript:void(0);" >编辑</a>&nbsp;';
+						a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>';
+		           return a;
+		       } 
+		   }];
 	var opt = {
 		    //请求方法
 			   method: 'get',

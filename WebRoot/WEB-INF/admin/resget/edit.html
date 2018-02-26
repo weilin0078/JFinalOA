@@ -6,52 +6,52 @@
 		                <h3 class="panel-title">添加</h3>
 		            </div>
 		            <form id="editForm" class="panel-body form-horizontal form-padding">
-						<input type="hidden"  name="oaResGet.id" class="form-control" value="">
+						<input type="hidden"  name="oaResGet.id" class="form-control" value="#(o?o.id:'')">
 			                <div class="form-group">
 			                    <label class="col-md-3 control-label" for="demo-text-input">标题</label>
 			                    <div class="col-md-9">
-			                        <input type="text"  name="oaResGet.title" class="form-control"  value="">
+			                        <input type="text"  name="oaResGet.title" class="form-control"  value="#(o?o.title:'')">
 			                        <small class="help-block">请输入标题</small>
 			                    </div>
 			                </div>
 			                <div class="form-group">
-			                	<label class="col-md-3 control-label" for="demo-text-input">领用数量</label>
+			                	<label class="col-md-3 control-label" for="demo-text-input">领用数量#(o.get_sum)</label>
 			                	<div class="col-md-3">
 			                        <select class="selectpicker" name="oaResGet.get_sum" #if(view=="detail") disabled #end>
-		                                <option value="1">1</option>
-		                                <option value="2">2</option>
-		                                <option value="3">3</option>
-		                                <option value="4">4</option>
-		                                <option value="5">5</option>
-		                                <option value="6">6</option>
-		                                <option value="7">7</option>
-		                                <option value="8">8</option>
-		                                <option value="9">9</option>
-		                                <option value="10">10</option>
-		                                <option value="11">11</option>
-		                                <option value="12">12</option>
-		                                <option value="13">13</option>
-		                                <option value="14">14</option>
-		                                <option value="15">15</option>
+		                                <option value="1" #if(o.get_sum=='1') selected="selected" #end>1</option>
+		                                <option value="2" #if(o.get_sum=='2') selected="selected" #end>2</option>
+		                                <option value="3" #if(o.get_sum=='3') selected="selected" #end>3</option>
+		                                <option value="4" #if(o.get_sum=='4') selected="selected" #end>4</option>
+		                                <option value="5" #if(o.get_sum=='5') selected="selected" #end>5</option>
+		                                <option value="6" #if(o.get_sum=='6') selected="selected" #end>6</option>
+		                                <option value="7" #if(o.get_sum=='7') selected="selected" #end>7</option>
+		                                <option value="8" #if(o.get_sum=='8') selected="selected" #end>8</option>
+		                                <option value="9" #if(o.get_sum=='9') selected="selected" #end>9</option>
+		                                <option value="10" #if(o.get_sum=='10') selected="selected" #end>10</option>
+		                                <option value="11" #if(o.get_sum=='11') selected="selected" #end>11</option>
+		                                <option value="12" #if(o.get_sum=='12') selected="selected" #end>12</option>
+		                                <option value="13" #if(o.get_sum=='13') selected="selected" #end>13</option>
+		                                <option value="14" #if(o.get_sum=='14') selected="selected" #end>14</option>
+		                                <option value="15" #if(o.get_sum=='15') selected="selected" #end>15</option>
 		                            </select>
 			                    </div>
 			                    <label class="col-md-1 control-label" for="demo-text-input">领用人</label>
 			                    <div class="col-md-3">
-			                        <input type="hidden"  name="oaResGet.get_user_id" class="form-control"  value="#(username)">
-			                        <input type="text" disabled="disabled" name="oaResGet.get_user_name" class="form-control"  value="#(caption)">
+			                        <input type="hidden"  name="oaResGet.get_user_id" class="form-control"  value="#(o?o.get_user_id:userid)">
+			                        <input type="text" readonly="readonly" name="oaResGet.get_user_name" class="form-control"  value="#(o?o.get_user_name:usercaption)">
 			                    </div>
 			                </div>
 			                <div class="form-group">
 			                    <label class="col-md-3 control-label" for="demo-text-input">物品名称</label>
 			                    <div class="col-md-9">
-			                        <input type="text"  name="oaResGet.res_name" class="form-control"  value="">
+			                        <input type="text"  name="oaResGet.res_name" class="form-control"  value="#(o?o.res_name:'')">
 			                        <small class="help-block">请输入物品名称</small>
 			                    </div>
 			                </div>
 			                <div class="form-group">
 			                    <label class="col-md-3 control-label" for="demo-text-input">领用原因</label>
 			                    <div class="col-md-9">
-					                <textarea rows="8" name="oaBumph.des" class="form-control">#(o?o.des:'')</textarea>
+					                <textarea rows="8" name="oaResGet.des" class="form-control">#(o?o.des:'')</textarea>
 			                        <small class="help-block">请输入领用原因</small>
 			                    </div>
 			                </div>
