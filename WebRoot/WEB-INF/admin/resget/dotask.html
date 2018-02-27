@@ -1,0 +1,89 @@
+	#include("/common/include/pageTitleBread.html")
+	<div id="page-content">
+			<div class="col-lg-12">
+		        <div class="panel">
+		            <div class="panel-heading">
+		                <h3 class="panel-title">添加</h3>
+		            </div>
+		            <form id="editForm" class="panel-body form-horizontal form-padding">
+						<input type="hidden"  name="oaResGet.id" class="form-control" value="#(o?o.id:'')">
+			                <div class="form-group">
+			                    <label class="col-md-3 control-label" for="demo-text-input">标题</label>
+			                    <div class="col-md-9">
+			                        <input type="text"  name="oaResGet.title" class="form-control"  value="#(o?o.title:'')">
+			                        <small class="help-block">请输入标题</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                	<label class="col-md-3 control-label" for="demo-text-input">领用数量#(o.get_sum)</label>
+			                	<div class="col-md-3">
+			                        <select class="selectpicker" name="oaResGet.get_sum" #if(view=="detail") disabled #end>
+		                                <option value="1" #if(o.get_sum=='1') selected="selected" #end>1</option>
+		                                <option value="2" #if(o.get_sum=='2') selected="selected" #end>2</option>
+		                                <option value="3" #if(o.get_sum=='3') selected="selected" #end>3</option>
+		                                <option value="4" #if(o.get_sum=='4') selected="selected" #end>4</option>
+		                                <option value="5" #if(o.get_sum=='5') selected="selected" #end>5</option>
+		                                <option value="6" #if(o.get_sum=='6') selected="selected" #end>6</option>
+		                                <option value="7" #if(o.get_sum=='7') selected="selected" #end>7</option>
+		                                <option value="8" #if(o.get_sum=='8') selected="selected" #end>8</option>
+		                                <option value="9" #if(o.get_sum=='9') selected="selected" #end>9</option>
+		                                <option value="10" #if(o.get_sum=='10') selected="selected" #end>10</option>
+		                                <option value="11" #if(o.get_sum=='11') selected="selected" #end>11</option>
+		                                <option value="12" #if(o.get_sum=='12') selected="selected" #end>12</option>
+		                                <option value="13" #if(o.get_sum=='13') selected="selected" #end>13</option>
+		                                <option value="14" #if(o.get_sum=='14') selected="selected" #end>14</option>
+		                                <option value="15" #if(o.get_sum=='15') selected="selected" #end>15</option>
+		                            </select>
+			                    </div>
+			                    <label class="col-md-1 control-label" for="demo-text-input">领用人</label>
+			                    <div class="col-md-3">
+			                        <input type="hidden"  name="oaResGet.get_user_id" class="form-control"  value="#(o?o.get_user_id:userid)">
+			                        <input type="text" readonly="readonly" name="oaResGet.get_user_name" class="form-control"  value="#(o?o.get_user_name:usercaption)">
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-3 control-label" for="demo-text-input">物品名称</label>
+			                    <div class="col-md-9">
+			                        <input type="text"  name="oaResGet.res_name" class="form-control"  value="#(o?o.res_name:'')">
+			                        <small class="help-block">请输入物品名称</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-3 control-label" for="demo-text-input">领用原因</label>
+			                    <div class="col-md-9">
+					                <textarea rows="8" name="oaResGet.des" class="form-control">#(o?o.des:'')</textarea>
+			                        <small class="help-block">请输入领用原因</small>
+			                    </div>
+			                </div>
+			                <div class="panel-footer">
+			                    <div class="row">
+			                        <div class="col-sm-9 col-sm-offset-3">
+			                            <button class="btn btn-warning" type="reset">重置</button>
+			                            <button class="btn btn-mint" type="submit" >保存</button>
+			                        </div>
+			                    </div>
+			                </div>
+		            </form>
+		        </div>
+		    </div>
+	</div>
+	<script>
+		function save(){
+			var data = common_ajax.ajaxFunc("/admin/resget/save", $('#editForm').serialize(), "json", null);
+			if(data.success){
+				pointLion.alertMsg("保存成功!" , "success" , "small" , function(){
+					doPjax(ctx+'/admin/resget/getListPage');//跳转到列表页
+				});
+			}
+		}
+		$(document).ready(function() {
+			$(".selectpicker").selectpicker({});
+			$('#editForm').bootstrapValidator({
+	            fields: {
+	            }
+	        }).on("success.form.bv", function (e) {
+	            save();
+	            return false;//阻止表单跳转
+	        });
+		});
+	</script>

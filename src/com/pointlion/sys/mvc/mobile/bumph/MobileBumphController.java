@@ -7,6 +7,9 @@ package com.pointlion.sys.mvc.mobile.bumph;
 
 import com.jfinal.aop.Clear;
 import com.jfinal.kit.StrKit;
+import com.pointlion.sys.mvc.admin.bumph.BumphConstants;
+import com.pointlion.sys.mvc.admin.bumph.BumphService;
+import com.pointlion.sys.mvc.admin.workflow.WorkFlowService;
 import com.pointlion.sys.mvc.common.base.BaseController;
 import com.pointlion.sys.mvc.common.model.OaBumph;
 import com.pointlion.sys.mvc.common.model.SysUser;;
@@ -18,15 +21,15 @@ import com.pointlion.sys.mvc.common.model.SysUser;;
  */
 @Clear()
 public class MobileBumphController extends BaseController {
-	static MobileBumphService service =  MobileBumphService.me;
-	
+	static WorkFlowService wfservice =  WorkFlowService.me;
+	static BumphService service =  BumphService.me;
 	/***
 	 * 获取所有待办
 	 */
 	public void getMyToDoList(){
 		String userid = getPara("userid");
 		if(StrKit.notBlank(userid)){
-			renderSuccess(service.getToDoListByKey(SysUser.dao.getUsername(userid)),null);
+			renderSuccess(wfservice.getToDoListByKey(BumphConstants.BUSINESS_TABLENAME,BumphConstants.DEFKEY_BUMPH,SysUser.dao.getUsername(userid)),null);
 		}else{
 			renderError();
 		}
@@ -38,7 +41,7 @@ public class MobileBumphController extends BaseController {
 	public void getBumphById(){
 		String id = getPara("id");
 		if(StrKit.notBlank(id)){
-			renderSuccess(service.getDoBumphTask(id),null);
+//			renderSuccess(service.getDoBumphTask(id),null);
 		}else{
 			renderError();
 		}

@@ -119,17 +119,15 @@ public class OaResGetController extends BaseController {
      * 取到办理页面
      */
     public void getDoTaskPage(){
-//    	String parentPath = this.getRequest().getServletPath().substring(0,this.getRequest().getServletPath().lastIndexOf("/")+1); 
-//    	String taskid = getPara("taskid");
-//    	String id = getPara("id");
-//    	OaBumph bumph = OaBumph.dao.findById(id);
-//    	Record task = wfservice.getTaskRecord(taskid);
-//		//获取主送和抄送单位
-//    	setAttrFirstSecond(bumph);
-//    	setAttr("o", bumph);
-//    	setAttr("task", task);
-//    	setBread("内部发文",parentPath+"getToDoPage","办理任务");
-//    	render("/WEB-INF/admin/bumph/audit/dotask.html");
+    	String parentPath = this.getRequest().getServletPath().substring(0,this.getRequest().getServletPath().lastIndexOf("/")+1); 
+    	String taskid = getPara("taskid");
+    	String id = getPara("id");
+    	OaResGet reset = OaResGet.dao.findById(id);
+    	Record task = wfservice.getTaskRecord(taskid);
+    	setAttr("o", reset);
+    	setAttr("task", task);
+    	setBread("内部发文",parentPath+"getToDoPage","办理任务");
+    	render("/WEB-INF/admin/resget/dotask.html");
     }
     /***
      * 办理任务
