@@ -89,9 +89,7 @@
 	           //通过formatter可以自定义列显示的内容
 	           //value：当前field的值，即id
 	           //row：当前行的数据
-	           var a = '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/resget/getEditPage?id='+row.id+'\')" href="javascript:void(0);" >编辑</a>&nbsp;';
-					a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>&nbsp;';
-					a = a + '<a class="label label-table label-success" onclick="startProcess(\''+row.id+'\')" href="javascript:void(0);" >提交</a>&nbsp;';
+	           var a = '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/resget/getEditPage?id='+row.id+'\')" href="javascript:void(0);" >办理</a>&nbsp;';
 	           return a;
 	       } 
 	   }];
