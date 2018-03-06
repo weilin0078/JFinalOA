@@ -49,4 +49,11 @@ public abstract class BaseSysRole<M extends BaseSysRole<M>> extends Model<M> imp
 		return get("description");
 	}
 
+	public void setCreateTime(java.lang.String createTime) {
+		set("create_time", createTime);
+	}
+
+	public java.lang.String getCreateTime() {
+		return get("create_time");
+	}
 }

@@ -658,7 +658,6 @@ public class DateUtil {
      * @throws
      */
     public static String getDateTime() {
-
         return new SimpleDateFormat(dateFormat[0]).format(new Date());
     }
 

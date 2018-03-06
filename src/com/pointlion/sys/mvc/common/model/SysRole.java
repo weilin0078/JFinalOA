@@ -46,7 +46,7 @@ public class SysRole extends BaseSysRole<SysRole> {
 	 * @return
 	 */
 	public Page<SysRole> getRolePage(Integer curr , Integer pagesize){
-		return SysRole.dao.paginate(curr, pagesize, "select * ", " from sys_role");
+		return SysRole.dao.paginate(curr, pagesize, "select * ", " from sys_role order by create_time desc");
 	}
 	/***
 	 * 删除角色下所有权限

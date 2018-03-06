@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50610
 File Encoding         : 65001
 
-Date: 2018-02-27 10:58:57
+Date: 2018-03-06 11:37:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1017,7 +1017,7 @@ CREATE TABLE `oa_notice_user` (
 -- ----------------------------
 -- Records of oa_notice_user
 -- ----------------------------
-INSERT INTO `oa_notice_user` VALUES ('045f362a698642c4ab81be4c1fd0bd1b', '7ac6e4c544634e179f78803d5ba2d0ca', '管理员', '7e4592c2fae24f418df10f70d776d40f', '0', null);
+INSERT INTO `oa_notice_user` VALUES ('045f362a698642c4ab81be4c1fd0bd1b', '7ac6e4c544634e179f78803d5ba2d0ca', '管理员', '7e4592c2fae24f418df10f70d776d40f', '1', null);
 INSERT INTO `oa_notice_user` VALUES ('0aeca406dd69482397cce9c3a76ab6f1', 'd44e967339b44e7090ce944432c4b1c0', '李阳', '7e4592c2fae24f418df10f70d776d40f', '0', null);
 INSERT INTO `oa_notice_user` VALUES ('5c7c0a33a0cc4a3c9d04d56e97dd1d94', 'c00aeba5714847dd9e5979d53cc73103', '金桐宇', 'ee9d8f8f83b74ce1a5b9c56f5908143c', '0', null);
 INSERT INTO `oa_notice_user` VALUES ('76eff72ffbff445ea75678032331742b', 'd44e967339b44e7090ce944432c4b1c0', '李阳', 'ee9d8f8f83b74ce1a5b9c56f5908143c', '0', null);
@@ -1319,14 +1319,15 @@ CREATE TABLE `sys_role` (
   `key` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `name` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `description` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
+  `create_time` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES ('8a40c0353fa828a6013fa898d4ac0023', '2', 'SuperAdmin', '超级管理员', '超级管理员');
-INSERT INTO `sys_role` VALUES ('c65364171504454daa4c614f5d941848', '1', 'WorkFlowManager', '流程管理员', '流程管理员');
+INSERT INTO `sys_role` VALUES ('8a40c0353fa828a6013fa898d4ac0023', '2', 'SuperAdmin', '超级管理员', '超级管理员', '2018-03-06 11:35:55');
+INSERT INTO `sys_role` VALUES ('c65364171504454daa4c614f5d941848', '1', 'WorkFlowManager', '流程管理员', '流程管理员', '2018-03-06 11:33:55');
 
 -- ----------------------------
 -- Table structure for sys_roleoperator

@@ -14,6 +14,7 @@ import com.pointlion.sys.interceptor.MainPageTitleInterceptor;
 import com.pointlion.sys.mvc.common.base.BaseController;
 import com.pointlion.sys.mvc.common.model.SysRole;
 import com.pointlion.sys.mvc.common.model.SysRoleAuth;
+import com.pointlion.sys.mvc.common.utils.DateUtil;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 
 /**
@@ -50,6 +51,7 @@ public class RoleController extends BaseController{
     		role.update();
     	}else{
     		role.setId(UuidUtil.getUUID());
+    		role.setCreateTime(DateUtil.getTime());
     		role.save();
     	}
     	renderSuccess();
