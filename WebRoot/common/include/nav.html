@@ -1,14 +1,8 @@
 <nav id="mainnav-container">
                 <div id="mainnav">
-
-                    <!--Menu-->
-                    <!--================================-->
                     <div id="mainnav-menu-wrap">
                         <div class="nano" id="pjax-nav-div">
                             <div class="nano-content">
-
-                                <!--Profile Widget-->
-                                <!--================================-->
                                 <div id="mainnav-profile" class="mainnav-profile #if(setting.show_user_img=='0') hidden #end">
                                     <div class="profile-wrap">
                                         <div class="pad-btm">
@@ -38,10 +32,6 @@
                                         </a>
                                     </div>
                                 </div>
-
-
-
-
                                 <ul id="mainnav-menu" class="list-group">
 						            <li class="active-link">
 						                <a onclick="doPjax('#(ctx)/admin/home')" href="javascript:void(0);">
@@ -51,8 +41,6 @@
 											</span>
 						                </a>
 						            </li>
-						            
-						
 									<!-- ！！！动态菜单！！！开始！！！下面受到权限控制，使用sql查询出来的 -->
 										#for(a:mlist)
 											<li class="list-header">#(a.name)</li>
@@ -83,9 +71,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--================================-->
-                    <!--End menu-->
-
                 </div>
             </nav>
             
