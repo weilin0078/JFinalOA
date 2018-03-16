@@ -1,4 +1,3 @@
 eclipse.preferences.version=1
-encoding//WebRoot/error/404.html=UTF-8
-encoding//WebRoot/error/needPermission.html=UTF-8
-encoding/<project>=UTF-8
+encoding//src/main/java=UTF-8
+encoding//src/test/java=UTF-8

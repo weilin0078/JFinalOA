@@ -1,4 +1,2 @@
-/bin/
-/WebRoot/WEB-INF/classes/*.class
-/WebRoot/WEB-INF/classes
+/target/
 /jfinalide.properties

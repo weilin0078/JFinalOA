@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OA | 在线办公平台</title>
+    #include("/common/include/include.html")
+	#if(setting.color_theme!=null)
+		<link id="theme" href="#(ctx)#(setting.color_theme)" rel="stylesheet">
+	#end
+    <script src="#(ctx)/common/js/demo/nifty-demo.js"></script>
+    <script src="#(ctx)/common/plugins/morris-js/morris.min.js"></script>
+	<script src="#(ctx)/common/plugins/morris-js/raphael-js/raphael.min.js"></script>
+    <script src="#(ctx)/common/plugins/sparkline/jquery.sparkline.min.js"></script>
+</head>
+<body>
+    <div id="container" class="    
+	    	#if(setting.box_lay=='1') boxed-layout #end     
+	    	#if(setting.animate=='1') effect #(setting.animate_type) #end
+	    	#if(setting.fixed_navbar=='1') navbar-fixed #end
+	    	#if(setting.fixed_footer=='1') footer-fixed #end
+	    	#if(setting.fixed_nav=='1') mainnav-fixed #end
+	    	#if(setting.show_asd=='1') aside-in #end
+	    	#if(setting.fixed_asd=='1') aside-fixed #end
+	    	#if(setting.left_asd=='1') aside-left #end
+	    	#if(setting.float_asd=='1') aside-float #end
+	    	#if(setting.dark_asd=='0') aside-bright #end
+	    	#if(setting.nav_coll=='1') mainnav-sm #else mainnav-lg #end
+    	"  
+    	#if(setting.box_lay=='1'&&setting.box_back_img!=null&&setting.box_back_img!='') 
+    		style="background-image: url(#(setting.box_back_img));background-repeat: no-repeat;background-size: cover;"  
+    	#end> 
+        #include("/common/include/header.html")
+        <div class="boxed">
+            <div id="content-container">
+            	#include("/common/include/main.html")
+            </div>
+            #include("/common/include/aside.html")
+            #include("/common/include/nav.html")
+        </div>
+        #include("/common/include/footer.html")
+        <button class="scroll-top btn">
+            <i class="pci-chevron chevron-up"></i>
+        </button>
+    </div>
+	#include("/common/include/setting.html")
+	<script>
+			//PJax
+			function doPjax(url){
+				$(document).on('pjax:start', function () {
+					history.replaceState({},"",ctx+"/admin/home");
+		        });
+				$(document).on('pjax:end', function () {
+					history.replaceState({},"",ctx+"/admin/home");
+	        	});
+				$.pjax({'url': url, container: '#content-container',timeout:999999});
+			}
+			//PJax-可传递容器
+			function doPjaxC(url,container){
+				$(document).on('pjax:start', function () {
+					history.replaceState({},"",ctx+"/admin/home");
+		        });
+				$(document).on('pjax:end', function () {
+					history.replaceState({},"",ctx+"/admin/home");
+	        	});
+				$.pjax({'url': url, container: container,timeout:999999});
+			}
+			//初始化高度
+			function initFullHeight(){
+				var clientW = document.body.clientHeight-160;
+				$(".lion-fullHeight").css("min-height",clientW+"px");
+			}
+			
+	</script>
+</body>
+</html>
