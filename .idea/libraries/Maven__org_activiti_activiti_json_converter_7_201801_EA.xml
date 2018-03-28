@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.activiti:activiti-json-converter:7-201801-EA">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/activiti/activiti-json-converter/7-201801-EA/activiti-json-converter-7-201801-EA.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/activiti/activiti-json-converter/7-201801-EA/activiti-json-converter-7-201801-EA-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/activiti/activiti-json-converter/7-201801-EA/activiti-json-converter-7-201801-EA-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
