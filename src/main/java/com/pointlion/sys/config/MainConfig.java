@@ -11,7 +11,6 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
-import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.UrlSkipHandler;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
@@ -19,6 +18,7 @@ import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
 import com.pointlion.sys.handler.GlobalHandler;
+import com.pointlion.sys.interceptor.ExceptionInterceptor;
 import com.pointlion.sys.interceptor.IfLoginInterceptor;
 import com.pointlion.sys.mvc.admin.bumph.BumphController;
 import com.pointlion.sys.mvc.admin.chat.ChatController;
@@ -33,6 +33,7 @@ import com.pointlion.sys.mvc.admin.notice.NoticeController;
 import com.pointlion.sys.mvc.admin.org.OrgController;
 import com.pointlion.sys.mvc.admin.resget.OaResGetController;
 import com.pointlion.sys.mvc.admin.role.RoleController;
+import com.pointlion.sys.mvc.admin.uidemo.UIDemoController;
 import com.pointlion.sys.mvc.admin.upload.UploadController;
 import com.pointlion.sys.mvc.admin.usecar.OaUseCarController;
 import com.pointlion.sys.mvc.admin.user.UserController;
@@ -57,9 +58,6 @@ import com.pointlion.sys.plugin.shiro.ShiroPlugin;
 public class MainConfig extends JFinalConfig {
     Routes routes;
     
-	public static void main(String[] args) {
-		JFinal.start("WebRoot", 80, "/", 5);
-	}
 	/**
 	 * 配置JFinal常量
 	 */
@@ -75,7 +73,7 @@ public class MainConfig extends JFinalConfig {
 		me.setMaxPostSize(1024*1024*10);
 		//获取beetl模版引擎
 //		me.setRenderFactory(new BeetlRenderFactory());
-		me.setError404View("/error/404.html");
+//		me.setError404View("/error/404.html");
         // 获取GroupTemplate ,可以设置共享变量等操作
 //        @SuppressWarnings("unused")
 //		GroupTemplate groupTemplate = BeetlRenderFactory.groupTemplate ;
@@ -116,6 +114,7 @@ public class MainConfig extends JFinalConfig {
 	public void configInterceptor(Interceptors me) {
 		 me.add(new ShiroInterceptor());//shiro拦截器
 		 me.add(new IfLoginInterceptor());//判断是否登录拦截器
+		 me.add(new ExceptionInterceptor());//通用异常处理拦截器
 	}
 	
 	/**
@@ -124,7 +123,7 @@ public class MainConfig extends JFinalConfig {
 	@Override
 	public void configHandler(Handlers handler) {
 		//log.info("configHandler 全局配置处理器，设置跳过哪些URL不处理");
-		handler.add(new UrlSkipHandler("/|/admin/friendchat/.*|/ca/.*|/se/.*|.*.htm|.*.html|.*.js|.*.css|.*.json|.*.png|.*.gif|.*.jpg|.*.jpeg|.*.bmp|.*.ico|.*.exe|.*.txt|.*.zip|.*.rar|.*.7z|.*.tff|.*.woff", false));
+		handler.add(new UrlSkipHandler("/|/admin/friendchat/.*|/ca/.*|/se/.*|.*.htm|.*.html|.*.js|.*.css|.*.json|.*.png|.*.gif|.*.jpg|.*.jpeg|.*.bmp|.*.ico|.*.exe|.*.txt|.*.zip|.*.rar|.*.7z|.*.tff|.*.woff|.*.ttf|.*.map", false));
 		handler.add(new GlobalHandler());
 	}
 	
@@ -136,6 +135,8 @@ public class MainConfig extends JFinalConfig {
 	@Override
 	public void configRoute(Routes me) {
 		this.routes = me;//shiro使用
+		//前端DEMO
+		me.add("/admin/uidemo", UIDemoController.class);//UIdemo
 		//系统管理
 		me.add("/admin/login", LoginController.class);//登陆
 		me.add("/admin/home", HomeController.class);//首页

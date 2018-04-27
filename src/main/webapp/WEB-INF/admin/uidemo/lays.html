@@ -1,0 +1,551 @@
+#include("/common/include/pageTitleBread.html")
+                <!--Page content-->
+                <!--===================================================-->
+                <div id="page-content">
+                    
+					
+					<!--STATIC EXAMPLE-->
+					<!--===================================================-->
+					
+					<div class="panel panel-dark panel-colorful">
+					    <div class="panel-heading">
+					        <h3 class="panel-title">Static Example</h3>
+					    </div>
+					    <div class="panel-body demo-nifty-modal">
+					
+					        <!--Static Examplel-->
+					        <div class="modal">
+					            <div class="modal-dialog">
+					                <div class="modal-content">
+					                    <div class="modal-header">
+					                        <button type="button" class="close" data-dismiss="modal"><i class="pci-cross pci-circle"></i></button>
+					                        <h4 class="modal-title">Modal title</h4>
+					                    </div>
+					
+					                    <div class="modal-body">
+					                        <p>One fine body ...........</p>
+					                    </div>
+					
+					                    <div class="modal-footer">
+					                        <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+					                        <button class="btn btn-primary" type="button">Save changes</button>
+					                    </div>
+					                </div>
+					            </div>
+					        </div>
+					
+					    </div>
+					</div>
+					
+					<!--===================================================-->
+					<!--END OF STATIC EXAMPLE-->
+					
+					<div class="row">
+					    <div class="col-md-6">
+					        <div id="demo-panel-ref" class="panel">
+					            <div class="panel-heading">
+					                <h3 class="panel-title">Default modal</h3>
+					            </div>
+					            <div class="panel-body">
+					
+					                <!--Launch demo default modal-->
+					                <p>Toggle a modal via JavaScript by clicking the button below. It will slide down and fade in from the top of the page.</p><br>
+					                <button data-target="#demo-default-modal" data-toggle="modal" class="btn btn-primary btn-lg">Launch demo modal</button>
+					
+					            </div>
+					        </div>
+					    </div>
+					    <div class="col-md-6">
+					        <div class="panel">
+					            <div class="panel-heading">
+					                <h3 class="panel-title">Remove animation</h3>
+					            </div>
+					            <div class="panel-body">
+					
+					                <!--Launch demo modal wihtout animation-->
+					                <p>For modals that simply appear rather than fade in to view, remove the <code>.fade</code> class from your modal markup.</p><br>
+					                <button data-target="#demo-modal-wo-anim" data-toggle="modal" class="btn btn-primary btn-lg">Launch demo modal</button>
+					
+					            </div>
+					        </div>
+					    </div>
+					</div>
+					<div class="row">
+					    <div class="col-sm-6">
+					        <div class="panel">
+					            <div class="panel-heading">
+					                <h3 class="panel-title">Optional sizes</h3>
+					            </div>
+					            <div class="panel-body">
+					
+					                <!--Large modal button-->
+					                <p>Modals have two optional sizes, available via modifier classes to be placed on a <code>.modal-dialog</code></p><br>
+					                <button data-target="#demo-lg-modal" data-toggle="modal" class="btn btn-warning">Large modal</button>
+					
+					            </div>
+					        </div>
+					    </div>
+					    <div class="col-sm-6">
+					        <div class="panel">
+					            <div class="panel-heading">
+					                <h3 class="panel-title">Optional sizes</h3>
+					            </div>
+					            <div class="panel-body">
+					
+					                <!--Small modal button-->
+					                <p>Modals have two optional sizes, available via modifier classes to be placed on a <code>.modal-dialog</code></p><br>
+					                <button data-target="#demo-sm-modal" data-toggle="modal" class="btn btn-success">Small modal</button>
+					
+					            </div>
+					        </div>
+					    </div>
+					</div>
+					<hr class="new-section-sm">
+					<div class="row">
+					    <div class="eq-height">
+					    <div class="col-lg-4 eq-box-lg">
+					        <div class="panel">
+					            <div class="panel-heading">
+					                <h3 class="panel-title">Bootbox Modals</h3>
+					            </div>
+					            <div class="panel-body demo-nifty-btn">
+					
+					                <!--Bootbox Modals-->
+					                <button id="demo-bootbox-alert" class="btn btn-danger">Alert</button>
+					                <button id="demo-bootbox-confirm" class="btn btn-info">Confirm</button>
+					                <button id="demo-bootbox-prompt" class="btn btn-warning">Prompt</button>
+					
+					            </div>
+					        </div>
+					    </div>
+					    <div class="col-lg-4 eq-box-lg">
+					        <div class="panel">
+					            <div class="panel-heading">
+					                <h3 class="panel-title">Bootbox Custom Modals</h3>
+					            </div>
+					            <div class="panel-body demo-nifty-btn">
+					
+					                <!--Bootbox Custom Modals-->
+					                <button id="demo-bootbox-custom" class="btn btn-purple">Custom Dialog</button>
+					                <button id="demo-bootbox-custom-h-content" class="btn btn-pink">HTML Content</button>
+					                <button id="demo-bootbox-custom-h-form" class="btn btn-success">HTML Form</button>
+					
+					            </div>
+					        </div>
+					    </div>
+					    <div class="col-lg-4 eq-box-lg">
+					        <div class="panel">
+					            <div class="panel-heading">
+					                <h3 class="panel-title">Bootbox with animate.css</h3>
+					            </div>
+					            <div class="panel-body demo-nifty-btn">
+					
+					                <!--Bootbox with Animate.css-->
+					                <button id="demo-bootbox-zoom" class="btn btn-info">Zoom in/out</button>
+					                <button id="demo-bootbox-bounce" class="btn btn-warning">Bounce</button>
+					                <button id="demo-bootbox-ruberwobble" class="btn btn-dark">RubberBand and wobble</button>
+					                <button id="demo-bootbox-flip" class="btn btn-purple">Flip</button>
+					                <button id="demo-bootbox-lightspeed" class="btn btn-success">Light Speed</button>
+					                <button id="demo-bootbox-swing" class="btn btn-primary">Swing and Hinge</button>
+					
+					            </div>
+					        </div>
+					    </div>
+					    </div>
+					</div>
+					
+					
+                </div>
+                <!--===================================================-->
+                <!--End page content-->
+<script>
+$(document).ready(function() {
+ $('#demo-bootbox-alert').on('click', function(){
+     bootbox.alert("Hello world!", function(){
+         $.niftyNoty({
+             type: 'info',
+             icon : 'pli-exclamation icon-2x',
+             message : 'Hello world callback',
+             container : 'floating',
+             timer : 5000
+         });
+     });
+ });
+
+ $('#demo-bootbox-confirm').on('click', function(){
+     bootbox.confirm("Are you sure?", function(result) {
+         if (result) {
+             $.niftyNoty({
+                 type: 'success',
+                 icon : 'pli-like-2 icon-2x',
+                 message : 'User confirmed dialog',
+                 container : 'floating',
+                 timer : 5000
+             });
+         }else{
+             $.niftyNoty({
+                 type: 'danger',
+                 icon : 'pli-cross icon-2x',
+                 message : 'User declined dialog.',
+                 container : 'floating',
+                 timer : 5000
+             });
+         };
+
+     });
+ });
+
+ $('#demo-bootbox-prompt').on('click', function(){
+     bootbox.prompt("What is your name?", function(result) {
+         if (result) {
+             $.niftyNoty({
+                 type: 'success',
+                 icon : 'pli-consulting icon-2x',
+                 message : 'Hi ' + result,
+                 container : 'floating',
+                 timer : 5000
+             });
+         }else{
+             $.niftyNoty({
+                 type: 'danger',
+                 icon : 'pli-cross icon-2x',
+                 message : 'User declined dialog.',
+                 container : 'floating',
+                 timer : 5000
+             });
+         };
+     });
+ });
+
+ $('#demo-bootbox-custom').on('click', function(){
+     bootbox.dialog({
+         message: "I am a custom dialog",
+         title: "Custom title",
+         buttons: {
+             success: {
+                 label: "Success!",
+                 className: "btn-success",
+                 callback: function() {
+                     $.niftyNoty({
+                         type: 'success',
+                         message : '<strong>Well done!</strong> You successfully read this important alert message. ',
+                         container : 'floating',
+                         timer : 5000
+                     });
+                 }
+             },
+
+             danger: {
+                 label: "Danger!",
+                 className: "btn-danger",
+                 callback: function() {
+                     $.niftyNoty({
+                         type: 'danger',
+                         message : '<strong>Oh snap!</strong> Change a few things up and try submitting again.',
+                         container : 'floating',
+                         timer : 5000
+                     });
+                 }
+             },
+
+             main: {
+                 label: "Click ME!",
+                 className: "btn-primary",
+                 callback: function() {
+                     $.niftyNoty({
+                         type: 'primary',
+                         message : "<strong>Heads up!</strong> This alert needs your attention, but it's not super important.",
+                         container : 'floating',
+                         timer : 5000
+                     });
+                 }
+             }
+         }
+     });
+ });
+
+ $('#demo-bootbox-custom-h-content').on('click', function(){
+     bootbox.dialog({
+         title: "That html",
+         message: '<div class="media"><div class="media-left"><img class="media-object img-lg img-circle" src="img/profile-photos/3.png" alt="Profile picture"></div><div class="media-body"><p class="text-semibold text-main">You can also use <strong class="text-primary">HTML</strong></p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.</div></div>',
+         buttons: {
+             confirm: {
+                 label: "Save"
+             }
+         }
+     });
+ });
+
+ $('#demo-bootbox-custom-h-form').on('click', function(){
+     bootbox.dialog({
+         title: "This is a form in a modal.",
+         message:'<div class="row"> ' + '<div class="col-md-12"> ' +
+                 '<form class="form-horizontal"> ' + '<div class="form-group"> ' +
+                 '<label class="col-md-4 control-label" for="name">Name</label> ' +
+                 '<div class="col-md-4"> ' +
+                 '<input id="name" name="name" type="text" placeholder="Your name" class="form-control input-md"> ' +
+                 '<span class="help-block"><small>Here goes your name</small></span> </div> ' +
+                 '</div> ' + '<div class="form-group"> ' +
+                 '<label class="col-md-4 control-label" for="awesomeness">How awesome is this?</label> ' +
+                 '<div class="col-md-8"> <div class="form-block"> ' +
+                 '<label class="form-radio form-icon demo-modal-radio active"><input type="radio" autocomplete="off" name="awesomeness" value="Really awesome" checked> Really awesome</label>' +
+                 '<label class="form-radio form-icon demo-modal-radio"><input type="radio" autocomplete="off" name="awesomeness" value="Super awesome"> Super awesome </label> </div>' +
+                 '</div> </div>' +
+                 '<\/form><\/div><\/div><\/script><\/script>',
+         buttons: {
+             success: {
+                 label: "Save",
+                 className: "btn-purple",
+                 callback: function() {
+                     var name = $('#name').val();
+                     var answer = $("input[name='awesomeness']:checked").val();
+
+                     $.niftyNoty({
+                         type: 'purple',
+                         icon : 'fa fa-check',
+                         message : "Hello " + name + ".<br> You've chosen <strong>" + answer + "</strong>",
+                         container : 'floating',
+                         timer : 4000
+                     });
+                 }
+             }
+         }
+     });
+
+     $(".demo-modal-radio").niftyCheck();
+ });
+
+ $('#demo-bootbox-zoom').on('click', function(){
+     bootbox.confirm({
+         message : "<p class='text-semibold text-main'>Zoom In/Out</p><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>",
+         buttons: {
+             confirm: {
+                 label: "Save"
+             }
+         },
+         callback : function(result) {
+             //Callback function here
+         },
+         animateIn: 'zoomInDown',
+         animateOut : 'zoomOutUp'
+     });
+ });
+
+ $('#demo-bootbox-bounce').on('click', function(){
+     bootbox.confirm({
+         message : "<p class='text-semibold text-main'>Bounce</p><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>",
+         buttons: {
+             confirm: {
+                 label: "Save"
+             }
+         },
+         callback : function(result) {
+             //Callback function here
+         },
+         animateIn: 'bounceIn',
+         animateOut : 'bounceOut'
+     });
+ });
+
+ $('#demo-bootbox-ruberwobble').on('click', function(){
+     bootbox.confirm({
+         message : "<p class='text-semibold text-main'>RubberBand & Wobble</p><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>",
+         buttons: {
+             confirm: {
+                 label: "Save"
+             }
+         },
+         callback : function(result) {
+             //Callback function here
+         },
+         animateIn: 'rubberBand',
+         animateOut : 'wobble'
+     });
+ });
+
+ $('#demo-bootbox-flip').on('click', function(){
+     bootbox.confirm({
+         message : "<p class='text-semibold text-main'>Flip</p><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>",
+         buttons: {
+             confirm: {
+                 label: "Save"
+             }
+         },
+         callback : function(result) {
+             //Callback function here
+         },
+         animateIn: 'flipInX',
+         animateOut : 'flipOutX'
+     });
+ });
+
+ $('#demo-bootbox-lightspeed').on('click', function(){
+     bootbox.confirm({
+         message : "<p class='text-semibold text-main'>Light Speed</p><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>",
+         buttons: {
+             confirm: {
+                 label: "Save"
+             }
+         },
+         callback : function(result) {
+             //Callback function here
+         },
+         animateIn: 'lightSpeedIn',
+         animateOut : 'lightSpeedOut'
+     });
+ });
+
+
+
+ $('#demo-bootbox-swing').on('click', function(){
+     bootbox.confirm({
+         message : "<p class='text-semibold text-main'>Swing & Hinge</p><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>",
+         buttons: {
+             confirm: {
+                 label: "Save"
+             }
+         },
+         callback : function(result) {
+             //Callback function here
+         },
+         animateIn: 'swing',
+         animateOut : 'hinge'
+     });
+ });
+
+})
+
+</script>
+
+
+
+
+
+
+<!-- BOOTSTRAP MODALS-->
+    <!--====================================================-->
+
+
+
+    <!--Default Bootstrap Modal-->
+    <!--===================================================-->
+    <div class="modal fade" id="demo-default-modal" role="dialog" tabindex="-1" aria-labelledby="demo-default-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!--Modal header-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><i class="pci-cross pci-circle"></i></button>
+                    <h4 class="modal-title">Modal Heading</h4>
+                </div>
+
+                <!--Modal body-->
+                <div class="modal-body">
+                    <p class="text-semibold text-main">Bootstrap Modal Vertical Alignment Center</p>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+                    <br>
+                    <p class="text-semibold text-main">Popover in a modal</p>
+                    <p>This
+                        <button class="btn btn-sm btn-warning demo-modal-popover add-popover" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="Popover Title">button</button>
+                        should trigger a popover on click.
+                    </p>
+                    <br>
+                    <p class="text-semibold text-main">Tooltips in a modal</p>
+                    <p>
+                        <a class="btn-link text-bold add-tooltip" href="#" data-original-title="Tooltip">This link</a> and
+                        <a class="btn-link text-bold add-tooltip" href="#" data-original-title="Tooltip">that link</a> should have tooltips on hover.
+                    </p>
+                </div>
+
+                <!--Modal footer-->
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--===================================================-->
+    <!--End Default Bootstrap Modal-->
+
+
+    <!--Bootstrap Modal without Animation-->
+    <!--===================================================-->
+    <div class="modal" id="demo-modal-wo-anim" role="dialog" tabindex="-1" aria-labelledby="demo-default-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!--Modal header-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><i class="pci-cross pci-circle"></i></button>
+                    <h4 class="modal-title">Modal Heading</h4>
+                </div>
+
+
+                <!--Modal body-->
+                <div class="modal-body">
+                    <p class="text-semibold text-main">Bootstrap Modal Vertical Alignment Center</p>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+                    <br>
+                    <p class="text-semibold text-main">Popover in a modal</p>
+                    <p>This
+                        <button class="btn btn-sm btn-warning demo-modal-popover add-popover" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="Popover Title">button</button>
+                        should trigger a popover on click.
+                    </p>
+                    <br>
+                    <p class="text-semibold text-main">Tooltips in a modal</p>
+                    <p>
+                        <a class="btn-link text-bold add-tooltip" href="#" data-original-title="Tooltip">This link</a> and
+                        <a class="btn-link text-bold add-tooltip" href="#" data-original-title="Tooltip">that link</a> should have tooltips on hover.
+                    </p>
+                </div>
+
+
+                <!--Modal footer-->
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--===================================================-->
+    <!--End Bootstrap Modal without Animation-->
+
+
+    <!--Large Bootstrap Modal-->
+    <!--===================================================-->
+    <div id="demo-lg-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><i class="pci-cross pci-circle"></i></button>
+                    <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--===================================================-->
+    <!--End Large Bootstrap Modal-->
+
+
+    <!--Small Bootstrap Modal-->
+    <!--===================================================-->
+    <div id="demo-sm-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><i class="pci-cross pci-circle"></i></button>
+                    <h4 class="modal-title" id="mySmallModalLabel">Small modal</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--===================================================-->
+    <!--End Small Bootstrap Modal-->
