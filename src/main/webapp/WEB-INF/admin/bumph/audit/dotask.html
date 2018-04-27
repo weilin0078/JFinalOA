@@ -5,8 +5,11 @@
 		            <div class="panel-heading">
 		                <h3 class="panel-title">
 		                	公文起草
-		                	<a href="#(ctx)/processEditor/diagram-viewer/index.html?processDefinitionId=#(task?task.DEFID:'')&processInstanceId=#(o?o.proc_ins_id:'')" target="_blank" style="position: absolute;right: 10px">
-		                		<button class="btn btn-mint" type="button">流程</button>
+		                	<a href="#(ctx)/processEditor/diagram-viewer/index.html?processDefinitionId=#(defId)&processInstanceId=#(o.proc_ins_id)" target="_blank" style="position: absolute;right: 10px">
+		                		<button class="btn btn-info" type="button">流程</button>
+		                	</a>
+		                	<a href="javascript:void(0);" onclick="pointLion.openTaskHisListPage('#(procInsId)')" style="position: absolute;right: 80px">
+		                		<button class="btn btn-success" type="button">流转</button>
 		                	</a>
 		                </h3>
 		            </div>

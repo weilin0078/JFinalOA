@@ -4,7 +4,6 @@
 			        	<div class="panel lion-fullHeight">
 						    <div class="panel-body">
 						        <a id="add" class="btn btn-info data-toolbar" onclick="doPjax('#(ctx)/admin/resget/getEditPage')" href="javascript:void(0);"><i class="demo-pli-add"></i> 添加</a>
-								<a id="del" class="btn btn-danger data-toolbar" onclick="delSel()" href="javascript:void(0);"><i class="demo-pli-cross"></i> 批量删除</a>
 						        <table id="pageTable" class="demo-add-niftycheck" data-toolbar="#del,#add"
 						               data-search="true"
 						               data-show-refresh="true"
@@ -19,11 +18,7 @@
 			        </div>
                 </div>
 <script>
-	var col = [{
-		       field: 'checked',
-		       checkbox : true,
-		       align: 'center'
-	   	   },
+	var col = [
 		   {
 		       field: 'id',
 		       title: '主键',
@@ -60,7 +55,7 @@
 		       title: '是否完成',
 		       align: 'center',
 		       formatter:function(value,row,index){
-		    	   if(value=='0'){//未提交
+		    	   if(value=='0'){//未完成
 		    		   return "未完成";
 		    	   }else{
 		    		   return "已完成";
@@ -78,7 +73,7 @@
 		       align: 'center'
 		   },
 		   {
-		       field: 'control',
+		       field: 'if_submit',
 		       title: '操作',
 		       align: 'center',
 		       width:'440',
@@ -86,9 +81,20 @@
 		           //通过formatter可以自定义列显示的内容
 		           //value：当前field的值，即id
 		           //row：当前行的数据
-		           var a = '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/resget/getEditPage?id='+row.id+'\')" href="javascript:void(0);" >编辑</a>&nbsp;';
-						a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>&nbsp;';
-						a = a + '<a class="label label-table label-success" onclick="startProcess(\''+row.id+'\')" href="javascript:void(0);" >提交</a>&nbsp;';
+		            var a = '';
+		            if(value=='0'){//未提交
+		            		a = '<a class="label label-table label-success" onclick="startProcess(\''+row.id+'\')" href="javascript:void(0);" >提交</a>&nbsp;';
+			                a = a + '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/resget/getEditPage?id='+row.id+'\')" href="javascript:void(0);" >编辑</a>&nbsp;';
+						    a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>&nbsp;';	
+		            }else{
+		            		a = a + '<a class="label label-table label-info" href="javascript:void(0);" onclick="pointLion.openTaskHisListPage(\''+row.proc_ins_id+'\')">流转</a>&nbsp;';
+		            	 	a = a + '<a class="label label-table label-info" target="_blank" href="#(ctx)/processEditor/diagram-viewer/index.html?processDefinitionId='+row.defid+'&processInstanceId='+row.proc_ins_id+'" >流程</a>&nbsp;';
+			    		   	a = a + '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/resget/getEditPage?id='+row.id+'&view=detail\')" href="javascript:void(0);" >查看</a>&nbsp;';
+			    		   	if(row.if_complete=="0"){
+				    		   a = a + '<a class="label label-table label-danger" href="javascript:void(0);" onclick="callBack(\''+row.id+'\')" >撤回</a>&nbsp;';
+			    			}
+		            }
+					
 		           return a;
 		       } 
 		   }];
@@ -146,18 +152,6 @@
 		$('#pageTable').bootstrapTable('hideColumn', 'id');
 	}
 	
-	//批量删除
-	function delSel(){
-		var data = [];
-		$("#pageTable input[type='checkbox'][name!='btSelectAll']:checked").each(function(){
-			data.push($(this).val());
-		});
-		if(data.length==0){
-			pointLion.alertMsg("请选择要删除的数据!","danger",null,null);
-			return;
-		}
-		del(data.join(","));//执行删除
-	}
 	//删除
 	function del(ids){
 		pointLion.confimMsg("您是否要删除所选信息 ?<br/> 点击确认进行删除 , 点击取消取消该操作",null,function(){
@@ -188,11 +182,11 @@
 	function callBack(id){
 		pointLion.confimMsg("您将要撤回该单据流程！<br/><span style='color:red;'>该操作将取回单据，您将可以对单据进行修改，并可将单据重新送交审批。</span> <br/>点击确认进行撤回单据 , 点击取消取消该操作",null,function(){
 			//执行删除
-			var data = common_ajax.ajaxFunc("/admin/bumph/callBack",{"id":id}, "json", null);
+			var data = common_ajax.ajaxFunc("/admin/resget/callBack",{"id":id}, "json", null);
 			//删除结果
 			if(data.success){
 				pointLion.alertMsg(data.message,"success",null,function(){
-					doPjax(ctx+'/admin/bumph/getDraftListPage');//跳转到列表页
+					doPjax(ctx+'/admin/resget/getDraftListPage');//跳转到列表页
 				});
 			}else{
 				pointLion.alertMsg(data.message,"danger",null,null);

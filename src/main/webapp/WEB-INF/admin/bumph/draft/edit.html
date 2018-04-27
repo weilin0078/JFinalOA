@@ -14,7 +14,7 @@
 		                		<a href="#(ctx)/processEditor/diagram-viewer/index.html?processDefinitionId=#(defId)&processInstanceId=#(o.proc_ins_id)" target="_blank" style="position: absolute;right: 80px">
 			                		<button class="btn btn-info" type="button">流程</button>
 			                	</a>
-			                	<a href="javascript:void(0);" onclick="openTaskHisListPage('#(procInsId)')" style="position: absolute;right: 150px">
+			                	<a href="javascript:void(0);" onclick="pointLion.openTaskHisListPage('#(procInsId)')" style="position: absolute;right: 150px">
 			                		<button class="btn btn-success" type="button">流转</button>
 			                	</a>
 		                	#end
@@ -89,10 +89,10 @@
 		                    </div>
 		                </div>
 		                <div class="form-group">
-		                    <label class="col-md-2 control-label" for="demo-text-input">公文正文</label>
+		                    <label class="col-md-2 control-label" for="demo-text-input">公文描述</label>
 		                    <div class="col-md-8">
 		                        <textarea name="oaBumph.content" rows="12" class="form-control" #if(view=="detail") readonly #end>#(o?o.content:'')</textarea>
-		                        <small class="help-block">请输入公文正文</small>
+		                        <small class="help-block">请输入公文描述内容</small>
 		                    </div>
 		                </div>
 		                
@@ -203,7 +203,7 @@
 	                "oaBumph.content": {
 	                    validators: {
 	                    	notEmpty: {
-	                            message: '*公文正文不能为空'
+	                            message: '*公文描述内容不能为空'
 	                        }
 	                    }
 	                }
@@ -212,10 +212,6 @@
 	            save();
 	            return false;//阻止表单跳转
 	        });
-		}
-		//打开流程流转历史页面
-		function openTaskHisListPage(insid){
-			pointLion.openTaskHisListPage(insid);
 		}
 		$(document).ready(function() {
 			$(".selectpicker").selectpicker({});

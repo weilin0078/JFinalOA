@@ -62,6 +62,14 @@ public class OaResGetController extends BaseController {
     	if(StrKit.notBlank(id)){//修改
     		OaResGet o = service.getById(id);
     		setAttr("o", o);
+    		String view = getPara("view");//查看
+    		if("detail".equals(view)){
+    			setAttr("view", view);
+    			if(StrKit.notBlank(o.getProcInsId())){
+    				setAttr("procInsId", o.getProcInsId());
+    				setAttr("defId", wfservice.getDefIdByInsId(o.getProcInsId()));
+    			}
+    		}
     	}
     	render("/WEB-INF/admin/resget/edit.html");
     }
@@ -134,7 +142,7 @@ public class OaResGetController extends BaseController {
      */
     public void doTask(){
     	try{
-    		String comment = getPara("comment");
+//    		String comment = getPara("comment");
 //    		service.completeTask(getPara("pass"),comment,getPara("taskid"), getModel(OaResGet.class));
     		renderSuccess("提交成功");
     	}catch(Exception e){

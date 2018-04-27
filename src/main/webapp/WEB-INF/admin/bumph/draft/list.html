@@ -95,6 +95,7 @@
 					a = a + '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/bumph/getDraftEditPage?id='+row.id+'\')" href="javascript:void(0);" >编辑</a>&nbsp;';
 					a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>';
 	    	   }else{
+	    		   a = a + '<a class="label label-table label-info" href="javascript:void(0);" onclick="pointLion.openTaskHisListPage(\''+row.proc_ins_id+'\')">流转</a>&nbsp;';
 	    		   a = a + '<a class="label label-table label-info" target="_blank" href="#(ctx)/processEditor/diagram-viewer/index.html?processDefinitionId='+row.defid+'&processInstanceId='+row.proc_ins_id+'" >流程</a>&nbsp;';
 	    		   a = a + '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/bumph/getDraftEditPage?id='+row.id+'&view=detail\')" href="javascript:void(0);" >查看</a>&nbsp;';
 	    		   if(row.if_complete=="0"){
