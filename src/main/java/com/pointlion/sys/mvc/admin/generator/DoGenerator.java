@@ -14,8 +14,10 @@ public class DoGenerator {
     
     protected Kv tablemetaMap        = null;
     protected String packageBase     = "com.pointlion.sys.mvc.admin";
-    protected String srcFolder       = "src";
-    protected String sourceFolder    = "/WebRoot";
+//    protected String srcFolder       = "/src";
+//    protected String sourceFolder    = "/WebRoot";
+    protected String srcFolder       = "/src/main/java";
+    protected String sourceFolder    = "/src/main/webapp";
     protected String pageFolder      = "/WEB-INF/admin/";
     protected String modelPrefixes   = "";//生成model的时候去掉的表名前缀
     protected String packagePrefixes = "Oa";//生成model的时候去掉的ClassName前缀
@@ -97,7 +99,7 @@ public class DoGenerator {
     	String className = tableNameToClassName(tableName);
         String packages = toPackages(className);
         Kv kv = getKv(tableName,b);
-        String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Controller.java";
+        String filePath = workSpacePath+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Controller.java";
         return enjoy.render("/java/controller.html", kv, filePath);
     }
     /**
@@ -117,7 +119,7 @@ public class DoGenerator {
     	String className = tableNameToClassName(tableName);
     	String packages = toPackages(className);
     	Kv kv = getKv(tableName,b);
-        String filePath = workSpacePath+"/"+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Service.java";
+        String filePath = workSpacePath+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Service.java";
         return enjoy.render("/java/service.html", kv, filePath);
     }
     
@@ -221,7 +223,7 @@ public class DoGenerator {
     	// base model 所使用的包名
 		String baseModelPackageName = modelPackageName+".base";
 		// base model 文件保存路径
-		String baseModelOutputDir = DoGenerator.workSpacePath + "/src/"+baseModelPackageName.replace(".", "/");
+		String baseModelOutputDir = DoGenerator.workSpacePath + srcFolder+"/"+baseModelPackageName.replace(".", "/");
 		
 		// model 所使用的包名 (MappingKit 默认使用的包名)
 		// model 文件保存路径 (MappingKit 与 DataDictionary 文件默认保存路径)
@@ -264,7 +266,5 @@ public class DoGenerator {
 		generator.generate();
     }
     
-    public static void main(String[] args) {
-		System.out.println(me.tableNameToClassName("sys_user"));
-	}
+
 }

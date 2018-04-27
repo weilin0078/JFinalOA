@@ -9,7 +9,7 @@ public class ExceptionInterceptor implements Interceptor {
         try{
             inv.invoke();
         }catch (Exception e){
-        	
+        	e.printStackTrace();
         }
     }
 
