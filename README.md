@@ -1,6 +1,8 @@
 qq交流群号：136981051
 
-JFinalOA码云地址：http://git.oschina.net/glorylion/JFinalOA
+码云地址：http://git.oschina.net/glorylion/JFinalOA
+演示地址：http://218.56.98.206:8092/JFinalOA
+默认密码：admin/admin
 
 JFinalOA-LayUI版本功能并不完善。仅供参考。
 
