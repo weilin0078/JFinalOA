@@ -33,7 +33,7 @@
 	<dependency>
 	    <groupId>org.activiti</groupId>
 	    <artifactId>activiti-engine</artifactId>
-	    <version>5.22.0</version>
+	    <version>5.21.0</version>
 	</dependency>
 	<dependency>
 	    <groupId>net.iharder</groupId>
@@ -51,19 +51,19 @@
 	    <version>1.2</version>
 	</dependency>
 	<dependency>
-	    <groupId>org.activiti</groupId>
-	    <artifactId>activiti-modeler</artifactId>
-	    <version>5.14</version>
-	</dependency>
-	<dependency>
 	    <groupId>commons-io</groupId>
 	    <artifactId>commons-io</artifactId>
 	    <version>2.6</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.activiti</groupId>
+	    <artifactId>activiti-modeler</artifactId>
+	    <version>5.21.0</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.activiti</groupId>
 	    <artifactId>activiti-json-converter</artifactId>
-	    <version>7-201801-EA</version>
+	    <version>5.21.0</version>
 	</dependency>
 	<dependency>
 	    <groupId>commons-codec</groupId>
@@ -88,11 +88,11 @@
 	<dependency>
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>
-	    <version>6.0.6</version>
+	    <version>5.1.46</version>
 	</dependency>
   </dependencies>
   <build>
-    <finalName>OA</finalName>
+    <finalName>JFinalOA</finalName>
     <pluginManagement>
 		<plugins>
 			<plugin>
