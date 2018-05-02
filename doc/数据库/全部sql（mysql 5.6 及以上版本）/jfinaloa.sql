@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50610
 File Encoding         : 65001
 
-Date: 2018-04-27 16:55:24
+Date: 2018-05-02 16:35:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -115,7 +115,7 @@ CREATE TABLE `act_ge_property` (
 -- ----------------------------
 INSERT INTO `act_ge_property` VALUES ('next.dbid', '1', '1');
 INSERT INTO `act_ge_property` VALUES ('schema.history', 'create(5.20.0.1) upgrade(5.20.0.1->5.21.0.0) upgrade(5.21.0.0->5.22.0.0)', '3');
-INSERT INTO `act_ge_property` VALUES ('schema.version', '5.22.0.0', '3');
+INSERT INTO `act_ge_property` VALUES ('schema.version', '5.21.0.0', '3');
 
 -- ----------------------------
 -- Table structure for act_hi_actinst
@@ -1168,6 +1168,20 @@ CREATE TABLE `oa_res_get` (
 -- ----------------------------
 INSERT INTO `oa_res_get` VALUES ('8a34220bcd2b424eaaf5f952354d9bf5', '1', '7ac6e4c544634e179f78803d5ba2d0ca', '管理员', null, '1', '1', null, null, '1', '1', '0', '0', 'f460a89ce61d4628abe8916105881e76');
 INSERT INTO `oa_res_get` VALUES ('987c97bfe3554443b040bbc0ad56357f', '2', '7ac6e4c544634e179f78803d5ba2d0ca', '管理员', null, '2', '1', null, null, '2', '1', '0', '0', '7399af641e0640cbac751d06c74132a2');
+
+-- ----------------------------
+-- Table structure for oa_test
+-- ----------------------------
+DROP TABLE IF EXISTS `oa_test`;
+CREATE TABLE `oa_test` (
+  `id` varchar(64) NOT NULL COMMENT '主键',
+  `name` varchar(100) DEFAULT NULL COMMENT '名字',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of oa_test
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oa_use_car
