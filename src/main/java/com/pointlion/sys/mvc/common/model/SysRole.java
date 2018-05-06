@@ -103,6 +103,7 @@ public class SysRole extends BaseSysRole<SysRole> {
 		
 	}
 	
+	
 	/***
 	 * 获取所有角色
 	 * 给用户赋值角色时候用
