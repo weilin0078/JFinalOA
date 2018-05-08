@@ -1,0 +1,118 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    #include("/common/include/include.html")
+</head>
+<body>
+	<div id="page-content">
+		<div class="col-sm-12">
+				<div class="panel">
+		            <div class="panel-heading">
+		                <h3 class="panel-title"><p class="text-primary">如何部署JFinalOA</p></h3>
+		            </div>
+			    </div>
+			    <div class="panel">
+		            <div class="panel-heading">
+		                <h3 class="panel-title"><p class="text-primary">一.准备环境</p></h3>
+		            </div>
+		            <div class="panel-body">
+		                <div class="list-group col-sm-6">
+	                        <a class="list-group-item list-group-item-primary" href="#">MySQL5.6+</a>
+	                        <a class="list-group-item list-group-item-success" href="#">JDK1.7+</a>
+	                        <a class="list-group-item list-group-item-info" href="#">Maven</a>
+	                        <a class="list-group-item list-group-item-danger" href="#">Eclipse/IDEA</a>
+	                    </div>
+			        </div>
+			    </div>
+			    <div class="panel">
+		            <div class="panel-heading">
+		                <h3 class="panel-title"><p class="text-primary">二.导入SQL</p></h3>
+		            </div>
+		            <div class="panel-body">
+		            	<p>
+		            		1.创建jfinaloa数据库。其他名字需要修改conf.properties配置文件即可。
+		            		2.MySQL5.6直接导入 "/doc/数据库/全部sql（mysql 5.6 及以上版本）/jfinaloa.sql" 文件。<br/><br/><br/><br/>
+		            		可以预见的问题<br/><br/>
+		                	1.Activiti（流程引擎）的表（act_*的表）是由代码自动创建的。直接导出后其他版本的MySQL会不兼容。<br/><br/>
+		                	2.视图的创建先后顺序，可能会出错。<br/><br/>
+		                	解决方法<br/><br/>
+		                	1.如果导入失败报错是由act_*开头的表导致的<br/><br/>
+		                	第一步.编辑"jfinaloa.sql"文件，将所有"act_"开头的sql语句删掉，然后进行导入。<br/><br/>
+		                	第二步.注释掉  _MappingKit.java类中"act_"开头和"v_"开头，表名的代码。<br/><br/>
+		                	<img alt="" src="#(ctx)/common/img/front/help/howToRunJFinalOA/_MappingKit.png"><br/><br/>
+		                	第三步.修改"ActivitiPlugin.java"中代码。注释掉第52行，放开第53行注释。<br/><br/>
+		                	<img alt="" src="#(ctx)/common/img/front/help/howToRunJFinalOA/ActivitiPlugin.png"><br/><br/>
+		                	第四步.启动项目，启动过程中，会自动创建"act_"开头的流程表。<br/><br/>
+		                	第五步.创建完成流程表之后，将第二步，第三步修改的代码还原。<br/><br/>
+		                	第六步.导入"视图.sql"。<br/><br/>
+		                	第七步.重启项目。<br/><br/>
+		                	<br/><br/>
+		                	注意。此种方式，会重置所有流程表，所以系统中预置的所有流程将无法使用，请到演示系统中导出所有的bpmn文件，导入到各自系统中使用。<br/><br/>
+		                	2.如果是视图导入报错。
+		                	第一步.打开"jfinaloa.sql"文件，删除以下sql。<br/><br/>
+		                	<img alt="" src="#(ctx)/common/img/front/help/howToRunJFinalOA/viewSQL.png"><br/><br/>
+		                	第二步.执行"jfinaloa.sql"<br/><br/>
+		                	第三步.执行"视图.sql"
+		                </p>
+			        </div>
+			    </div>
+			    <div class="panel">
+		            <div class="panel-heading">
+		                <h3 class="panel-title"><p class="text-primary">三.Eclipse运行</p></h3>
+		            </div>
+		            <div class="panel-body">
+		                <p>
+		                	1.导入Maven项目。<br/><br/>
+		                	<img alt="" src="#(ctx)/common/img/front/help/howToRunJFinalOA/importMvnProject.png" width="400"><br/><br/>
+		                	2.修改buildPath。<br/><br/>
+		                	<img alt="" src="#(ctx)/common/img/front/help/howToRunJFinalOA/editJDK.png" width="600"><br/><br/>
+		                	3.更新Maven。<br/><br/>
+		                	<img alt="" src="#(ctx)/common/img/front/help/howToRunJFinalOA/updateMaven.png" width="600"><br/><br/>
+		                	4.修改数据库配置文件。在"conf.properties"文件中。<br/><br/>
+		                	<img alt="" src="#(ctx)/common/img/front/help/howToRunJFinalOA/confImg.png"><br/><br/>
+		                	5.运行项目。<br/><br/>
+		                	<img alt="" src="#(ctx)/common/img/front/help/howToRunJFinalOA/runJFinalOAEclipse.png" width="700"><br/><br/>
+		                	其中。jetty可以换成tomcat，tomcat7<br>
+		                	jetty:run,tomcat:run,tomcat7:run均可以
+		                </p>
+			        </div>
+			    </div>
+			    <div class="panel">
+		            <div class="panel-heading">
+		                <h3 class="panel-title"><p class="text-primary">四.IDEA运行</p></h3>
+		            </div>
+		            <div class="panel-body">
+		                <p>
+		                	1.打开Maven项目。<br/><br/>
+		                	2.修改buildPath。<br/><br/>
+		                	3.更新Maven。<br/><br/>
+		                	4.修改数据库配置文件。在"conf.properties"文件中。<br/><br/>
+		                	5.运行项目。<br/><br/>
+		                	<img alt="" src="#(ctx)/common/img/front/help/howToRunJFinalOA/runIDEA.png" width="700"><br/><br/>
+		                	delpoy中设置context;<br/><br/>
+		                	<img alt="" src="#(ctx)/common/img/front/help/howToRunJFinalOA/IDEADeploy.png" width="700"><br/><br/>
+		                	
+		                </p>
+			        </div>
+			    </div>
+			    <div class="panel">
+		            <div class="panel-heading">
+		                <h3 class="panel-title"><p class="text-primary">五.运行</p></h3>
+		            </div>
+		            <div class="panel-body">
+		                <p>
+							浏览器访问：http://localhost:8080/JFinalOA		                	
+		                </p>
+			        </div>
+			    </div>
+		</div>
+		</div>
+	</div>
+</body>
+</html>
+                  

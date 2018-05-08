@@ -8,7 +8,6 @@ package com.pointlion.sys.mvc.mobile.login;
 import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.authc.credential.PasswordService;
 
-import com.jfinal.aop.Clear;
 import com.pointlion.sys.mvc.common.base.BaseController;
 import com.pointlion.sys.mvc.common.model.SysUser;
 
@@ -17,7 +16,6 @@ import com.pointlion.sys.mvc.common.model.SysUser;
  * @author Administrator
  *
  */
-@Clear()
 public class MobileLoginController extends BaseController {
 	
 	/***

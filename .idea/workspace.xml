@@ -6,7 +6,26 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0baef53-ced4-4b29-8451-38da90773e0d" name="默认的" comment="" />
+    <list default="true" id="e0baef53-ced4-4b29-8451-38da90773e0d" name="默认的" comment="">
+      <change beforePath="$PROJECT_DIR$/.classpath" afterPath="$PROJECT_DIR$/.classpath" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.wst.common.project.facet.core.xml" afterPath="$PROJECT_DIR$/.settings/org.eclipse.wst.common.project.facet.core.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/config/MainConfig.java" afterPath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/config/MainConfig.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/handler/GlobalHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/handler/GlobalHandler.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/interceptor/IfLoginInterceptor.java" afterPath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/interceptor/IfLoginInterceptor.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/mvc/common/base/BaseController.java" afterPath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/mvc/common/base/BaseController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/mvc/mobile/bumph/MobileBumphController.java" afterPath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/mvc/mobile/bumph/MobileBumphController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/mvc/mobile/bumph/MobileBumphService.java" afterPath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/mvc/mobile/bumph/MobileBumphService.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/mvc/mobile/common/MobileController.java" afterPath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/mvc/mobile/common/MobileController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/mvc/mobile/login/MobileLoginController.java" afterPath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/mvc/mobile/login/MobileLoginController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/mvc/mobile/notice/MobileNoticeController.java" afterPath="$PROJECT_DIR$/src/main/java/com/pointlion/sys/mvc/mobile/notice/MobileNoticeController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/config.properties" afterPath="$PROJECT_DIR$/src/main/java/config.properties" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/home/index.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/admin/home/index.html" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/shiro.ini" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/shiro.ini" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/common/include/include.html" afterPath="$PROJECT_DIR$/src/main/webapp/common/include/include.html" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/common/js/common/pointLion.js" afterPath="$PROJECT_DIR$/src/main/webapp/common/js/common/pointLion.js" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.html" afterPath="$PROJECT_DIR$/src/main/webapp/login.html" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,11 +39,11 @@
       <file leaf-file-name="MainConfig.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/pointlion/sys/config/MainConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1472">
-              <caret line="116" column="35" lean-forward="false" selection-start-line="116" selection-start-column="35" selection-end-line="116" selection-end-column="35" />
+            <state relative-caret-position="1656">
+              <caret line="117" column="35" lean-forward="false" selection-start-line="117" selection-start-column="35" selection-end-line="117" selection-end-column="35" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <marker date="1524816523363" expanded="true" signature="5249:7060" ph="{...}" />
+                <marker date="1525767574489" expanded="true" signature="7146:7167" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -43,8 +62,8 @@
       <file leaf-file-name="ExceptionInterceptor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/pointlion/sys/interceptor/ExceptionInterceptor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <state relative-caret-position="224">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -63,10 +82,11 @@
       <file leaf-file-name="GlobalHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/pointlion/sys/handler/GlobalHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state relative-caret-position="552">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
+                <marker date="1525767376740" expanded="true" signature="740:1200" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -172,7 +192,7 @@
     <ConfirmationsSetting value="1" id="添加" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages ProjectPane="false" />
       <showMembers ProjectPane="false" />
       <showModules />
@@ -185,14 +205,20 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.TypeScript" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2678161" />
     <property name="SearchEverywhereHistoryKey" value="未命名&#9;null&#9;null" />
@@ -388,6 +414,8 @@
       <workItem from="1524474093461" duration="3323000" />
       <workItem from="1524811971054" duration="1588000" />
       <workItem from="1524880022794" duration="55000" />
+      <workItem from="1525693060810" duration="706000" />
+      <workItem from="1525773054758" duration="1280000" />
     </task>
     <task id="LOCAL-00001" summary="IDEA">
       <created>1522221603146</created>
@@ -400,7 +428,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11717000" />
+    <option name="totallyTimeSpent" value="13703000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -413,6 +441,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6147404" sideWeight="0.49546143" order="7" side_tool="false" content_ui="tabs" />
@@ -420,16 +449,16 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998326" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6147404" sideWeight="0.5045386" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33668342" sideWeight="0.5045386" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4154104" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998326" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998326" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3400335" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998326" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="控制板" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2065053" sideWeight="0.5" order="0" side_tool="true" content_ui="combo" x="556" y="141" width="254" height="456" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2065053" sideWeight="0.5" order="0" side_tool="true" content_ui="combo" x="556" y="141" width="254" height="456" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="设计师" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -854,10 +883,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pointlion/sys/handler/GlobalHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state relative-caret-position="552">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <marker date="1525767376740" expanded="true" signature="740:1200" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -872,19 +902,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pointlion/sys/config/MainConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1472">
-          <caret line="116" column="35" lean-forward="false" selection-start-line="116" selection-start-column="35" selection-end-line="116" selection-end-column="35" />
+        <state relative-caret-position="1656">
+          <caret line="117" column="35" lean-forward="false" selection-start-line="117" selection-start-column="35" selection-end-line="117" selection-end-column="35" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1524816523363" expanded="true" signature="5249:7060" ph="{...}" />
+            <marker date="1525767574489" expanded="true" signature="7146:7167" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pointlion/sys/interceptor/ExceptionInterceptor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        <state relative-caret-position="224">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -947,7 +977,8 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.2678161" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

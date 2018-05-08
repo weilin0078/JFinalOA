@@ -76,9 +76,9 @@ var pointLion = function(){
 			if(size){
 				s = size;
 			}
-			bootbox.dialog({  
-	            buttons: {  
-	            	ok: {  
+			bootbox.dialog({
+	            buttons: {
+	            	ok: {
 	                    label: '确定',
 	                    className: "btn-"+t,
 	                    callback : function(){
@@ -103,7 +103,7 @@ var pointLion = function(){
 			if(size){
 				s = size;
 			}
-			bootbox.dialog({  
+			bootbox.dialog({
 	            buttons: {
 	            	cancel : {
 	                	label: '取消',
@@ -112,7 +112,7 @@ var pointLion = function(){
 	    	            	
 	    	            }
 	                },
-	            	ok: {  
+	            	ok: {
 	                    label: '确定',
 	                    className: "btn-mint",
 	                    callback : function(){

@@ -7,7 +7,6 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.sys.mvc.admin.bumph.BumphConstants;
 import com.pointlion.sys.mvc.admin.bumph.BumphService;
-import com.pointlion.sys.mvc.common.model.OaBumph;
 import com.pointlion.sys.mvc.common.model.OaBumphOrg;
 import com.pointlion.sys.mvc.common.utils.StringUtil;
 

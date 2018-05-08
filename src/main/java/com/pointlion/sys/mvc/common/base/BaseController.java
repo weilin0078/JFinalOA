@@ -411,7 +411,7 @@ public abstract class BaseController extends Controller {
 	 * @return
 	 */
 	protected String[] getParas(String name) {
-		return getRequest().getParameterValues(name);
+		return getParaValues(name);
 	}
 	
 

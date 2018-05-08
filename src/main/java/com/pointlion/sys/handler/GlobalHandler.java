@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jfinal.core.Action;
 import com.jfinal.core.JFinal;
-import com.jfinal.core.JFinalFilter;
 import com.jfinal.handler.Handler;
 import com.jfinal.log.Log;
 import com.jfinal.render.RenderManager;

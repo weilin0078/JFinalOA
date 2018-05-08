@@ -5,12 +5,10 @@
  */
 package com.pointlion.sys.mvc.mobile.bumph;
 
-import com.jfinal.aop.Clear;
 import com.jfinal.kit.StrKit;
 import com.pointlion.sys.mvc.admin.bumph.BumphConstants;
 import com.pointlion.sys.mvc.admin.workflow.WorkFlowService;
 import com.pointlion.sys.mvc.common.base.BaseController;
-import com.pointlion.sys.mvc.common.model.OaBumph;
 import com.pointlion.sys.mvc.common.model.SysUser;
 
 /***
@@ -18,7 +16,6 @@ import com.pointlion.sys.mvc.common.model.SysUser;
  * @author Administrator
  *
  */
-@Clear()
 public class MobileBumphController extends BaseController {
 	static WorkFlowService wfservice =  WorkFlowService.me;
 	static MobileBumphService service =  MobileBumphService.me;
@@ -53,7 +50,7 @@ public class MobileBumphController extends BaseController {
 	public void completeTask(){
 		String taskid = getPara("taskid");
 		String pass = getPara("pass");
-		String comment = getPara("comment");
+//		String comment = getPara("comment");
 		String id = getPara("id");
 		if(StrKit.notBlank(taskid)&&StrKit.notBlank(pass)&&StrKit.notBlank(id)){
 //			service.completeTask(pass,comment, taskid, OaBumph.dao.findById(id));

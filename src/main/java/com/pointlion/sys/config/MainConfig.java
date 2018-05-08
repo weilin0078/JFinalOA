@@ -46,6 +46,7 @@ import com.pointlion.sys.mvc.admin.workflow.rest.ProcessDefinitionDiagramLayoutR
 import com.pointlion.sys.mvc.admin.workflow.rest.ProcessInstanceDiagramLayoutResource;
 import com.pointlion.sys.mvc.admin.workflow.rest.ProcessInstanceHighlightsResource;
 import com.pointlion.sys.mvc.common.model._MappingKit;
+import com.pointlion.sys.mvc.front.help.HelpController;
 import com.pointlion.sys.mvc.mobile.bumph.MobileBumphController;
 import com.pointlion.sys.mvc.mobile.common.MobileController;
 import com.pointlion.sys.mvc.mobile.login.MobileLoginController;
@@ -171,6 +172,8 @@ public class MainConfig extends JFinalConfig {
 		me.add("/mobile/notice",MobileNoticeController.class);
 		me.add("/mobile/login",MobileLoginController.class);
 		me.add("/mobile/bumph",MobileBumphController.class);
+		//
+		me.add("/front/help",HelpController.class);
 	}
 	
 	@Override

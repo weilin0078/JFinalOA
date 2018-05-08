@@ -8,7 +8,6 @@ package com.pointlion.sys.mvc.mobile.notice;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.jfinal.aop.Clear;
 import com.jfinal.kit.StrKit;
 import com.pointlion.sys.mvc.common.base.BaseController;
 import com.pointlion.sys.mvc.common.model.OaNotice;
@@ -20,7 +19,6 @@ import com.pointlion.sys.mvc.common.model.SysUser;
  * @author Administrator
  *
  */
-@Clear()
 public class MobileNoticeController extends BaseController {
 	
 	static MobileNoticeService service =  MobileNoticeService.me;

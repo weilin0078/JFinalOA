@@ -12,7 +12,6 @@ import java.util.Map;
 import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.authc.credential.PasswordService;
 
-import com.jfinal.aop.Clear;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.IAtom;
@@ -31,7 +30,6 @@ import com.pointlion.sys.mvc.common.utils.UuidUtil;
  * @author Administrator
  *
  */
-@Clear()
 public class MobileController extends BaseController {
 	
 	static MobileService service =  MobileService.me;

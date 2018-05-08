@@ -9,7 +9,7 @@ import com.pointlion.sys.plugin.shiro.ext.SimpleUser;
 public class IfLoginInterceptor implements Interceptor {
 	@Override
 	public void intercept(Invocation inv) {
-		if(!inv.getActionKey().contains(ShiroKit.getLoginUrl())){//如果是登录地址的请求
+		if(!inv.getActionKey().contains(ShiroKit.getLoginUrl())&&inv.getActionKey().indexOf("/admin/")==0){//如果访问的不是登录地址,并且，访问的是/admin/路由下的地址
 			SimpleUser user = ShiroKit.getLoginUser();
 			Controller c = inv.getController();
 			if(user!=null){
