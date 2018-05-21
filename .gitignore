@@ -1,2 +1,4 @@
 /target/
 /jfinalide.properties
+.idea*
+JFinalOA.iml
