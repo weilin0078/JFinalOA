@@ -76,7 +76,7 @@
 			   ////查询参数,每次调用是会带上这个参数，可自定义                         
 			   queryParams : function(params) {
 			       return {
-			             pageNumber: params.offset+1,
+			             pageNumber: (params.offset/params.limit)+1,
 			             pageSize: params.limit
 			           };
 			   },
