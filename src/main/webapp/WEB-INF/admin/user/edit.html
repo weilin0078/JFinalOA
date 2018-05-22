@@ -11,7 +11,7 @@
 		                    <div class="col-md-5">
 		                    	<div class="input-group mar-btm">
 			                        <input type="text" id="orgname" name="sysUser.orgName" class="form-control" disabled value="#(org?org.name:'')">
-			                        <input type="hidden" id="orgid" name="sysUser.orgid" class="form-control" value="#(o?o.orgid:'')">
+			                        <input type="hidden" id="orgid" name="sysUser.orgid" class="form-control" value="#(o?o.orgid:org.id)">
 			                        <input type="hidden"  name="sysUser.id" class="form-control" value="#(o?o.id:'')">
 			                        <span class="input-group-btn">
 			                            <button class="btn btn-mint" type="button" onclick="selectOneOrg()">选择</button>
