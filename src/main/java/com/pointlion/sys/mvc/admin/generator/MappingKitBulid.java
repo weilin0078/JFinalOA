@@ -4,10 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
- 
+
 import com.jfinal.plugin.activerecord.generator.MappingKitGenerator;
-import com.jfinal.plugin.activerecord.generator.TableMeta;
  
 public class MappingKitBulid extends MappingKitGenerator{
  
@@ -17,7 +15,7 @@ public class MappingKitBulid extends MappingKitGenerator{
 		// TODO Auto-generated constructor stub
 	}
 	
-	
+	/*
 	@Override
 	protected void genMappingMethod(List<TableMeta> tableMetas, StringBuilder ret) {
 		ret.append(String.format(mappingMethodDefineTemplate));
@@ -33,6 +31,7 @@ public class MappingKitBulid extends MappingKitGenerator{
 		readOldMapping(ret,add,addTableName);
 		ret.append(String.format("\t}%n"));
 	}
+	*/
 	
 	//读取之前mapping生成的数据，然后进行追加
 	public void readOldMapping(StringBuilder ret,String add,String addTableName){

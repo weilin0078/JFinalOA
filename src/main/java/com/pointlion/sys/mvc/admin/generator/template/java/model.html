@@ -1,28 +1,27 @@
-package #(package);
+package #(modelPackageName);
 
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.pointlion.sys.mvc.common.model.base.Base#(className);
-
+import #(baseModelPackageName).#(tableMeta.baseModelName);
 @SuppressWarnings("serial")
-public class #(className) extends Base#(className)<#(className)> {
-	public static final #(className) dao = new #(className)();
+public class #(tableMeta.modelName) extends #(tableMeta.baseModelName)<#(tableMeta.modelName)> {
+	public static final #(tableMeta.modelName) dao = new #(tableMeta.modelName)();
 	
 	/***
 	 * 根据主键查询
 	 */
-	public #(className) getById(String id){
-		return #(className).dao.findById(id);
+	public #(tableMeta.modelName) getById(String id){
+		return #(tableMeta.modelName).dao.findById(id);
 	}
 	
 	/***
 	 * 获取分页
 	 */
 	public Page<Record> getPage(int pnum,int psize){
-		String sql  = " from #(tableName) o ";
+		String sql  = " from #(tableMeta.name) o ";
 		return Db.paginate(pnum, psize, " select * ", sql);
 	}
 	
@@ -34,7 +33,7 @@ public class #(className) extends Base#(className)<#(className)> {
 	public void deleteByIds(String ids){
     	String idarr[] = ids.split(",");
     	for(String id : idarr){
-    		#(className) o = #(className).dao.getById(id);
+    		#(tableMeta.modelName) o = #(tableMeta.modelName).dao.getById(id);
     		o.delete();
     	}
 	}
