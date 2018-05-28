@@ -160,7 +160,7 @@ public class BumphService {
 	 * @throws Exception 
 	 */
 	public File bumphExport(String id,HttpServletRequest request) throws Exception{
-		String path = request.getSession().getServletContext().getRealPath("")+"\\WEB-INF\\admin\\bumph\\template\\";
+		String path = request.getSession().getServletContext().getRealPath("")+File.separator+"WEB-INF"+File.separator+"admin"+File.separator+"bumph"+File.separator+"template"+File.separator;
 		OaBumph bumph = OaBumph.dao.findById(id);
 		Map<String , Object > data = new HashMap<String , Object>();
 		data.put("doc_num_n", bumph.getDocNumN());
