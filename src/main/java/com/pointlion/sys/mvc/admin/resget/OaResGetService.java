@@ -28,8 +28,8 @@ public class OaResGetService{
 	 * 获取分页
 	 */
 	public Page<Record> getPage(int pnum,int psize){
-		String sql  = " from oa_res_get o ";
-		return Db.paginate(pnum, psize, " select * ", sql);
+		String sql  = " from oa_res_get b LEFT JOIN act_hi_procinst p ON b.proc_ins_id=p.ID_";
+		return Db.paginate(pnum, psize, " select b.*,p.PROC_DEF_ID_ defid ", sql);
 	}
 	
 	/***
