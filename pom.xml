@@ -7,41 +7,6 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>JFinalOA Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  <profiles>
-		<profile>
-			<!-- 本地56环境 -->
-			<id>dev</id>
-			<properties>
-				<repository_url>http://192.168.1.56</repository_url>
-				<db-url><![CDATA[jdbc:mysql://127.0.0.1:3306/jfinaloa?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&nullNamePatternMatchesAll=true]]></db-url>
-				<db-username>root</db-username>
-				<db-password>123456</db-password>
-				<db-type>mysql</db-type>
-				<db-name>jfinaloa</db-name>
-				<dev-model>true</dev-model>
-				<workspace-path>D:\Program Files\workspace\JFinalOA</workspace-path>
-				<log4j-level>debug</log4j-level>
-				<log4j-path>d\:/JFinalLogs/</log4j-path>
-			</properties>
-			<!-- 默认激活本环境 -->
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-		</profile>
-</profiles>
-	<repositories>
-		<repository>
-			<id>nexus</id>
-			<name>nexus</name>
-			<url>${repository_url}:8080/nexus/content/groups/public/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
   <dependencies>
 	<dependency>
 	    <groupId>org.apache.tomcat</groupId>
@@ -142,12 +107,6 @@
 	</dependency>
   </dependencies>
   <build>
-  <resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
     <finalName>JFinalOA</finalName>
     <pluginManagement>
 		<plugins>
@@ -177,6 +136,36 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>6.1.5</version>
+                <configuration>
+                    <webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
+                    <connectors>
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>8080</port>
+                        </connector>
+                    </connectors>
+                </configuration>
+            </plugin>
+            <plugin>
+	            <groupId>org.apache.tomcat.maven</groupId>
+	            <artifactId>tomcat7-maven-plugin</artifactId>
+	            <version>2.2</version>
+	               <configuration>
+	                  <port>8080</port>
+	                  <server>tomcat7</server>
+	               </configuration>
+	                <executions>
+	                    <execution>
+	                        <phase>package</phase>
+	                        <goals>
+	                            <goal>run</goal>
+	                        </goals>
+	                    </execution>
+	                </executions>
+	        </plugin>
 		</plugins>
     </pluginManagement>
   </build>
