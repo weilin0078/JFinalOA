@@ -6,3 +6,4 @@ JFinalOA.iml
 .gitignore
 .project
 .settings/*
+/.settings
