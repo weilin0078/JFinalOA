@@ -4,6 +4,8 @@ qq交流群号：136981051
 
 演示地址：http://218.56.98.206:8092/JFinalOA
 
+如何部署：http://218.56.98.206:8092/JFinalOA/front/help/howToRunJFinalOA
+
 默认密码：admin/admin
 
 **1.简单介绍** 
