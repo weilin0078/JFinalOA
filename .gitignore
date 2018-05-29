@@ -2,3 +2,7 @@
 /jfinalide.properties
 .idea*
 JFinalOA.iml
+.classpath
+.gitignore
+.project
+.settings/
