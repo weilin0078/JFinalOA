@@ -53,7 +53,7 @@
 	       title: '操作',
 	       width:'250',
 	       formatter:function(value,row,index){
-	    	   var a  =     '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/notice/getEditPage?id='+row.id+'&view=detail\')" href="javascript:void(0);" >查看</a>&nbsp;';
+	    	   var a  =     '<a class="label label-table label-success" onclick="viewNotice(\''+row.id+'\')" href="javascript:void(0);" >查看</a>&nbsp;';
 		       return a;
 	       }
 	   }];
@@ -111,46 +111,36 @@
 		$("#pageTable").bootstrapTable('refresh', opt);
 		$('#pageTable').bootstrapTable('hideColumn', 'id');
 	}
-	//删除
-	function del(ids){
-		pointLion.confimMsg("您是否要删除所选公告 ?<br/> 点击确认进行删除 , 点击取消取消该操作",null,function(){
-			//执行删除
-			var data = common_ajax.ajaxFunc("/admin/notice/delete",{"ids":ids}, "json", null);
-			//删除结果
-			if(data.success){
-				pointLion.alertMsg(data.message,"success",null,function(){
-					doPjax(ctx+'/admin/notice/getListPage');//跳转到列表页
-				});
-			}else{
-				pointLion.alertMsg(data.message,"success",null,null);
-			}
-		});
-	};
-	//发布
-	function publish(id){
-			pointLion.confimMsg("您将要发布该公告！<br/><span style='color:green;'>被通知人将会收到该通知！<br/>您将无法进行修改和删除！！！</span> <br/>点击确认进行提交 , 点击取消取消该操作",null,function(){
-				var data = common_ajax.ajaxFunc("/admin/notice/publish",{"id":id}, "json", null);
-				if(data.success){
-					pointLion.alertMsg(data.message,"success",null,function(){
-						doPjax(ctx+'/admin/notice/getListPage');//跳转到列表页
+	//查看通知公告
+	function viewNotice(id){
+		var thisLay;//弹出层
+		layer.open({
+			  type: 2,
+			  title: false, //不显示标题栏
+			  area: ['900px', '620px'],
+			  shade: 0.8,
+			  id: 'selectOneMenu', //设定一个id，防止重复弹出
+			  resize: false,
+			  closeBtn: false,
+			  isOutAnim : false , 
+			  btn: ['签收', '取消'], 
+			  btnAlign: 'c',
+			  content: ctx+'/admin/notice/viewNotice?id='+id,
+			  success: function(layero){
+				  thisLay = window[layero.find('iframe')[0]['name']]; 
+			  },
+			  yes: function(){
+				  thisLay.pointLion.confimMsg("您将要签收该公告！<br/><span style='color:green;'>签收之后公告发布人员可知晓您签收状态和时间！</span> <br/>点击确认进行签收 , 点击取消取消该操作",null,function(){
+					  	var data = common_ajax.ajaxFunc("/admin/notice/sign",{"id":id}, "json", null);
+						if(data.success){
+							layer.closeAll();
+							pointLion.alertMsg(data.message,"success",null,null);
+						}else{
+							pointLion.alertMsg(data.message,"success",null,null);
+						}
 					});
-				}
+			  }
 			});
-	}
-	//取回
-	function callBack(id){
-		pointLion.confimMsg("您将要取回该公告！取回将可以对公告进行修改和删除！<br/><span style='color:red;'>取回之后被通知人将无法查看该公告！<br/>取回之后如果进行修改，重新发布之后，被通知人将会重新收到“签收”通知！</span> <br/>点击确认进行取回 , 点击取消取消该操作",null,function(){
-			//执行删除
-			var data = common_ajax.ajaxFunc("/admin/notice/callBack",{"id":id}, "json", null);
-			//删除结果
-			if(data.success){
-				pointLion.alertMsg(data.message,"success",null,function(){
-					doPjax(ctx+'/admin/notice/getListPage');//跳转到列表页
-				});
-			}else{
-				pointLion.alertMsg(data.message,"danger",null,null);
-			}
-		});
 	}
 	$(document).ready(function(){
 		initFullHeight();//初始化高度

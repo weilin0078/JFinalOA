@@ -110,7 +110,7 @@ public class NoticeService {
 		return dao.find("select DISTINCT n.*,u.if_sign from oa_notice n ,oa_notice_user u where n.id=u.notice_id and u.user_id='"+userid+"' and n.if_publish='"+NoticeConstants.NOTICE_IF_PUBLISH_YES+"'");
 	}
 	public Page<OaNotice> getMyNoticePage(int pnum,int psize,String userid){
-		return OaNotice.dao.paginate(pnum, psize, "select * "," from oa_notice n ,oa_notice_user u where n.id=u.notice_id and u.user_id='"+userid+"' and n.if_publish='"+NoticeConstants.NOTICE_IF_PUBLISH_YES+"'");
+		return OaNotice.dao.paginate(pnum, psize, "select DISTINCT n.*,u.if_sign "," from oa_notice n ,oa_notice_user u where n.id=u.notice_id and u.user_id='"+userid+"' and n.if_publish='"+NoticeConstants.NOTICE_IF_PUBLISH_YES+"'");
 	}
 	/***
 	 * 签收公告
