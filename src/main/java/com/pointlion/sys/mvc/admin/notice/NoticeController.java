@@ -101,6 +101,19 @@ public class NoticeController extends BaseController {
 		service.callBack(getPara("id"));
 		renderSuccess();
 	}
+	
+	/*****************我收到的公告*********************************/
+	public void myReceiveNoticePage(){
+		setBread("通知公告",this.getRequest().getServletPath(),"我收到的公告");
+		render("/WEB-INF/admin/notice/myReceiveNotice.html");
+	}
+	public void myReceiveNotice(){
+		String curr = getPara("pageNumber");
+    	String pageSize = getPara("pageSize");
+		String userid = ShiroKit.getUserId();
+		Page<OaNotice> page = service.getMyNoticePage(Integer.valueOf(curr),Integer.valueOf(pageSize),userid);
+		renderPage(page.getList(),"" ,page.getTotalRow());
+	}
 	/*****************管理通知公告结束*********************************/
 	
 	/***
