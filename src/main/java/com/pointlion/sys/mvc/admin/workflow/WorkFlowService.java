@@ -264,11 +264,14 @@ public class WorkFlowService {
 	 * --管理页面使用
 	 */
 	public Page<Record> getToDoPageByKey(int pnum,int psize,String tableName,String key ,String username){
-		String sql = "select * from v_tasklist t ,"+tableName+" b ";
+		String sql = " from v_tasklist t ,"+tableName+" b where t.INSID=b.proc_ins_id ";
+		if(StrKit.notBlank(key)){
+			sql = sql + "and  t.DEFKEY='"+key+"'";
+		}
 		if(StrKit.notBlank(username)){
 			sql = sql + " and (t.ASSIGNEE='"+username+"' or t.CANDIDATE='"+username+"')";
 		}
-		return Db.paginate(pnum, psize, "select * "," from v_tasklist t ,"+tableName+" b where t.INSID=b.proc_ins_id and  t.DEFKEY='"+key+"'");
+		return Db.paginate(pnum, psize, "select * ",sql);
 	}
 	/***
 	 * 获取流转历史
