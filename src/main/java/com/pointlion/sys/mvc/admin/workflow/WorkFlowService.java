@@ -36,6 +36,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.pointlion.sys.mvc.common.model.SysUser;
 import com.pointlion.sys.mvc.common.utils.Constants;
 import com.pointlion.sys.plugin.activiti.ActivitiPlugin;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
@@ -263,17 +264,37 @@ public class WorkFlowService {
 	 * --管理页面使用
 	 */
 	public Page<Record> getToDoPageByKey(int pnum,int psize,String tableName,String key ,String username){
-		String sql = "select * from v_tasklist t ,"+tableName+" b ";
+		String sql = " from v_tasklist t ,"+tableName+" b where t.INSID=b.proc_ins_id ";
+		if(StrKit.notBlank(key)){
+			sql = sql + "and  t.DEFKEY='"+key+"'";
+		}
 		if(StrKit.notBlank(username)){
 			sql = sql + " and (t.ASSIGNEE='"+username+"' or t.CANDIDATE='"+username+"')";
 		}
-		return Db.paginate(pnum, psize, "select * "," from v_tasklist t ,"+tableName+" b where t.INSID=b.proc_ins_id and  t.DEFKEY='"+key+"'");
+		return Db.paginate(pnum, psize, "select * ",sql);
 	}
 	/***
 	 * 获取流转历史
 	 */
 	public List<Record> getHisTaskList(String insid){
-		return Db.find("SELECT t.assignee_,	u.name,	t.name_,	t.end_time_,	c.message_ FROM	sys_user u ,	act_hi_taskinst t LEFT JOIN act_hi_comment c ON t.id_ = c.task_id_ where u.username=t.ASSIGNEE_ AND t.proc_inst_id_ = '"+insid+"' ORDER BY t.end_time_ desc ");
+		List<Record> taskList = Db.find("select  t.NAME_ taskName,t.ASSIGNEE_ assignee,t.EXECUTION_ID_ exeId,t.ID_ taskId,t.END_TIME_ endTime,c.MESSAGE_ message from act_hi_taskinst t LEFT JOIN act_hi_comment c  ON c.TASK_ID_=t.ID_ where t.proc_inst_id_ = '"+insid+"' ORDER BY t.end_time_ DESC");
+		for(Record r : taskList){
+			String assignee = r.getStr("assignee");
+			if(StrKit.isBlank(assignee)){
+				Record v = Db.findFirst("select * from act_hi_varinst v where v.EXECUTION_ID_='"+r.getStr("exeId")+"' and v.NAME_!='loopCounter'");
+				assignee = v.getStr("TEXT_");
+			}
+			SysUser user  = SysUser.dao.getByUsername(assignee);
+			if(user!=null){
+				r.set("assignee", user.getName());
+			}else{
+				r.set("assignee", "已无此人["+assignee+"]");
+			}
+			String endtime = r.getStr("endTime");
+			r.set("endTime", StrKit.notBlank(endtime)?endtime.substring(0,endtime.indexOf(".")):"");
+		}
+		return taskList;
+//		return Db.find("SELECT t.assignee_,	u.name,	t.name_,	t.end_time_,	c.message_ FROM	sys_user u ,	act_hi_taskinst t LEFT JOIN act_hi_comment c ON t.id_ = c.task_id_ where u.username=t.ASSIGNEE_ AND t.proc_inst_id_ = '"+insid+"' ORDER BY t.end_time_ desc ");
 	}
 	
 	/***

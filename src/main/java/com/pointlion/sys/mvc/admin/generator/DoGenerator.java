@@ -19,7 +19,7 @@ public class DoGenerator {
     protected String packageBase     = "com.pointlion.sys.mvc.admin";
 //    protected String srcFolder       = "/src";
 //    protected String sourceFolder    = "/WebRoot";
-    protected String srcFolder       = "/src/main/java";
+    protected String srcFolder       = "/src/main/java/";
     protected String sourceFolder    = "/src/main/webapp";
     protected String pageFolder      = "/WEB-INF/admin/";
     protected String modelPrefixes   = "";//生成model的时候去掉的表名前缀
@@ -277,6 +277,7 @@ public class DoGenerator {
 		ModelBulid modelBulid=new ModelBulid(DbKit.getConfig().getDataSource(), tableName,PropKit.get("dbType"));
 		generator.setMetaBuilder(modelBulid);
 		MappingKitBulid mappingKitBulid=new MappingKitBulid(modelPackageName, modelOutputDir);
+		mappingKitBulid.setMappingKitClassName("_newMapping_Kit");
 		generator.setMappingKitGenerator(mappingKitBulid);
 		//加载自定义model模板，模板中的标签不是自己kv里面的属性，参照底层的TableMeta类和model_template.jf(jar包中自带模板)
 		generator.setModelTemplate(PathKit.getPackagePath(mappingKitBulid)+"/template/java/model.html");
