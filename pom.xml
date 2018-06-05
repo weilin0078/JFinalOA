@@ -13,13 +13,13 @@
 			<id>dev</id>
 			<properties>
 				<repository_url>http://192.168.1.56</repository_url>
-				<db-url><![CDATA[jdbc:mysql://localhost/jfinaloa?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&nullNamePatternMatchesAll=true&autoReconnect=true]]></db-url>
+				<db-url><![CDATA[jdbc:mysql://localhost:3306/jfinaloa?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&nullNamePatternMatchesAll=true&autoReconnect=true]]></db-url>
 				<db-username>root</db-username>
-				<db-password>root</db-password>
+				<db-password>123456</db-password>
 				<db-type>mysql</db-type>
 				<db-name>jfinaloa</db-name>
 				<dev-model>true</dev-model>
-				<workspace-path>E:/workspaces/workspaceLion/LionOA/OA</workspace-path>
+				<workspace-path>D:\Program Files\workspace\oa</workspace-path>
 				<log4j-level>debug</log4j-level>
 			</properties>
 			<!-- 默认激活本环境 -->
@@ -175,6 +175,19 @@
 							</goals>
 						</execution>
 					</executions>
+				</plugin>
+				<plugin>
+				    <groupId>org.apache.maven.plugins</groupId>
+				    <artifactId>maven-resources-plugin</artifactId>
+				    <version>2.6</version>
+				    <configuration>
+				        <encoding>UTF-8</encoding>
+				        <nonFilteredFileExtensions>
+				            <nonFilteredFileExtension>xls</nonFilteredFileExtension>
+				            <nonFilteredFileExtension>xlsx</nonFilteredFileExtension>
+				            <nonFilteredFileExtension>json</nonFilteredFileExtension>
+				        </nonFilteredFileExtensions>
+				    </configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.mortbay.jetty</groupId>
