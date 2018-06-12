@@ -14,15 +14,22 @@ import com.jfinal.template.Engine;
  * @author dufuzhong
  */
 public class Enjoy {
+	
+	static final Integer FAIL = -1;
+	static final Integer SUCCESS = 0;
+	static final Integer EXIST = 1;
 
     /**
-     * 根据具体魔板生成文件
+     * 根据具体模板生成文件
      * @param templateFileName  模板文件名称
      * @param kv                渲染参数
      * @param filePath          输出目录
      * @return 
+     * 1：已存在
+     * 0：成功
+     * -1：失败
      */
-    public boolean render(String templateFileName, Kv kv, String filePath)  {
+    public Integer render(String templateFileName, Kv kv, String filePath)  {
         BufferedWriter output = null;
         try {
             String baseTemplatePath = new StringBuilder(PathKit.getRootClassPath())
@@ -32,7 +39,7 @@ public class Enjoy {
             .toString();
             File file = new File(filePath.toString());
             if(file.exists()){//如果已经存在了
-            	return false;
+            	return EXIST;
             }
             File path = new File(file.getParent());
             if ( ! path.exists() ) {
@@ -44,10 +51,10 @@ public class Enjoy {
             //.setSourceFactory(new ClassPathSourceFactory())
             .getTemplate(templateFileName)
             .render(kv, output);
-            return true;
+            return SUCCESS;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
+            return FAIL;
         }finally{
             try { if( output != null ) output.close(); } catch (IOException e) {}
         }

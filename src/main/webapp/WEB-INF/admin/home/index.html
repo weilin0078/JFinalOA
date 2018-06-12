@@ -54,7 +54,7 @@
 				$(document).on('pjax:end', function () {
 					history.replaceState({},"",ctx+"/admin/home");
 	        	});
-				$.pjax({'url': url, container: '#content-container',timeout:999999});
+				$.pjax({'url': url, container: '#content-container',timeout:999999,cache: false});
 			}
 			//PJax-可传递容器
 			function doPjaxC(url,container){
@@ -64,7 +64,7 @@
 				$(document).on('pjax:end', function () {
 					history.replaceState({},"",ctx+"/admin/home");
 	        	});
-				$.pjax({'url': url, container: container,timeout:999999});
+				$.pjax({'url': url, container: container,timeout:999999,cache: false});
 			}
 			//初始化高度
 			function initFullHeight(){

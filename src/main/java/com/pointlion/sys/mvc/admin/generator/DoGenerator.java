@@ -1,6 +1,9 @@
 package com.pointlion.sys.mvc.admin.generator;
 
+import java.io.File;
+
 import com.jfinal.kit.Kv;
+import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.generator.Generator;
@@ -16,7 +19,7 @@ public class DoGenerator {
     protected String packageBase     = "com.pointlion.sys.mvc.admin";
 //    protected String srcFolder       = "/src";
 //    protected String sourceFolder    = "/WebRoot";
-    protected String srcFolder       = "/src/main/java";
+    protected String srcFolder       = "/src/main/java/";
     protected String sourceFolder    = "/src/main/webapp";
     protected String pageFolder      = "/WEB-INF/admin/";
     protected String modelPrefixes   = "";//生成model的时候去掉的表名前缀
@@ -53,17 +56,24 @@ public class DoGenerator {
     
     /**
      * java 代码生成
+     * service,controller不覆盖
      * */
     public String javaRender(String tableName,HtmlGenerateBean b) {
         String result = "";
-        if(controller(tableName,b)){
+        Integer ret = controller(tableName,b);
+        if(ret.equals(Enjoy.EXIST)){//已存在
+        	result = result + "controller已存在<br/>";
+        }else if(ret.equals(Enjoy.SUCCESS)){//成功！
         	result = result + "controller生成成功<br/>";
-        }else{
+        }else{//-1:失败
         	result = result + "controller生成失败<br/>";
         }
-        if(service(tableName,b)){
+        ret = service(tableName,b);
+        if(ret.equals(Enjoy.EXIST)){//已存在
+        	result = result + "service已存在<br/>";
+        }else if(ret.equals(Enjoy.SUCCESS)){//成功！
         	result = result + "service生成成功<br/>";
-        }else{
+        }else{//-1:失败
         	result = result + "service生成失败<br/>";
         }
         model(tableName);
@@ -76,14 +86,20 @@ public class DoGenerator {
      */
     public String htmlRender(String tableName,HtmlGenerateBean b){
     	String result = "";
-        if(htmlList(tableName,b)){
+    	Integer ret = htmlList(tableName,b);
+        if(ret.equals(Enjoy.EXIST)){//已存在
+        	result = result + "html已存在<br/>";
+        }else if(ret.equals(Enjoy.SUCCESS)){//成功！
         	result = result + "html生成成功<br/>";
-        }else{
+        }else{//-1:失败
         	result = result + "html生成失败<br/>";
         }
-        if(htmlEdit(tableName,b)){
+        ret = htmlEdit(tableName,b);
+        if(ret.equals(Enjoy.EXIST)){//已存在
+        	result = result + "edit已存在<br/>";
+        }else if(ret.equals(Enjoy.SUCCESS)){//成功！
         	result = result + "edit生成成功<br/>";
-        }else{
+        }else{//-1:失败
         	result = result + "edit生成失败<br/>";
         }
         return result;
@@ -95,11 +111,11 @@ public class DoGenerator {
      * 生成Controller
      * @param tableName         表名称
      */
-    public Boolean controller(String tableName,HtmlGenerateBean b){
+    public Integer controller(String tableName,HtmlGenerateBean b){
     	String className = tableNameToClassName(tableName);
         String packages = toPackages(className);
         Kv kv = getKv(tableName,b);
-        String filePath = workSpacePath+srcFolder+"/"+packages.replace(".", "/")+"/"+className+"Controller.java";
+        String filePath = workSpacePath+srcFolder+packages.replace(".", File.separator)+File.separator+className+"Controller.java";
         return enjoy.render("/java/controller.html", kv, filePath);
     }
     /**
@@ -115,7 +131,7 @@ public class DoGenerator {
      * @param className         类名称
      * @param tableName         表名
      */
-    public Boolean service(String tableName,HtmlGenerateBean b){
+    public Integer service(String tableName,HtmlGenerateBean b){
     	String className = tableNameToClassName(tableName);
     	String packages = toPackages(className);
     	Kv kv = getKv(tableName,b);
@@ -123,14 +139,14 @@ public class DoGenerator {
         return enjoy.render("/java/service.html", kv, filePath);
     }
     
-    public Boolean htmlList(String tableName,HtmlGenerateBean b){
+    public Integer htmlList(String tableName,HtmlGenerateBean b){
     	String className = tableNameToClassName(tableName);
         Kv kv = getKv(tableName,b);
         String filePath = workSpacePath+sourceFolder+getPageFilePath(className)+"/list.html";
         return enjoy.render("/html/list.html", kv, filePath);
     }
     
-    public Boolean htmlEdit(String tableName,HtmlGenerateBean b){
+    public Integer htmlEdit(String tableName,HtmlGenerateBean b){
     	String className = tableNameToClassName(tableName);
         Kv kv = getKv(tableName,b);
         String filePath = workSpacePath+sourceFolder+getPageFilePath(className)+"/edit.html";
@@ -261,7 +277,10 @@ public class DoGenerator {
 		ModelBulid modelBulid=new ModelBulid(DbKit.getConfig().getDataSource(), tableName,PropKit.get("dbType"));
 		generator.setMetaBuilder(modelBulid);
 		MappingKitBulid mappingKitBulid=new MappingKitBulid(modelPackageName, modelOutputDir);
+		mappingKitBulid.setMappingKitClassName("_newMapping_Kit");
 		generator.setMappingKitGenerator(mappingKitBulid);
+		//加载自定义model模板，模板中的标签不是自己kv里面的属性，参照底层的TableMeta类和model_template.jf(jar包中自带模板)
+		generator.setModelTemplate(PathKit.getPackagePath(mappingKitBulid)+"/template/java/model.html");
 		// 生成
 		generator.generate();
     }

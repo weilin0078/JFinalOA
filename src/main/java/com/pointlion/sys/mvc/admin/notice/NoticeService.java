@@ -5,6 +5,7 @@ import java.util.List;
 import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.pointlion.sys.mvc.common.model.OaNotice;
 import com.pointlion.sys.mvc.common.model.OaNoticeUser;
@@ -107,6 +108,9 @@ public class NoticeService {
 	}
 	public List<OaNotice> getMyNotice(String userid){
 		return dao.find("select DISTINCT n.*,u.if_sign from oa_notice n ,oa_notice_user u where n.id=u.notice_id and u.user_id='"+userid+"' and n.if_publish='"+NoticeConstants.NOTICE_IF_PUBLISH_YES+"'");
+	}
+	public Page<OaNotice> getMyNoticePage(int pnum,int psize,String userid){
+		return OaNotice.dao.paginate(pnum, psize, "select DISTINCT n.*,u.if_sign "," from oa_notice n ,oa_notice_user u where n.id=u.notice_id and u.user_id='"+userid+"' and n.if_publish='"+NoticeConstants.NOTICE_IF_PUBLISH_YES+"'");
 	}
 	/***
 	 * 签收公告

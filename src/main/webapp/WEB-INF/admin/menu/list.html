@@ -2,7 +2,7 @@
 				
 				#define makeMenu(m,p)
 					<tr data-tt-id="F_#(m.id)" #if(p) data-tt-parent-id="F_#(p.id)" #end>
-						  <td><span #if(m.children) class="folder" #else class="file" #end>#(m.name)</span></td>
+						  <td><span #if(m.children.size()>0) class="folder" #else class="file" #end>#(m.name)</span></td>
 						  <td style="text-align: center;">
 						  		<a onclick="changeIcon('#(m.id)')" href="javascript:void(0);">
 							  		#if(m.icon) 
@@ -19,7 +19,7 @@
 						  <td>
 						  		<a class="label label-table label-info" onclick="doPjax('#(ctx)/admin/menu/getEditPage?parentid=#(m.id)')" href="javascript:void(0);" >添加下级菜单</a>&nbsp;
 								<a class="label label-table label-success" onclick="doPjax('#(ctx)/admin/menu/getEditPage?id=#(m.id)')" href="javascript:void(0);">编辑</a>&nbsp;
-								#if(!m.children)<a class="label label-table label-danger" onclick="del('#(m.id)')" href="javascript:void(0);" >删除</a>#end
+								#if(m.children.size()==0)<a class="label label-table label-danger" onclick="del('#(m.id)')" href="javascript:void(0);" >删除</a>#end
 						  </td>
 					</tr>
 				#end

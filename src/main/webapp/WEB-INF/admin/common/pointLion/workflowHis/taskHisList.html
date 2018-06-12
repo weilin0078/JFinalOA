@@ -30,17 +30,17 @@
 												<th style="width: 50px;"><div class="th-inner">办理人ID</div></th>
 												<th style="width: 100px;"><div class="th-inner">办理人名称</div></th>
 												<th style="width: 200px;"><div class="th-inner">办理意见</div></th>
-												<th style="width: 100px;"><div class="th-inner">办理时间</div></th>
+												<th style="width: 140px;"><div class="th-inner">办理时间</div></th>
 									        </tr>
 								        </thead>
 								        <tbody>
 								        	#for(t:hislist)
 									        	<tr>
-													  <td>#(t.name_)</td>
-													  <td>#(t.assignee_)</td>
-													  <td>#(t.name)</td>
-													  <td>#(t.message_)</td>
-													  <td>#(t.end_time_?t.end_time_:"未完成")</td>
+													  <td>#(t.taskName)</td>
+													  <td>#(t.assignee)</td>
+													  <td>#(t.assignee)</td>
+													  <td>#(t.message)</td>
+													  <td>#(t.endTime?t.endTime:"未完成")</td>
 												</tr>
 								        	#end
 								        </tbody>
