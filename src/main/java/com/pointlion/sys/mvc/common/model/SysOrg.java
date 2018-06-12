@@ -18,7 +18,11 @@ import com.pointlion.sys.mvc.common.model.base.BaseSysOrg;
 @SuppressWarnings("serial")
 public class SysOrg extends BaseSysOrg<SysOrg> {
 	public static final SysOrg dao = new SysOrg();
-	
+
+	public SysOrg getByName(String name){
+		return SysOrg.dao.findFirst("SELECT * FROM sys_org where name=?",name);
+	}
+
 	/***
 	 * 根据主键查询
 	 */

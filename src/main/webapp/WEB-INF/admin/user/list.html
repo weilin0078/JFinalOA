@@ -11,8 +11,9 @@
 			        	<div class="panel lion-fullHeight">
 						    <div class="panel-body">
 						        <a id="add" class="btn btn-info data-toolbar" onclick="getEditPage()" href="javascript:void(0);"><i class="demo-pli-add"></i> 添加</a>
+								<a id="import" class="btn btn-success data-toolbar" onclick="excelImport()" href="javascript:void(0);"><i class="demo-pli-file-excel"></i> 批量导入</a>
 								<a id="del" class="btn btn-danger data-toolbar" onclick="delSel()" href="javascript:void(0);"><i class="demo-pli-cross"></i> 批量删除</a>
-						        <table id="pageTable" class="demo-add-niftycheck" data-toolbar="#del,#add"
+						        <table id="pageTable" class="demo-add-niftycheck" data-toolbar="#del,#import,#add"
 						               data-search="true"
 						               data-show-refresh="true"
 						               data-show-toggle="true"
@@ -135,6 +136,16 @@
 		$("#pageTable").bootstrapTable('refresh', opt);
 		$('#pageTable').bootstrapTable('hideColumn', 'id');
 	}
+
+    function excelImport() {
+        layer.open({
+            type: 2,
+            area: ['700px', '450px'],
+            fixed: false, //不固定
+            maxmin: true,
+            content: ctx+'/admin/user/importExcel'
+        });
+    }
 	//树
 	var setting = {
 		async: {

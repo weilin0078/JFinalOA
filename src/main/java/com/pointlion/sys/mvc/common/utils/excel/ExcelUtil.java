@@ -3,9 +3,7 @@ package com.pointlion.sys.mvc.common.utils.excel;
 import com.google.common.collect.Lists;
 import com.jfinal.kit.StrKit;
 import com.pointlion.sys.mvc.common.utils.DateUtils;
-import com.pointlion.sys.mvc.common.utils.StringUtil;
 import com.pointlion.sys.mvc.common.utils.excel.annotation.ExcelField;
-
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -17,10 +15,8 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-
 import java.beans.PropertyDescriptor;
 import java.io.FileInputStream;
 import java.lang.reflect.Field;
@@ -28,7 +24,12 @@ import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.List;
 
-
+/**
+ * Description:
+ *
+ * @author Jin
+ * @create 2017-07-27
+ **/
 public class ExcelUtil {
 
     public static void exports(String sheetName,List<?> list,HttpServletResponse response) {
@@ -63,7 +64,7 @@ public class ExcelUtil {
                     Method getMethod = pd.getReadMethod();
                     Object o = getMethod.invoke(obj);
                     if(!StrKit.isBlank(excelFiled.dateFormat())&& o instanceof Date) cell.setCellValue(DateUtils.format((Date)o,excelFiled.dateFormat()));
-                    else cell.setCellValue(StringUtil.isNullOrEmpty(o)?excelFiled.isNullDefaultValue():String.valueOf(o));
+                    else cell.setCellValue(o!=null?excelFiled.isNullDefaultValue():String.valueOf(o));
                     tmp++;
                 }
             }
@@ -81,6 +82,7 @@ public class ExcelUtil {
 
     public static void exports2007(String sheetName,List<?> list,HttpServletResponse response) {
 
+        if(list!=null&&list.size()<1) throw new RuntimeException("导出excel失败！");
         try {
             ServletOutputStream out = response.getOutputStream();
             XSSFWorkbook wb = new XSSFWorkbook();
@@ -111,7 +113,7 @@ public class ExcelUtil {
                     Method getMethod = pd.getReadMethod();
                     Object o = getMethod.invoke(obj);
                     if(!StrKit.isBlank(excelFiled.dateFormat())&& o instanceof Date) cell.setCellValue(DateUtils.format((Date)o,excelFiled.dateFormat()));
-                    else cell.setCellValue(StringUtil.isNullOrEmpty(o)?excelFiled.isNullDefaultValue():String.valueOf(o));
+                    else cell.setCellValue(o!=null?excelFiled.isNullDefaultValue():String.valueOf(o));
                     tmp++;
                 }
             }
@@ -144,9 +146,9 @@ public class ExcelUtil {
                 for (int c = 0; c < row.getPhysicalNumberOfCells(); c++) {
                     for(Field field :fields) {
                         ExcelField excelFiled = field.getAnnotation(ExcelField.class);
-                        String title = getCellValue(row0.getCell(c).getCellType(), row0.getCell(c));
+                        String title = getCellValue(row0.getCell(c).getCellType(), row0.getCell(c),excelFiled.allowFloatNumber());
                         if(excelFiled==null&&!title.equals(excelFiled.value())) continue;
-                        String cellValue = getCellValue(row.getCell(c).getCellTypeEnum().getCode(), row.getCell(c));
+                        String cellValue = getCellValue(row.getCell(c).getCellTypeEnum().getCode(), row.getCell(c),excelFiled.allowFloatNumber());
                         PropertyDescriptor pd = new PropertyDescriptor(field.getName(),obj.getClass());
                         if("错误".equals(cellValue)||field.getType()==String.class) {
                             pd.getWriteMethod().invoke(obj, cellValue);
@@ -176,7 +178,6 @@ public class ExcelUtil {
                 result.add(obj);
             }
         }catch (Exception e) {
-            e.printStackTrace();
             throw new RuntimeException("导如excel失败,["+e.getMessage()+"]");
         }
         return result;
@@ -197,9 +198,9 @@ public class ExcelUtil {
                 for (int c = 0; c < row.getPhysicalNumberOfCells(); c++) {
                     for(Field field :fields) {
                         ExcelField excelFiled = field.getAnnotation(ExcelField.class);
-                        String title = getCellValue(row0.getCell(c).getCellType(), row0.getCell(c));
+                        String title = getCellValue(row0.getCell(c).getCellType(), row0.getCell(c),excelFiled.allowFloatNumber());
                         if(excelFiled==null||!title.equals(excelFiled.value())) continue;
-                        String cellValue = getCellValue(row.getCell(c).getCellType(), row.getCell(c));
+                        String cellValue = getCellValue(row.getCell(c).getCellType(), row.getCell(c),excelFiled.allowFloatNumber());
                         PropertyDescriptor pd = new PropertyDescriptor(field.getName(),obj.getClass());
                         if("错误".equals(cellValue)||field.getType()==String.class) {
                             pd.getWriteMethod().invoke(obj, cellValue);
@@ -235,7 +236,7 @@ public class ExcelUtil {
         return result;
     }
 
-    public static String getCellValue(int cellType,Cell cell){
+    public static String getCellValue(int cellType,Cell cell,boolean allowFloatNumber){
         switch(cellType) {
             case Cell.CELL_TYPE_STRING: /*文本*/
                 return cell.getStringCellValue();
@@ -244,7 +245,14 @@ public class ExcelUtil {
                     return DateUtils.formatDate(cell.getDateCellValue()); /*日期型*/
                 }
                 else {
-                    return String.valueOf(cell.getNumericCellValue()); /*数字*/
+                    System.out.println("allowFloatNumber:"+allowFloatNumber);
+                    if(allowFloatNumber) {
+                        System.out.println(String.valueOf(cell.getNumericCellValue()));
+                        return String.valueOf(cell.getNumericCellValue()); /** 浮点型 **/
+                    }else{
+                        System.out.println(new Double(cell.getNumericCellValue()).intValue());
+                        return String.valueOf(new Double(cell.getNumericCellValue()).intValue());
+                    }
                 }
             case Cell.CELL_TYPE_BOOLEAN: /*布尔型*/
                 return  String.valueOf(cell.getBooleanCellValue());
@@ -258,4 +266,15 @@ public class ExcelUtil {
                 return "错误";
         }
     }
+
+//    public static void main(String [] args){
+//        File file = new File("E:\\123.xlsx");
+//        try {
+//            FileInputStream inputStream=  new FileInputStream(file);
+//            List<TCmsContent> list= imports2007(inputStream, TCmsContent.class);
+//            System.out.println(list.get(0).getTitle());
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

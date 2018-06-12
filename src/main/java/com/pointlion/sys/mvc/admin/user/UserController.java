@@ -5,9 +5,14 @@
  */
 package com.pointlion.sys.mvc.admin.user;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.pointlion.sys.mvc.admin.user.dto.UserDto;
+import com.pointlion.sys.mvc.common.utils.excel.ExcelUtil;
 import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.authc.credential.PasswordService;
 
@@ -45,6 +50,35 @@ public class UserController extends BaseController {
     	Page<Record> page = SysUser.dao.getPage(Integer.valueOf(curr),Integer.valueOf(pageSize),orgid);
     	renderPage(page.getList(),"" ,page.getTotalRow());
     }
+
+    /*excel用户导入view*/
+	public void importExcel(){
+		render("/WEB-INF/admin/user/importExcel.html");
+	}
+
+	/*excel用户导入控制器*/
+	public void importExcelUpload() throws FileNotFoundException {
+		List<UserDto> userDtoList =ExcelUtil.imports2007(new FileInputStream(getFile().getFile()),UserDto.class);
+		userDtoList.forEach(u->{
+			SysUser user = new SysUser();
+			if(user.getByUsername(u.getUsername())==null){
+				user.setId(UuidUtil.getUUID());
+				user.setUsername(u.getUsername());
+				user.setName(u.getName());
+				user.setMobile(u.getMobile());
+				System.out.println(u.getPassword());
+				user.setPassword(new DefaultPasswordService().encryptPassword(StrKit.isBlank(u.getPassword())?"123456":u.getPassword()));
+				SysOrg org = SysOrg.dao.getByName(u.getDeptName());
+				if(org==null)
+					user.setOrgid("#root");
+				else
+					user.setOrgid(org.getId());
+				user.save();
+			}
+		});
+		renderJson(userDtoList);
+	}
+
     /***
      * 保存
      */
