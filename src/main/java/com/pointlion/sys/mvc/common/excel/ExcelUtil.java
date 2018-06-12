@@ -173,6 +173,7 @@ public class ExcelUtil {
                 result.add(obj);
             }
         }catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException("导如excel失败,["+e.getMessage()+"]");
         }
         return result;
@@ -254,15 +255,4 @@ public class ExcelUtil {
                 return "错误";
         }
     }
-
-//    public static void main(String [] args){
-//        File file = new File("E:\\123.xlsx");
-//        try {
-//            FileInputStream inputStream=  new FileInputStream(file);
-//            List<TCmsContent> list= imports2007(inputStream, TCmsContent.class);
-//            System.out.println(list.get(0).getTitle());
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
