@@ -59,7 +59,7 @@ public class UserController extends BaseController {
 	/*excel用户导入控制器*/
 	public void importExcelUpload() throws FileNotFoundException {
 		List<UserDto> userDtoList =ExcelUtil.imports2007(new FileInputStream(getFile().getFile()),UserDto.class);
-		userDtoList.forEach(u->{
+		for(UserDto u : userDtoList){
 			SysUser user = new SysUser();
 			if(user.getByUsername(u.getUsername())==null){
 				user.setId(UuidUtil.getUUID());
@@ -75,7 +75,7 @@ public class UserController extends BaseController {
 					user.setOrgid(org.getId());
 				user.save();
 			}
-		});
+		}
 		renderJson(userDtoList);
 	}
 
