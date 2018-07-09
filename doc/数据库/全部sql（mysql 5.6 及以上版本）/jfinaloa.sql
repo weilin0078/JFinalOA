@@ -1819,6 +1819,24 @@ INSERT INTO `sys_user_role` VALUES ('68fc8a5dbbd840979eaa73ad24bc58d6', 'd44e967
 INSERT INTO `sys_user_role` VALUES ('d9f2a799ce0d47108c7fe70a0b219e62', '7ac6e4c544634e179f78803d5ba2d0ca', '8a40c0353fa828a6013fa898d4ac0023');
 
 -- ----------------------------
+-- View structure for v_tasklist_candidate
+-- ----------------------------
+DROP VIEW IF EXISTS `v_tasklist_candidate`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `v_tasklist_candidate` AS SELECT TASK_ID_, USER_ID_ USER_ID
+                    FROM ACT_RU_IDENTITYLINK I, ACT_RU_TASK T
+                      WHERE TASK_ID_ IS NOT NULL
+                        AND USER_ID_ IS NOT NULL
+                        AND I.TASK_ID_ = T.ID_
+                        AND T.ASSIGNEE_ IS NULL
+                        AND TYPE_ = 'candidate' ;
+
+-- ----------------------------
+-- View structure for v_tasklist_candidate_d
+-- ----------------------------
+DROP VIEW IF EXISTS `v_tasklist_candidate_d`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `v_tasklist_candidate_d` AS SELECT DISTINCT * FROM v_tasklist_candidate U ;
+
+-- ----------------------------
 -- View structure for v_tasklist
 -- ----------------------------
 DROP VIEW IF EXISTS `v_tasklist`;
@@ -1840,21 +1858,3 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `v_tasklist` AS SELE
     ON A.ID_ = I.TASK_ID_ 
    LEFT JOIN ACT_RE_PROCDEF D 
    ON A.PROC_DEF_ID_ = D.ID_ ;
-
--- ----------------------------
--- View structure for v_tasklist_candidate
--- ----------------------------
-DROP VIEW IF EXISTS `v_tasklist_candidate`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `v_tasklist_candidate` AS SELECT TASK_ID_, USER_ID_ USER_ID
-                    FROM ACT_RU_IDENTITYLINK I, ACT_RU_TASK T
-                      WHERE TASK_ID_ IS NOT NULL
-                        AND USER_ID_ IS NOT NULL
-                        AND I.TASK_ID_ = T.ID_
-                        AND T.ASSIGNEE_ IS NULL
-                        AND TYPE_ = 'candidate' ;
-
--- ----------------------------
--- View structure for v_tasklist_candidate_d
--- ----------------------------
-DROP VIEW IF EXISTS `v_tasklist_candidate_d`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `v_tasklist_candidate_d` AS SELECT DISTINCT * FROM v_tasklist_candidate U ;
