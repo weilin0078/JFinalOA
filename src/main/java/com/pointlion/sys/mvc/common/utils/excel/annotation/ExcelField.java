@@ -16,5 +16,7 @@ public @interface ExcelField {
 
     boolean isOnlyImport() default false;
 
+    boolean allowFloatNumber() default false;
+
     String isNullDefaultValue() default "N/A";
 }

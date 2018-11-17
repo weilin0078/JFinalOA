@@ -24,6 +24,7 @@ import com.pointlion.sys.mvc.common.model.SysOrg;
 import com.pointlion.sys.mvc.common.model.SysUser;
 import com.pointlion.sys.mvc.common.model.VTasklist;
 import com.pointlion.sys.mvc.common.utils.DateUtil;
+import com.pointlion.sys.mvc.common.utils.ListUtils;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 import com.pointlion.sys.plugin.activiti.ActivitiPlugin;
 
@@ -96,12 +97,12 @@ public class BumphService {
 		List<OaBumphOrg> list = OaBumphOrg.dao.getList(id, null);//主送单位和抄送单位
 		List<String> userlist = new ArrayList<String>();//需要阅读公文的人员列表
 		for(OaBumphOrg org:list){
-			List<SysUser> ulist = SysUser.dao.getUserListByOrgId(org.getId());//单位下的用户
+			List<SysUser> ulist = SysUser.dao.getUserListByOrgId(org.getOrgid());//单位下的用户
 			for(SysUser u:ulist){
 				userlist.add(u.getUsername());
 			}
 		}
-		var.put("userlist", userlist);//需要阅读公文的所有人员
+		var.put("userlist", ListUtils.removeDuplicate(userlist));//需要阅读公文的所有人员
 		String procInsId = service.startProcess(id, BumphConstants.DEFKEY_BUMPH,var);
 		OaBumph bumph = OaBumph.dao.findById(id);
 		bumph.setProcInsId(procInsId);

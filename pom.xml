@@ -12,12 +12,12 @@
 			<!-- 本地56环境 -->
 			<id>dev</id>
 			<properties>
-				<repository_url>http://192.168.1.56</repository_url>
-				<db-url><![CDATA[jdbc:mysql://localhost/jfinaloa?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&nullNamePatternMatchesAll=true&autoReconnect=true]]></db-url>
+				<repository_url>http://127.0.0.1</repository_url>
+				<db-url><![CDATA[jdbc:mysql://localhost/jfinal_oa?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&nullNamePatternMatchesAll=true&autoReconnect=true]]></db-url>
 				<db-username>root</db-username>
-				<db-password>root</db-password>
+				<db-password>123456</db-password>
 				<db-type>mysql</db-type>
-				<db-name>jfinaloa</db-name>
+				<db-name>jfinal_oa</db-name>
 				<dev-model>true</dev-model>
 				<workspace-path>E:/workspaces/workspaceLion/LionOA/OA</workspace-path>
 				<log4j-level>debug</log4j-level>
@@ -28,19 +28,19 @@
 			</activation>
 		</profile>
 	</profiles>
-	<repositories>
-		<repository>
-			<id>nexus</id>
-			<name>nexus</name>
-			<url>${repository_url}:8080/nexus/content/groups/public/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
+	<!--<repositories>-->
+		<!--<repository>-->
+			<!--<id>nexus</id>-->
+			<!--<name>nexus</name>-->
+			<!--<url>${repository_url}:8080/nexus/content/groups/public/</url>-->
+			<!--<releases>-->
+				<!--<enabled>true</enabled>-->
+			<!--</releases>-->
+			<!--<snapshots>-->
+				<!--<enabled>true</enabled>-->
+			<!--</snapshots>-->
+		<!--</repository>-->
+	<!--</repositories>-->
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
@@ -63,6 +63,11 @@
 			<groupId>com.jfinal</groupId>
 			<artifactId>jfinal</artifactId>
 			<version>3.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>cos</artifactId>
+			<version>26Dec2008</version>
 		</dependency>
 		<dependency>
 			<groupId>org.activiti</groupId>
@@ -177,6 +182,17 @@
 					</executions>
 				</plugin>
 				<plugin>
+				    <groupId>org.apache.maven.plugins</groupId>
+				    <artifactId>maven-resources-plugin</artifactId>
+				    <version>2.6</version>
+				    <configuration>
+				        <encoding>UTF-8</encoding>
+				        <nonFilteredFileExtensions>
+				            <nonFilteredFileExtension>json</nonFilteredFileExtension>
+				        </nonFilteredFileExtensions>
+				    </configuration>
+				</plugin>
+				<plugin>
 					<groupId>org.mortbay.jetty</groupId>
 					<artifactId>maven-jetty-plugin</artifactId>
 					<version>6.1.5</version>
@@ -208,5 +224,15 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>
