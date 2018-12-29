@@ -1,4 +1,8 @@
+qq:439635374
 qq交流群号：136981051
+
+最新版为Tab页签版本，需要单页面版本的，请选标签，下载 1.0.2 版本使用。
+
 
 码云地址：http://git.oschina.net/glorylion/JFinalOA
 
