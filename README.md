@@ -7,9 +7,9 @@ qq交流群号：136981051
 
 如何部署：http://218.56.98.206:8092/JFinalOA/front/help/howToRunJFinalOA
 
-默认密码：admin/admin
-
 最新版为Tab页签版本，需要单页面版本的，请选标签，下载 1.0.2 版本使用。
+
+默认密码：admin/admin
 
 其他用户的帐号密码：帐号密码均为姓名的全拼。
 
