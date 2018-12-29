@@ -31,10 +31,11 @@ public class CommonFinishDeledate implements JavaDelegate{
 		ProcessInstance instance = ActivitiPlugin.buildProcessEngine().getRuntimeService().createProcessInstanceQuery().processInstanceId(execution.getProcessInstanceId()).singleResult();
 		String id = instance.getBusinessKey();//业务主键
 		String className = execution.getVariable(OAConstants.WORKFLOW_VAR_APPLY_BUSINESS_CLASSNAME).toString();//对象类名
-		Class busClass = Class.forName(className);
+		Class busClass = Class.forName("com.pointlion.sys.mvc.common.model."+className);
 		Model model = (Model)busClass.newInstance();
-		model.set("ID", id);
-		model.set("IF_COMPLETE",Constants.IF_COMPLETE_YES);
+		model.set("id", id);
+		model.set("if_complete",Constants.IF_COMPLETE_YES);
+		model.set("if_agree", Constants.IF_AGREE_YES);
 		model.update();
 	}
 
