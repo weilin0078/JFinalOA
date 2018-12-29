@@ -18,6 +18,7 @@ public class ZtreeNode {
 	 */
 	private String id;
 
+	private String type;
 	/**
 	 * 节点名称
 	 */
@@ -46,6 +47,8 @@ public class ZtreeNode {
 	 * 节点图标
 	 */
 	private String icon;
+	
+	private long level;
 	
 	/**
 	 * 子节点数据
@@ -119,7 +122,21 @@ public class ZtreeNode {
 	public void setParent(boolean isParent) {
 		this.isParent = isParent;
 	}
+	public long getLevel() {
+		return level;
+	}
 
+	public void setLevel(long level) {
+		this.level = level;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 
 

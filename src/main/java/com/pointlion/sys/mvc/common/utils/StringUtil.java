@@ -346,4 +346,52 @@ public abstract class StringUtil extends StringUtils{
 		}
 		return false;
 	}
+	
+	/***
+	 * 去掉所有的html标签
+	 * @param htmlStr
+	 * @return
+	 */
+	public static String delHTMLTag(String htmlStr){ 
+        String regEx_script="<script[^>]*?>[\\s\\S]*?<\\/script>"; //定义script的正则表达式 
+        String regEx_style="<style[^>]*?>[\\s\\S]*?<\\/style>"; //定义style的正则表达式 
+        String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式 
+         
+        Pattern p_script=Pattern.compile(regEx_script,Pattern.CASE_INSENSITIVE); 
+        Matcher m_script=p_script.matcher(htmlStr); 
+        htmlStr=m_script.replaceAll(""); //过滤script标签 
+         
+        Pattern p_style=Pattern.compile(regEx_style,Pattern.CASE_INSENSITIVE); 
+        Matcher m_style=p_style.matcher(htmlStr); 
+        htmlStr=m_style.replaceAll(""); //过滤style标签 
+         
+        Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE); 
+        Matcher m_html=p_html.matcher(htmlStr); 
+        htmlStr=m_html.replaceAll(""); //过滤html标签 
+
+        return htmlStr.trim(); //返回文本字符串 
+    } 
+	
+	/***
+	 * 补零
+	 * @param str  原字符串长度
+	 * @param strLength    补零后字符串长度
+	 * @return
+	 */
+	public static String addZeroForNum(String str, int strLength,String leftOrRight) {
+		int strLen = str.length();
+			if (strLen < strLength) {
+				while (strLen < strLength) {
+					StringBuffer sb = new StringBuffer();
+					if("left".equals(leftOrRight)){
+						sb.append("0").append(str);//左补0
+					}else if("right".equals(leftOrRight)){
+						sb.append(str).append("0");//右补0
+					}
+					str = sb.toString();
+					strLen = str.length();
+				}
+			}
+		return str;
+	}
 }

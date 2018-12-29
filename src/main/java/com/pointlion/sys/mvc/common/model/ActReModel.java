@@ -9,13 +9,17 @@ import com.pointlion.sys.mvc.common.model.base.BaseActReModel;
 @SuppressWarnings("serial")
 public class ActReModel extends BaseActReModel<ActReModel> {
 	public static final ActReModel dao = new ActReModel();
+	
+	
 	/***
-	 * 查询分页
+	 * 自定义流程查询分页
 	 * @param curr
 	 * @param pagesize
 	 * @return
 	 */
-	public Page<ActReModel> getModelPage(Integer curr , Integer pagesize){
-		return ActReModel.dao.paginate(curr, pagesize, "select * ", " FROM (select *  from act_re_model ORDER BY VERSION_ DESC) a group by KEY_");
+	public Page<ActReModel> getCustomModelPage(Integer curr , Integer pagesize){
+		String sql = " from (SELECT MAX(VERSION_) maxversion,KEY_ FROM act_re_model WHERE 1=1 ";
+		sql = sql + " group by KEY_ ) a ,act_re_model m where m.KEY_=a.KEY_ and m.VERSION_=a.maxversion order by m.KEY_ ASC";
+		return ActReModel.dao.paginate(curr, pagesize, "select * ", sql);
 	}
 }

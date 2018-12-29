@@ -1,8 +1,22 @@
+<style>
+#page-title{
+	display: table;
+	table-layout: fixed;
+	position: fixed;
+	z-index: 9;
+	background-color: #fff;
+	margin: 0px;
+	padding: 0px;
+	height: 35px;
+	line-height: 35px;
+	border-top: 1px solid #eee;
+}
+</style>
 <div id="page-title">
-	<h1 class="page-header text-overflow">#(pageTitleBread.pageTitle)</h1>
+	<span style="float: left;font-size: 20px;height: 30px;line-height: 30px;">#(pageTitleBread?pageTitleBread.pageTitle:"")</span>
+	<ol class="breadcrumb" style="float: left;height: 30px;line-height: 35px;margin-bottom: 0px;">
+		<li><a href="javascript:void(0);" onclick="doPjax('#(ctx)')">首页</a></li>
+		<li><a href="javascript:void(0);" onclick="doPjax('#(ctx)#(pageTitleBread?pageTitleBread.url:"")')">#(pageTitleBread?pageTitleBread.pageTitle:"")</a></li>
+		<li class="active">#(pageTitleBread?pageTitleBread.nowBread:"")</li>
+	</ol>
 </div>
-<ol class="breadcrumb">
-	<li><a href="javascript:void(0);">首页</a></li>
-	<li><a href="javascript:void(0);" onclick="doPjax('#(ctx)#(pageTitleBread.url)')">#(pageTitleBread.pageTitle)</a></li>
-	<li class="active">#(pageTitleBread.nowBread)</li>
-</ol>

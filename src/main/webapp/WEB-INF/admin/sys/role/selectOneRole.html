@@ -1,0 +1,56 @@
+#include("/common/include/include.html")
+<style>
+	.lay-body{
+		margin-top: 52px;
+		overflow-y: auto;
+		overflow-x: unset;
+	}
+	.lay-header{
+		position: absolute;
+		top: 0px;
+		width: 100%;
+	}
+</style>
+<div class="modal-dialog" style="width:100%">
+    <div class="modal-content" style="height: 100%;">
+        <div class="modal-header lay-header">
+            <button type="button" class="close" data-dismiss="modal" onclick="{parent.layer.closeAll();}"><i class="pci-cross pci-circle"></i></button>
+            <h4 class="modal-title">选择角色</h4>
+        </div>
+
+        <div class="modal-body lay-body">
+            <ul id="treeDemo" class="ztree"></ul>
+        </div>
+    </div>
+</div>
+
+<script>
+	var userid = "#(userid)";
+	//树
+	var setting = {
+		check: {
+			enable: true,
+			chkStyle: "radio",  //单选框
+            radioType: "all"   //对所有节点设置单选
+		},
+		async : {
+			enable : true,
+			url : ctx + "/admin/sys/role/getAllRoleTreeNode"
+		},
+		callback: {
+			onCheck  : checkNode
+		}
+	};
+	
+	//获取选择的节点
+	function checkNode(){
+		var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+		var node = treeObj.getCheckedNodes(true);
+		parent.pointLion.setOneRoleNode(node[0]);	
+	}
+	$(document).ready(function() {
+		$.fn.zTree.init($("#treeDemo"), setting);//初始化树
+		var clientH = document.body.clientHeight-54;
+		$(".lay-body").css("height",clientH+"px");
+	});
+</script>

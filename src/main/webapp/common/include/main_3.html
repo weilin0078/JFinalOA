@@ -1,0 +1,215 @@
+#define makeApplyToDoList(list,defkey)
+	#if(list&&list.size()>0)
+		<div class="media" style="margin-bottom: 15px;">
+		    <div class="media-left">
+		        <i class="demo-pli-laptop text-main icon-3x"></i>
+		    </div>
+		    <div class="media-body">
+		        <p class="text-main text-lg mar-no">#(WorkFlowUtil.getDefNameByDefKey(defkey))</p>
+		        <small>您收到<span class="padding-lr10 text-pink">#(list?list.size():"0")</span>条内部#(name)任务，请及时办理</small>
+		    </div>
+		</div>
+         #for(t:list)
+         	<p>
+         		<small class="text-mint">#(t.applyer_name)</small>
+         		<small class="text-mint padding-l10">#(t.org_name)</small>
+         		<span class="text-success padding-l10">#(t.TASKNAME)&nbsp;</span>
+         		<span class="text-info padding-l10">#(t.title)</span>
+         		<small class="padding-l10">#(t.create_time)</small>
+         		<a class="text-primary padding-lr10" href="javascript:void(0)" onclick="doTask('#(t.TASKID)','#(t.id)','#(defkey)',this)">办理</a>
+         	</p>
+         #end
+     #end
+#end
+#define makeToDoList(todo)
+	     	<p>
+         		<span class="text-success padding-l10">#(todo.DEFNAME)&nbsp;</span>
+	     		<small class="text-mint">#(todo.UserName)</small>
+	     		<span class="text-success padding-l10">#(todo.TASKNAME)&nbsp;</span>
+	     		<span class="text-info padding-l10">#(todo.title)</span>
+	     		<small class="padding-l10">#(todo.create_time)</small>
+	     		<a class="text-primary padding-lr10" href="javascript:void(0)" onclick="doTask('#(todo.TASKID)','#(todo.businessId)','#(todo.DEFKEY)')">办理</a>
+	     	</p>
+#end
+
+<!-- 已办代码太多，单独封装一个文件 -->
+#include("/WEB-INF/admin/oa/common/commonHavedoneList.html")
+<style>
+	.padding-lr10{
+		padding-left:10px;
+		padding-right:10px;
+	}
+	.padding-l10{
+		padding-left:10px;
+	}
+	.demo-icon i{
+		color:white;
+	}
+	.tab-base .nav-tabs > li{
+		width:120px;
+	}
+	.tab-base .nav-tabs > li.active > a{
+	  	border-color: #26a69a !important;
+		border-right: none;
+		margin-right: -1px;
+	}
+	.tab-base .nav-tabs > li.active > a:hover {
+	  	border-color: #26a69a;
+	  	border-right: none;
+		margin-right: -1px;
+	}
+</style>
+
+
+                <div id="page-content">
+					<div class="row">
+					    <div class="col-lg-9">
+						    <!-- 工作台Start -->
+						    <div class="panel panel-mint ">
+								<div class="panel-heading">
+								    <div class="panel-control">
+								        <ul class="nav nav-tabs">
+								            <li class="active"><a data-toggle="tab" href="#todolistPanel">待办任务<span class="pull-right badge badge-warning todoListCount">#(todoListCount)</span></a></li>
+								            <li><a data-toggle="tab" href="#havedonelistPanel">已办任务</a></li>
+								            <!-- <li><a data-toggle="tab" href="#commonUtil">常用工具</a></li> -->
+								            <li><a data-toggle="tab" href="#customTaskPanel">自定义任务</a></li>
+								        </ul>
+								    </div>
+								    <h3 class="panel-title">工作台</h3>
+								</div>
+								<div class="panel-body">
+								    <div class="tab-content">
+								        <div id="todolistPanel" class="tab-pane fade in active">
+								        			#for(map:todoMap)
+								        				#@makeApplyToDoList(map.value,map.key)
+								        			#end
+								        </div>
+								        <!-- 已办Start -->
+								        <div id="havedonelistPanel" class="tab-pane fade">
+									        <div class="tab-base tab-stacked-left">
+									            <ul class="nav nav-tabs">
+									                #for(defkey:havedoneKeyList)
+									                	<li #if(for.index==0)class="active"#end>
+										                    <a data-toggle="tab" href="#havedone_#(defkey)">#(WorkFlowUtil.getDefNameByDefKey(defkey))</a>
+										                </li>
+									                #end
+									            </ul>
+									            <div class="tab-content" style="border: solid 1px #26a69a;">
+									            	#for(defkey:havedoneKeyList)
+									                	<div id="havedone_#(defkey)" class="tab-pane fade #if(for.index==0)active #end in">
+									                		#@makeHavedoneList(defkey)
+										                </div>
+									                #end
+									            </div>
+									        </div>
+								        </div>
+								        <!-- 已办End -->
+								        <!-- 常用工具Start -->
+								        #include("/common/include/commonUtil.html")
+								        <!-- 常用工具End -->
+								        <!-- 自定义流程 Start -->
+								        <div id="customTaskPanel" class="tab-pane fade">
+								        	#include("/WEB-INF/admin/oa/workflow/model/homepageCustomFlowList.html")
+								        </div>
+								        <!-- 自定义流程 End -->
+								    </div>
+								</div>
+								<!-- panel-body end -->
+							</div>
+							<!-- 工作台End -->
+					    </div>
+					    <div class="col-lg-3">
+					        <div class="panel ">
+						        <div class="panel-heading">
+				                    <h3 class="panel-title">通知公告</h3>
+				                </div>
+				                <div class="panel-body" style="padding: 0px;">
+				                    <div class="list-group">
+				                        #for(notice:NoticeList)
+				                        	<a href="javascript:void(0);" onclick="viewNotice('#(notice.id)')" class="list-group-item" style="padding: 5px 10px;">
+					                            <h5 class="list-group-item-heading">#(notice.title)</h5>
+					                            <p class="list-group-item-text">
+					                            	<div style="word-break: break-all;word-wrap: break-word;">
+							                            #if(notice.text_content)
+					                            			#if(notice.text_content.length()>15)
+					                            				#(notice.text_content.substring(0,15))
+					                            			#else
+					                            				#(notice.text_content)
+					                            			#end
+						                            	#end
+					                            	</div>
+							                        <div style="height: 1px;">
+					                            		<code style="color:#26a69a;float: right;font-size: 12px;padding: 0px 9px;">#(notice.publish_time)</code>
+					                            	</div>
+					                            </p>
+					                        </a>
+					                	#end
+				                    </div>
+				                </div>
+					        </div>
+					    </div>
+					</div>
+                </div>
+                <script type="text/javascript">
+						$(document).ready(function(){
+							initFullHeight(200);//初始化高度
+						});
+						/***
+						 * 办理任务
+						 */
+						var nowTask;
+						function doTask(taskid,id,defkey,o){
+							layer.open({
+								  type: 2,
+								  title: false, //不显示标题栏
+								  area: ['1000px', '620px'],
+								  shade: 0.2,
+								  id: 'selectOneMenu', //设定一个id，防止重复弹出
+								  resize: false,
+								  closeBtn: false,
+								  isOutAnim : false , 
+								  btnAlign: 'c',
+								  content: ctx+'/admin/oa/workflow/flowtask/getDoTaskPage?taskid='+taskid+'&id='+id+'&defkey='+defkey,
+								  success: function(layero){
+										nowTask = o;
+								  }
+							});
+						}
+						function successCompleteTask(){
+							$(nowTask).parents("p").remove();
+							var todoListCount = $(".todoListCount").text();
+							$(".todoListCount").text(todoListCount-1);
+						}
+						//查看通知公告
+						function viewNotice(id){
+							var thisLay;//弹出层
+							layer.open({
+								  type: 2,
+								  title: false, //不显示标题栏
+								  area: ['900px', '620px'],
+								  shade: 0.2,
+								  id: 'selectOneMenu', //设定一个id，防止重复弹出
+								  resize: false,
+								  closeBtn: false,
+								  isOutAnim : false , 
+								  btn: ['签收', '取消'], 
+								  btnAlign: 'c',
+								  content: ctx+'/admin/oa/notice/viewNotice?id='+id,
+								  success: function(layero){
+									  thisLay = window[layero.find('iframe')[0]['name']]; 
+								  },
+								  yes: function(){
+									  thisLay.pointLion.confimMsg("您将要签收该公告！<br/><span style='color:green;'>签收之后公告发布人员可知晓您签收状态和时间！</span> <br/>点击确认进行签收 , 点击取消取消该操作",null,function(){
+										  	var data = common_ajax.ajaxFunc("/admin/oa/notice/sign",{"id":id}, "json", null);
+											if(data.success){
+												layer.closeAll();
+												pointLion.alertMsg(data.message,"success",null,null);
+											}else{
+												pointLion.alertMsg(data.message,"success",null,null);
+											}
+										});
+								  }
+							});
+						}
+				</script>
+

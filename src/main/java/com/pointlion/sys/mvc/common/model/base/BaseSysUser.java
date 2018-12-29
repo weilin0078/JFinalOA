@@ -120,4 +120,86 @@ public abstract class BaseSysUser<M extends BaseSysUser<M>> extends Model<M> imp
 	public java.lang.String getImg() {
 		return get("img");
 	}
+	
+	public void setType(java.lang.String type) {
+		set("type", type);
+	}
+
+	public java.lang.String getType() {
+		return get("type");
+	}
+	
+	public void setEntryDate(java.lang.String entry_date) {
+		set("entry_date", entry_date);
+	}
+
+	public java.lang.String getEntryDate() {
+		return get("entry_date");
+	}
+	
+	public void setYearHoliday(java.lang.String year_holiday) {
+		set("year_holiday", year_holiday);
+	}
+
+	public java.lang.String getYearHoliday() {
+		return get("year_holiday");
+	}
+	
+	public void setInCompanyDate(java.lang.String in_company_date) {
+		set("in_company_date", in_company_date);
+	}
+
+	public java.lang.String getInCompanyDate() {
+		return get("in_company_date");
+	}
+
+	public void setDimissionDate(java.lang.String dimission_date) {
+		set("dimission_date", dimission_date);
+	}
+
+	public java.lang.String getDimissionDate() {
+		return get("dimission_date");
+	}
+
+	public void setExperience(java.lang.String experience) {
+		set("experience", experience);
+	}
+
+	public java.lang.String getExperience() {
+		return get("experience");
+	}
+
+	public void setEduExperience(java.lang.String edu_experience) {
+		set("edu_experience", edu_experience);
+	}
+
+	public java.lang.String getEduExperience() {
+		return get("edu_experience");
+	}
+
+	public void setWorkNum(java.lang.String work_num) {
+		set("work_num", work_num);
+	}
+
+	public java.lang.String getWorkNum() {
+		return get("work_num");
+	}
+	
+	public void setBirthDate(java.lang.String birth_date) {
+		set("birth_date", birth_date);
+	}
+
+	public java.lang.String getBirthDate() {
+		return get("birth_date");
+	}
+	
+	public void setPosition(java.lang.String position) {
+		set("position", position);
+	}
+
+	public java.lang.String getPosition() {
+		return get("position");
+	}
+	
 }
+

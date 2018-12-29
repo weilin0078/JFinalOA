@@ -1,0 +1,49 @@
+				
+                <div id="page-content">
+			        <div class="col-sm-12 eq-box-sm">
+			        	<div class="panel ">
+						    <div class="panel-body">
+						    	<div class="bootstrap-table">
+									<div class="fixed-table-toolbar">
+									</div>
+									<div class="fixed-table-container" style="padding-bottom: 0px;">
+										<div class="fixed-table-body">
+													<table id="treetable" class="demo-add-niftycheck table table-hover table-striped">
+														        <thead>
+														         	<tr>
+															        	<th style="width: 100px;text-align:center;"><div class="th-inner">姓名</div></th>
+																		<th style="width: 50px;text-align:center;"><div class="th-inner">性别</div></th>
+																		<th style="width: 120px;text-align:center;"><div class="th-inner">身份证号</div></th>
+																		<th style="width: 120px;text-align:center;"><div class="th-inner">邮箱</div></th>
+																		<th style="width: 100px;text-align:center;"><div class="th-inner">电话</div></th>
+																		<th style="width: 100px;text-align:center;"><div class="th-inner">认领积分</div></th>
+																		<th style="width: 100px;text-align:center;"><div class="th-inner">认领时间</div></th>
+															        </tr>
+														        </thead>
+														        <tbody>
+														        	#for(u:list)
+														        		<tr data-tt-id="F_#(u.id)">
+																			  <td style="text-align: center;">#(u.name)</td>
+																			  <td style="text-align: center;">
+																				  		#if(u.sex=='1') 
+																				  			男
+																				  		#else
+																				  			女
+																				  		#end
+																			  </td>
+																			  <td style="text-align: center;">#(u.idcard)</td>
+																			  <td style="text-align: center;">#(u.email)</td>
+																			  <td style="text-align: center;">#(u.mobile)</td>
+																			  <td style="text-align: center;">#(u.point)</td>
+																			  <td style="text-align: center;">#(u.create_date)</td>
+																		</tr>
+														        	#end 
+														        </tbody>
+													</table>
+										</div>
+									</div>
+								</div>
+						    </div>
+						</div>
+			        </div>
+                </div>

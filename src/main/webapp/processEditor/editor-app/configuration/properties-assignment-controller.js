@@ -40,6 +40,7 @@ var KisBpmAssignmentPopupCtrl = [ '$scope', function($scope) {
         && $scope.property.value.assignment !== null) 
     {
         $scope.assignment = $scope.property.value.assignment;
+//        alert(JSON.stringify($scope.property.value));
     } else {
         $scope.assignment = {};
     }

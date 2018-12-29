@@ -9,19 +9,24 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 public class DateUtil {
-	
+//	private static Logger logger = LoggerFactory.getLogger(DateUtil.class);
 	
 	private final static SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
 	private final static SimpleDateFormat sdfMonth = new SimpleDateFormat("MM");
 
-    private final static SimpleDateFormat sdfDay = new SimpleDateFormat("yyyy-MM-dd");
+    private final static SimpleDateFormat sdfDay = new SimpleDateFormat("dd");
 
     private final static SimpleDateFormat sdfDays = new SimpleDateFormat("yyyyMMdd");
 
     private final static SimpleDateFormat sdfTime = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
-
+    
+    public final static SimpleDateFormat sdfIdDateTime = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+    
+	/** HTTP日期时间格式化器 */
+	private final static SimpleDateFormat HTTP_DATETIME_FORMAT = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z",Locale.US);
     /**
      * 获取YYYY格式
      * 
@@ -60,7 +65,22 @@ public class DateUtil {
     public static String getTime() {
         return sdfTime.format(new Date());
     }
+	/**
+	 * 
+	 * 格式化为Http的标准日期格式
+	 * 
+	 * @param date
+	 *            被格式化的日期
+	 * 
+	 * @return HTTP标准形式日期字符串
+	 * 
+	 */
+	public static String formatHttpDate(Date date) {
+		// return new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z",
+		// Locale.US).format(date);
 
+		return HTTP_DATETIME_FORMAT.format(date);
+	}
     /**
      * @Title: compareDate
      * @Description: TODO(日期比较，如果s>=e 返回true 否则返回false)
@@ -70,11 +90,11 @@ public class DateUtil {
      * @throws
      * @author luguosui
      */
-    public static boolean compareDate(String s, String e) {
-        if (fomatDate(s) == null || fomatDate(e) == null) {
+    public static boolean compareDatetime(String s, String e,String format) {
+        if (fomatDate(s,format) == null || fomatDate(e,format) == null) {
             return false;
         }
-        return fomatDate(s).getTime() >= fomatDate(e).getTime();
+        return fomatDate(s,format).getTime() >= fomatDate(e,format).getTime();
     }
 
     /**
@@ -82,8 +102,8 @@ public class DateUtil {
      * 
      * @return
      */
-    public static Date fomatDate(String date) {
-        DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+    public static Date fomatDate(String date,String format) {
+        DateFormat fmt = new SimpleDateFormat(format);
         try {
             return fmt.parse(date);
         } catch (ParseException e) {
@@ -92,6 +112,23 @@ public class DateUtil {
         }
     }
 
+	/**
+	 * 
+	 * 根据特定格式格式化日期
+	 * 
+	 * @param date
+	 *            被格式化的日期
+	 * 
+	 * @param format
+	 *            格式
+	 * 
+	 * @return 格式化后的字符串
+	 * 
+	 */
+	public static String format(Date date, String format) {
+		return new SimpleDateFormat(format).format(date);
+	}
+	
     /**
      * 校验日期是否合法
      * 
@@ -179,18 +216,18 @@ public class DateUtil {
      * @return
      */
     public static String getAfterDayDate(String days) {
-        int daysInt = Integer.parseInt(days);
-
+        return getAfterDayDate(new Date(),days);
+    }
+    public static String getAfterDayDate(Date date,String days){
+    	int daysInt = Integer.parseInt(days);
         Calendar canlendar = Calendar.getInstance(); // java.util包
+        canlendar.setTime(date);//设置日期
         canlendar.add(Calendar.DATE, daysInt); // 日期减 如果不够减会将月变动
-        Date date = canlendar.getTime();
-
+        Date newdate = canlendar.getTime();
         SimpleDateFormat sdfd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateStr = sdfd.format(date);
-
+        String dateStr = sdfd.format(newdate);
         return dateStr;
     }
-
     /**
      * 得到n天之后是周几
      * 
@@ -229,7 +266,8 @@ public class DateUtil {
 								            "yy.MM.dd",//12
 								            "MM月dd日HH时mm分",//13 
 								            "yyyy年MM月dd日 HH:mm:ss",//14 
-								            "yyyy-MM-dd HH:mm" //15
+								            "yyyy-MM-dd HH:mm", //15
+								            "yyyy-MM", //16
             							};
 
     /**
@@ -1307,43 +1345,142 @@ public class DateUtil {
 
     }
 
-    public static void main(String[] args) {
-        // System.out.println(getDateTime());
-        // System.out.println(getStartDate());
-        // Calendar c1 =
-        // DateUtils.convUtilDateToUtilCalendar(DateUtils.parseDate("2014-05-10 10:52",15));
-        // TimeZone tz = TimeZone.getTimeZone("GMT+08:00"); // 获得时区
-        // Calendar cal = Calendar.getInstance();
-        // cal.set(Calendar.SECOND, 0);
-        // cal.setTimeZone(tz); // 设置时区
-        // c1.setTimeZone(tz);
-        // System.out.println(c1.getTimeInMillis());
-        // System.out.println(cal.getTimeInMillis());
-        // System.out.println(c1.getTime());
-        // System.out.println(cal.getTime());
-        // System.out.println(DateUtils.calendarTime(c1, cal));;
-        // System.out.println(DateUtils.getCountdownTime("2015-01-25 18:22:00"));
-        // System.out.println(DateUtils.getCountdownTime("2015-01-24 18:22:00"));
-        // System.out.println(DateUtils.getCountdownTime("2015-01-24 18:15:00"));
-        // System.out.println(DateUtils.isOldTime("2015-01-23 19:22:00"));
-        // System.out.println(DateUtils.getDiffTimeLessNow("2015-01-23 19:15:00"));
+	/**
+	 * 
+	 * 获取指定日期偏移指定时间后的时间
+	 * 
+	 * @param date
+	 *            基准日期
+	 * 
+	 * @param calendarField
+	 *            偏移的粒度大小（小时、天、月等）使用Calendar中的常数
+	 * 
+	 * @param offsite
+	 *            偏移量，正数为向后偏移，负数为向前偏移
+	 * 
+	 * @return 偏移后的日期
+	 * 
+	 */
+	public static Date getOffsiteDate(Date date, int calendarField, int offsite) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.add(calendarField, offsite);
+		return cal.getTime();
+	}
 
-//        Calendar c = Calendar.getInstance();
-        try {
-            System.out.println(getStartWeek("2017-01-15 05:00:00"));
-            // System.out.println(getLastWeekEndTime());
-            // System.out.println(getStartWeek("2015-01-23 19:22:00"));
-            // System.out.println(getEndWeek("2015-01-23 19:22:00"));
-            // System.out.println(getStartMounth("2015-01-23 19:22:00"));
-            // System.out.println(getEndMounth("2015-01-23 19:22:00"));
-            // System.out.println(getStartQuarter("2015-01-23 19:22:00"));
-            // System.out.println(getEndQuarter("2015-01-23 19:22:00"));
-            // System.out.println(getStartYear("2015-01-23 19:22:00"));
-            // System.out.println(getEndYear("2015-01-23 19:22:00"));
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+	/**
+	 * 
+	 * 判断两个日期相差的时长<br/>
+	 * 
+	 * 返回 minuend - subtrahend 的差
+	 * 
+	 * @param subtrahend
+	 *            减数日期
+	 * 
+	 * @param minuend
+	 *            被减数日期
+	 * 
+	 * @param diffField
+	 *            相差的选项：相差的天、小时
+	 * 
+	 * @return 日期差
+	 * 
+	 */
+	public static long dateDiff(Date subtrahend, Date minuend, long diffField) {
+		long diff = minuend.getTime() - subtrahend.getTime();
+		return diff / diffField;
+	}
+
+	/**
+	 * 日期比较（只比较日期部分）
+	 * date1 > date2 返回true
+	 * @param date1
+	 * @param date2
+	 * @return
+	 * @throws ParseException
+	 */
+	public static boolean  dateCompare(Date date1,Date date2){
+		if(date1 == null)return false;
+		if(date2 == null)return true;
+		if(date1.getTime() > date2.getTime())return true;
+		return false;
+	}
+
+	
+    /**
+     * 获取某日期区间的所有日期  日期倒序
+     *
+     * @param startDate  开始日期
+     * @param endDate    结束日期
+     * @param dateFormat 日期格式
+     * @return 区间内所有日期
+     */
+    public static List<String> getPerDaysByStartAndEndDate(String startDate, String endDate, String dateFormat) { 
+    	DateFormat format = new SimpleDateFormat(dateFormat);
+        try { Date sDate = format.parse(startDate);
+            Date eDate = format.parse(endDate);
+            long start = sDate.getTime();
+            long end = eDate.getTime();
+            if (start > end) { return null;
+            } Calendar calendar = Calendar.getInstance();
+            calendar.setTime(eDate);
+            List<String> res = new ArrayList<String>();
+            while (end >= start) { res.add(format.format(calendar.getTime()));
+                calendar.add(Calendar.DAY_OF_MONTH, -1);
+                end = calendar.getTimeInMillis();
+            } return res;
+        } catch (ParseException e) {
+        	e.printStackTrace();
+        } return null;
     }
-
+    
+    /***
+     * 获取某年某月最大一天
+     * @param year
+     * @param month
+     * @return
+     * 
+     * 需要注意的是：月份是从0开始的，比如说如果输入5的话，实际上显示的是4月份的最后一天，所以月份减去1了
+     */
+    public static String getLastDayOfMonth(int year, int month) {     
+        Calendar cal = Calendar.getInstance();     
+        cal.set(Calendar.YEAR, year);     
+        cal.set(Calendar.MONTH, month-1);     
+        cal.set(Calendar.DAY_OF_MONTH,cal.getActualMaximum(Calendar.DATE));  
+       return  new   SimpleDateFormat( "yyyy-MM-dd ").format(cal.getTime());  
+    }   
+    
+    /**
+     * 两个月份相减的月份数
+     * @param args
+     */
+    @SuppressWarnings("static-access")
+	public static Integer getDiffNum(Date startMonth,Date endMonth){
+           Integer monthNum = 0;
+           Integer yearNumber = 0;
+           Calendar startCalendar = Calendar.getInstance(); 
+           Calendar endCalendar = Calendar.getInstance();
+          
+           startCalendar.setTime(startMonth); 
+           endCalendar.setTime(endMonth);
+           yearNumber = endCalendar.get(endCalendar.YEAR) - startCalendar.get(endCalendar.YEAR);
+           monthNum = endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
+           return yearNumber*12 + monthNum;
+      }
+    
+	    /***
+	     * 测试
+	     * @param args
+	     * @throws Exception 
+	     */
+	  public static void main(String[] args) throws Exception {
+//		  Integer i = DateUtil.getDiffNum(DateUtil.StringToDate("2017-01",16),DateUtil.StringToDate("2018-12",16));
+//		  System.out.println(i);
+//		  List<String> l = DateUtil.getMonthBetween("2017-01", "2018-12");
+//		  for(String s : l){
+//			  System.out.println(s);
+//		  }
+		  
+		  System.out.println(DateUtil.getLastDayOfMonth("2017-02"));
+	  }
 }

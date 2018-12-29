@@ -46,7 +46,8 @@ public class AnySuccessfulStrategy extends AbstractAuthenticationStrategy {
      * mandates that only the info from the first successfully authenticated
      * realm be used.
      */
-    protected AuthenticationInfo merge(AuthenticationInfo info, AuthenticationInfo aggregate) {
+    @SuppressWarnings("deprecation")
+	protected AuthenticationInfo merge(AuthenticationInfo info, AuthenticationInfo aggregate) {
         if (aggregate != null && !CollectionUtils.isEmpty(aggregate.getPrincipals())) {
             return aggregate;
         }

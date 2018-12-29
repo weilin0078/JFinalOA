@@ -3,13 +3,17 @@ package com.pointlion.sys.mvc.common.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.pointlion.sys.mvc.admin.oa.workflow.WorkFlowIdentityService;
 import com.pointlion.sys.mvc.common.dto.ZtreeNode;
 import com.pointlion.sys.mvc.common.model.base.BaseSysRole;
+import com.pointlion.sys.mvc.common.utils.Constants;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 
 /**
@@ -17,6 +21,7 @@ import com.pointlion.sys.mvc.common.utils.UuidUtil;
  */
 @SuppressWarnings("serial")
 public class SysRole extends BaseSysRole<SysRole> {
+	public static final WorkFlowIdentityService idService = WorkFlowIdentityService.me;
 	public static final SysRole dao = new SysRole();
 	/***
 	 * 根据主键查询
@@ -32,10 +37,11 @@ public class SysRole extends BaseSysRole<SysRole> {
 	public void deleteByIds(String ids){
 		String idarr[] = ids.split(",");
     	for(String roleid : idarr){
-			SysRole menu = SysRole.dao.getById(roleid);
-			if(menu!=null){
-				menu.delete();//删除角色
+			SysRole role = SysRole.dao.getById(roleid);
+			if(role!=null){
+				role.delete();//删除角色
 				deleteAllRoleAuthByRolieid(roleid);//删除角色下的所有权限
+				idService.deleteGroup(role.getKey());
 			}
     	}
 	}
@@ -108,13 +114,22 @@ public class SysRole extends BaseSysRole<SysRole> {
 	 * 获取所有角色
 	 * 给用户赋值角色时候用
 	 */
-	public List<ZtreeNode> getAllRoleTreeNode(){
-		List<SysRole> rolelist = SysRole.dao.find("select * from sys_role");
+	public List<ZtreeNode> getAllRoleTreeNode(String roleKey){
+//		('1','2','3')
+		String sql = "select * from sys_role r where 1=1 ";
+		if(StrKit.notBlank(roleKey)){
+			String rolekeyArr[] = roleKey.split(",");
+			String temp = StringUtils.join(rolekeyArr,"','");
+			temp= "('"+temp+"')";
+			sql = sql + " and r.key in"+ temp;
+		}
+		List<SysRole> rolelist = SysRole.dao.find(sql);
 		List<ZtreeNode> treelist = new ArrayList<ZtreeNode>();
 		for(SysRole role:rolelist){
 			ZtreeNode tree = new ZtreeNode();
 			tree.setId(role.getId());
 			tree.setName(role.getName());
+			tree.setType(role.getKey());
 			treelist.add(tree);
 		}
 		return treelist;
@@ -124,5 +139,47 @@ public class SysRole extends BaseSysRole<SysRole> {
 	 */
 	public List<SysRole> getAllRoleByUserid(String id){
 		return SysRole.dao.find("select r.* from sys_role r ,sys_user_role ur , sys_user u where ur.user_id=u.id and ur.role_id=r.id and u.id='"+id+"'");
+	}
+	
+	/***
+	 * 获取角色下所有用户,
+	 * 带组织单位
+	 */
+	public List<SysRole> getAllUserByRoleid(String roleid){
+		return SysRole.dao.find("SELECT o.name orgname,r.*,u.* FROM sys_role r,sys_user_role ur,sys_user u,sys_org o WHERE o.id=u.orgid AND ur.user_id = u.id AND ur.role_id = r.id AND r.id='"+roleid+"'");
+	}
+	
+	/***
+	 * 根据角色名查角色
+	 * @return
+	 */
+	public List<SysRole> getRoleByRoleName(String name){
+		return SysRole.dao.find("select * from sys_role r where r.name='"+name+"'");
+	}
+	
+	public SysRole getRoleByRoleKey(String key){
+		return SysRole.dao.findFirst("select * from sys_role r where r.key='"+key+"'");
+	}
+	
+	/***
+	 * 判断是否是超级管理员角色
+	 * @return
+	 */
+	public Boolean ifSuperAdmin(String userid){
+		List<SysRole> roleList = SysRole.dao.getAllRoleByUserid(userid);//登录人所有角色
+		for(SysRole r:roleList){
+			if(Constants.SuperAdmin.equals(r.getKey())){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/***
+	 * 获取所有角色
+	 * @return
+	 */
+	public List<SysRole> getAllRole(){
+		return dao.find("select * from sys_role ");
 	}
 }

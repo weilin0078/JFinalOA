@@ -263,6 +263,8 @@
       el.className = el.className.replace('pace-active', '');
       el.className += ' pace-inactive';
       document.body.className = document.body.className.replace('pace-running', '');
+      document.body.className = document.body.className.replace('pace-done', '');
+      
       return document.body.className += ' pace-done';
     };
 

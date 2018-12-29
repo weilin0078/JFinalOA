@@ -1,0 +1,98 @@
+				
+				
+                <div id="page-content">
+                	<div class="col-sm-12 eq-box-sm">
+			        	<div class="panel ">
+						    		<div class="panel-body">
+											<div class="bootstrap-table">
+												<div class="fixed-table-toolbar">
+													<div class="bars pull-left form-group">
+														表名：<select id="selectTable" class="selectpicker" onchange="changeTable()">
+							                                #for(t:tableList)
+							                                	<option value="#(t.table_name)">#(t.table_name)</option>
+							                                #end
+							                            </select>
+														<a class="btn btn-mint data-toolbar" onclick="doGenerate()" href="javascript:void(0);"><i class="demo-pli-add"></i>代码生成</a>
+													</div>
+												</div>
+												<div class="fixed-table-container" style="padding-bottom: 0px;">
+													<div class="fixed-table-body">
+																<table id="treetable" class="demo-add-niftycheck table table-hover table-striped">
+																	        <thead>
+																	         	<tr>
+																		        	<th style="width: 220px;text-align: center;"><div class="th-inner">表名</div></th>
+																					<th style="width: 70px;text-align: center;"><div class="th-inner">是否显示在列</div></th>
+																					<th style="width: 70px;text-align: center;"><div class="th-inner">是否用于查询</div></th>
+																					<th style="width: 100px;text-align: center;"><div class="th-inner">类型</div></th>
+																					<th style="width: 100px;text-align: center;"><div class="th-inner">长度</div></th>
+																					<th style="width: 200px;text-align: center;"><div class="th-inner">注释</div></th>
+																		        </tr>
+																	        </thead>
+																	        <tbody id = "tableColumns">
+																	        	<!-- 此处用来展示表的所有列信息-异步展示pjax -->
+																	        </tbody>
+																</table>
+													</div>
+												</div>
+											</div>
+										</div>
+							</div>
+						</div>
+                </div>
+<script>
+	//换表	
+	function changeTable(){
+		doPjaxC(ctx+"/admin/sys/generator/getAllCols?tableName="+$("#selectTable").val(),"#tableColumns");
+	}
+	//进行代码生成
+	function doGenerate(){
+		var ifShowOnColArr = $("input[name='ifShowOnCol']:checked");//是否显示在列
+		var ifShowOnColA = [];//是否显示在列字段
+		var ifShowOnColN = [];//是否显示在列字段注释-用来显示标题
+		
+		var ifUseForQueryArr = $("input[name='ifUseForQuery']:checked");//是否用来查询
+		var ifUseForQueryA = [];//是否用来查询
+		var ifUseForQueryN = [];//是否用来查询字段注释-用来显示标题
+		var vali = true;//校验
+		$.each(ifShowOnColArr,function(){
+			var c = $(this).attr("data-comment");
+			if(c){
+				ifShowOnColA.push($(this).val());
+				ifShowOnColN.push(c);
+			}else{
+				vali = false;
+			}
+		});
+		$.each(ifUseForQueryArr,function(){
+			var c = $(this).attr("data-comment");
+			if(c){
+				ifUseForQueryA.push($(this).val());
+				ifUseForQueryN.push(c)
+			}else{
+				vali = false;
+			}
+		});
+		//if(vali){
+			var result = common_ajax.ajaxFunc("/admin/sys/generator/doGenerate",{
+				"tableName":$("#selectTable").val(),
+				"ifShowOnColA":ifShowOnColA.join(","),
+				"ifShowOnColN":ifShowOnColN.join(","),
+				"ifUseForQueryA":ifUseForQueryA.join(","),
+				"ifUseForQueryN":ifUseForQueryN.join(",")
+			},
+			"json", null);
+			if(result.success){
+				pointLion.alertMsg(result.message, "success" , "small" , null);
+			}else{
+				pointLion.alertMsg(result.message,"danger","small",null);
+			}
+		//}else{
+		//	pointLion.alertMsg("请补全表中注释信息！","danger","small",null);
+		//}
+		
+	}
+	$(document).ready(function() {
+		$(".selectpicker").selectpicker({});
+		changeTable();
+	});
+</script>

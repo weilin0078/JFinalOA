@@ -5,6 +5,8 @@ import java.util.concurrent.ConcurrentMap;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
+import com.pointlion.sys.mvc.common.model.SysOrg;
+import com.pointlion.sys.mvc.common.model.SysUser;
 import com.pointlion.sys.plugin.shiro.ext.SimpleUser;
 
 
@@ -91,7 +93,7 @@ public class ShiroKit {
 		return SAVED_REQUEST_KEY;
 	}
 	/***
-	 * 获取登陆用户信息
+	 * 获取登录用户信息
 	 * @return
 	 */
 	public static SimpleUser getLoginUser(){
@@ -104,7 +106,7 @@ public class ShiroKit {
 		}
 	}
 	/***
-	 * 获取登陆用户主键
+	 * 获取登录用户主键
 	 * @return
 	 */
 	public static String getUserId(){
@@ -112,7 +114,7 @@ public class ShiroKit {
 		return user.getId();
 	}
 	/***
-	 * 获取登陆用户id
+	 * 获取登录用户id
 	 * @return
 	 */
 	public static String getUsername(){
@@ -129,6 +131,53 @@ public class ShiroKit {
 		return user.getName();
 	}
 	
+	public static String getUserOrgId(){
+		SysUser user = SysUser.dao.getById(getUserId());
+		if(user!=null){
+			return user.getOrgid();
+		}else{
+			return "";
+		}
+	}
+	public static SysOrg getUserOrg(){
+		SysUser user = SysUser.dao.getById(getUserId());
+		if(user!=null){
+			SysOrg org = SysOrg.dao.getById(user.getOrgid());
+			if(org!=null){
+				return org;
+			}else{
+				return null;
+			}
+		}else{
+			return null;
+		}
+	}
+	public static String getUserParentChileCompanyId(){
+		SysUser user = SysUser.dao.getById(getUserId());
+		if(user!=null){
+			SysOrg org = SysOrg.dao.getById(user.getOrgid());
+			if(org!=null){
+				return org.getParentChildCompanyId();
+			}else{
+				return "";
+			}
+		}else{
+			return "";
+		}
+	}
+	public static String getUserOrgName(){
+		SysUser user = SysUser.dao.getById(getUserId());
+		if(user!=null){
+			SysOrg org = SysOrg.dao.getById(user.getOrgid());
+			if(org!=null){
+				return org.getName();
+			}else{
+				return "";
+			}
+		}else{
+			return "";
+		}
+	}
 	/***
 	 * 判断是否有资源权限
 	 * @param p

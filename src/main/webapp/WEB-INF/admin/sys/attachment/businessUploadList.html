@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PointLion | JFinalOA</title>
+    #include("/common/include/include.html")
+    <script src="#(ctx)/common/js/demo/nifty-demo.js"></script>
+    <script src="#(ctx)/common/plugins/morris-js/morris.min.js"></script>
+	<script src="#(ctx)/common/plugins/morris-js/raphael-js/raphael.min.js"></script>
+    <script src="#(ctx)/common/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <style>
+		.lay-body{
+			margin-top: 52px;
+			overflow-y: auto;
+			overflow-x: unset;
+		}
+		.lay-header{
+			position: absolute;
+			top: 0px;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+<div class="modal-dialog" style="width:100%">
+    <div class="modal-content" style="height: 100%;">
+        <div class="modal-header lay-header">
+            <button type="button" class="close" data-dismiss="modal" onclick="{parent.layer.closeAll();}"><i class="pci-cross pci-circle"></i></button>
+            <h4 class="modal-title">附件</h4>
+        </div>
+
+        <div class="modal-body lay-body">
+						<div id="page-content">
+					        <div class="col-sm-12 eq-box-sm">
+					        	<div class="panel ">
+								    <div class="panel-body">
+									    #if(view=='detail')
+									    #else
+									        <div id="filePicker" style="float: left;margin-top: 10px;margin-right: 10px;">上传</div>
+											<a id="del" class="btn btn-danger data-toolbar" onclick="delSel()" href="javascript:void(0);" style="height: 38px;line-height: 24px;"><i class="demo-pli-cross"></i> 批量删除</a>
+										#end
+								        <table id="pageTable" class="demo-add-niftycheck" data-toolbar="#del,#add"
+								               data-search="true"
+								               data-show-refresh="true"
+								               data-show-toggle="true"
+								               data-show-columns="true"
+								               data-sort-name="id"
+								               data-page-list="[5, 10, 15, 20,50,100]"
+								               data-page-size="5"
+								               data-pagination="true" data-show-pagination-switch="true" ></table>
+								    </div>
+								</div>
+					        </div>
+		                </div>		
+        </div>
+    </div>
+</div>
+<script>
+var busid = "#(busid)";//可能是业务ID，也可能是TEMP_UUID
+var col = [{
+		    field: 'checked',
+		    checkbox : true,
+		    align: 'center'
+		},
+
+	   {
+	       field: 'id',
+	       title: '主键',
+	       align: 'center'
+	   },
+	   {
+	       field: 'create_user_name',
+	       title: '创建人名称',
+	       align: 'center'
+	   },
+	   {
+	       field: 'create_org_name',
+	       title: '机构名称',
+	       align: 'center'
+	   },
+	   {
+	       field: 'file_name',
+	       title: '文件名',
+	       align: 'center'
+	   },
+	   {
+	       field: 'suffix',
+	       title: '后缀名',
+	       align: 'center'
+	   },
+{
+    field: 'control',
+    title: '操作',
+    align: 'left',
+    width:'120',
+    formatter:function(value,row,index){
+        	//通过formatter可以自定义列显示的内容
+        	//value：当前field的值，即id
+        	//row：当前行的数据
+		    var a = '<a class="label label-table label-success" href="'+ctx+'/admin/sys/attachment/downloadFile?id='+row.id+'&view=detail" target="_blank">下载</a>&nbsp;';
+		    #if(view=='detail')
+			#else
+		    	a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>';
+			#end
+        	return a;
+    }
+}];
+var opt = {
+	    //请求方法
+		   method: 'get',
+		    //是否显示行间隔色
+		   striped: true,
+		   //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）     
+		   cache: false,  
+		   //data-toolbar: "#demo-delete-row",
+		   //是否显示分页（*）  
+		   pagination: true,   
+		    //是否启用排序  
+		   sortable: false,    
+		    //排序方式 
+		   sortOrder: "asc",    
+		   //初始化加载第一页，默认第一页
+		   //我设置了这一项，但是貌似没起作用，而且我这默认是0,- -
+		   //pageNumber:1,   
+		   //每页的记录行数（*）   
+		   pageSize: 5,  
+		   //可供选择的每页的行数（*）    
+		   pageList: [5, 10, 15, 20,50,100],
+		   //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据  
+		   url: ctx+"/admin/sys/attachment/getBusinessUploadList?busid="+busid,
+		   //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+		   //queryParamsType:'',   
+		   ////查询参数,每次调用是会带上这个参数，可自定义                         
+		   queryParams : function(params) {
+		       return {
+		             pageNumber: (params.offset/params.limit)+1,
+		             pageSize: params.limit
+		           };
+		   },
+		   //分页方式：client客户端分页，server服务端分页（*）
+		   sidePagination: "server",
+		   //是否显示搜索
+		   search: false,  
+		   //Enable the strict search.    
+		   strictSearch: true,
+		   //Indicate which field is an identity field.
+		   idField : "id",
+		   columns: col,
+		   pagination:true,paginationShowPageGo: true
+		}; 
+	
+//表格
+function initTable(){
+	$('#pageTable').bootstrapTable(opt);
+	$('#pageTable').bootstrapTable('hideColumn', 'id');
+}
+function refreshTable(){
+	$("#pageTable").bootstrapTable('refresh', opt);
+	$('#pageTable').bootstrapTable('hideColumn', 'id');
+}
+
+//批量删除
+function delSel(){
+	var data = [];
+	$("#pageTable input[type='checkbox'][name!='btSelectAll']:checked").each(function(){
+		data.push($(this).val());
+	});
+	if(data.length==0){
+		pointLion.alertMsg("请选择要删除的数据!","danger",null,null);
+		return;
+	}
+	del(data.join(","));//执行删除
+}
+//删除
+function del(ids){
+	pointLion.confimMsg("您是否要删除所选信息 ?<br/> 点击确认进行删除 , 点击取消取消该操作",null,function(){
+		//执行删除
+		var data = common_ajax.ajaxFunc("/admin/sys/attachment/delete",{"ids":ids}, "json", null);
+		//删除结果
+		if(data.success){
+			pointLion.alertMsg(data.message,"success",null,function(){
+				refreshTable();
+			});
+		}else{
+			pointLion.alertMsg(data.message,"success",null,null);
+		}
+	});
+};
+	$(document).ready(function() {
+		//var clientH = document.body.clientHeight-131;
+		var clientH = 440;
+		$(".lay-body").css("height",clientH+"px");
+		initTable();//初始化
+		//初始化上传组件
+		pointLion.initUploader("/admin/sys/attachment/attachmentUpload?busid="+busid,function(data){
+			pointLion.alertMsg(data.message,"success",null,null);
+			refreshTable();
+		});
+	});
+</script>
+</body>
+</html>

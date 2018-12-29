@@ -21,8 +21,11 @@
 var ACTIVITI = ACTIVITI || {};
 
 var pathName=window.document.location.pathname;
-var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1); 
-//alert(projectName);
+var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+
+var projectName1=window.document.location.protocol+"//"+window.document.location.host;
+//alert(projectName1);
 ACTIVITI.CONFIG = {
-	'contextRoot' : projectName+'/admin',
+	'contextRoot' : projectName+'/admin/oa',
+	'ctx' :  projectName
 };

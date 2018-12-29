@@ -1,0 +1,31 @@
+package #(modelPackageName);
+
+import com.jfinal.aop.Before;
+import com.jfinal.plugin.activerecord.tx.Tx;
+import #(baseModelPackageName).#(tableMeta.baseModelName);
+@SuppressWarnings("serial")
+public class #(tableMeta.modelName) extends #(tableMeta.baseModelName)<#(tableMeta.modelName)> {
+	public static final #(tableMeta.modelName) dao = new #(tableMeta.modelName)();
+	public static final String tableName = "#(tableMeta.name)";
+	
+	/***
+	 * 根据主键查询
+	 */
+	public #(tableMeta.modelName) getById(String id){
+		return #(tableMeta.modelName).dao.findById(id);
+	}
+	
+	/***
+	 * 删除
+	 * @param ids
+	 */
+	@Before(Tx.class)
+	public void deleteByIds(String ids){
+    	String idarr[] = ids.split(",");
+    	for(String id : idarr){
+    		#(tableMeta.modelName) o = #(tableMeta.modelName).dao.getById(id);
+    		o.delete();
+    	}
+	}
+	
+}

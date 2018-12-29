@@ -1,0 +1,89 @@
+<!-- pjax页面返回按钮 -->
+#define installPJaxGoBackBtn()
+	<a href="javascript:void(0);" onclick="doPjax('#(ctx)#(pageTitleBread?pageTitleBread.url:"")')" style="position: absolute;left: 10px;">
+			<button class="btn btn-mint" type="button">返回</button>
+	</a>
+#end
+<!-- 通用业务-附件按钮 -->
+#define installAttachment(businessId)
+		<a href="javascript:void(0);" onclick="doUploadAttachment_#(businessId)('#(businessId)')" style="position: relative;">
+			<button class="btn btn-warning" type="button">附件</button>
+			<span class="pull-right badge badge-success" style="position: absolute;right: -8px;top: -14px;" id="businessAttachmentCount_#(businessId)">0</span>
+		</a>
+		<script>
+			var view = "#(view?view:'')";
+			//打开附件列表
+			function doUploadAttachment_#(businessId)(busid){
+				if(busid){
+					pointLion.openBusinessAttachmentPage(busid,view,function(){
+						setAttachmentCount_#(businessId)();//关闭之后回调
+					});
+				}else{
+					pointLion.alertMsg("请先保存再上传附件！" , "danger" , "small" , null);
+				}
+			}
+			//设置附件数量
+			function setAttachmentCount_#(businessId)(){
+				var data = common_ajax.ajaxFunc("/admin/sys/attachment/getBusinessAttachmentCount", {"busid":"#(businessId)"}, "json", null);
+				if(data.success){
+					$("#businessAttachmentCount_#(businessId)").html(data.data);
+				}
+			}
+			$(document).ready(function() {
+				setAttachmentCount_#(businessId)();
+			});
+		</script>
+#end
+
+<!-- 选择字典按钮 -->
+#define installSelectDctBtn(name,groupKey,idCol,nameCol,idValue,nameValue)
+	<div class="form-group">
+	    <label class="col-md-2 control-label">#(name)</label>
+	    <div class="col-md-4">
+	    	<div class="input-group mar-btm col-md-12">
+	    		<input type="hidden"  name="#(formModelName).#(idCol)" id="dctId" class="form-control"  value="#(idValue)">
+			    <input type="text"  name="#(formModelName).#(nameCol)" id="dctName" class="form-control"  value="#(nameValue)" readonly>
+		        
+			    #if(view!="detail")
+			    	<span class="input-group-btn">
+		            	<button class="btn btn-mint" type="button" onclick="openSlectDctDialog()">选择</button>
+		            </span>
+		        #end
+		    </div>
+	    </div>
+	    <script>
+	    	function openSlectDctDialog(){
+	    		layer.open({
+					  type: 2,
+					  title: false, //不显示标题栏
+					  area: ['1000px', '550px'],
+					  shade: 0.2,
+					  id: 'openSlectDctDialog', //设定一个id，防止重复弹出
+					  resize: false,
+					  closeBtn: false,
+					  isOutAnim : false , 
+					  btnAlign: 'c',
+					  content: ctx+'/admin/sys/dct/openSelectDctDialog?groupKey=#(groupKey)',
+					  success: function(layero){
+					  }
+				});
+	    	}
+	    	
+	    	function getSelected(data){
+	    		if(data){
+					if(data.id){
+			    		$("#dctId").val(data.id);
+		    		}else{
+		    			$("#dctId").val("");
+		    		}
+					if(data.name){
+						$("#dctName").val(data.name);
+		    		}else{
+		    			$("#dctName").val("");
+		    		}
+	    		}
+	    		layer.closeAll();
+	    	}
+	    </script>
+	</div>
+#end

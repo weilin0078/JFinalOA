@@ -17,7 +17,7 @@
     "properties" : [ {
       "id" : "overrideid",
       "type" : "String",
-      "title" : "主键（ID）",
+      "title" : "TaskKey(主键)",
       "value" : "",
       "description" : "流程唯一标识.",
       "popular" : true
@@ -48,7 +48,7 @@
     "properties" : [ {
       "id" : "process_author",
       "type" : "String",
-      "title" : "流程作者",
+      "title" : "流程auther",
       "value" : "",
       "description" : "流程定义者姓名.",
       "popular" : true
@@ -98,7 +98,7 @@
     "properties" : [ {
       "id" : "executionlisteners",
       "type" : "multiplecomplex",
-      "title" : "执行监听器",
+      "title" : "执行监听",
       "value" : "",
       "description" : "Listeners for an activity, process, sequence flow, start and end event.",
       "popular" : true
@@ -108,7 +108,7 @@
     "properties" : [ {
       "id" : "tasklisteners",
       "type" : "multiplecomplex",
-      "title" : "任务监听器",
+      "title" : "任务监听",
       "value" : "",
       "description" : "监听用户任务.",
       "popular" : true
@@ -118,7 +118,7 @@
     "properties" : [ {
       "id" : "eventlisteners",
       "type" : "multiplecomplex",
-      "title" : "事件监听器",
+      "title" : "事件监听",
       "value" : "",
       "description" : "Listeners for any event happening in the Activiti Engine. It's also possible to rethrow the event as a signal, message or error event",
       "popular" : true
@@ -138,7 +138,7 @@
     "properties" : [ {
       "id" : "formproperties",
       "type" : "Complex",
-      "title" : "表单属性",
+      "title" : "表单参数",
       "value" : "",
       "description" : "定义表单属性",
       "popular" : true
@@ -168,7 +168,7 @@
     "properties" : [ {
       "id" : "prioritydefinition",
       "type" : "String",
-      "title" : "优先级",
+      "title" : "优先level",
       "value" : "",
       "description" : "用户任务的优先级.",
       "popular" : true
@@ -448,7 +448,7 @@
     "properties" : [ {
       "id" : "conditionsequenceflow",
       "type" : "Complex",
-      "title" : "流条件",
+      "title" : "流condition",
       "value" : "",
       "description" : "The condition of the sequence flow",
       "popular" : true
@@ -458,7 +458,7 @@
     "properties" : [ {
       "id" : "defaultflow",
       "type" : "Boolean",
-      "title" : "默认流",
+      "title" : "默认flow",
       "value" : "false",
       "description" : "Define the sequence flow as default",
       "popular" : true,
@@ -581,7 +581,7 @@
     "properties" : [ {
       "id" : "multiinstance_type",
       "type" : "kisbpm-multiinstance",
-      "title" : "多实例类型",
+      "title" : "会签的type",
       "value" : "None",
       "description" : "Repeated activity execution (parallel or sequential) can be displayed through different loop types",
       "popular" : true,
@@ -592,7 +592,7 @@
     "properties" : [ {
       "id" : "multiinstance_cardinality",
       "type" : "String",
-      "title" : "基数（多实例）",
+      "title" : "基数（会签）",
       "value" : "",
       "description" : "Define the cardinality of multi instance.",
       "popular" : true
@@ -602,7 +602,7 @@
     "properties" : [ {
       "id" : "multiinstance_collection",
       "type" : "String",
-      "title" : "集合（多实例）",
+      "title" : "集合（会签） " ,
       "value" : "",
       "description" : "Define the collection for the multi instance.",
       "popular" : true
@@ -612,7 +612,7 @@
     "properties" : [ {
       "id" : "multiinstance_variable",
       "type" : "String",
-      "title" : "元素变量（多实例）",
+      "title" : "元素变量（会签）",
       "value" : "",
       "description" : "Define the element variable for the multi instance.",
       "popular" : true
@@ -622,7 +622,7 @@
     "properties" : [ {
       "id" : "multiinstance_condition",
       "type" : "String",
-      "title" : "完成条件（多实例）",
+      "title" : "完成条件（会签）",
       "value" : "",
       "description" : "Define the completion condition for the multi instance.",
       "popular" : true
@@ -696,55 +696,55 @@
   }, {
     "type" : "node",
     "id" : "StartNoneEvent",
-    "title" : "开始事件",
+    "title" : "Start事件",
     "description" : "A start event without a specific trigger",
     "view" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<svg\n   xmlns=\"http://www.w3.org/2000/svg\"\n   xmlns:oryx=\"http://www.b3mn.org/oryx\"\n   width=\"40\"\n   height=\"40\"\n   version=\"1.0\">\n  <defs></defs>\n  <oryx:magnets>\n  \t<oryx:magnet oryx:cx=\"16\" oryx:cy=\"16\" oryx:default=\"yes\" />\n  </oryx:magnets>\n  <g pointer-events=\"fill\">\n    <circle id=\"bg_frame\" cx=\"16\" cy=\"16\" r=\"15\" stroke=\"#585858\" fill=\"#ffffff\" stroke-width=\"1\"/>\n\t<text font-size=\"11\" \n\t\tid=\"text_name\" \n\t\tx=\"16\" y=\"33\" \n\t\toryx:align=\"top center\" \n\t\tstroke=\"#373e48\"\n\t></text>\n  </g>\n</svg>",
     "icon" : "startevent/none.png",
-    "groups" : [ "开始事件" ],
+    "groups" : [ "Start事件" ],
     "propertyPackages" : [ "overrideidpackage", "namepackage", "documentationpackage", "executionlistenerspackage", "initiatorpackage", "formkeydefinitionpackage", "formpropertiespackage" ],
     "hiddenPropertyPackages" : [ ],
     "roles" : [ "sequence_start", "Startevents_all", "StartEventsMorph", "all" ]
   }, {
     "type" : "node",
     "id" : "StartTimerEvent",
-    "title" : "定时开始事件",
-    "description" : "有定时任务触发器的开始事件",
+    "title" : "定时Start事件",
+    "description" : "有定时任务触发器的Start事件",
     "view" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<svg\n   xmlns=\"http://www.w3.org/2000/svg\"\n   xmlns:oryx=\"http://www.b3mn.org/oryx\"\n   width=\"40\"\n   height=\"40\"\n   version=\"1.0\">\n  <defs></defs>\n  <oryx:magnets>\n  \t<oryx:magnet oryx:cx=\"16\" oryx:cy=\"16\" oryx:default=\"yes\" />\n  </oryx:magnets>\n  <g pointer-events=\"fill\">\n    <circle \n    \tid=\"bg_frame\" \n    \tcx=\"16\" \n    \tcy=\"16\" \n    \tr=\"15\" \n    \tstroke=\"#585858\" \n    \tfill=\"#ffffff\" \n    \tstroke-width=\"1\"\n    \tstyle=\"stroke-dasharray: 5.5, 3\" />\n    <circle id=\"frame\" cx=\"16\" cy=\"16\" r=\"15\" stroke=\"#585858\" fill=\"none\" stroke-width=\"1\"/>\n    \n    <path id=\"path1\" transform=\"translate(6,6)\"\n    \td=\"M 10 0 C 4.4771525 0 0 4.4771525 0 10 C 0 15.522847 4.4771525 20 10 20 C 15.522847 20 20 15.522847 20 10 C 20 4.4771525 15.522847 1.1842379e-15 10 0 z M 9.09375 1.03125 C 9.2292164 1.0174926 9.362825 1.0389311 9.5 1.03125 L 9.5 3.5 L 10.5 3.5 L 10.5 1.03125 C 15.063526 1.2867831 18.713217 4.9364738 18.96875 9.5 L 16.5 9.5 L 16.5 10.5 L 18.96875 10.5 C 18.713217 15.063526 15.063526 18.713217 10.5 18.96875 L 10.5 16.5 L 9.5 16.5 L 9.5 18.96875 C 4.9364738 18.713217 1.2867831 15.063526 1.03125 10.5 L 3.5 10.5 L 3.5 9.5 L 1.03125 9.5 C 1.279102 5.0736488 4.7225326 1.4751713 9.09375 1.03125 z M 9.5 5 L 9.5 8.0625 C 8.6373007 8.2844627 8 9.0680195 8 10 C 8 11.104569 8.8954305 12 10 12 C 10.931981 12 11.715537 11.362699 11.9375 10.5 L 14 10.5 L 14 9.5 L 11.9375 9.5 C 11.756642 8.7970599 11.20294 8.2433585 10.5 8.0625 L 10.5 5 L 9.5 5 z \"  \n    \tfill=\"#585858\" stroke=\"none\" />\n   \n\t<text font-size=\"11\" \n\t\tid=\"text_name\" \n\t\tx=\"16\" y=\"33\" \n\t\toryx:align=\"top center\" \n\t\tstroke=\"#373e48\"\n\t></text>\n  </g>\n</svg>",
     "icon" : "startevent/timer.png",
-    "groups" : [ "开始事件" ],
+    "groups" : [ "Start事件" ],
     "propertyPackages" : [ "overrideidpackage", "namepackage", "documentationpackage", "executionlistenerspackage", "timercycledefinitionpackage", "timerdatedefinitionpackage", "timerdurationdefinitionpackage" ],
     "hiddenPropertyPackages" : [ ],
     "roles" : [ "sequence_start", "Startevents_all", "StartEventsMorph", "all" ]
   }, {
     "type" : "node",
     "id" : "StartSignalEvent",
-    "title" : "信号开始事件",
-    "description" : "有信号触发器的开始事件.",
+    "title" : "信号Start事件",
+    "description" : "有信号触发器的Start事件.",
     "view" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<svg\n   xmlns=\"http://www.w3.org/2000/svg\"\n   xmlns:oryx=\"http://www.b3mn.org/oryx\"\n   width=\"40\"\n   height=\"40\"\n   version=\"1.0\">\n  <defs></defs>\n  <oryx:magnets>\n  \t<oryx:magnet oryx:cx=\"16\" oryx:cy=\"16\" oryx:default=\"yes\" />\n  </oryx:magnets>\n  <g pointer-events=\"fill\">\n\n    <circle \n    \tid=\"bg_frame\" \n    \tcx=\"16\" \n    \tcy=\"16\" \n    \tr=\"15\" \n    \tstroke=\"#585858\" \n    \tfill=\"#ffffff\" \n    \tstroke-width=\"1\"\n    \tstyle=\"stroke-dasharray: 5.5, 3\" />\n    <circle id=\"frame\" cx=\"16\" cy=\"16\" r=\"15\" stroke=\"#585858\" fill=\"none\" stroke-width=\"1\"/>\n    <path\n       d=\"M 8.7124971,21.247342 L 23.333334,21.247342 L 16.022915,8.5759512 L 8.7124971,21.247342 z\"\n       id=\"triangle\"\n       stroke=\"#585858\"\n       style=\"fill:none;stroke-width:1.4;stroke-miterlimit:4;stroke-dasharray:none\" />\n\t<text font-size=\"11\" \n\t\tid=\"text_name\" \n\t\tx=\"16\" y=\"33\" \n\t\toryx:align=\"top center\" \n\t\tstroke=\"#373e48\"\n\t></text>\n  </g>\n</svg>",
     "icon" : "startevent/signal.png",
-    "groups" : [ "开始事件" ],
+    "groups" : [ "Start事件" ],
     "propertyPackages" : [ "overrideidpackage", "namepackage", "documentationpackage", "executionlistenerspackage", "signalrefpackage" ],
     "hiddenPropertyPackages" : [ ],
     "roles" : [ "sequence_start", "Startevents_all", "StartEventsMorph", "all" ]
   }, {
     "type" : "node",
     "id" : "StartMessageEvent",
-    "title" : "消息开始事件",
-    "description" : "有消息触发器的开始事件.",
+    "title" : "消息Start事件",
+    "description" : "有消息触发器的Start事件.",
     "view" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<svg\n   xmlns=\"http://www.w3.org/2000/svg\"\n   xmlns:oryx=\"http://www.b3mn.org/oryx\"\n   width=\"40\"\n   height=\"40\"\n   version=\"1.0\">\n  <defs></defs>\n  <oryx:magnets>\n  \t<oryx:magnet oryx:cx=\"16\" oryx:cy=\"16\" oryx:default=\"yes\" />\n  </oryx:magnets>\n  <g pointer-events=\"fill\">\n    <circle \n    \tid=\"bg_frame\" \n    \tcx=\"16\" \n    \tcy=\"16\" \n    \tr=\"15\" \n    \tstroke=\"#585858\" \n    \tfill=\"#ffffff\" \n    \tstroke-width=\"1\"\n    \tstyle=\"stroke-dasharray: 5.5, 3\" />\n    \n    <circle id=\"frame\" cx=\"16\" cy=\"16\" r=\"15\" stroke=\"#585858\" fill=\"none\" stroke-width=\"1\"/>\n    \n    <path transform=\"translate(7,7)\" id=\"path1\" stroke=\"none\" fill=\"#585858\" stroke-width=\"1\" d=\"m 0.5,2.5 0,13 17,0 0,-13 z M 2,4 6.5,8.5 2,13 z M 4,4 14,4 9,9 z m 12,0 0,9 -4.5,-4.5 z M 7.5,9.5 9,11 10.5,9.5 15,14 3,14 z\"/>\n\t<text font-size=\"11\" \n\t\tid=\"text_name\" \n\t\tx=\"16\" y=\"33\" \n\t\toryx:align=\"top center\" \n\t\tstroke=\"#373e48\"\n\t></text>\n  </g>\n</svg>",
     "icon" : "startevent/message.png",
-    "groups" : [ "开始事件" ],
+    "groups" : [ "Start事件" ],
     "propertyPackages" : [ "overrideidpackage", "namepackage", "documentationpackage", "executionlistenerspackage", "messagerefpackage" ],
     "hiddenPropertyPackages" : [ ],
     "roles" : [ "sequence_start", "Startevents_all", "StartEventsMorph", "all" ]
   }, {
     "type" : "node",
     "id" : "StartErrorEvent",
-    "title" : "错误开始事件",
-    "description" : "捕获抛出BMP错误的开始事件.",
+    "title" : "错误Start事件",
+    "description" : "捕获抛出BMP错误的Start事件.",
     "view" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<svg\n   xmlns=\"http://www.w3.org/2000/svg\"\n   xmlns:oryx=\"http://www.b3mn.org/oryx\"\n   width=\"40\"\n   height=\"40\"\n   version=\"1.0\">\n  <defs></defs>\n  <oryx:magnets>\n  \t<oryx:magnet oryx:cx=\"16\" oryx:cy=\"16\" oryx:default=\"yes\" />\n  </oryx:magnets>\n  <oryx:docker oryx:cx=\"16\" oryx:cy=\"16\" />\n  <g pointer-events=\"fill\">\n    <circle id=\"bg_frame\" cx=\"16\" cy=\"16\" r=\"15\" stroke=\"#585858\" fill=\"#ffffff\" stroke-width=\"1\"/>\n    \n    <path\n         stroke=\"#585858\"\n         style=\"fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10\"\n         d=\"M 22.820839,11.171502 L 19.36734,24.58992 L 13.54138,14.281819 L 9.3386512,20.071607 L 13.048949,6.8323057 L 18.996148,16.132659 L 22.820839,11.171502 z\"\n         id=\"errorPolygon\" />\n\t<text font-size=\"11\" \n\t\tid=\"text_name\" \n\t\tx=\"16\" y=\"33\" \n\t\toryx:align=\"top center\" \n\t\tstroke=\"#373e48\"\n\t></text>\n  </g>\n</svg>",
     "icon" : "startevent/error.png",
-    "groups" : [ "开始事件" ],
+    "groups" : [ "Start事件" ],
     "propertyPackages" : [ "overrideidpackage", "namepackage", "documentationpackage", "executionlistenerspackage", "errorrefpackage" ],
     "hiddenPropertyPackages" : [ ],
     "roles" : [ "sequence_start", "Startevents_all", "StartEventsMorph", "all" ]

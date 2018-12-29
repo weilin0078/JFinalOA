@@ -11,59 +11,42 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
+import com.jfinal.core.Const;
 import com.jfinal.ext.handler.UrlSkipHandler;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
+import com.pointlion.sys.config.routes.MobileRoutes;
+import com.pointlion.sys.config.routes.OARoutes;
+import com.pointlion.sys.config.routes.SysRoutes;
 import com.pointlion.sys.handler.GlobalHandler;
 import com.pointlion.sys.interceptor.ExceptionInterceptor;
 import com.pointlion.sys.interceptor.IfLoginInterceptor;
-import com.pointlion.sys.mvc.admin.bumph.BumphController;
-import com.pointlion.sys.mvc.admin.chat.ChatController;
-import com.pointlion.sys.mvc.admin.cms.CmsController;
-import com.pointlion.sys.mvc.admin.cstmsetting.CustomSettingController;
-import com.pointlion.sys.mvc.admin.generator.GeneratorController;
-import com.pointlion.sys.mvc.admin.home.HomeController;
-import com.pointlion.sys.mvc.admin.leave.OaLeaveController;
-import com.pointlion.sys.mvc.admin.login.LoginController;
-import com.pointlion.sys.mvc.admin.menu.MenuController;
-import com.pointlion.sys.mvc.admin.notice.NoticeController;
-import com.pointlion.sys.mvc.admin.org.OrgController;
-import com.pointlion.sys.mvc.admin.resget.OaResGetController;
-import com.pointlion.sys.mvc.admin.role.RoleController;
-import com.pointlion.sys.mvc.admin.uidemo.UIDemoController;
-import com.pointlion.sys.mvc.admin.upload.UploadController;
-import com.pointlion.sys.mvc.admin.usecar.OaUseCarController;
-import com.pointlion.sys.mvc.admin.user.UserController;
-import com.pointlion.sys.mvc.admin.workflow.WorkFlowController;
-import com.pointlion.sys.mvc.admin.workflow.main.StencilsetRestResource;
-import com.pointlion.sys.mvc.admin.workflow.model.ModelController;
-import com.pointlion.sys.mvc.admin.workflow.model.ModelEditorJsonRestResource;
-import com.pointlion.sys.mvc.admin.workflow.model.ModelSaveRestResource;
-import com.pointlion.sys.mvc.admin.workflow.rest.ProcessDefinitionDiagramLayoutResource;
-import com.pointlion.sys.mvc.admin.workflow.rest.ProcessInstanceDiagramLayoutResource;
-import com.pointlion.sys.mvc.admin.workflow.rest.ProcessInstanceHighlightsResource;
+import com.pointlion.sys.interceptor.WorkFlowHisInterceptor;
+import com.pointlion.sys.mvc.admin.oa.common.OAConstants;
+import com.pointlion.sys.mvc.admin.oa.workflow.WorkFlowUtil;
 import com.pointlion.sys.mvc.common.model._MappingKit;
-import com.pointlion.sys.mvc.front.help.HelpController;
-import com.pointlion.sys.mvc.mobile.bumph.MobileBumphController;
-import com.pointlion.sys.mvc.mobile.common.MobileController;
-import com.pointlion.sys.mvc.mobile.login.MobileLoginController;
-import com.pointlion.sys.mvc.mobile.notice.MobileNoticeController;
+import com.pointlion.sys.mvc.common.utils.UuidUtil;
 import com.pointlion.sys.plugin.activiti.ActivitiPlugin;
+import com.pointlion.sys.plugin.mail.MailPlugin;
+import com.pointlion.sys.plugin.quartz.QuartzPlugin;
 import com.pointlion.sys.plugin.shiro.ShiroInterceptor;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
 import com.pointlion.sys.plugin.shiro.ShiroPlugin;
 
 public class MainConfig extends JFinalConfig {
-    Routes routes;
+    public static Routes routes;
+    public static Constants constants;
     
 	/**
 	 * 配置JFinal常量
+	 * 加载顺序！！！！！！！！！  第一
 	 */
 	@Override
 	public void configConstant(Constants me) {
+		MainConfig.constants = me;
 		//读取数据库配置文件
 		PropKit.use("config.properties");
 		//设置当前是否为开发模式
@@ -71,7 +54,7 @@ public class MainConfig extends JFinalConfig {
 		//设置默认上传文件保存路径 getFile等使用
 		me.setBaseUploadPath("upload/");
 		//设置上传最大限制尺寸
-		me.setMaxPostSize(1024*1024*10);
+		me.setMaxPostSize(100*Const.DEFAULT_MAX_POST_SIZE);
 		//获取beetl模版引擎
 //		me.setRenderFactory(new BeetlRenderFactory());
 //		me.setError404View("/error/404.html");
@@ -86,6 +69,8 @@ public class MainConfig extends JFinalConfig {
 	 * ORM
 	 * 缓存等插件
 	 * 自定义插件
+	 * 
+	 * 加载顺序！！！！    第三
 	 */
 	@Override
 	public void configPlugin(Plugins me) {
@@ -97,34 +82,43 @@ public class MainConfig extends JFinalConfig {
 		arp.setDialect(new MysqlDialect());
 		_MappingKit.mapping(arp);
 		ActivitiPlugin acitivitiPlugin = new ActivitiPlugin();
-		ShiroPlugin shiroPlugin = new ShiroPlugin(this.routes);
-	    shiroPlugin.setLoginUrl("/admin/login");//登陆url：未验证成功跳转
-	    shiroPlugin.setSuccessUrl("/admin/index");//登陆成功url：验证成功自动跳转
+		ShiroPlugin shiroPlugin = new ShiroPlugin(MainConfig.routes);
+	    shiroPlugin.setLoginUrl("/admin/login");//登录url：未验证成功跳转
+	    shiroPlugin.setSuccessUrl("/admin/index");//登录成功url：验证成功自动跳转
 	    shiroPlugin.setUnauthorizedUrl("/admin/login/needPermission");//授权url：未授权成功自动跳转
+	    QuartzPlugin quatrZPlugin = new QuartzPlugin();
+	    MailPlugin mailPlugin = new MailPlugin(PropKit.use("mail.properties").getProperties());
 	    //添加到插件列表中
-	    me.add(druidPlugin);
-	    me.add(arp);
-	    me.add(acitivitiPlugin);
-	    me.add(shiroPlugin);
+	    me.add(druidPlugin);//数据库连接池插件
+	    me.add(arp);//ARP插件
+	    me.add(acitivitiPlugin);//流程插件
+	    me.add(shiroPlugin);//权限插件
+	    me.add(mailPlugin);//邮件发送插件
+	    me.add(quatrZPlugin);//定时任务插件
 	}
 	
 	/**
 	 * 配置全局拦截器
+	 * 
+	 * 加载顺序！！！！    第五
 	 */
 	@Override
 	public void configInterceptor(Interceptors me) {
 		 me.add(new ShiroInterceptor());//shiro拦截器
 		 me.add(new IfLoginInterceptor());//判断是否登录拦截器
+		 me.add(new WorkFlowHisInterceptor());//流程历史拦截器
 		 me.add(new ExceptionInterceptor());//通用异常处理拦截器
 	}
 	
 	/**
 	 * 配置全局处理器
+	 * 
+	 * 加载顺序！！！！    第六
 	 */
 	@Override
 	public void configHandler(Handlers handler) {
 		//log.info("configHandler 全局配置处理器，设置跳过哪些URL不处理");
-		handler.add(new UrlSkipHandler("/|/admin/friendchat/.*|/ca/.*|/se/.*|.*.htm|.*.html|.*.js|.*.css|.*.json|.*.png|.*.gif|.*.jpg|.*.jpeg|.*.bmp|.*.ico|.*.exe|.*.txt|.*.zip|.*.rar|.*.7z|.*.tff|.*.woff|.*.ttf|.*.map|.*.xml|.*.woff2|.*.xlsx", false));
+		handler.add(new UrlSkipHandler("/|/admin/friendchat/.*|/ca/.*|/se/.*|.*.htm|.*.html|.*.js|.*.css|.*.json|.*.png|.*.gif|.*.jpg|.*.jpeg|.*.bmp|.*.ico|.*.exe|.*.txt|.*.zip|.*.rar|.*.7z|.*.tff|.*.woff|.*.ttf|.*.map|.*.xml|.*.woff2|.*.pdf", false));
 		handler.add(new GlobalHandler());
 	}
 	
@@ -132,52 +126,35 @@ public class MainConfig extends JFinalConfig {
 	
 	/**
 	 * 配置JFinal路由映射
+	 * 加载顺序！！！！！！！！     第二
 	 */
 	@Override
 	public void configRoute(Routes me) {
-		this.routes = me;//shiro使用
-		//前端DEMO
-		me.add("/admin/uidemo", UIDemoController.class);//UIdemo
-		//系统管理
-		me.add("/admin/login", LoginController.class);//登陆
-		me.add("/admin/home", HomeController.class);//首页
-		me.add("/admin/org", OrgController.class);//用户
-		me.add("/admin/chat",ChatController.class);//即时聊天
-		me.add("/admin/cms",CmsController.class);//内容管理
-		me.add("/admin/user", UserController.class);//用户
-		me.add("/admin/menu", MenuController.class);//菜单
-		me.add("/admin/role",RoleController.class);//执行对象-功能
-		me.add("/admin/customsetting",CustomSettingController.class);//执行对象-功能
-		me.add("/admin/model",ModelController.class);//工作流-模型
-		me.add("/admin/workflow",WorkFlowController.class);//工作流
-		//代码生成器
-		me.add("/admin/generator",GeneratorController.class);//工作流
-		//文件上传
-		me.add("/admin/upload",UploadController.class);//文件上传
-		//在线办公
-		me.add("/admin/bumph",BumphController.class);//公文管理---内部发文，收文转发
-		me.add("/admin/notice",NoticeController.class);//通知公告
-		me.add("/admin/resget",OaResGetController.class);//物品领用
-		me.add("/admin/usecar",OaUseCarController.class);//车辆派送
-		me.add("/admin/leave",OaLeaveController.class);//请销假
-		//流程在线编辑器和流程跟踪所用路由
-		me.add("/admin/process-instance/highlights",ProcessInstanceHighlightsResource.class);//modeler
-		me.add("/admin/process-instance/diagram-layout",ProcessInstanceDiagramLayoutResource.class);//modeler
-		me.add("/admin/process-definition/diagram-layout",ProcessDefinitionDiagramLayoutResource.class);//modeler
-		me.add("/admin/modelEditor/save",ModelSaveRestResource.class);
-		me.add("/admin/editor/stencilset",StencilsetRestResource.class);
-		me.add("/admin/modelEditor/json",ModelEditorJsonRestResource.class);
-		//手机端接口
-		me.add("/mobile/common",MobileController.class);
-		me.add("/mobile/notice",MobileNoticeController.class);
-		me.add("/mobile/login",MobileLoginController.class);
-		me.add("/mobile/bumph",MobileBumphController.class);
-		//
-		me.add("/front/help",HelpController.class);
+		MainConfig.routes = me;//shiro使用
+		me.add(new OARoutes());//办公路由
+		me.add(new SysRoutes());//系统管理路由
+		me.add(new MobileRoutes());//手机端管理路由
 	}
 	
+	/****
+	 * 加载顺序！！！！    第四
+	 */
 	@Override
 	public void configEngine(Engine me) {
-		me.addSharedObject("shiro",new ShiroKit());
+		me.addSharedObject("shiro",new ShiroKit());//提供给模板能使用Shiro权限校验
+		me.addSharedObject("OAConstants", new OAConstants());//提供给模板能引用后台常量类
+		me.addSharedObject("WorkFlowUtil", new WorkFlowUtil());//提供给模板使用能流程工具类
+		me.addSharedObject("UuidUtil", new UuidUtil());//提供给模板能生成UUID
+		//业务通用的工具函数
+		me.addSharedFunction("/WEB-INF/admin/sys/attachment/businessIncludeBtn.html");
+		//通用流程相关函数
+		me.addSharedFunction("/WEB-INF/admin/oa/workflow/commonFlowModule.html");
+	}
+	
+	/***
+	 * 项目启动之后执行
+	 */
+	public void afterJFinalStart(){
+
 	}
 }

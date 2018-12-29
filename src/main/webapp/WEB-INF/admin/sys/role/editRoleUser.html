@@ -1,0 +1,69 @@
+#include("/common/include/include.html")
+<style>
+	.lay-body{
+		margin-top: 52px;
+		overflow-y: auto;
+		overflow-x: unset;
+	}
+	.lay-header{
+		position: absolute;
+		top: 0px;
+		width: 100%;
+	}
+	table{
+		font-size: 12px;
+	}
+	.colseLabel{
+		color: red;
+		cursor: pointer;
+		margin-left: 5px;
+	}
+</style>
+<div class="modal-dialog" style="width:100%">
+    <div class="modal-content">
+        <div class="modal-header lay-header">
+            <button type="button" class="close" data-dismiss="modal" onclick="{parent.layer.closeAll();}"><i class="pci-cross pci-circle"></i></button>
+            <h4 class="modal-title">角色下人员</h4>
+        </div>
+        <div class="modal-body lay-body">
+                <div id="page-content" style="height: 382px;">
+					<a id="add" class="btn btn-mint data-toolbar" style="position: absolute;top: 5px;" onclick="selectOneUser()" href="javascript:void(0);"><i class="demo-pli-add"></i> 添加新人员</a>
+                	<div class="col-sm-12 eq-box-sm" style="margin-top: 28px;">
+			            <div class="panel" style="height: 382px;">
+			                <div class="panel-body userUl">
+			                    #for(user:userList)
+			                    	<span class="label label-primary">(#(user.orgname))#(user.name)<span class="colseLabel" onclick="removeUser('#(user.id)',this)">X</span></span>
+			                    #end
+			                </div>
+			            </div>
+			        </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+<script>
+	function selectOneUser(){
+		parent.pointLion.selectOneUser(encodeURIComponent("#root"),function(data){
+			var result = common_ajax.ajaxFunc("/admin/sys/role/addUserToRole",{"userid":data.idData,"roleid":"#(roleid)"}, "json", null);
+			if(result.success){
+				parent.pointLion.alertMsg("添加成功","success",null,null);
+				$(".userUl").append('<span class="label label-primary">('+data.orgnameData+')'+data.nameData+'<span class="colseLabel" onclick="removeUser(\''+data.idData+'\',this)">X</span></span>');
+			}else{
+				parent.pointLion.alertMsg(result.message,"danger",null,null);
+			}
+		});
+	}
+	function removeUser(userid,o){
+		var data = common_ajax.ajaxFunc("/admin/sys/role/removeUserFromRole",{"userid":userid,"roleid":"#(roleid)"}, "json", null);
+		if(data.success){
+			parent.pointLion.alertMsg("删除成功","success",null,null);
+			$(o).parent().remove();
+		}else{
+			parent.pointLion.alertMsg("删除失败","danger",null,null);
+		}
+	}
+	$(document).ready(function(){
+		
+	});
+</script>

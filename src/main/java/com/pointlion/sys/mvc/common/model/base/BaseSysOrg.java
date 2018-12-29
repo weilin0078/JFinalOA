@@ -51,6 +51,14 @@ public abstract class BaseSysOrg<M extends BaseSysOrg<M>> extends Model<M> imple
 		return get("type");
 	}
 
+	public void setArea(java.lang.String area) {
+		set("area", area);
+	}
+
+	public java.lang.String getArea() {
+		return get("area");
+	}
+
 	public void setDescription(java.lang.String description) {
 		set("description", description);
 	}
@@ -114,5 +122,12 @@ public abstract class BaseSysOrg<M extends BaseSysOrg<M>> extends Model<M> imple
 	public java.lang.String getOperate() {
 		return get("operate");
 	}
+	
+	public void setParentChildCompanyId(java.lang.String parent_child_company_id) {
+		set("parent_child_company_id", parent_child_company_id);
+	}
 
+	public java.lang.String getParentChildCompanyId() {
+		return get("parent_child_company_id");
+	}
 }

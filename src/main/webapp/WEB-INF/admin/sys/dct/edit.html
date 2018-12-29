@@ -1,0 +1,123 @@
+	
+	<div id="page-content">
+			<div class="col-lg-12">
+		        <div class="panel">
+		            <div class="panel-heading">
+		                <h3 class="panel-title" style="text-align:center;">
+		                	#@installPJaxGoBackBtn()
+		                	#if(view=='detail')
+		                		系统字典
+		                	#else
+		                		添加新字典
+		                	#end
+		                </h3>
+		            </div>
+		            <form id="editForm" class="panel-body form-horizontal form-padding">
+							<input type="hidden"  name="#(formModelName).id" class="form-control" value="#(o?o.id:'')">
+							
+							<div class="form-group">
+			                    <label class="col-md-2 control-label">所属分组</label>
+			                    <div class="col-md-5">
+			                    	<div class="input-group mar-btm">
+			                    		<input type="hidden" id="groupid" name="#(formModelName).group_id" class="form-control" value="#(group.id)">
+			                        	<input type="text" id="groupname" class="form-control" disabled value="#(group.name)">
+				                        <span class="input-group-btn">
+				                            <button class="btn btn-mint" type="button" onclick="selectDctGroup()">选择</button>
+				                        </span>
+			                    	</div>
+			                        <small class="help-block">请选择所属分组</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">名称</label>
+			                    <div class="col-md-8">
+			                        <input type="text"  name="#(formModelName).name" class="form-control"  value="#(o?o.name:'')" #if(view=='detail') readonly #end>
+			                        <small class="help-block">请输入名称</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">键</label>
+			                    <div class="col-md-8">
+			                        <input type="text"  name="#(formModelName).key" class="form-control"  value="#(o?o.key:'')" #if(view=='detail') readonly #end>
+			                        <small class="help-block">请输入键值</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">值</label>
+			                    <div class="col-md-8">
+			                        <input type="text"  name="#(formModelName).value" class="form-control"  value="#(o?o.value:'')" #if(view=='detail') readonly #end>
+			                        <small class="help-block">请输入键值</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">类型</label>
+			                    <div class="col-md-8">
+			                        <input type="text"  name="#(formModelName).type" class="form-control"  value="#(o?o.type:'')" #if(view=='detail') readonly #end>
+			                        <small class="help-block">请输入类型</small>
+			                    </div>
+			                </div>
+		                	#if(view=='detail')
+			                
+				            #else
+			            	<div class="panel-footer">
+			                    <div class="row">
+			                        <div class="col-sm-8 col-sm-offset-3">
+			                            <button class="btn btn-warning" type="reset" #if(view=='detail') disabled #end>重置</button>
+			                            <button class="btn btn-mint" type="submit" #if(view=='detail') disabled #end>保存</button>
+			                        </div>
+			                    </div>
+			                </div>
+				            #end
+		            </form>
+		        </div>
+		    </div>
+	</div>
+	<script>
+		function save(){
+			var data = common_ajax.ajaxFunc("/admin/sys/dct/save", $('#editForm').serialize(), "json", null);
+			if(data.success){
+				pointLion.alertMsg("保存成功!" , "success" , "small" , function(){
+					doPjax(ctx+'/admin/sys/dct/getListPage');//跳转到列表页
+				},data);
+			}else{
+				pointLion.alertMsg(data.message , "danger" , "small" , function(){
+					$(".btn").removeAttr("disabled");
+				},data);
+			}
+		}
+		//选择一个分组
+		var selectDctGroupNodeIframe;
+		function selectDctGroup(){
+			layer.open({
+				  type: 2,
+				  title: false, //不显示标题栏
+				  area: ['300px', '550px'],
+				  shade: 0.2,
+				  id: 'selectOneGroup', //设定一个id，防止重复弹出
+				  resize: false,
+				  closeBtn: false,
+				  isOutAnim : false , 
+				  btn: ['确定', '取消'], 
+				  btnAlign: 'c',
+				  content: ctx+'/admin/sys/dct/getSelectOneDctGroupPage',
+				  success: function(layero){
+						selectDctGroupNodeIframe = window[layero.find('iframe')[0]['name']];
+				  },
+				  yes: function(){
+					    var selectDctGroupNode = selectDctGroupNodeIframe.selectDataOK();
+						$("#groupname").val(selectDctGroupNode.name);//所选单位名称
+						$("#groupid").val(selectDctGroupNode.id);//所选单位id
+						layer.closeAll();
+				  }
+			});
+		}
+		$(document).ready(function() {
+			$('#editForm').bootstrapValidator({
+	            fields: {
+	            }
+	        }).on("success.form.bv", function (e) {
+	            save();
+	            return false;//阻止表单跳转
+	        });
+		});
+	</script>

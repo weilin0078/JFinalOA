@@ -53,7 +53,7 @@ public class SysCustomSetting extends BaseSysCustomSetting<SysCustomSetting> {
 	}
 	
 	/***
-	 * 获取当前登陆用户的设置信息 
+	 * 获取当前登录用户的设置信息 
 	 * @return
 	 */
 	public SysCustomSetting getLoginUserCstSetting(){

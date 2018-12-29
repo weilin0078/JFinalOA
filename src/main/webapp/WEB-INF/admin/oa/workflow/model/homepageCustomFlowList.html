@@ -1,0 +1,98 @@
+<table id="pageTable" class="demo-add-niftycheck"></table>
+<script>
+var orgid = '';
+var col = [{
+       field: 'ID_',
+       title: 'ID_',
+       align: 'center'
+   }, {
+       field: 'KEY_',
+       title: '任务标识',
+       align: 'center'
+   }, {
+       field: 'NAME_',
+       title: '任务名称',
+       align: 'center'
+   }, {
+       field: 'VERSION_',
+       title: '任务版本',
+       align: 'center'
+   }, {
+       field: 'CREATE_TIME_',
+       title: '创建时间',
+       align: 'center'
+   }, {
+       field: 'LAST_UPDATE_TIME_',
+       title: '最后更新时间',
+       align: 'center'
+   }, {
+       field: 'control',
+       title: '操作',
+       align: 'left',
+       width:'100',
+       formatter:function(value,row,index){
+           //通过formatter可以自定义列显示的内容
+           //value：当前field的值，即id
+           //row：当前行的数据
+		   var a = '<a class="label label-table label-success" href="javascript:void(0);" onclick="doPjax(\'#(ctx)/admin/oa/apply/custom/getEditPage?defKey='+row.KEY_+'\')">创建任务</a>&nbsp;';
+           return a;
+       } 
+   }];
+var opt = {
+	    //请求方法
+		   method: 'get',
+		    //是否显示行间隔色
+		   striped: true,
+		   //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）     
+		   cache: false,  
+		   //data-toolbar: "#demo-delete-row",
+		   //是否显示分页（*）  
+		   pagination: true,   
+		    //是否启用排序  
+		   sortable: false,    
+		    //排序方式 
+		   sortOrder: "asc",    
+		   //初始化加载第一页，默认第一页
+		   //我设置了这一项，但是貌似没起作用，而且我这默认是0,- -
+		   //pageNumber:1,   
+		   //每页的记录行数（*）   
+		   pageSize: 10,
+		   //可供选择的每页的行数（*）    
+		   pageList: [10, 25, 50, 100],
+		   //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据  
+		   url: ctx+"/admin/oa/model/listCustomData",
+		   //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+		   //queryParamsType:'',   
+		   ////查询参数,每次调用是会带上这个参数，可自定义                         
+		   queryParams : function(params) {
+		       return {
+		             pageNumber: (params.offset/params.limit)+1,
+		             pageSize: params.limit
+		           };
+		   },
+		   //分页方式：client客户端分页，server服务端分页（*）
+		   sidePagination: "server",
+		   //是否显示搜索
+		   search: false,  
+		   //Enable the strict search.    
+		   strictSearch: true,
+		   //Indicate which field is an identity field.
+		   idField : "id",
+		   columns: col,
+		   pagination:true,paginationShowPageGo: true
+		}; 
+	
+//表格
+function initTable(){
+	$('#pageTable').bootstrapTable(opt);
+	$('#pageTable').bootstrapTable('hideColumn', 'ID_');
+}
+function refreshTable(){
+	$("#pageTable").bootstrapTable('refresh', opt);
+	$('#pageTable').bootstrapTable('hideColumn', 'ID_');
+}
+$(document).ready(function(){
+	
+	initTable();//初始化表格
+});
+</script>

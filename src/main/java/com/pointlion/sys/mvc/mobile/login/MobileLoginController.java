@@ -5,21 +5,25 @@
  */
 package com.pointlion.sys.mvc.mobile.login;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.authc.credential.PasswordService;
 
 import com.pointlion.sys.mvc.common.base.BaseController;
+import com.pointlion.sys.mvc.common.model.SysOrg;
 import com.pointlion.sys.mvc.common.model.SysUser;
 
 /***
- * 通知公告控制器（手机端）
+ * 手机的登录控制器（手机端）
  * @author Administrator
  *
  */
 public class MobileLoginController extends BaseController {
 	
 	/***
-	 * 手机端登陆
+	 * 手机端登录
 	 */
 	public void doLogin(){
 		String username = getPara("username");
@@ -32,7 +36,15 @@ public class MobileLoginController extends BaseController {
         	//验证密码
         	PasswordService svc = new DefaultPasswordService();
         	if(svc.passwordsMatch(password, user.getPassword())){
-        		renderSuccess(user.getId(),null);
+        		Map<String,String> map = new HashMap<String,String>();
+        		map.put("ID", user.getId());
+        		map.put("USERNAME", user.getUsername());
+        		map.put("NAME", user.getName());
+        		String orgId = user.getOrgid();
+        		map.put("ORGID", orgId);
+        		SysOrg org = new SysOrg();
+        		map.put("ORGNAME", org.getById(orgId)==null?"":org.getById(orgId).getName());
+        		renderSuccess(map,null);
         	}else{
         		renderError("用户名或密码错误");
         	}

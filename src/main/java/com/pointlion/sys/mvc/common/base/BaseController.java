@@ -18,15 +18,6 @@ import com.pointlion.sys.mvc.common.dto.RenderBean;
 
 
 public abstract class BaseController extends Controller {
-
-
-	
-	/**
-	 * 全局变量
-	 */
-	protected String id;				// 主键
-	protected List<?> list;				// 公共list
-	
 	protected static String messageSuccess = "操作成功";	
 	protected static String messageFail = "操作失败";
 	/**
@@ -414,5 +405,22 @@ public abstract class BaseController extends Controller {
 		return getParaValues(name);
 	}
 	
-
+	/***
+	 * tab页签，iframe方式的统一处理方式
+	 */
+	public void render(String view){
+		String action = getPara("action","");
+		if("openPage".equals(action)){//打开新页面
+			String s = this.getViewPath();
+			if(view.indexOf("/")==0){
+				setAttr("iframeRenderUrl", view);
+			}else{
+				setAttr("iframeRenderUrl", s+view);
+			}
+			setAttr("openNewPageType","onePage");//单页模式
+			super.render("/common/include/iframe.html");
+		}else{
+			super.render(view);
+		}
+	}
 }

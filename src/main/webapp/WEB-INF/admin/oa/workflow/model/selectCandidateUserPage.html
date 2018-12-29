@@ -1,0 +1,96 @@
+#include("/common/include/include.html")
+<style>
+	.lay-body{
+		margin-top: 52px;
+		overflow-y: auto;
+		overflow-x: unset;
+	}
+	.lay-header{
+		position: absolute;
+		top: 0px;
+		width: 100%;
+	}
+</style>
+<div class="modal-dialog" style="width:100%">
+    <div class="modal-content" style="height: 100%;">
+        <div class="modal-header lay-header">
+            <button type="button" class="close" data-dismiss="modal" onclick="{parent.layer.closeAll();}"><i class="pci-cross pci-circle"></i></button>
+            <h4 class="modal-title">选择候选人</h4>
+        </div>
+
+        <div class="modal-body lay-body">
+	        <form id="editForm" class="panel-body form-horizontal form-padding">
+		    	<div class="form-group">
+		            <label class="col-md-12 col-sm-12 col-xs-12 control-label">类型</label>
+		            <div class="col-md-12 col-sm-12 col-xs-12">
+		            	<input id="selectVarType" type="radio" name="selectVarType" value="select" checked="checked" onclick="checkType('selectDiv')">选择已有流程变量
+		                <input id="customVarType" type="radio" name="selectVarType" value="custom" onclick="checkType('customDiv')">手动输入候选人
+		            </div>
+		        </div>
+		        <div class="form-group selectVarDiv selectDiv">
+		            <label class="col-md-12 col-sm-12 col-xs-12 control-label">候选人</label>
+		            <div class="col-md-12 select">
+		                <select id="selectVar" onchange="selectWFVar()">
+		                	#for(v:var)
+		                		<option>#(v.value)</option>
+		                	#end
+		                </select>
+		            </div>
+		        </div>
+		        <div class="form-group selectVarDiv customDiv" style="display:none;">
+		            <label class="col-md-12 col-sm-12 col-xs-12 control-label">候选人</label>
+		            <div class="col-md-12 col-sm-12 col-xs-12">
+		            	<input id="candidateUser" type="text" value="" class="form-control" style="height: auto;">
+		            </div>
+		        </div>
+		        <div class="form-group selectVarDiv selectDiv">
+		            <label class="col-md-12 col-sm-12 col-xs-12 control-label">备注</label>
+		            <div class="col-md-12 col-sm-12 col-xs-12" id="varDes">
+			            #for(v:var)
+			        		#if(for.index==1)
+			        			#(v.des)
+			        		#end
+			        	#end
+		            </div>
+		        </div>
+	        </form>
+        </div>
+    </div>
+</div>
+<div style="display:none">
+	#for(v:var)
+		<input id="#(v.value)" value="#(v.des)"/>
+	#end
+</div>
+<script>
+	$(document).ready(function() {
+		var clientH = document.body.clientHeight-54;
+		$(".lay-body").css("height",clientH+"px");
+	});
+	//选择类型
+	function checkType(name){
+		$(".selectVarDiv").hide();
+		$("."+name).show();
+	}
+	//选择变量
+	function selectWFVar(){
+		var value = $("#selectVar").val();
+		var des = $("#"+value).val();
+		$("#varDes").html(des);
+	}
+	//获取选择结果
+	function getSelectData(){
+		var result = "";
+		var type = $("input[name='selectVarType']:checked").val();
+		if("select"==type){
+			var s = $("#selectVar").val();
+			result = "${"+s+"}";
+		}else if("custom"==type){
+			var c = $("#candidateUser").val();
+			if(c){
+				result = c;
+			}
+		}
+		return result;
+	}
+</script>

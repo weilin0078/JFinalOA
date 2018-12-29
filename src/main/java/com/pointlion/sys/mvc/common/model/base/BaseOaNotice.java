@@ -112,5 +112,13 @@ public abstract class BaseOaNotice<M extends BaseOaNotice<M>> extends Model<M> i
 	public java.lang.String getIfPublish() {
 		return get("if_publish");
 	}
+	
+	public void setTextContent(java.lang.String text_content) {
+		set("text_content", text_content);
+	}
+
+	public java.lang.String getTextContent() {
+		return get("text_content");
+	}
 
 }

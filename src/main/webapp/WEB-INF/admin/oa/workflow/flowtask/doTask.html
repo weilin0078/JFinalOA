@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PointLion | JFinalOA</title>
+    #include("/common/include/include.html")
+    <script src="#(ctx)/common/js/demo/nifty-demo.js"></script>
+    <script src="#(ctx)/common/plugins/morris-js/morris.min.js"></script>
+	<script src="#(ctx)/common/plugins/morris-js/raphael-js/raphael.min.js"></script>
+    <script src="#(ctx)/common/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <style>
+		.lay-body{
+			margin-top: 52px;
+			overflow-y: auto;
+			overflow-x: unset;
+		}
+		.lay-header{
+			position: absolute;
+			top: 0px;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+<div class="modal-dialog" style="width:100%">
+    <div class="modal-content" style="height: 100%;">
+        <div class="modal-header lay-header">
+            <button type="button" class="close" data-dismiss="modal" onclick="{parent.layer.closeAll();}"><i class="pci-cross pci-circle"></i></button>
+            <h4 class="modal-title">办理任务</h4>
+        </div>
+
+        <div class="modal-body lay-body">
+								<div class="col-lg-12">
+							        <div class="panel">
+							            <div class="panel-heading" style="text-align:center;">
+							                <h3 class="panel-title">
+							                	#(title)单
+							                	#@installFlowHisBtn(defId,procInsId)
+							                	<span style="position: absolute;right: 150px;">
+								                	#@installAttachment(o?o.id:'')
+							                	</span>
+							                </h3>
+							            </div>
+							            #render(pageUrl)
+							            <form id="taskForm" class="panel-body form-horizontal form-padding">
+								            <div class="form-group">
+							                    <label class="col-md-2 control-label">办理意见</label>
+							                    <div class="col-md-8">
+							                    	<input name="taskId" type="hidden" value="#(task.TASKID)">
+							                        <textarea name="comment" rows="8" class="form-control"></textarea>
+							                    </div>
+									        </div>
+									        #@buildWorkFlowHisTable(hislist)
+									        <div class="panel-footer">
+							                    <div class="row">
+							                        <div class="col-sm-9 col-sm-offset-3">
+							                            #if(task.TASKDEFKEY.indexOf("audit")==0)
+								                            <button class="btn btn-warning" type="reset">重置</button>
+								                            <button class="btn btn-danger" type="button" onclick="completeTask(0)">不同意</button>
+								                            <button class="btn btn-mint" type="button" onclick="completeTask(1)">同意</button>
+								                        #elseif(task.TASKDEFKEY=="ReEdit")
+								                        	<button class="btn btn-mint" type="button" onclick="completeTask(1)">保存并提交</button>
+								                        #else
+								                        	<button class="btn btn-mint" type="button" onclick="completeTask(1)">提交</button>
+								                        #end
+							                        </div>
+							                    </div>
+							                </div>
+									    </form>
+									</div><!-- panel end-->
+							</div><!-- col-lg-12 end-->
+		</div><!-- main-body end-->
+	</div>
+</div>
+	<script>
+		function completeTask(pass){
+			pointLion.confimMsg("确定要提交该任务 ？ <br/> 点击确认进行提交 , 点击取消取消该操作",null,function(){
+				var data = common_ajax.ajaxFunc("/admin/oa/workflow/flowtask/submitTask?pass="+pass, $('#taskForm').serialize()+"&"+$("#editForm").serialize(), "json", null);
+				if(data.success){
+					pointLion.alertMsg(data.message , "success" , "small" , function(){
+						parent.successCompleteTask();
+						parent.layer.closeAll();
+					});
+				}else{
+					pointLion.alertMsg(data.message , "success" , "small" , function(){
+						$(".btn").removeAttr("disabled");
+					});
+				}
+			});
+		}
+		$(document).ready(function() {
+			var clientH = 566;
+			$(".lay-body").css("height",clientH+"px");
+		});
+	</script>
+

@@ -1,0 +1,100 @@
+	
+	<div id="page-content">
+			<div class="col-lg-12">
+		        <div class="panel">
+		            <div class="panel-heading">
+		                <h3 class="panel-title" style="text-align:center;">
+		                	#@installPJaxGoBackBtn()
+		                	添加
+		                </h3>
+		            </div>
+		            <form id="editForm" class="panel-body form-horizontal form-padding">
+						<input type="hidden"  name="#(formModelName).id" class="form-control" value="#(o?o.id:'')">
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">收信人id</label>
+			                    <div class="col-md-8">
+			                        <input type="text"  name="#(formModelName).to_userid" class="form-control"  value="#(o?o.to_userid:'')" #if(view=='detail') readonly #end>
+			                        <small class="help-block">请输入收信人id</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">收信人登录帐号</label>
+			                    <div class="col-md-8">
+			                        <input type="text"  name="#(formModelName).to_username" class="form-control"  value="#(o?o.to_username:'')" #if(view=='detail') readonly #end>
+			                        <small class="help-block">请输入收信人登录帐号</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">收信人姓名</label>
+			                    <div class="col-md-8">
+			                        <input type="text"  name="#(formModelName).to_name" class="form-control"  value="#(o?o.to_name:'')" #if(view=='detail') readonly #end>
+			                        <small class="help-block">请输入收信人姓名</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">短信内容</label>
+			                    <div class="col-md-8">
+			                        <input type="text"  name="#(formModelName).message" class="form-control"  value="#(o?o.message:'')" #if(view=='detail') readonly #end>
+			                        <small class="help-block">请输入短信内容</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">发送时间</label>
+			                    <div class="col-md-8">
+			                        <input type="text"  name="#(formModelName).send_time" class="form-control"  value="#(o?o.send_time:'')" #if(view=='detail') readonly #end>
+			                        <small class="help-block">请输入发送时间</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">短信类型。1：自动发送.2：主动发送</label>
+			                    <div class="col-md-8">
+			                        <input type="text"  name="#(formModelName).type" class="form-control"  value="#(o?o.type:'')" #if(view=='detail') readonly #end>
+			                        <small class="help-block">请输入短信类型。1：自动发送.2：主动发送</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">短信平台</label>
+			                    <div class="col-md-8">
+			                        <input type="text"  name="#(formModelName).message_platfrom" class="form-control"  value="#(o?o.message_platfrom:'')" #if(view=='detail') readonly #end>
+			                        <small class="help-block">请输入短信平台</small>
+			                    </div>
+			                </div>
+		                	#if(view=='detail')
+			                
+				            #else
+			            	<div class="panel-footer">
+			                    <div class="row">
+			                        <div class="col-sm-8 col-sm-offset-3">
+			                            <button class="btn btn-warning" type="reset" #if(view=='detail') disabled #end>重置</button>
+			                            <button class="btn btn-mint" type="submit" #if(view=='detail') disabled #end>保存</button>
+			                        </div>
+			                    </div>
+			                </div>
+				            #end
+		            </form>
+		        </div>
+		    </div>
+	</div>
+	<script>
+		function save(){
+			var data = common_ajax.ajaxFunc("/admin/sysmobilemessage/save", $('#editForm').serialize(), "json", null);
+			if(data.success){
+				pointLion.alertMsg("保存成功!" , "success" , "small" , function(){
+					doPjax(ctx+'/admin/sysmobilemessage/getListPage');//跳转到列表页
+				},data);
+			}else{
+				pointLion.alertMsg(data.message , "danger" , "small" , function(){
+					$(".btn").removeAttr("disabled");
+				},data);
+			}
+		}
+		$(document).ready(function() {
+			$('#editForm').bootstrapValidator({
+	            fields: {
+	            }
+	        }).on("success.form.bv", function (e) {
+	            save();
+	            return false;//阻止表单跳转
+	        });
+		});
+	</script>

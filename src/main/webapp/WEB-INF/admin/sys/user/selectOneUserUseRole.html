@@ -1,0 +1,189 @@
+#include("/common/include/include.html")
+<style>
+	.lay-body{
+		margin-top: 52px;
+		overflow-y: auto;
+		overflow-x: unset;
+	}
+	.lay-header{
+		position: absolute;
+		top: 0px;
+		width: 100%;
+	}
+	table{
+		font-size: 12px;
+	}
+	.bootstrap-table{
+		height: 245px;
+	}
+</style>
+<div class="modal-dialog" style="width:100%">
+    <div class="modal-content">
+        <div class="modal-header lay-header">
+            <button type="button" class="close" data-dismiss="modal" onclick="{parent.layer.closeAll();}"><i class="pci-cross pci-circle"></i></button>
+            <h4 class="modal-title">选择人员</h4>
+        </div>
+
+        <div class="modal-body lay-body">
+                            <div id="page-content" style="height: 410px;">
+			                	<div class="col-sm-3 eq-box-sm">
+						            <div class="panel" style="height: 395px;">
+						                <div class="panel-body">
+						                    <ul id="treeDemo" class="ztree"></ul>
+						                </div>
+						            </div>
+						        </div>
+						        <div class="col-sm-9 eq-box-sm">
+						        	<div class="panel">
+									    <div class="panel-body" style="height: 393px;">
+									        <table id="pageTable"></table>
+									    </div>
+									</div>
+						        </div>
+			                </div>
+        </div>
+    </div>
+</div>
+
+<script>
+	var roleid = '#(firstRoleId)';
+	var col = [{
+	       field: 'checked',
+	       checkbox : true,
+	       align: 'center'
+	   }, {
+	       field: 'username',
+	       title: '登录名称',
+	       align: 'center'
+	   }, {
+	       field: 'name',
+	       title: '用户名称',
+	       align: 'center'
+	   }, {
+	       field: 'sex',
+	       title: '性别',
+	       align: 'center',
+	       formatter:function(value,row,index){
+	           if(value=="1"){
+	        	   return "男";
+	           }else{
+	        	   return "女";
+	           }
+	       } 
+	   }, {
+	       field: 'orgname',
+	       title: '所属单位',
+	       align: 'center'
+	   }];
+	var opt = {
+		    //请求方法
+			   method: 'get',
+			    //是否显示行间隔色
+			   striped: true,
+			   //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）     
+			   cache: false,  
+			   //data-toolbar: "#demo-delete-row",
+			   //是否显示分页（*）  
+			   pagination: true,   
+			    //是否启用排序  
+			   sortable: false,    
+			    //排序方式 
+			   sortOrder: "asc",    
+			   //初始化加载第一页，默认第一页
+			   //我设置了这一项，但是貌似没起作用，而且我这默认是0,- -
+			   singleSelect  : true, 
+			   //pageNumber:1,   
+			   //每页的记录行数（*）   
+			   pageSize: 5,  
+			   //可供选择的每页的行数（*）    
+			   pageList: [5, 10, 50, 100],
+			   //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据  
+			   url: ctx+"/admin/sys/user/getListDataByRoleid",
+			   //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+			   //queryParamsType:'',   
+			   ////查询参数,每次调用是会带上这个参数，可自定义                         
+			   queryParams : function(params) {
+			       return {
+			             pageNumber: (params.offset/params.limit)+1,
+			             pageSize: params.limit,
+			             roleid:roleid
+			           };
+			   },
+			   //分页方式：client客户端分页，server服务端分页（*）
+			   sidePagination: "server",
+			   //是否显示搜索
+			   search: false,  
+			   //Enable the strict search.    
+			   strictSearch: true,
+			   //Indicate which field is an identity field.
+			   idField : "id",
+			   columns: col,
+			   pagination:true,paginationShowPageGo: true
+			}; 
+	//表格
+	function initTable(){
+		$('#pageTable').bootstrapTable(opt);
+		$('#pageTable').bootstrapTable('hideColumn', 'id');
+	}
+	function refreshTable(){
+		$("#pageTable").bootstrapTable('refresh', opt);
+		$('#pageTable').bootstrapTable('hideColumn', 'id');
+	}
+	//树
+	var setting = {
+		async: {
+			enable: true,
+			url:ctx+"/admin/sys/role/getAllRoleTreeNode?roleKey=#(roleKey)"
+		},
+		callback: {
+			onClick: clickNode
+		}
+	};
+	function clickNode(event, treeId, treeNode, clickFlag){
+		roleid = treeNode.id;
+		//刷新表格
+		refreshTable();
+	}
+	//添加人
+	function addSelectUser(){
+		var idarr = [];
+		var usernamearr = [];
+		var namearr=[];
+		var orgnamearr=[];
+		$("#pageTable input[type='checkbox'][name!='btSelectAll']:checked").each(function(){
+			idarr.push($(this).val());
+			usernamearr.push($(this).parent().next().html());
+			namearr.push($(this).parent().next().next().html());
+			orgnamearr.push($(this).parent().next().next().next().next().html());
+		});
+		if(idarr.length==0){
+			pointLion.alertMsg("请选择要添加的用户!","danger",null,null);
+			return;
+		}
+		var html = ""
+		$.each(idarr,function(i,d){
+			html = html + "<li class='list-group-item'>"+namearr[i]+"（"+orgnamearr[i]+"）<a class='label label-table label-danger' onclick='delSelectedUser(this)' href='javascript:void(0);'>删除</a></li>";
+		})
+		$("#selectedUsersId").val(idarr.join(","));
+		$("#selectedUsersname").val(usernamearr.join(","));
+		$("#selectedUsersName").val(namearr.join(","));
+		$("#selectedUser").append(html);
+	}
+	//删除已经选的人
+	function delSelectedUser(o){
+		$(o).parent().remove();
+	}
+	//点确定返回给底层数据
+	function selectMankUserOK(){
+		var o = $("#pageTable input[type='checkbox'][name!='btSelectAll']:checked");
+		var data = {};
+		data.idData=$(o).val();
+		data.usernameData=$(o).parent().next().html();;
+		data.nameData=$(o).parent().next().next().html();
+		return data;
+	}
+	$(document).ready(function(){
+		$.fn.zTree.init($("#treeDemo"), setting);//初始化树
+		initTable();//初始化树
+	});
+</script>

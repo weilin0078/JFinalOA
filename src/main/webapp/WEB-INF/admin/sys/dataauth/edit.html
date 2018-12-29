@@ -1,0 +1,307 @@
+	
+	<style>
+		td{
+			height:51px;
+			line-height: 30px !important;
+		}
+	</style>
+	<div id="page-content">
+			<div class="col-lg-12">
+		        <div class="panel">
+		            <div class="panel-heading">
+		                <h3 class="panel-title" style="text-align:center;">
+		                	数据权限配置
+		                </h3>
+		            </div>
+		            <form id="editForm" class="panel-body form-horizontal form-padding">
+							<input type="hidden"  name="#(formModelName).id" class="form-control" value="#(o?o.id:'')">
+							<div class="form-group">
+			                    <label class="col-md-2 control-label">数据权限名称</label>
+			                    <div class="col-md-9">
+			                        <input type="text"  name="#(formModelName).auth_name" class="form-control"  value="#(o?o.auth_name:'')" #if(view=='detail') readonly #end>
+			                        <small class="help-block">请输入数据权限名称</small>
+			                    </div>
+			                </div>
+							<div class="form-group">
+			                    <label class="col-md-2 control-label">表名</label>
+			                    <div class="col-md-4">
+			                    	<div class="select pull-left" style="width:100%;">
+				                        <select name="#(formModelName).table" #if(view=='detail') readonly #end style="width:100%;">
+			                                #for(t:tableList)
+			                                	<option value="#(t.table_name)" #if(o&&o.table==t.table_name) selected #end>#(t.table_name)</option>
+			                                #end
+			                            </select>
+			                        </div>
+			                    </div>
+			                    <label class="col-md-1 control-label">应用角色</label>
+			                    <div class="col-md-4">
+			                    	<div class="select pull-left" style="width:100%;">
+				                        <select name="#(formModelName).role_id" #if(view=='detail') readonly #end style="width:100%;">
+			                                #for(t:roleList)
+			                                	<option value="#(t.id)" #if(o&&o.role_id==t.id) selected #end>#(t.name)</option>
+			                                #end
+			                            </select>
+			                        </div>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">是否启用</label>
+			                    <div class="col-md-9">
+							            <input  type="checkbox" id="menuIfShow" name="#(formModelName).status"  value="1" #if(o&&o.status=='1') checked #end >
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">描述信息</label>
+			                    <div class="col-md-9">
+			                        <textarea name="#(formModelName).des" rows="9" class="form-control"  #if(view=='detail') readonly #end>#(o?o.des:'')</textarea>
+			                        <small class="help-block">请输入描述信息</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">命令行</label>
+			                    <div class="col-md-9">
+			                        <textarea id="commandText" name="#(formModelName).command_text" rows="9" class="form-control" readonly>#(o?o.command_text:'')</textarea>
+			                    </div>
+			                </div>
+			                <div class="form-group bootstrap-table">
+				                <div class="fixed-table-container" style="padding-bottom: 0px;">
+									<div class="fixed-table-body" id="parentTreetable">
+												<table id="treetable" class="demo-add-niftycheck table table-hover table-striped">
+													        <thead>
+													         	<tr>
+													         		<th style="width: 150px;"><div class="th-inner">名称</div></th>
+													         		<th style="width: 150px;"><div class="th-inner">字段</div></th>
+													         		<th style="width: 150px;"><div class="th-inner">条件</div></th>
+													         		<th style="width: 150px;"><div class="th-inner">类型</div></th>
+													         		<th style="width: 150px;"><div class="th-inner">值</div></th>
+																	<th style="width: 160px;"><div class="th-inner">操作</div></th>
+														        </tr>
+													        </thead>
+													        <tbody>
+													        	<tr data-tt-id="rules" data-tt-parent-id="root">
+													        	#@installGroup("root")
+													        </tbody>
+												</table>
+									</div>
+								</div>
+			                </div>
+		                	#if(view=='detail')
+			                
+				            #else
+			            	<div class="panel-footer">
+			                    <div class="row">
+			                        <div class="col-sm-11 col-sm-offset-5">
+			                            <button class="btn btn-warning" type="reset" #if(view=='detail') disabled #end>重置</button>
+			                            <button class="btn btn-mint" type="submit" #if(view=='detail') disabled #end>保存</button>
+			                        </div>
+			                    </div>
+			                </div>
+				            #end
+		            </form>
+		        </div>
+		    </div>
+	</div>
+	<script>
+		function save(){
+			var data = common_ajax.ajaxFunc("/admin/sys/dataauth/save", $('#editForm').serialize(), "json", null);
+			if(data.success){
+				pointLion.alertMsg("保存成功!" , "success" , "small" , function(){
+					doPjax(ctx+'/admin/sys/dataauth/getListPage');//跳转到列表页
+				},data);
+			}else{
+				pointLion.alertMsg(data.message , "danger" , "small" , function(){
+					$(".btn").removeAttr("disabled");
+				},data);
+			}
+		}
+		
+		/***
+		 * 添加规则
+		 */
+		function addRule(o){
+			var parentID = $(o).parents("tr").attr("data-tt-id");
+			var html = '';
+			html = html + '<tr data-tt-id="'+parentID+'_r" data-tt-parent-id="'+parentID+'">';
+			html = html + $("#templateRule").html().replace("<tr>","");
+			$(o).parents("tr").after(html);
+			$("#parentTreetable .indenter").remove();
+			var treeTableHtml = $("#parentTreetable").html();
+			$("#treetable").remove();
+			$("#parentTreetable").html(treeTableHtml);
+			$("#treetable").treetable({ expandable: true });//树表格
+			$('#treetable').treetable('expandAll');//展开所有
+		}
+		function delRule(o){
+			$(o).parents("tr").remove();
+		}
+		/***
+		 * 添加分组
+		 */
+		function addGroup(o){
+			var parentID = $(o).parents("tr").attr("data-tt-id");
+			var html = '';
+			html = html + '<tr data-tt-id="'+parentID+'_g" data-tt-parent-id="'+parentID+'">';
+			html = html + $("#templateGroup").html().replace("<tr>","");
+			$(o).parents("tr").after(html);
+			$.each($("tr[data-tt-parent-id='_templateGroup_']"),function(i,d){
+				var attr = $(d).attr("data-tt-id").replace("_templateGroup_",parentID);
+				$(d).attr("data-tt-id",attr);
+				$(d).attr("data-tt-parent-id",parentID);
+			})
+			$("#parentTreetable .indenter").remove();
+			var treeTableHtml = $("#parentTreetable").html();
+			$("#treetable").remove();
+			$("#parentTreetable").html(treeTableHtml);
+			$("#treetable").treetable({ expandable: true });//树表格
+			$('#treetable').treetable('expandAll');//展开所有
+		}
+		function delGroup(o){
+			$(o).parents("tr").remove();
+		}
+		//获取执行命令行
+		function setCommandText(){
+			//{"operation":"and","rules":[{"field":"sender_id","operation":"=","type":"string","value":"$CurrentUser_Id$"}]}
+			var command = {};
+			var operation = $("tr[data-tt-id='root_o']").find("select").val();
+			command.operation=operation;
+			var rules = [];
+			var rulesTR = $("tr[data-tt-parent-id='rules']");
+			$.each(rulesTR,function(i,d){
+				var rule = {};
+				rule.field = $(d).find(".rule_col").val();
+				rule.operation = $(d).find(".rule_operation").val();
+				rule.type = $(d).find(".rule_value_type").val();
+				rule.value = $(d).find(".rule_value").val();
+				rules.push(rule);
+			})
+			command.rules=rules;
+			var str = JSON.stringify(command);
+			$("#commandText").val(str);
+		}
+		$(document).ready(function() {
+			new Switchery(document.getElementById('menuIfShow'));//制做开关按钮
+			$("#treetable").treetable({ expandable: true });//树表格
+			$('#treetable').treetable('expandAll');//展开所有
+			$('#editForm').bootstrapValidator({
+	            fields: {
+	            }
+	        }).on("success.form.bv", function (e) {
+	            save();
+	            return false;//阻止表单跳转
+	        });
+			
+			$("#parentTreetable").on("change","input,select",function(){
+				setCommandText();
+			})
+		});
+	</script>
+	
+	
+	<!--  下面都是模版！！！！！！！！！！！与业务无关！！！！！！！！！！！！！！！！  -->
+	
+	#define installGroup(parentId)
+				  <td><span>规则组</span></td>
+				  <td>
+				  </td>
+				  <td>
+				  </td>
+				  <td>
+				  </td>
+				  <td>
+				  </td>
+				  <td>
+				  		<a class="label label-table label-info" onclick="addRule(this)" href="javascript:void(0);" >添加规则</a>&nbsp;
+				  </td>
+			</tr>
+			<tr data-tt-id="#(parentId)_o" data-tt-parent-id="#(parentId)">
+				  <td><span>操作</span></td>
+				  <td>
+					  	<div class="select" style="width:100%;padding:0px;">
+							  <select style="width:100%;">
+					  			<option value="AND">并且</option>
+					  			<option value="OR">或者</option>
+				  			  </select>
+				  		</div>
+				  </td>
+				  <td>
+				  </td>
+				  <td>
+				  </td>
+				  <td>
+				  </td>
+				  <td>
+				  </td>
+			</tr>
+			<!-- <tr data-tt-id="#(parentId)_g" data-tt-parent-id="#(parentId)">
+				  <td><span>分组</span></td>
+				  <td>
+				  </td>
+				  <td>
+				  </td>
+				  <td>
+				  </td>
+				  <td>
+				  </td>
+				  <td>
+				  		<a class="label label-table label-info" onclick="addGroup(this)" href="javascript:void(0);" >添加分组</a>&nbsp;
+				  		<a class="label label-table label-info" onclick="delGroup(this)" href="javascript:void(0);" >删除分组</a>&nbsp;
+				  </td>
+			</tr>  -->
+	#end
+	
+	#define installRule()
+			  <td>
+			  		<span class="file"></span>
+			  </td>
+			  <td>
+			  		<div class="select" style="width:100%;padding:0px;">
+		    	  		<select style="width:100%;" class="rule_col">
+		    	  			#for(col:colList)
+		    	  				<option value="#(col.column_name)">#(col.column_name)</option>
+		    	  			#end
+						</select>
+					</div>
+			  </td>
+			  <td>
+			  		<div class="select" style="width:100%;padding:0px;">
+						  <select style="width:100%;" class="rule_operation">
+						  	<option value="=">等于</option>
+						  	<option value="!=">不等于</option>
+						  	<option value=">">大于</option>
+						  	<option value="<">小于</option>
+						  	<option value=">=">大于等于</option>
+						  	<option value="<=">小于等于</option>
+			  			  </select>
+			  		</div>
+			  </td>
+			  <td>
+			  		<div class="select" style="width:100%;padding:0px;">
+						  <select style="width:100%;" class="rule_value_type">
+						  	<option value="string">字符串</option>
+						  	<option value="number">数字</option>
+			  			  </select>
+			  		</div>
+			  </td>
+			  <td>
+			  		<input type="text" class="form-control rule_value">
+			  </td>
+			  <td>
+			  		<a class="label label-table label-info" onclick="delRule(this)" href="javascript:void(0);" >删除规则</a>&nbsp;
+			  </td>
+		</tr>
+	#end
+	
+	<!-- 模版 -->
+	<table style = "display:none;">
+		<tbody id="templateRule">
+		<tr>
+		#@installRule()
+		</tbody>
+	</table>
+	
+	<table style = "display:none;">
+		<tbody id="templateGroup">
+		<tr>
+		#@installGroup("_templateGroup_")
+		</tbody>
+	</table>

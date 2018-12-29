@@ -84,7 +84,6 @@ public class SysMenu extends BaseSysMenu<SysMenu> {
 	public List<SysMenu> getChildrenAll(String id){
 		List<SysMenu> menuList =  getChildrenByPid(id);//根据id查询孩子
 		for(SysMenu m : menuList){
-			System.out.println(m.getName());
 			m.setChildren(getChildrenAll(m.getId()));
 		}
 		return menuList;

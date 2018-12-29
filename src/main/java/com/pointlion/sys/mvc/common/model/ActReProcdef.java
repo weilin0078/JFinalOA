@@ -17,6 +17,6 @@ public class ActReProcdef extends BaseActReProcdef<ActReProcdef> {
 	 * @return
 	 */
 	public Page<ActReProcdef> getDefPage(Integer curr , Integer pagesize){
-		return ActReProcdef.dao.paginate(curr, pagesize, "select * ", " from (select def.*,dep.DEPLOY_TIME_ from act_re_procdef def ,act_re_deployment dep where def.DEPLOYMENT_ID_=dep.ID_ ORDER BY VERSION_ DESC) a group by KEY_");
+		return ActReProcdef.dao.paginate(curr, pagesize, "select def.*,a.DEPLOY_TIME_ DEPLOY_TIME_  ", " from (SELECT KEY_,MAX(VERSION_) maxversion,dep.DEPLOY_TIME_ DEPLOY_TIME_ FROM act_re_procdef def, act_re_deployment dep WHERE def.DEPLOYMENT_ID_ = dep.ID_ GROUP BY KEY_) a,act_re_procdef def where def.VERSION_=a.maxversion and def.KEY_=a.KEY_ ORDER BY a.KEY_ ASC");
 	}
 }

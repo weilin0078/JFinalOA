@@ -6,7 +6,7 @@
                                 <div id="mainnav-profile" class="mainnav-profile #if(setting.show_user_img=='0') hidden #end">
                                     <div class="profile-wrap">
                                         <div class="pad-btm">
-                                            <span class="label label-success pull-right">管理员</span>
+                                            <span class="label label-success pull-right">#(userName)</span>
                                             <img class="img-circle img-sm img-border" src="#(ctx)/common/img/profile-photos/1.png" alt="Profile Picture">
                                         </div>
                                         <a href="#profile-nav" class="box-block" data-toggle="collapse" aria-expanded="false">
@@ -34,7 +34,7 @@
                                 </div>
                                 <ul id="mainnav-menu" class="list-group">
 						            <li class="active-link">
-						                <a onclick="doPjax('#(ctx)/admin/home')" href="javascript:void(0);">
+						                <a class="open-menu" href="#(ctx)/admin/home/getHomePage">
 						                    <i class="demo-psi-home"></i>
 						                    <span class="menu-title">
 												<strong>首页</strong>
@@ -58,7 +58,7 @@
 									                #if(b.children)
 									                	<ul class="collapse">
 										                	#for(c:b.children)
-											                    <li><a onclick="doPjax('#(ctx)#(c.url)')" href="javascript:void(0);">#(c.name)</a></li>
+											                    <li><a class="open-menu" onclick="openNewPage('#(ctx)#(c.url)')" href="#(ctx)#(c.url)">#(c.name)</a></li>
 										                	#end
 										                </ul>
 									                #end
@@ -97,9 +97,9 @@
 											<i class="arrow"></i>
 						                </a>
 						                <ul class="collapse">
-						                    <li><a onclick="doPjax('#(ctx)/admin/menu/getListPage')" href="javascript:void(0);">菜单管理</a></li>
-						                    <li><a onclick="doPjax('#(ctx)/admin/user/getListPage')" href="javascript:void(0);">用户管理</a></li>
-						                    <li><a onclick="doPjax('#(ctx)/admin/org/getListPage')" href="javascript:void(0);">组织结构</a></li>
+						                    <li><a onclick="doPjax('#(ctx)/admin/sys/menu/getListPage')" href="javascript:void(0);">菜单管理</a></li>
+						                    <li><a onclick="doPjax('#(ctx)/admin/sys/user/getListPage')" href="javascript:void(0);">用户管理</a></li>
+						                    <li><a onclick="doPjax('#(ctx)/admin/sys/org/getListPage')" href="javascript:void(0);">组织结构</a></li>
 						                    <li><a href="#">岗位管理</a></li>
 						                </ul>
 						            </li>
@@ -110,7 +110,7 @@
 											<i class="arrow"></i>
 						                </a>
 						                <ul class="collapse">
-						                    <li><a onclick="doPjax('#(ctx)/admin/role/getListPage')" href="javascript:void(0);">角色管理</a></li>
+						                    <li><a onclick="doPjax('#(ctx)/admin/sys/role/getListPage')" href="javascript:void(0);">角色管理</a></li>
 						                </ul>
 						            </li>
 						            <li>

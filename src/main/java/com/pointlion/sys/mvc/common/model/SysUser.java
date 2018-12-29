@@ -1,6 +1,9 @@
 package com.pointlion.sys.mvc.common.model;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
@@ -8,6 +11,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.pointlion.sys.mvc.admin.oa.workflow.WorkFlowIdentityService;
 import com.pointlion.sys.mvc.common.model.base.BaseSysUser;
 import com.pointlion.sys.mvc.common.utils.Constants;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
@@ -19,6 +23,7 @@ import com.pointlion.sys.plugin.shiro.ShiroKit;
 @SuppressWarnings("serial")
 public class SysUser extends BaseSysUser<SysUser> {
 	public static final SysUser dao = new SysUser();
+	public static final WorkFlowIdentityService idService = WorkFlowIdentityService.me;
 	
 	/***
 	 * 根据主键获取用户名
@@ -41,7 +46,8 @@ public class SysUser extends BaseSysUser<SysUser> {
 	 * @return
 	 */
 	public SysUser getByUsername(String username){
-		return dao.findFirst("SELECT * from sys_user u where u.username='"+username+"'");
+		SysUser user =  dao.findFirst("SELECT * from sys_user u where u.username='"+username+"'");
+		return user;
 	}
 	
 	/***
@@ -59,7 +65,7 @@ public class SysUser extends BaseSysUser<SysUser> {
 	/***
 	 * 获取分页
 	 */
-	public Page<Record> getPage(int pnum,int psize, String orgid){
+	public Page<Record> getPage(int pnum,int psize, String orgid,String usernameSearch,String nameSearch){
 		String sql  = " from sys_user u LEFT JOIN sys_org o  on o.id = u.orgid  where 1=1 ";
 		if(!ShiroKit.getLoginUser().getUsername().equals("lion")){
 			sql = sql + " and u.username !='"+Constants.SUUUUUUUUUUUUUPER_USER_NAME+"' ";
@@ -67,8 +73,116 @@ public class SysUser extends BaseSysUser<SysUser> {
 		if(StrKit.notBlank(orgid)){
 			sql = sql + " and u.orgid='"+orgid+"' ";
 		}
-		sql = sql + " order by sort ";
+		if(StrKit.notBlank(usernameSearch)){
+			sql = sql + " and u.username like '%"+usernameSearch+"%' ";
+		}
+		if(StrKit.notBlank(nameSearch)){
+			sql = sql + " and u.name like '%"+nameSearch+"%' ";
+		}
+		sql = sql + " order by u.sort ";
 		return Db.paginate(pnum, psize, " select u.*,o.name orgname ", sql);
+	}
+	/***
+	 * 获取分页
+	 */
+	public Page<Record> getPageByRoleid(int pnum,int psize,String roleid){
+		String sql  = " from sys_user u , sys_user_role r  where r.user_id=u.id ";
+		if(!ShiroKit.getLoginUser().getUsername().equals("lion")){
+			sql = sql + " and u.username !='"+Constants.SUUUUUUUUUUUUUPER_USER_NAME+"' ";
+		}
+		sql = sql + " and r.role_id='"+roleid+"' ";//roleid不允许为空传进来！！！
+		sql = sql + " order by sort ";
+		Page<Record> page = Db.paginate(pnum, psize, " select u.* ", sql);
+		if(page!=null&&page.getList()!=null){
+			List<Record> list = page.getList();
+			for(Record r : list){
+				SysOrg org = SysOrg.dao.getById(r.getStr("orgid"));
+				if(org!=null){
+					r.set("orgname",org.getName());
+				}
+			}
+		}
+		return page;
+	}
+	/***
+	 * 根据组织机构id，和，角色id。
+	 * 查询某个机构下的拥有某角色的所有人
+	 * @return
+	 */
+	public List<SysUser> getUserByOrgidAndRoleId(String orgid,String roleid){
+		return dao.find("select u.* from sys_user u ,sys_org o,sys_user_role r where u.orgid=o.id and u.id=r.user_id and o.id='"+orgid+"' and r.role_id='"+roleid+"'");
+	}
+	/***
+	 * 根据组织机构key，和，角色id。
+	 * 查询某个机构下的拥有某角色的所有人
+	 * @return
+	 */
+	public List<SysUser> getUserByOrgidAndRoleKey(String orgid,String key){
+		String sql = "select u.* from sys_org o,sys_user_role ur,sys_role r,sys_user u where r.id=ur.role_id and ur.user_id=u.id and u.orgid=o.id and r.key='"+key+"' and u.orgid='"+orgid+"'";
+		return dao.find(sql);
+	}
+	/***
+	 * 递归往上
+	 */
+	public List<SysUser> getUserByOrgidAndRoleKey2(String orgid,String key){
+		List<SysUser> list = getUserByOrgidAndRoleKey(orgid,key);
+		if(list==null||list.size()==0){
+			SysOrg org = SysOrg.dao.getById(orgid);
+			if(org!=null&&!"#root".equals(org.getParentId())){
+				list = getUserByOrgidAndRoleKey2(org.getParentId(),key);
+			}
+		}
+		return list;
+	}
+	/***
+	 * 根据组织机构id，和，角色key。
+	 * 查询某个机构下的拥有某角色的所有人.
+	 * ！！！！！！！！！！！！！包含直属子机构的
+	 * @return
+	 */
+	public List<SysUser> getUserByOrgidAndRoleKeyForChildOrg(String orgid,String key){
+		List<SysUser> list = new ArrayList<SysUser>();
+		//自己的单位
+		List<SysUser> l = getUserByOrgidAndRoleKey(orgid,key);
+		if(l!=null&&l.size()>0){
+			list.addAll(l);
+		}
+		//自己单位下的所有的单位--包括自己公司下面的--其他子级的子公司
+		List<SysOrg> oList = SysOrg.dao.getChildrenAll(orgid);//分公司下所有单位
+		if(oList!=null){
+			for(SysOrg o : oList){
+				List<SysUser> ll = getUserByOrgidAndRoleKey(o.getId(),key);
+				if(ll!=null&&ll.size()>0){
+					list.addAll(ll);
+				}
+			}
+		}
+		return list;
+	}
+	/***
+	 * 根据组织机构id，和，角色key。
+	 * 查询某个机构下的拥有某角色的所有人.
+	 * ！！！！！！！！！！！！！包含直属子公司机构的（自己同级的子公司，不包括，自己下级的子公司）
+	 * @return
+	 */
+	public List<SysUser> getUserByOrgidAndRoleKeyForChildCompany(String orgid,String key){
+		List<SysUser> list = new ArrayList<SysUser>();
+		//自己的单位
+		List<SysUser> l = getUserByOrgidAndRoleKey(orgid,key);
+		if(l!=null&&l.size()>0){
+			list.addAll(l);
+		}
+		//同一个子公司下的单位
+		List<SysOrg> oList = SysOrg.dao.getChildCompanyList(orgid);//分公司下所有单位
+		if(oList!=null){
+			for(SysOrg o : oList){
+				List<SysUser> ll = getUserByOrgidAndRoleKey(o.getId(),key);
+				if(ll!=null&&ll.size()>0){
+					list.addAll(ll);
+				}
+			}
+		}
+		return list;
 	}
 	/***
 	 * 删除
@@ -79,6 +193,7 @@ public class SysUser extends BaseSysUser<SysUser> {
     	String idarr[] = ids.split(",");
     	for(String id : idarr){
     		SysUser o = SysUser.dao.getById(id);
+    		idService.deleteUser(o.getUsername());
     		o.delete();
     	}
 	}
@@ -89,7 +204,12 @@ public class SysUser extends BaseSysUser<SysUser> {
 	public Integer deleteRoleByUserid(String userid){
 		return Db.update("delete from sys_user_role  where user_id='"+userid+"'");
 	}
-	
+	/***
+	 * 获取某个角色下所有用户
+	 */
+	public List<SysUser> getUserByRoleKey(String key){
+		return SysUser.dao.find("select u.* from sys_user_role ur ,sys_user u ,sys_role r where r.id=ur.role_id and u.id=ur.user_id and r.key='"+key+"'");
+	}
 	/***
 	 * 给用户赋值角色
 	 * @param userid
@@ -97,14 +217,52 @@ public class SysUser extends BaseSysUser<SysUser> {
 	 */
 	@Before(Tx.class)
 	public void giveUserRole(String userid ,String roledata){
+		SysUser user = SysUser.dao.getById(userid);//用户
 		deleteRoleByUserid(userid);//删除用户下所有关系
 		String rolearr[] = roledata.split(",");
-    	for(String role : rolearr){//循环插入所有新关系
-    		SysUserRole ur = new SysUserRole();
-    		ur.setId(UuidUtil.getUUID());
-    		ur.setUserId(userid);
-    		ur.setRoleId(role);
-    		ur.save();
-    	}
+		if(rolearr[0].length()>0){//必定会有一个元素
+			idService.deleteUser(user.getUsername());//删掉用户
+			for(String roleid : rolearr){//循环插入所有新关系
+	    		SysRole role = SysRole.dao.findById(roleid);//角色
+	    		idService.createRelationShip(user.getUsername(), role.getKey());//没有用户会创建,没有角色会创建
+	    		SysUserRole ur = new SysUserRole();
+	    		ur.setId(UuidUtil.getUUID());
+	    		ur.setUserId(userid);
+	    		ur.setRoleId(roleid);
+	    		ur.save();
+	    	}
+		}else{
+			idService.deleteUserAllRole(user.getUsername());
+		}
+	}
+	
+	/****
+	 * id相连的字符串，转换成name
+	 * @return
+	 */
+	public String idStrToNameStr(String idstr ,String fliex){
+		if(StrKit.notBlank(idstr)){
+			String idarr[] = idstr.split(fliex);
+			List<String> result = new ArrayList<String>(); 
+			for(String id : idarr){
+				SysUser user = SysUser.dao.findById(id);
+				if(user!=null){
+					result.add(user.getName());
+				}else{
+					result.add("未知姓名");
+				}
+			}
+			return StringUtils.join(result,fliex);
+		}else{
+			return "";
+		}
+		
+	}
+	
+	/****
+	 * 获取所有用户
+	 */
+	public List<SysUser> getAllUser(){
+		return SysUser.dao.find("select * from sys_user u where u.username!='lion' order by u.name");
 	}
 }

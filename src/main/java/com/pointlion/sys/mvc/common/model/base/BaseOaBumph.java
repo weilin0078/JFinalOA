@@ -112,7 +112,14 @@ public abstract class BaseOaBumph<M extends BaseOaBumph<M>> extends Model<M> imp
 	public java.lang.String getIfComplete() {
 		return get("if_complete");
 	}
-
+	
+	public void setIfAgree(java.lang.String ifAgree) {
+		set("if_agree", ifAgree);
+	}
+	
+	public java.lang.String getIfAgree() {
+		return getStr("if_agree");
+	}
 	public void setDocNum(java.lang.String docNum) {
 		set("doc_num", docNum);
 	}

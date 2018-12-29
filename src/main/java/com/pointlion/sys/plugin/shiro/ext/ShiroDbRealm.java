@@ -82,9 +82,9 @@ public class ShiroDbRealm extends AuthorizingRealm {
         	return info;
         }
         List<SysMenu> authlist = SysRole.dao.getRoleAuthByUserid(user.getId(),null,null);
-	    for(SysMenu o :authlist){
-	    	if(StrKit.notBlank(o.getPermission())){
-	    		info.addStringPermission(o.getPermission());//获取资源名称
+	    for(SysMenu m :authlist){
+	    	if(StrKit.notBlank(m.getPermission())){
+	    		info.addStringPermission(m.getPermission());//获取资源名称
 	    	}
 	    }
         return info;
