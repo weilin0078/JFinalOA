@@ -22,7 +22,7 @@
 			var data = common_ajax.ajaxFunc("/admin/oa/apply/finance/save", $('#editForm').serialize(), "json", null);
 			if(data.success){
 				pointLion.alertMsg("保存成功!" , "success" , "small" , function(){
-					doPjax(ctx+'/admin/oa/apply/finance/getListPage?type=#(type)');//跳转到列表页
+					doPjax(ctx+'/admin/oa/apply/finance/getListPage');//跳转到列表页
 				},data);
 			}else{
 				pointLion.alertMsg(data.message , "danger" , "small" , function(){
@@ -43,14 +43,6 @@
 			$('.form_datetime').datepicker({format: 'yyyy-mm-dd',weekStart: 1,todayBtn:  1,autoclose: 1,language:  'zh-CN',todayHighlight: 1,forceParse: 0,showMeridian: 1});
 			$('#editForm').bootstrapValidator({
 	            fields: {
-	            	"#(formModelName).common_price":{
-						validators:{
-							regexp: {
-								regexp: /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/,
-								message: '金额只能是数字（最长两位小数）。'
-							}
-						}
-					},
 					"#(formModelName).contract_all_price":{
 						validators:{
 							regexp: {
@@ -84,54 +76,6 @@
 						}
 					},
 					"#(formModelName).to_now_sum_pay":{
-						validators:{
-							regexp: {
-								regexp: /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/,
-								message: '金额只能是数字（最长两位小数）。'
-							}
-						}
-					},
-					"#(formModelName).tax_price":{
-						validators:{
-							regexp: {
-								regexp: /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/,
-								message: '金额只能是数字（最长两位小数）。'
-							}
-						}
-					},
-					"#(formModelName).loan_sum_money":{
-						validators:{
-							regexp: {
-								regexp: /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/,
-								message: '金额只能是数字（最长两位小数）。'
-							}
-						}
-					},
-					"#(formModelName).load_sum_give_money":{
-						validators:{
-							regexp: {
-								regexp: /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/,
-								message: '金额只能是数字（最长两位小数）。'
-							}
-						}
-					},
-					"#(formModelName).to_bofore_sum_back_money":{
-						validators:{
-							regexp: {
-								regexp: /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/,
-								message: '金额只能是数字（最长两位小数）。'
-							}
-						}
-					},
-					"#(formModelName).now_apply_back_money":{
-						validators:{
-							regexp: {
-								regexp: /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/,
-								message: '金额只能是数字（最长两位小数）。'
-							}
-						}
-					},
-					"#(formModelName).to_now_sum_back_money":{
 						validators:{
 							regexp: {
 								regexp: /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/,
