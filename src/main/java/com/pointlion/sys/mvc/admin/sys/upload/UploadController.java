@@ -8,12 +8,10 @@ package com.pointlion.sys.mvc.admin.sys.upload;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.jfinal.upload.UploadFile;
 import com.pointlion.sys.mvc.common.base.BaseController;
-import com.pointlion.sys.mvc.common.utils.office.excel.ExcelUtil;
 
 /***
  * 通知公告控制器（web）
