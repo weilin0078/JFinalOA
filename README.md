@@ -1,8 +1,10 @@
+
+有兴趣请帮点一下Star，谢谢支持。
+
 qq:439635374
 
 qq交流群号：136981051
 
-有兴趣请帮点一下Star，谢谢支持
 
 码云地址：http://git.oschina.net/glorylion/JFinalOA
 
@@ -32,27 +34,27 @@ qq交流群号：136981051
  **3.部分截图**
 
 登录
-![输入图片说明](https://static.oschina.net/uploads/space/2018/0429/022852_aPue_2412577.png "在这里输入图片标题")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0114/095251_f70c0376_868436.png "在这里输入图片标题")
 首页
-![输入图片说明](https://static.oschina.net/uploads/space/2018/0429/022945_Sw9P_2412577.png "在这里输入图片标题")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0114/095253_5ff7c61e_868436.png "在这里输入图片标题")
 即时通讯
-![输入图片说明](https://static.oschina.net/uploads/space/2018/0429/023054_NkcF_2412577.png "在这里输入图片标题")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0114/095251_9761cd0e_868436.png "在这里输入图片标题")
 UI
-![输入图片说明](https://static.oschina.net/uploads/space/2018/0429/023118_jV9g_2412577.png "在这里输入图片标题")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0114/095251_89761846_868436.png "在这里输入图片标题")
 公文DEMO
-![输入图片说明](https://static.oschina.net/uploads/space/2018/0429/023152_N71P_2412577.png "在这里输入图片标题")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0114/095251_fce70eef_868436.png "在这里输入图片标题")
 流转历史
-![输入图片说明](https://static.oschina.net/uploads/space/2018/0429/023216_BZm4_2412577.png "在这里输入图片标题")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0114/095251_af8a034f_868436.png "在这里输入图片标题")
 流程跟踪
-![输入图片说明](https://static.oschina.net/uploads/space/2018/0429/023306_HDBM_2412577.png "在这里输入图片标题")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0114/095252_fcce3784_868436.png "在这里输入图片标题")
 菜单管理
-![输入图片说明](https://static.oschina.net/uploads/space/2018/0429/023342_CvFs_2412577.png "在这里输入图片标题")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0114/095252_3d7d1e64_868436.png "在这里输入图片标题")
 用户管理
-![输入图片说明](https://static.oschina.net/uploads/space/2018/0429/023405_XZ8U_2412577.png "在这里输入图片标题")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0114/095252_34434dc4_868436.png "在这里输入图片标题")
 流程管理
-![输入图片说明](https://static.oschina.net/uploads/space/2018/0429/023428_fw9m_2412577.png "在这里输入图片标题")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0114/095252_763b9834_868436.png "在这里输入图片标题")
 流程编辑
-![输入图片说明](https://static.oschina.net/uploads/space/2018/0429/023453_F2Ft_2412577.png "在这里输入图片标题")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0114/095252_c1cba53c_868436.png "在这里输入图片标题")
 代码生成
-![输入图片说明](https://static.oschina.net/uploads/space/2018/0429/023512_u7sQ_2412577.png "在这里输入图片标题")
+![输入图片说明](https://images.gitee.com/uploads/images/2019/0114/095252_5ce7189b_868436.png "在这里输入图片标题")
 
