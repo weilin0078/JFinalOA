@@ -1,25 +1,15 @@
 package com.pointlion.sys.plugin.quartz;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import org.quartz.CronScheduleBuilder;
-import org.quartz.CronTrigger;
-import org.quartz.Job;
-import org.quartz.JobBuilder;
-import org.quartz.JobDetail;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.SchedulerFactory;
-import org.quartz.TriggerBuilder;
-import org.quartz.TriggerKey;
-import org.quartz.impl.StdSchedulerFactory;
-
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.IPlugin;
 import com.pointlion.sys.plugin.quartz.bean.JobBean;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**  
  * @Description: TODO

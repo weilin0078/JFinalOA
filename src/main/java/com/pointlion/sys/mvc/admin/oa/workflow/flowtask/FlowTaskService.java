@@ -1,11 +1,11 @@
 package com.pointlion.sys.mvc.admin.oa.workflow.flowtask;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.sys.mvc.admin.oa.workflow.WorkFlowUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FlowTaskService{
 	public static final FlowTaskService me = new FlowTaskService();

@@ -1,12 +1,12 @@
 package com.pointlion.sys.interceptor;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainPageTitleInterceptor implements Interceptor {
 	public Map<String,String> pageTitleBread(){

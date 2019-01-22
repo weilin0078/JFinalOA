@@ -1,10 +1,9 @@
 package com.pointlion.sys.plugin.mail.core;
 
-import java.io.InputStream;
+import com.pointlion.sys.plugin.mail.exception.MailException;
 
 import javax.mail.internet.MimeMessage;
-
-import com.pointlion.sys.plugin.mail.exception.MailException;
+import java.io.InputStream;
 
 
 public interface JavaMailSender extends MailSender {

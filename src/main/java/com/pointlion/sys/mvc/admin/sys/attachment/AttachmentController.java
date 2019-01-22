@@ -1,9 +1,5 @@
 package com.pointlion.sys.mvc.admin.sys.attachment;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
@@ -16,6 +12,10 @@ import com.pointlion.sys.mvc.common.model.SysUser;
 import com.pointlion.sys.mvc.common.utils.DateUtil;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 @Before(MainPageTitleInterceptor.class)
 public class AttachmentController extends BaseController {

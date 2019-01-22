@@ -3,10 +3,6 @@
  */
 package com.pointlion.sys.mvc.admin.sys.role;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
@@ -19,6 +15,10 @@ import com.pointlion.sys.mvc.common.model.SysUser;
 import com.pointlion.sys.mvc.common.model.SysUserRole;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Lion

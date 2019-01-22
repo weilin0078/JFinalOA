@@ -1,7 +1,5 @@
 package com.pointlion.sys.mvc.admin.oa.notice;
 
-import java.util.List;
-
 import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
@@ -13,6 +11,8 @@ import com.pointlion.sys.mvc.common.model.SysUser;
 import com.pointlion.sys.mvc.common.utils.DateUtil;
 import com.pointlion.sys.mvc.common.utils.StringUtil;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
+
+import java.util.List;
 
 /***
  * web端通知公告调用服务

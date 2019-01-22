@@ -1,10 +1,10 @@
 package com.pointlion.sys.plugin.mail.core;
 
+import javax.activation.FileTypeMap;
+import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import javax.activation.FileTypeMap;
-import javax.activation.MimetypesFileTypeMap;
 
 /**
  * 

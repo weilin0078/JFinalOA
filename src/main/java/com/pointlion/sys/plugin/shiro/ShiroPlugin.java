@@ -15,6 +15,13 @@
  */
 package com.pointlion.sys.plugin.shiro;
 
+import com.jfinal.config.Routes;
+import com.jfinal.config.Routes.Route;
+import com.jfinal.core.ActionKey;
+import com.jfinal.core.Controller;
+import com.jfinal.plugin.IPlugin;
+import org.apache.shiro.authz.annotation.*;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -23,18 +30,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresGuest;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.apache.shiro.authz.annotation.RequiresUser;
-
-import com.jfinal.config.Routes;
-import com.jfinal.config.Routes.Route;
-import com.jfinal.core.ActionKey;
-import com.jfinal.core.Controller;
-import com.jfinal.plugin.IPlugin;
 
 /**
  * Shiro插件，启动时加载所有Shiro访问控制注解。

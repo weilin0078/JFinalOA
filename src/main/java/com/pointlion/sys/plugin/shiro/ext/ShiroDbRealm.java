@@ -1,13 +1,11 @@
 package com.pointlion.sys.plugin.shiro.ext;
 
-import java.util.List;
-
+import com.jfinal.kit.StrKit;
+import com.pointlion.sys.mvc.common.model.SysMenu;
+import com.pointlion.sys.mvc.common.model.SysRole;
+import com.pointlion.sys.mvc.common.model.SysUser;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.authc.credential.PasswordService;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -19,10 +17,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
-import com.jfinal.kit.StrKit;
-import com.pointlion.sys.mvc.common.model.SysMenu;
-import com.pointlion.sys.mvc.common.model.SysRole;
-import com.pointlion.sys.mvc.common.model.SysUser;
+import java.util.List;
 
 
 public class ShiroDbRealm extends AuthorizingRealm {

@@ -13,22 +13,6 @@
 
 package com.pointlion.sys.mvc.admin.oa.workflow.rest;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import org.activiti.engine.HistoryService;
-import org.activiti.engine.ProcessEngine;
-import org.activiti.engine.RepositoryService;
-import org.activiti.engine.RuntimeService;
-import org.activiti.engine.history.HistoricActivityInstance;
-import org.activiti.engine.history.HistoricProcessInstance;
-import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
-import org.activiti.engine.impl.pvm.PvmTransition;
-import org.activiti.engine.impl.pvm.process.ActivityImpl;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -36,6 +20,24 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.sys.plugin.activiti.ActivitiPlugin;
+/*import org.activiti.engine.HistoryService;
+import org.activiti.engine.ProcessEngine;
+import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
+import org.activiti.engine.history.HistoricActivityInstance;
+import org.activiti.engine.history.HistoricProcessInstance;
+import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
+import org.activiti.engine.impl.pvm.PvmTransition;
+import org.activiti.engine.impl.pvm.process.ActivityImpl;*/
+import org.flowable.engine.HistoryService;
+import org.flowable.engine.ProcessEngine;
+import org.flowable.engine.RepositoryService;
+import org.flowable.engine.RuntimeService;
+import org.flowable.engine.history.HistoricActivityInstance;
+import org.flowable.engine.history.HistoricProcessInstance;
+import org.flowable.engine.impl.persistence.entity.ProcessDefinitionEntity;
+
+import java.util.*;
 
 public class ProcessInstanceHighlightsResource extends Controller{
 	private ProcessEngine pEngine = ActivitiPlugin.buildProcessEngine();
@@ -100,7 +102,7 @@ public class ProcessInstanceHighlightsResource extends Controller{
     LinkedList<HistoricActivityInstance> hisActInstList = new LinkedList<HistoricActivityInstance>();
     hisActInstList.addAll(historicActivityInstances);
       
-    getHighlightedFlows(processDefinition.getActivities(), hisActInstList, highLightedFlows);
+    getHighlightedFlows(processDefinition.get.getActivities(), hisActInstList, highLightedFlows);
     
     return highLightedFlows;
 	}

@@ -1,8 +1,8 @@
 package com.pointlion.sys.mvc.common.utils.office.excel;
 
-import java.text.DecimalFormat;
-
 import org.apache.poi.ss.usermodel.Cell;
+
+import java.text.DecimalFormat;
 
 public class DbImportExcelUtils {
 	@SuppressWarnings("deprecation")

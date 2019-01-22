@@ -5,6 +5,15 @@
  */
 package com.pointlion.sys.mvc.admin.sys.login;
 
+import com.jfinal.aop.Before;
+import com.pointlion.sys.mvc.common.base.BaseController;
+import com.pointlion.sys.mvc.common.model.SysCustomSetting;
+import com.pointlion.sys.mvc.common.model.SysUser;
+import com.pointlion.sys.plugin.shiro.ShiroKit;
+import com.pointlion.sys.plugin.shiro.ext.CaptchaFormAuthenticationInterceptor;
+import com.pointlion.sys.plugin.shiro.ext.CaptchaRender;
+import com.pointlion.sys.plugin.shiro.ext.CaptchaUsernamePasswordToken;
+import com.pointlion.sys.plugin.shiro.ext.IncorrectCaptchaException;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -15,16 +24,6 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ThreadContext;
-
-import com.jfinal.aop.Before;
-import com.pointlion.sys.mvc.common.base.BaseController;
-import com.pointlion.sys.mvc.common.model.SysCustomSetting;
-import com.pointlion.sys.mvc.common.model.SysUser;
-import com.pointlion.sys.plugin.shiro.ShiroKit;
-import com.pointlion.sys.plugin.shiro.ext.CaptchaFormAuthenticationInterceptor;
-import com.pointlion.sys.plugin.shiro.ext.CaptchaRender;
-import com.pointlion.sys.plugin.shiro.ext.CaptchaUsernamePasswordToken;
-import com.pointlion.sys.plugin.shiro.ext.IncorrectCaptchaException;
 
 
 public class LoginController extends BaseController {

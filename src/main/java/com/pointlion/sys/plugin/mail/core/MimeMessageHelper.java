@@ -1,9 +1,5 @@
 package com.pointlion.sys.plugin.mail.core;
 
-import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
-
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -11,12 +7,10 @@ import javax.activation.FileTypeMap;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.internet.MimePart;
+import javax.mail.internet.*;
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 
 /**
  * 

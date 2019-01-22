@@ -3,11 +3,6 @@
  */
 package com.pointlion.sys.mvc.admin.oa.workflow.model;
 
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
 import com.pointlion.sys.interceptor.MainPageTitleInterceptor;
@@ -17,6 +12,11 @@ import com.pointlion.sys.mvc.common.base.BaseController;
 import com.pointlion.sys.mvc.common.model.ActReModel;
 import com.pointlion.sys.mvc.common.model.SysDct;
 import com.pointlion.sys.plugin.activiti.ActivitiPlugin;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Lion

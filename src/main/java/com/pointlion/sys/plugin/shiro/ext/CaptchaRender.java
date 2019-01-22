@@ -16,19 +16,16 @@
 
 package com.pointlion.sys.plugin.shiro.ext;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
+import com.jfinal.kit.StrKit;
+import com.jfinal.render.Render;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.util.Random;
-
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-
-import com.jfinal.kit.StrKit;
-import com.jfinal.render.Render;
 
 /**
  * 验证码Render，这个验证码Render在构造函数里就已经创建好了随机码以及md5散列后的随机码。

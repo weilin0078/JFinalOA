@@ -1,16 +1,15 @@
 package com.pointlion.sys.mvc.admin.oa.common;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
-
 import com.jfinal.core.Controller;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.pointlion.sys.mvc.common.model.OaFlowCarbonC;
 import com.pointlion.sys.mvc.common.utils.DateUtil;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
+import org.apache.commons.lang.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FlowCCService {
 	public static final FlowCCService me = new FlowCCService();

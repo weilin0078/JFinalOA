@@ -1,12 +1,11 @@
 package com.pointlion.sys.plugin.quartz.task;
 
+import com.jfinal.kit.PropKit;
+import com.jfinal.plugin.activerecord.Db;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.jfinal.kit.PropKit;
-import com.jfinal.plugin.activerecord.Db;
 
 /**  
  * @Description: 定时爬取政策文件 , 定时任务执行类

@@ -1,43 +1,5 @@
 package com.pointlion.sys.mvc.admin.oa.workflow;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-
-import org.activiti.bpmn.converter.BpmnXMLConverter;
-import org.activiti.bpmn.model.BpmnModel;
-import org.activiti.editor.constants.ModelDataJsonConstants;
-import org.activiti.editor.language.json.converter.BpmnJsonConverter;
-import org.activiti.engine.ActivitiException;
-import org.activiti.engine.HistoryService;
-import org.activiti.engine.ProcessEngine;
-import org.activiti.engine.RepositoryService;
-import org.activiti.engine.RuntimeService;
-import org.activiti.engine.TaskService;
-import org.activiti.engine.history.HistoricTaskInstance;
-import org.activiti.engine.impl.RepositoryServiceImpl;
-import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
-import org.activiti.engine.impl.pvm.PvmActivity;
-import org.activiti.engine.impl.pvm.PvmTransition;
-import org.activiti.engine.impl.pvm.process.ActivityImpl;
-import org.activiti.engine.impl.pvm.process.ProcessDefinitionImpl;
-import org.activiti.engine.impl.pvm.process.TransitionImpl;
-import org.activiti.engine.repository.Deployment;
-import org.activiti.engine.repository.Model;
-import org.activiti.engine.repository.ProcessDefinition;
-import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.task.Task;
-import org.apache.commons.lang3.StringUtils;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -56,6 +18,48 @@ import com.pointlion.sys.mvc.common.utils.Constants;
 import com.pointlion.sys.mvc.common.utils.DateUtil;
 import com.pointlion.sys.plugin.activiti.ActivitiPlugin;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
+//import org.activiti.bpmn.converter.BpmnXMLConverter;
+//import org.activiti.bpmn.model.BpmnModel;
+//import org.activiti.editor.constants.ModelDataJsonConstants;
+//import org.activiti.editor.language.json.converter.BpmnJsonConverter;
+//import org.activiti.engine.*;
+//import org.activiti.engine.history.HistoricTaskInstance;
+//import org.activiti.engine.impl.RepositoryServiceImpl;
+//import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
+//import org.activiti.engine.impl.pvm.PvmActivity;
+//import org.activiti.engine.impl.pvm.PvmTransition;
+//import org.activiti.engine.impl.pvm.process.ActivityImpl;
+//import org.activiti.engine.impl.pvm.process.ProcessDefinitionImpl;
+//import org.activiti.engine.impl.pvm.process.TransitionImpl;
+//import org.activiti.engine.repository.Deployment;
+//import org.activiti.engine.repository.Model;
+//import org.activiti.engine.repository.ProcessDefinition;
+//import org.activiti.engine.runtime.ProcessInstance;
+//import org.activiti.engine.task.Task;
+import org.apache.commons.lang3.StringUtils;
+import org.flowable.bpmn.converter.BpmnXMLConverter;
+import org.flowable.bpmn.model.BpmnModel;
+import org.flowable.common.engine.api.FlowableException;
+import org.flowable.editor.constants.ModelDataJsonConstants;
+import org.flowable.editor.language.json.converter.BpmnJsonConverter;
+import org.flowable.engine.*;
+import org.flowable.engine.repository.Deployment;
+import org.flowable.engine.repository.Model;
+import org.flowable.engine.repository.ProcessDefinition;
+import org.flowable.engine.runtime.ProcessInstance;
+import org.flowable.task.api.history.HistoricTaskInstance;
+
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class WorkFlowService {
 	public static final WorkFlowService me = new WorkFlowService();
@@ -63,7 +67,7 @@ public class WorkFlowService {
 	 * 创建新模型
 	 * @throws UnsupportedEncodingException 
 	 * */
-	public void createModel(ProcessEngine pe,String name,String key) throws UnsupportedEncodingException{
+	public void createModel(ProcessEngine pe, String name, String key) throws UnsupportedEncodingException{
 		RepositoryService repositoryService = pe.getRepositoryService();
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode editorNode = objectMapper.createObjectNode();
@@ -98,7 +102,7 @@ public class WorkFlowService {
 		try {
 			ProcessEngine pe = ActivitiPlugin.buildProcessEngine();
 			RepositoryService repositoryService = pe.getRepositoryService();
-			org.activiti.engine.repository.Model modelData = repositoryService.getModel(id);
+			org.flowable.engine.repository.Model modelData = repositoryService.getModel(id);
 			BpmnJsonConverter jsonConverter = new BpmnJsonConverter();
 			JsonNode editorNode = new ObjectMapper().readTree(repositoryService.getModelEditorSource(modelData.getId()));
 			BpmnModel bpmnModel = jsonConverter.convertToBpmnModel(editorNode);
@@ -125,7 +129,7 @@ public class WorkFlowService {
 				message = "部署失败，没有流程。";
 			}
 		} catch (Exception e) {
-			throw new ActivitiException("设计模型图不正确，检查模型正确性", e);
+			throw new FlowableException("设计模型图不正确，检查模型正确性", e);
 		}
 		return message;
 	}
@@ -211,7 +215,7 @@ public class WorkFlowService {
 	
 		BpmnJsonConverter converter = new BpmnJsonConverter();
 		ObjectNode modelNode = converter.convertToJson(bpmnModel);
-		org.activiti.engine.repository.Model modelData = repositoryService.newModel();
+		org.flowable.engine.repository.Model modelData = repositoryService.newModel();
 		modelData.setKey(processDefinition.getKey());
 		modelData.setName(processDefinition.getName());
 		modelData.setCategory(processDefinition.getCategory());//.getDeploymentId());
@@ -233,9 +237,11 @@ public class WorkFlowService {
 	
 	/**
 	 * 读取资源，通过部署ID
-	 * @param processDefinitionId  流程定义ID
-	 * @param processInstanceId 流程实例ID
-	 * @param resourceType 资源类型(xml|image)
+	 * @param procDefId
+	 * @param proInsId
+	 * @param resType
+	 * @return
+	 * @throws Exception
 	 */
 	public InputStream resourceRead(String procDefId, String proInsId, String resType) throws Exception {
 		RuntimeService runtimeService = ActivitiPlugin.buildProcessEngine().getRuntimeService();
@@ -277,14 +283,14 @@ public class WorkFlowService {
 			}
 		}
 	}
+	
 	/**
 	 * 启动流程
 	 * @param id
-	 * @param defKey
+	 * @param m
 	 * @param title
 	 * @param var
 	 * @return
-	 * @throws Exception 
 	 */
 	@SuppressWarnings("rawtypes")
 	public String startProcess(String id,com.jfinal.plugin.activerecord.Model m,String title,Map<String, Object> var){
@@ -593,67 +599,67 @@ public class WorkFlowService {
 	/***
 	 * 流程取回
 	 */
-	public void callBackTask(String taskId){
-		ProcessEngine pe =  ActivitiPlugin.buildProcessEngine();
-		HistoryService historyService = pe.getHistoryService();
-		RuntimeService runTimeService = pe.getRuntimeService();
-		RepositoryService repositoryService = pe.getRepositoryService();
-		TaskService taskService = pe.getTaskService();
-		try {
-            Map<String, Object> variables;
-            // 取得当前任务
-            HistoricTaskInstance currTask =historyService.createHistoricTaskInstanceQuery().taskId(taskId).singleResult();
-            // 取得流程实例
-            ProcessInstance instance = runTimeService.createProcessInstanceQuery().processInstanceId(currTask.getProcessInstanceId()).singleResult();
-            if (instance == null) {
-//                log.error("流程已经结束");
-            }
-            variables=instance.getProcessVariables();
-            // 取得流程定义
-            ProcessDefinitionEntity definition = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService).getDeployedProcessDefinition(currTask.getProcessDefinitionId());
-            if (definition == null) {
-//                log.error("流程定义未找到");
-            }
-            // 取得下一步活动
-            ActivityImpl currActivity = ((ProcessDefinitionImpl) definition).findActivity(currTask.getTaskDefinitionKey());
-            List<PvmTransition> nextTransitionList = currActivity.getOutgoingTransitions();
-            for (PvmTransition nextTransition : nextTransitionList) {
-                PvmActivity nextActivity = nextTransition.getDestination();
-                List<HistoricTaskInstance> completeTasks = historyService.createHistoricTaskInstanceQuery().processInstanceId(instance.getId()).taskDefinitionKey(nextActivity.getId()).finished().list();
-                int finished = completeTasks.size();
-                if (finished > 0) {
-//                    log.error("存在已经完成的下一步，流程不能取回");
-                }
-                List<Task> nextTasks = taskService.createTaskQuery().processInstanceId(instance.getId()).taskDefinitionKey(nextActivity.getId()).list();
-                for (Task nextTask : nextTasks) {
-                    //取活动，清除活动方向
-                    List<PvmTransition> oriPvmTransitionList = new ArrayList<PvmTransition>();
-                    List<PvmTransition> pvmTransitionList = nextActivity.getOutgoingTransitions();
-                    for (PvmTransition pvmTransition : pvmTransitionList) {
-                        oriPvmTransitionList.add(pvmTransition);
-                    }
-                    pvmTransitionList.clear();
-                    //建立新方向
-                    ActivityImpl nextActivityImpl = ((ProcessDefinitionImpl) definition).findActivity(nextTask.getTaskDefinitionKey());
-                    TransitionImpl newTransition = nextActivityImpl.createOutgoingTransition();
-                    newTransition.setDestination(currActivity);
-                    //完成任务
-                    taskService.complete(nextTask.getId(), variables);
-                    historyService.deleteHistoricTaskInstance(nextTask.getId());
-                    //恢复方向
-                    currActivity.getIncomingTransitions().remove(newTransition);
-                    List<PvmTransition> pvmTList = nextActivity.getOutgoingTransitions();
-                    pvmTList.clear();
-                    for (PvmTransition pvmTransition : oriPvmTransitionList) {
-                        pvmTransitionList.add(pvmTransition);
-                    }
-                }
-            }
-            historyService.deleteHistoricTaskInstance(currTask.getId());
-        } catch (Exception e) {
-        	e.printStackTrace();
-        }
-	}
+//	public void callBackTask(String taskId){
+//		ProcessEngine pe =  ActivitiPlugin.buildProcessEngine();
+//		HistoryService historyService = pe.getHistoryService();
+//		RuntimeService runTimeService = pe.getRuntimeService();
+//		RepositoryService repositoryService = pe.getRepositoryService();
+//		TaskService taskService = pe.getTaskService();
+//		try {
+//            Map<String, Object> variables;
+//            // 取得当前任务
+//            HistoricTaskInstance currTask =historyService.createHistoricTaskInstanceQuery().taskId(taskId).singleResult();
+//            // 取得流程实例
+//            ProcessInstance instance = runTimeService.createProcessInstanceQuery().processInstanceId(currTask.getProcessInstanceId()).singleResult();
+//            if (instance == null) {
+////                log.error("流程已经结束");
+//            }
+//            variables=instance.getProcessVariables();
+//            // 取得流程定义
+//            ProcessDefinitionEntity definition = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService).getDeployedProcessDefinition(currTask.getProcessDefinitionId());
+//            if (definition == null) {
+////                log.error("流程定义未找到");
+//            }
+//            // 取得下一步活动
+//            ActivityImpl currActivity = ((ProcessDefinitionImpl) definition).findActivity(currTask.getTaskDefinitionKey());
+//            List<PvmTransition> nextTransitionList = currActivity.getOutgoingTransitions();
+//            for (PvmTransition nextTransition : nextTransitionList) {
+//                PvmActivity nextActivity = nextTransition.getDestination();
+//                List<HistoricTaskInstance> completeTasks = historyService.createHistoricTaskInstanceQuery().processInstanceId(instance.getId()).taskDefinitionKey(nextActivity.getId()).finished().list();
+//                int finished = completeTasks.size();
+//                if (finished > 0) {
+////                    log.error("存在已经完成的下一步，流程不能取回");
+//                }
+//                List<Task> nextTasks = taskService.createTaskQuery().processInstanceId(instance.getId()).taskDefinitionKey(nextActivity.getId()).list();
+//                for (Task nextTask : nextTasks) {
+//                    //取活动，清除活动方向
+//                    List<PvmTransition> oriPvmTransitionList = new ArrayList<PvmTransition>();
+//                    List<PvmTransition> pvmTransitionList = nextActivity.getOutgoingTransitions();
+//                    for (PvmTransition pvmTransition : pvmTransitionList) {
+//                        oriPvmTransitionList.add(pvmTransition);
+//                    }
+//                    pvmTransitionList.clear();
+//                    //建立新方向
+//                    ActivityImpl nextActivityImpl = ((ProcessDefinitionImpl) definition).findActivity(nextTask.getTaskDefinitionKey());
+//                    TransitionImpl newTransition = nextActivityImpl.createOutgoingTransition();
+//                    newTransition.setDestination(currActivity);
+//                    //完成任务
+//                    taskService.complete(nextTask.getId(), variables);
+//                    historyService.deleteHistoricTaskInstance(nextTask.getId());
+//                    //恢复方向
+//                    currActivity.getIncomingTransitions().remove(newTransition);
+//                    List<PvmTransition> pvmTList = nextActivity.getOutgoingTransitions();
+//                    pvmTList.clear();
+//                    for (PvmTransition pvmTransition : oriPvmTransitionList) {
+//                        pvmTransitionList.add(pvmTransition);
+//                    }
+//                }
+//            }
+//            historyService.deleteHistoricTaskInstance(currTask.getId());
+//        } catch (Exception e) {
+//        	e.printStackTrace();
+//        }
+//	}
 	
 	
 	/***

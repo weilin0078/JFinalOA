@@ -15,9 +15,9 @@
  */
 package com.pointlion.sys.plugin.shiro;
 
-import java.util.List;
-
 import org.apache.shiro.authz.AuthorizationException;
+
+import java.util.List;
 
 /**
  * 组合模式访问控制处理器

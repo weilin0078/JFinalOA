@@ -5,11 +5,6 @@
  */
 package com.pointlion.sys.mvc.admin.sys.org;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
@@ -22,6 +17,11 @@ import com.pointlion.sys.mvc.common.model.SysRole;
 import com.pointlion.sys.mvc.common.utils.ContextUtil;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /***
  * 菜单管理控制器

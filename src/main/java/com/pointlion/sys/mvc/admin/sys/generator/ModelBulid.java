@@ -1,11 +1,11 @@
 package com.pointlion.sys.mvc.admin.sys.generator;
- 
-import javax.sql.DataSource;
- 
+
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.dialect.OracleDialect;
 import com.jfinal.plugin.activerecord.dialect.SqlServerDialect;
 import com.jfinal.plugin.activerecord.generator.MetaBuilder;
+
+import javax.sql.DataSource;
  
 public class ModelBulid extends MetaBuilder{
 	

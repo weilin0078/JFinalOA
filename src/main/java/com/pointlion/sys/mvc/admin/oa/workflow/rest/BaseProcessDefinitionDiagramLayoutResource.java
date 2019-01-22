@@ -13,18 +13,26 @@
 
 package com.pointlion.sys.mvc.admin.oa.workflow.rest;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.jfinal.core.Controller;
+import com.pointlion.sys.plugin.activiti.ActivitiPlugin;
+import org.apache.commons.lang3.StringUtils;
+import org.flowable.common.engine.api.FlowableException;
+import org.flowable.common.engine.api.FlowableObjectNotFoundException;
+import org.flowable.engine.HistoryService;
+import org.flowable.engine.ProcessEngine;
+import org.flowable.engine.RepositoryService;
+import org.flowable.engine.RuntimeService;
+import org.flowable.engine.impl.persistence.entity.ExecutionEntity;
+import org.flowable.engine.impl.persistence.entity.ProcessDefinitionEntity;
+import org.flowable.engine.runtime.ProcessInstance;
 
-import org.activiti.engine.ActivitiException;
-import org.activiti.engine.ActivitiObjectNotFoundException;
-import org.activiti.engine.HistoryService;
-import org.activiti.engine.ProcessEngine;
-import org.activiti.engine.RepositoryService;
-import org.activiti.engine.RuntimeService;
+import java.util.*;
+
+/*import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.impl.bpmn.behavior.BoundaryEventActivityBehavior;
 import org.activiti.engine.impl.bpmn.behavior.CallActivityBehavior;
@@ -36,22 +44,10 @@ import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.pvm.PvmTransition;
 import org.activiti.engine.impl.pvm.delegate.ActivityBehavior;
-import org.activiti.engine.impl.pvm.process.ActivityImpl;
-import org.activiti.engine.impl.pvm.process.Lane;
-import org.activiti.engine.impl.pvm.process.LaneSet;
-import org.activiti.engine.impl.pvm.process.ParticipantProcess;
-import org.activiti.engine.impl.pvm.process.TransitionImpl;
+import org.activiti.engine.impl.pvm.process.*;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.Execution;
-import org.activiti.engine.runtime.ProcessInstance;
-import org.apache.commons.lang3.StringUtils;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.jfinal.core.Controller;
-import com.pointlion.sys.plugin.activiti.ActivitiPlugin;
+import org.activiti.engine.runtime.ProcessInstance;*/
 
 public class BaseProcessDefinitionDiagramLayoutResource extends Controller {
   private ProcessEngine pEngine = ActivitiPlugin.buildProcessEngine();
@@ -73,7 +69,7 @@ public class BaseProcessDefinitionDiagramLayoutResource extends Controller {
     if (processInstanceId != null) {
       processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
       if (processInstance == null) {
-        throw new ActivitiObjectNotFoundException("Process instance could not be found");
+        throw new FlowableObjectNotFoundException("Process instance could not be found");
       }
       processDefinitionId = processInstance.getProcessDefinitionId();
 
@@ -100,13 +96,13 @@ public class BaseProcessDefinitionDiagramLayoutResource extends Controller {
     }
 
     if (processDefinitionId == null) {
-      throw new ActivitiObjectNotFoundException("No process definition id provided");
+      throw new FlowableObjectNotFoundException("No process definition id provided");
     }
 
     ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) repositoryService.getProcessDefinition(processDefinitionId);
 
     if (processDefinition == null) {
-      throw new ActivitiException("Process definition " + processDefinitionId + " could not be found");
+      throw new FlowableException("Process definition " + processDefinitionId + " could not be found");
     }
 
     ObjectNode responseJSON = new ObjectMapper().createObjectNode();

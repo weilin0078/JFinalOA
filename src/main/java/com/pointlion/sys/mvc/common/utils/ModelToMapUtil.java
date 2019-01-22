@@ -1,12 +1,12 @@
 package com.pointlion.sys.mvc.common.utils;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jfinal.plugin.activerecord.Model;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class ModelToMapUtil {
 	/**

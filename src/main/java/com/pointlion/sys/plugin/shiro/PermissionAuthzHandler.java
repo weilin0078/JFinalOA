@@ -15,12 +15,12 @@
  */
 package com.pointlion.sys.plugin.shiro;
 
-import java.lang.annotation.Annotation;
-
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
+
+import java.lang.annotation.Annotation;
 
 /**
  * 基于权限的访问控制处理器，非单例模式运行。

@@ -1,9 +1,5 @@
 package com.pointlion.sys.mvc.admin.sys.dataauth;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
@@ -15,6 +11,10 @@ import com.pointlion.sys.mvc.common.model.SysDataAuth;
 import com.pointlion.sys.mvc.common.model.SysRole;
 import com.pointlion.sys.mvc.common.utils.StringUtil;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 

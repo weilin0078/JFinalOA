@@ -1,8 +1,5 @@
 package com.pointlion.sys.interceptor;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
@@ -12,8 +9,10 @@ import com.pointlion.sys.mvc.common.model.SysLog;
 import com.pointlion.sys.mvc.common.utils.DateUtil;
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
-
 import net.sf.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ExceptionInterceptor implements Interceptor {
     @Override

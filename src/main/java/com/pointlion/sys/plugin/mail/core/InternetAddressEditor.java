@@ -1,9 +1,8 @@
 package com.pointlion.sys.plugin.mail.core;
 
-import java.beans.PropertyEditorSupport;
-
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import java.beans.PropertyEditorSupport;
 
 /**
  * 

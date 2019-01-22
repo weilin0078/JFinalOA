@@ -5,14 +5,14 @@
  */
 package com.pointlion.sys.handler;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.jfinal.core.Action;
 import com.jfinal.core.JFinal;
 import com.jfinal.handler.Handler;
 import com.jfinal.render.RenderManager;
 import com.pointlion.sys.mvc.common.utils.ContextUtil;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 /**
  * 全局Handler，设置一些通用功能
  * 描述：主要是一些全局变量的设置，再就是日志记录开始和结束操作

@@ -1,16 +1,15 @@
 package com.pointlion.sys.mvc.common.utils;
 
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-import java.util.Random;
-
-import org.apache.shiro.authc.credential.DefaultPasswordService;
-import org.apache.shiro.authc.credential.PasswordService;
-
 import com.pointlion.sys.mvc.admin.oa.workflow.WorkFlowIdentityService;
 import com.pointlion.sys.mvc.common.model.SysOrg;
 import com.pointlion.sys.mvc.common.model.SysUser;
 import com.pointlion.sys.mvc.common.model.SysUserRole;
+import org.apache.shiro.authc.credential.DefaultPasswordService;
+import org.apache.shiro.authc.credential.PasswordService;
+
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Random;
  
 public class ChineseNameUtil {
  

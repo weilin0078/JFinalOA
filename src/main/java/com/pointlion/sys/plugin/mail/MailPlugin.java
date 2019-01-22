@@ -1,10 +1,10 @@
 package com.pointlion.sys.plugin.mail;
 
-import java.util.Properties;
-
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.IPlugin;
+
+import java.util.Properties;
 
 /**
  * 发送邮件插件

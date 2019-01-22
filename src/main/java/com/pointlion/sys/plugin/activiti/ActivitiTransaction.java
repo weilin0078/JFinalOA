@@ -1,14 +1,12 @@
 package com.pointlion.sys.plugin.activiti;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
-
+import com.jfinal.plugin.activerecord.DbKit;
 import org.apache.ibatis.session.TransactionIsolationLevel;
 import org.apache.ibatis.transaction.Transaction;
 
-import com.jfinal.plugin.activerecord.DbKit;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * @author Lion
@@ -54,7 +52,12 @@ public class ActivitiTransaction implements Transaction {
 			DbKit.getConfig().close(connection);
 		}
 	}
-
+	
+	@Override
+	public Integer getTimeout() throws SQLException {
+		return null;
+	}
+	
 	protected void openConnection() throws SQLException {
 		connection = DbKit.getConfig().getConnection();
 		if (level != null) {

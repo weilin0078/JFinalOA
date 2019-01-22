@@ -1,9 +1,9 @@
 package com.pointlion.sys.mvc.common.utils;
 
+import com.jfinal.log.Log;
+
 import java.util.Random;
 import java.util.UUID;
-
-import com.jfinal.log.Log;
 
 
 public abstract class RandomUtil {

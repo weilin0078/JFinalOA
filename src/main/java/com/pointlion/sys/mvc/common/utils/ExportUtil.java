@@ -1,14 +1,13 @@
 package com.pointlion.sys.mvc.common.utils;
 
+import com.pointlion.sys.mvc.common.utils.office.word.POITemplateUtil;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
-
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-
-import com.pointlion.sys.mvc.common.utils.office.word.POITemplateUtil;
 
 public class ExportUtil {
 	/***

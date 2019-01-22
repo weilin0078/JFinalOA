@@ -1,11 +1,11 @@
 
 package com.pointlion.sys.mvc.common.model;
 
-import java.util.List;
-
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.pointlion.sys.mvc.common.model.base.BaseSysDct;
+
+import java.util.List;
 @SuppressWarnings("serial")
 public class SysDct extends BaseSysDct<SysDct> {
 	public static final SysDct dao = new SysDct();

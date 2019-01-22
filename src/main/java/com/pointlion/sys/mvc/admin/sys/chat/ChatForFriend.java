@@ -1,19 +1,14 @@
 package com.pointlion.sys.mvc.admin.sys.chat;
 
+import com.pointlion.sys.mvc.admin.sys.login.SessionUtil;
+
+import javax.servlet.http.HttpSession;
+import javax.websocket.*;
+import javax.websocket.server.PathParam;
+import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-import javax.websocket.EndpointConfig;
-import javax.websocket.OnClose;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-import javax.websocket.server.PathParam;
-import javax.websocket.server.ServerEndpoint;
-
-import com.pointlion.sys.mvc.admin.sys.login.SessionUtil;
 
 
 @ServerEndpoint(value="/admin/friendchat/{friend}",configurator=GetHttpSessionConfigurator.class)

@@ -1,13 +1,13 @@
 package com.pointlion.sys.mvc.admin.sys.generator;
 
+import com.jfinal.kit.Kv;
+import com.jfinal.kit.PathKit;
+import com.jfinal.template.Engine;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import com.jfinal.kit.Kv;
-import com.jfinal.kit.PathKit;
-import com.jfinal.template.Engine;
 
 /***
  * jfinal魔板引擎

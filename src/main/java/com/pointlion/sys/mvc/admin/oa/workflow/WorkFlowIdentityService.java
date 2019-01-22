@@ -1,14 +1,20 @@
 package com.pointlion.sys.mvc.admin.oa.workflow;
 
-import java.util.List;
-
-import org.activiti.engine.IdentityService;
-import org.activiti.engine.identity.Group;
-import org.activiti.engine.identity.User;
-import org.activiti.engine.impl.persistence.entity.GroupEntity;
-import org.activiti.engine.impl.persistence.entity.UserEntity;
-
 import com.pointlion.sys.plugin.activiti.ActivitiPlugin;
+import org.flowable.engine.IdentityService;
+import org.flowable.idm.api.Group;
+import org.flowable.idm.api.User;
+import org.flowable.idm.engine.impl.persistence.entity.GroupEntity;
+import org.flowable.idm.engine.impl.persistence.entity.GroupEntityImpl;
+import org.flowable.idm.engine.impl.persistence.entity.UserEntity;
+import org.flowable.idm.engine.impl.persistence.entity.UserEntityImpl;
+//import org.activiti.engine.IdentityService;
+//import org.activiti.engine.identity.Group;
+//import org.activiti.engine.identity.User;
+//import org.activiti.engine.impl.persistence.entity.GroupEntity;
+//import org.activiti.engine.impl.persistence.entity.UserEntity;
+
+import java.util.List;
 
 public class WorkFlowIdentityService {
 	public static final WorkFlowIdentityService me = new WorkFlowIdentityService();
@@ -21,7 +27,9 @@ public class WorkFlowIdentityService {
 	public void addUser(String username){
 		User user = identityService.createUserQuery().userId(username).singleResult();
 		if(user==null){
-			identityService.saveUser(new UserEntity(username));//建立activiti用户
+			UserEntityImpl u = new UserEntityImpl();
+			u.setId(username);
+			identityService.saveUser(u);//建立activiti用户
 		}
 	}
 	
@@ -31,7 +39,9 @@ public class WorkFlowIdentityService {
 	public void addGroup(String groupKey){
 		Group group = identityService.createGroupQuery().groupId(groupKey).singleResult();//Activiti角色
 		if(group==null){
-			identityService.saveGroup(new GroupEntity(groupKey));//建立组
+			GroupEntityImpl g = new GroupEntityImpl();
+			g.setId(groupKey);
+			identityService.saveGroup(g);//建立组
 		}
 	}
 	

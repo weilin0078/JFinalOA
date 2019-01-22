@@ -1,18 +1,12 @@
 package com.pointlion.sys.mvc.common.utils.office.word;
- 
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 import com.lowagie.text.pdf.BaseFont;
-
 import org.xhtmlrenderer.pdf.ITextFontResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
- 
-
-
-
-
 
 import java.io.File;
 import java.io.FileInputStream;

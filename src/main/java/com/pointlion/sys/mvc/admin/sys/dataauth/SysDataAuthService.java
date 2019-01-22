@@ -1,7 +1,5 @@
 package com.pointlion.sys.mvc.admin.sys.dataauth;
 
-import java.util.List;
-
 import com.jfinal.aop.Before;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.Db;
@@ -9,6 +7,8 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.pointlion.sys.mvc.common.model.SysDataAuth;
+
+import java.util.List;
 
 public class SysDataAuthService{
 	public static final SysDataAuthService me = new SysDataAuthService();

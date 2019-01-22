@@ -1,11 +1,11 @@
 package com.pointlion.sys.mvc.admin.oa.workflow;
 
-import java.lang.reflect.Field;
-
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.sys.mvc.common.model.SysDct;
+
+import java.lang.reflect.Field;
 
 public class WorkFlowUtil {
 	/***

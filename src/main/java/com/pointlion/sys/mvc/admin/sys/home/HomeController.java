@@ -6,28 +6,25 @@
  */
 package com.pointlion.sys.mvc.admin.sys.home;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.pointlion.sys.mvc.admin.oa.notice.NoticeService;
 import com.pointlion.sys.mvc.admin.oa.workflow.WorkFlowService;
 import com.pointlion.sys.mvc.admin.oa.workflow.flowtask.FlowTaskService;
 import com.pointlion.sys.mvc.admin.sys.login.SessionUtil;
+import com.pointlion.sys.mvc.common.base.BaseController;
+import com.pointlion.sys.mvc.common.model.*;
+import com.pointlion.sys.mvc.common.utils.Constants;
+import com.pointlion.sys.mvc.common.utils.ContextUtil;
+import com.pointlion.sys.plugin.shiro.ShiroKit;
+import com.pointlion.sys.plugin.shiro.ext.SimpleUser;
+
+import java.util.ArrayList;
+import java.util.List;
+
 //import com.pointlion.sys.mvc.admin.apply.resget.OaResGetConstants;
 //import com.pointlion.sys.mvc.admin.bumph.BumphConstants;
 //import com.pointlion.sys.mvc.admin.login.SessionUtil;
 //import com.pointlion.sys.mvc.admin.notice.NoticeService;
 //import com.pointlion.sys.mvc.admin.workflow.WorkFlowService;
-import com.pointlion.sys.mvc.common.base.BaseController;
-import com.pointlion.sys.mvc.common.model.SysCustomSetting;
-import com.pointlion.sys.mvc.common.model.SysFriend;
-import com.pointlion.sys.mvc.common.model.SysMenu;
-import com.pointlion.sys.mvc.common.model.SysRole;
-import com.pointlion.sys.mvc.common.model.SysUser;
-import com.pointlion.sys.mvc.common.utils.Constants;
-import com.pointlion.sys.mvc.common.utils.ContextUtil;
-import com.pointlion.sys.plugin.shiro.ShiroKit;
-import com.pointlion.sys.plugin.shiro.ext.SimpleUser;
 
 /***
  * 首页控制器

@@ -1,11 +1,10 @@
 package com.pointlion.sys.plugin.mail.core;
 
-import java.util.Date;
+import com.pointlion.sys.plugin.mail.exception.MailParseException;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-
-import com.pointlion.sys.plugin.mail.exception.MailParseException;
+import java.util.Date;
 
 
 /**

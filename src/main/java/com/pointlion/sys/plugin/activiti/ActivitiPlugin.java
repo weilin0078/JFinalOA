@@ -5,14 +5,18 @@
  */
 package com.pointlion.sys.plugin.activiti;
 
-import org.activiti.engine.ProcessEngine;
+import com.jfinal.plugin.IPlugin;
+import com.jfinal.plugin.activerecord.DbKit;
+import org.flowable.engine.ProcessEngine;
+import org.flowable.engine.ProcessEngineConfiguration;
+import org.flowable.engine.ProcessEngines;
+import org.flowable.engine.impl.cfg.ProcessEngineConfigurationImpl;
+import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;
+/*import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
-import org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration;
-
-import com.jfinal.plugin.IPlugin;
-import com.jfinal.plugin.activerecord.DbKit;
+import org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration;*/
 
 /**
  * @author Lion
@@ -37,7 +41,7 @@ public class ActivitiPlugin implements IPlugin{
 
 	@Override
 	public boolean stop() {
-		ProcessEngines.destroy(); 
+		ProcessEngines.destroy();
 		isStarted = false;
 		return true;
 	}

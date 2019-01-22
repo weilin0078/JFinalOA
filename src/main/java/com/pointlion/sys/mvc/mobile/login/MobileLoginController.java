@@ -5,15 +5,14 @@
  */
 package com.pointlion.sys.mvc.mobile.login;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.shiro.authc.credential.DefaultPasswordService;
-import org.apache.shiro.authc.credential.PasswordService;
-
 import com.pointlion.sys.mvc.common.base.BaseController;
 import com.pointlion.sys.mvc.common.model.SysOrg;
 import com.pointlion.sys.mvc.common.model.SysUser;
+import org.apache.shiro.authc.credential.DefaultPasswordService;
+import org.apache.shiro.authc.credential.PasswordService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /***
  * 手机的登录控制器（手机端）

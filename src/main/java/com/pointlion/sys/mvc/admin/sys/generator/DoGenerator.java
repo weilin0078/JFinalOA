@@ -1,12 +1,12 @@
 package com.pointlion.sys.mvc.admin.sys.generator;
 
-import java.io.File;
-
 import com.jfinal.kit.Kv;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.generator.Generator;
+
+import java.io.File;
 
 public class DoGenerator {
 

@@ -1,12 +1,12 @@
 package com.pointlion.sys.mvc.admin.oa.common;
 
-import java.util.Date;
-
 import com.jfinal.plugin.activerecord.Model;
 import com.pointlion.sys.mvc.common.model.SysOrg;
 import com.pointlion.sys.mvc.common.utils.DateUtil;
 import com.pointlion.sys.mvc.common.utils.PinYinUtil;
 import com.pointlion.sys.mvc.common.utils.StringUtil;
+
+import java.util.Date;
 
 public class BusinessUtil {
 	

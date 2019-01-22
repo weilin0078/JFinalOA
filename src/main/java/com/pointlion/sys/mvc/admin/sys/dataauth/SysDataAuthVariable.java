@@ -1,15 +1,14 @@
 package com.pointlion.sys.mvc.admin.sys.dataauth;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
-
 import com.pointlion.sys.mvc.admin.sys.dataauth.bean.SysDataAuthRuleBean;
 import com.pointlion.sys.mvc.common.model.SysOrg;
 import com.pointlion.sys.mvc.common.model.SysUser;
 import com.pointlion.sys.mvc.common.utils.Constants;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
+import org.apache.commons.lang.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /***
  * 数据权限，所有的变量，渲染

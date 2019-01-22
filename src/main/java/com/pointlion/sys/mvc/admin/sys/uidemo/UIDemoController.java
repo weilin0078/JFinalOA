@@ -5,10 +5,10 @@
  */
 package com.pointlion.sys.mvc.admin.sys.uidemo;
 
+import com.pointlion.sys.mvc.common.base.BaseController;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import com.pointlion.sys.mvc.common.base.BaseController;
 
 
 public class UIDemoController extends BaseController {

@@ -1,10 +1,5 @@
 package com.pointlion.sys.mvc.admin.sys.dataauth;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
-
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
@@ -14,9 +9,12 @@ import com.pointlion.sys.mvc.common.model.SysRole;
 import com.pointlion.sys.mvc.common.utils.Constants;
 import com.pointlion.sys.mvc.common.utils.JSONUtil;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SysDataAuthTranslator {
 	/***

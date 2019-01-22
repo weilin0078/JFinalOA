@@ -1,13 +1,13 @@
 package com.pointlion.sys.mvc.admin.sys.generator;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.sys.interceptor.MainPageTitleInterceptor;
 import com.pointlion.sys.mvc.common.base.BaseController;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Before(MainPageTitleInterceptor.class)
 public class GeneratorController extends BaseController{

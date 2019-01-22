@@ -1,15 +1,14 @@
 
 package com.pointlion.sys.plugin.shiro.ext;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-
+import com.jfinal.aop.Interceptor;
+import com.jfinal.aop.Invocation;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
 
-import com.jfinal.aop.Interceptor;
-import com.jfinal.aop.Invocation;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 
 public class CaptchaFormAuthenticationInterceptor extends FormAuthenticationFilter implements Interceptor {

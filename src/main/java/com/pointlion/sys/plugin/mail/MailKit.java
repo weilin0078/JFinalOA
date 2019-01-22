@@ -1,11 +1,11 @@
 package com.pointlion.sys.plugin.mail;
 
+import com.pointlion.sys.plugin.mail.core.JavaMailSender;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.pointlion.sys.plugin.mail.core.JavaMailSender;
 
 /**
  * 发送邮件工具

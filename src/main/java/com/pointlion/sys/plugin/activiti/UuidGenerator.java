@@ -1,8 +1,8 @@
 package com.pointlion.sys.plugin.activiti;
 
-import org.activiti.engine.impl.cfg.IdGenerator;
-
 import com.pointlion.sys.mvc.common.utils.UuidUtil;
+import org.flowable.common.engine.impl.cfg.IdGenerator;
+
 
 
 /**

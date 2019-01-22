@@ -1,9 +1,5 @@
 package com.pointlion.sys.mvc.admin.oa.workflow.flowtask;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
@@ -17,6 +13,10 @@ import com.pointlion.sys.mvc.common.model.VTasklist;
 import com.pointlion.sys.mvc.common.utils.StringUtil;
 import com.pointlion.sys.plugin.shiro.ShiroKit;
 import com.pointlion.sys.plugin.shiro.ext.SimpleUser;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FlowTaskController extends BaseController{
 	static NoticeService noticeService = new NoticeService();

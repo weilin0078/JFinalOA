@@ -5,16 +5,16 @@
  */
 package com.pointlion.sys.mvc.common.base;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-
 import com.jfinal.core.Controller;
 import com.jfinal.kit.StrKit;
 import com.jfinal.render.JsonRender;
 import com.pointlion.sys.mvc.common.dto.BootstrapValid;
 import com.pointlion.sys.mvc.common.dto.RenderBean;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 
 public abstract class BaseController extends Controller {

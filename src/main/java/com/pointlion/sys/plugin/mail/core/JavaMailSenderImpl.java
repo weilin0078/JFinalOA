@@ -1,27 +1,13 @@
 package com.pointlion.sys.plugin.mail.core;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import com.pointlion.sys.plugin.mail.exception.*;
 
 import javax.activation.FileTypeMap;
-import javax.mail.AuthenticationFailedException;
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.MimeMessage;
-
-import com.pointlion.sys.plugin.mail.exception.MailAuthenticationException;
-import com.pointlion.sys.plugin.mail.exception.MailException;
-import com.pointlion.sys.plugin.mail.exception.MailParseException;
-import com.pointlion.sys.plugin.mail.exception.MailPreparationException;
-import com.pointlion.sys.plugin.mail.exception.MailSendException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 
 /**
  * 

@@ -1,11 +1,11 @@
 package com.pointlion.sys.mvc.admin.sys.generator;
- 
+
+import com.jfinal.plugin.activerecord.generator.MappingKitGenerator;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
-import com.jfinal.plugin.activerecord.generator.MappingKitGenerator;
  
 public class MappingKitBulid extends MappingKitGenerator{
  

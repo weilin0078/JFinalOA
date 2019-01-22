@@ -1,10 +1,10 @@
 package com.pointlion.sys.mvc.admin.sys.generator;
 
-import java.util.List;
-
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+
+import java.util.List;
 
 public class GeneratorService {
 	public static final GeneratorService me  = new GeneratorService();

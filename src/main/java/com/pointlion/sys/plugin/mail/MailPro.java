@@ -1,17 +1,5 @@
 package com.pointlion.sys.plugin.mail;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
-import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.jfinal.render.RenderManager;
 import com.pointlion.sys.plugin.mail.core.JavaMailSender;
 import com.pointlion.sys.plugin.mail.core.JavaMailSenderImpl;
@@ -19,6 +7,17 @@ import com.pointlion.sys.plugin.mail.core.MimeMessageHelper;
 import com.pointlion.sys.plugin.mail.exception.MailSendException;
 import com.pointlion.sys.plugin.mail.mockhttp.MockHttpServletRequest;
 import com.pointlion.sys.plugin.mail.mockhttp.MockHttpServletResponse;
+
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * 邮件发送

@@ -1,13 +1,12 @@
 package com.pointlion.sys.plugin.shiro;
 
-import java.util.concurrent.ConcurrentMap;
-
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
-
 import com.pointlion.sys.mvc.common.model.SysOrg;
 import com.pointlion.sys.mvc.common.model.SysUser;
 import com.pointlion.sys.plugin.shiro.ext.SimpleUser;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+
+import java.util.concurrent.ConcurrentMap;
 
 
 /**

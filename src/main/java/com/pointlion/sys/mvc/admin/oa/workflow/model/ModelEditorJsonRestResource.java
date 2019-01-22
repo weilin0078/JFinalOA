@@ -12,23 +12,28 @@
  */
 package com.pointlion.sys.mvc.admin.oa.workflow.model;
 
-import org.activiti.editor.constants.ModelDataJsonConstants;
-import org.activiti.engine.ActivitiException;
-import org.activiti.engine.RepositoryService;
-import org.activiti.engine.repository.Model;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jfinal.core.Controller;
 import com.pointlion.sys.plugin.activiti.ActivitiPlugin;
+/*import org.activiti.editor.constants.ModelDataJsonConstants;
+import org.activiti.engine.ActivitiException;
+import org.activiti.engine.RepositoryService;
+import org.activiti.engine.repository.Model;*/
+import org.apache.commons.lang3.StringUtils;
+import org.flowable.common.engine.api.FlowableException;
+import org.flowable.editor.constants.ModelDataJsonConstants;
+import org.flowable.engine.RepositoryService;
+import org.flowable.engine.repository.Model;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static org.flowable.editor.constants.ModelDataJsonConstants.MODEL_ID;
 
 /**
  * @author Tijs Rademakers
  */
-public class ModelEditorJsonRestResource extends Controller implements ModelDataJsonConstants{
+public class ModelEditorJsonRestResource extends Controller implements ModelDataJsonConstants {
   
   protected static final Logger LOGGER = LoggerFactory.getLogger(ModelEditorJsonRestResource.class);
   
@@ -55,7 +60,7 @@ public class ModelEditorJsonRestResource extends Controller implements ModelData
         
       } catch (Exception e) {
         LOGGER.error("Error creating model JSON", e);
-        throw new ActivitiException("Error creating model JSON", e);
+        throw new FlowableException("Error creating model JSON", e);
       }
     }
     renderJson(modelNode.toString());
