@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
     var scrollSetp = 500,
     operationWidth = 90,
     leftOperationWidth = 30,
@@ -68,7 +68,7 @@
                     }
                 }
             }
-            this.remove();
+            ${this}.remove();
             $("#jfinaloa-menu-all #jfinaloa-menu-all-ul li[data-url='" + jthis.data("url") + "'][data-value='" + jthis.data("value") + "']").remove();
             $("#jfinaloa-tab-page-content .iframe-content[data-url='" + jthis.data("url") + "'][data-value='" + jthis.data("value") + "']").remove();
         });
