@@ -2,7 +2,7 @@
 有兴趣请帮点一下Star，谢谢支持。
 
 <a href="https://blog.csdn.net/qq_30739519/article/details/82493456" target="_blank">
-    最新版已从Activiti升级为Flowable
+    最新版已从Activiti升级为Flowable（点击查看Activiti与Flowable区别）
 </a>
 
 qq:439635374
