@@ -1,11 +1,16 @@
 
 有兴趣请帮点一下Star，谢谢支持。
 
-最新版已从Activiti升级为Flowable
+<a href="https://blog.csdn.net/qq_30739519/article/details/82493456" target="_blank">
+    最新版已从Activiti升级为Flowable（点击查看Activiti与Flowable区别）
+</a>
 
 qq:439635374
 
 qq交流群号：136981051
+
+
+演示项目中有很多审批流的业务为自己开发使用仅供参考（不方便开源），开源项目中仅提供公章使用申请作为示例代码，其他基础功能全部开源，望知晓。
 
 
 码云地址：http://git.oschina.net/glorylion/JFinalOA
@@ -19,6 +24,11 @@ qq交流群号：136981051
 默认密码：admin/admin
 
 其他用户的帐号密码：帐号密码均为姓名的全拼。
+
+
+1.JDK请使用1.8（flowable要求）
+2.数据库如果导入失败，请使用mysql5.6+navicat还原psc文件
+3.启动项目如果出现一套大写的ACT开头的数据库表，请将大写表删除之后，设置数据库忽略大小写，重新启动项目
 
 
 **1.简单介绍** 
