@@ -9,7 +9,7 @@
 			<div class="col-lg-12">
 		        <div class="panel">
 		            <div class="panel-heading">
-		                <h3 class="panel-title" style="text-align:center;">
+		                <h3 class="panel-title" style="text-align: right;">
 		                	数据权限配置
 		                </h3>
 		            </div>
@@ -92,7 +92,7 @@
 			                    <div class="row">
 			                        <div class="col-sm-11 col-sm-offset-5">
 			                            <button class="btn btn-warning" type="reset" #if(view=='detail') disabled #end>重置</button>
-			                            <button class="btn btn-mint" type="submit" #if(view=='detail') disabled #end>保存</button>
+			                            <button class="btn btn-primary" type="submit" #if(view=='detail') disabled #end>保存</button>
 			                        </div>
 			                    </div>
 			                </div>
@@ -106,7 +106,7 @@
 			var data = common_ajax.ajaxFunc("/admin/sys/dataauth/save", $('#editForm').serialize(), "json", null);
 			if(data.success){
 				pointLion.alertMsg("保存成功!" , "success" , "small" , function(){
-					doPjax(ctx+'/admin/sys/dataauth/getListPage');//跳转到列表页
+					location.href = ctx+'/admin/sys/dataauth/getListPage';//跳转到列表页
 				},data);
 			}else{
 				pointLion.alertMsg(data.message , "danger" , "small" , function(){

@@ -1,0 +1,134 @@
+.datepicker-dropdown::before {
+    content: unset;
+}
+.datepicker-dropdown::after {
+    content: unset;
+}
+.datepicker-inline {
+    width: auto;
+}
+/*滚动条样式*/
+::-webkit-scrollbar
+{
+    width: 5px;
+    height: 5px;
+    background-color: #F5F5F5;
+}
+/*竖向-滚动条上下两个按钮*/
+::-webkit-scrollbar-button{
+    /*background-color:#26a69a;*/
+    height: 0px;
+    display:none;
+}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track
+{
+    /*border-radius: 10px;  */
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #F5F5F5;
+}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+    /*border-radius: 10px;  */
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #26a69a;
+}
+/*滑块效果*/
+::-webkit-scrollbar-thumb:hover
+{
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.4);
+}
+
+/*bootstrap-table固定标头之后的问题。列不对齐问题。最后一行不显示边框问题*/
+.demo-add-niftycheck{
+    table-layout:fixed !important;
+}
+/*.bootstrap-table tr:last-child{*/
+    /*border-bottom: 1px solid #ddd;*/
+/*}*/
+/*IE滚动条颜色*/
+html {
+    scrollbar-face-color:#bfbfbf;/*滚动条颜色*/
+    scrollbar-highlight-color:#000;
+    scrollbar-3dlight-color:#000;
+    scrollbar-darkshadow-color:#000;
+    scrollbar-Shadow-color:#adadad;/*滑块边色*/
+    scrollbar-arrow-color:rgba(0,0,0,0.4);/*箭头颜色*/
+    scrollbar-track-color:#eeeeee;/*背景颜色*/
+}
+/***
+ * 太长的，变成省略号
+ */
+.bootstrap-table tbody td{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/*数字多长强制换行*/
+.taskHisList td{
+    word-wrap: break-word;
+}
+
+/*******/
+.bootbox.modal.in{
+    z-index: 9999999999999999999999;
+}
+
+/*******
+ * 单选按钮，居中
+ */
+.magic-radio + label::after{
+    top:3px !important;
+    left:2.5px !important;
+}
+/***
+*表单样式
+*/
+.form-group{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+/***
+**提示信息的字体大小
+*/
+small, .small {
+    font-size: 90% !important;
+}
+.row {
+    margin: 0px;
+}
+
+
+.panel{
+    /*border: none;*/
+}
+
+/*解决footer顶部有两天边框问题*/
+.panel-footer{
+    border-top: none;
+}
+/*解决panel顶部有两条边框问题*/
+.panel-title{
+    min-height: 30px;
+}
+
+
+
+
+/*表单面板容器*/
+.form-panel{
+    margin: 10px 15px 15px 15px;
+    border-radius: 3px;
+}
+
+.form-panel-header{
+    height: 30px;
+
+}
+.form-panel-header .panel-title{
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}

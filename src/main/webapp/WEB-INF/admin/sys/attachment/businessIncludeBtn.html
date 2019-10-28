@@ -1,7 +1,7 @@
 <!-- pjax页面返回按钮 -->
 #define installPJaxGoBackBtn()
-	<a href="javascript:void(0);" onclick="doPjax('#(ctx)#(pageTitleBread?pageTitleBread.url:"")')" style="position: absolute;left: 10px;">
-			<button class="btn btn-mint" type="button">返回</button>
+	<a href="javascript:void(0);" onclick="window.history.back();" style="position: absolute;left: 10px;">
+		<button class="btn btn-primary" type="button">返回</button>
 	</a>
 #end
 <!-- 通用业务-附件按钮 -->
@@ -46,7 +46,7 @@
 		        
 			    #if(view!="detail")
 			    	<span class="input-group-btn">
-		            	<button class="btn btn-mint" type="button" onclick="openSlectDctDialog()">选择</button>
+		            	<button class="btn btn-primary" type="button" onclick="openSlectDctDialog()">选择</button>
 		            </span>
 		        #end
 		    </div>

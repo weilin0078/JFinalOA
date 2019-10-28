@@ -34,7 +34,7 @@ var col = [{
            //通过formatter可以自定义列显示的内容
            //value：当前field的值，即id
            //row：当前行的数据
-		   var a = '<a class="label label-table label-success" href="javascript:void(0);" onclick="doPjax(\'#(ctx)/admin/oa/apply/custom/getEditPage?defKey='+row.KEY_+'\')">创建任务</a>&nbsp;';
+		   var a = '<a class="label label-table label-success" href="#(ctx)/admin/oa/apply/custom/getEditPage?defKey='+row.KEY_+'">创建任务</a>&nbsp;';
            return a;
        } 
    }];

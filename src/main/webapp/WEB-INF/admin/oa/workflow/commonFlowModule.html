@@ -1,11 +1,11 @@
 #define installFlowHisBtn(defId,procInsId)
 	#if(defId)
-		<a href="#(ctx)/processEditor/diagram-viewer/index.html?processDefinitionId=#(defId)&processInstanceId=#(procInsId)" target="_blank" style="position: absolute;right: 80px">
-			<button class="btn btn-info" type="button">流程</button>
+		<a href="#(ctx)/processEditor/diagram-viewer/index.html?processDefinitionId=#(defId)&processInstanceId=#(procInsId)" target="_blank">
+			<button class="btn btn-primary" type="button">流程</button>
 		</a>
 	#end
 	#if(procInsId)
-		<a href="javascript:void(0);" onclick="pointLion.openTaskHisListPage('#(procInsId)')" style="position: absolute;right: 10px">
+		<a href="javascript:void(0);" onclick="pointLion.openTaskHisListPage('#(procInsId)')">
 			<button class="btn btn-success" type="button">流转</button>
 		</a>
 	#end
@@ -13,30 +13,37 @@
 
 #define buildWorkFlowHisTable(hislist)
 	#if(hislist)
-		<div class="modal-body">
-			<div class="fixed-table-container bootstrap-table" style="padding-bottom: 0px;">
-			<table id="treetable" class="demo-add-niftycheck table table-hover table-striped">
-				        <thead>
-				         	<tr>
-					        	<th style="width: 100px;"><div class="th-inner">任务名称</div></th>
+		<div class="panel skin-border form-panel">
+			<div class="panel-heading form-panel-header skin-bgcolor">
+				<h3 class="panel-title">申请单流转历史</h3>
+			</div>
+			<div class="panel-body">
+				<div class="modal-body">
+					<div class="fixed-table-container bootstrap-table" style="padding-bottom: 0px;">
+						<table id="treetable" class="demo-add-niftycheck table table-hover table-striped">
+							<thead>
+							<tr>
+								<th style="width: 100px;"><div class="th-inner">任务名称</div></th>
 								<th style="width: 100px;"><div class="th-inner">办理人</div></th>
 								<th style="width: 200px;"><div class="th-inner">办理意见</div></th>
 								<th style="width: 140px;"><div class="th-inner">办理时间</div></th>
 								<th style="width: 140px;"><div class="th-inner">是否完成</div></th>
-					        </tr>
-				        </thead>
-				        <tbody>
-				        	#for(t:hislist)
-					        	<tr>
-									  <td>#(t.taskName)</td>
-									  <td>#(t.assignee)</td>
-									  <td>#(t.message)</td>
-									  <td>#(t.endTime?t.endTime:"")</td>
-									  <td>#if(t.endTime)<span style="color:green">已办理</span>#else<span style="color:red">未办理</span>#end</td>
-								</tr>
-				        	#end
-				        </tbody>
-			</table>
+							</tr>
+							</thead>
+							<tbody>
+							#for(t:hislist)
+							<tr>
+								<td>#(t.taskName)</td>
+								<td>#(t.assignee)</td>
+								<td>#(t.message)</td>
+								<td>#(t.endTime?t.endTime:"")</td>
+								<td>#if(t.endTime)<span style="color:green">已办理</span>#else<span style="color:red">未办理</span>#end</td>
+							</tr>
+							#end
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	#end
@@ -52,7 +59,7 @@
 			    <input type="text" id="flowCCName" class="form-control"  value="#(flowCCName)" disabled>
 		        #if(view!="detail")
 		        	<span class="input-group-btn">
-		            	<button class="btn btn-mint" type="button" onclick="openSlectFlowCCDialog()">选择</button>
+		            	<button class="btn btn-primary" type="button" onclick="openSlectFlowCCDialog()">选择</button>
 		            </span>
 		        #end
 		    </div>

@@ -54,7 +54,7 @@
   font-weight: 500;
 }
 .bootstrap-timepicker-widget table tr:nth-child(2) td:not(.separator) {
-  background-color: #E7ECF2;
+  background-color: rgba(0,0,0,.1);
 }
 .bootstrap-timepicker-widget table td:not(.separator) {
   min-width: 30px;

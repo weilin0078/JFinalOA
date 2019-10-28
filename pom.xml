@@ -5,7 +5,7 @@
 	<artifactId>JFinalOA</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>PointLion Maven Webapp</name>
+	<name>JFinalOA Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<profiles>
 		<profile>
@@ -19,7 +19,7 @@
 				<db-password>root</db-password>
 				<db-type>mysql</db-type>
 				<dev-model>true</dev-model>
-				<workspace-path>E:/work/workSpace/LionOA/PointLion</workspace-path>
+				<workspace-path>E:/workspaces/workspacePointLion/JFinalOA</workspace-path>
 				<log4j-level>debug</log4j-level>
 			</properties>
 			<!-- 默认激活本环境 -->
@@ -62,18 +62,29 @@
 		<dependency>
 			<groupId>com.jfinal</groupId>
 			<artifactId>jfinal</artifactId>
-			<version>3.4</version>
+			<version>4.6</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.jfinal</groupId>
 		    <artifactId>cos</artifactId>
-		    <version>2017.5</version>
+		    <version>2019.8</version>
 		</dependency>
 		<dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-engine</artifactId>
-			<version>5.21.0</version>
+			<groupId>org.flowable</groupId>
+			<artifactId>flowable-engine</artifactId>
+			<version>6.4.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.flowable</groupId>
+			<artifactId>flowable-modeler</artifactId>
+			<version>5.23.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.flowable</groupId>
+			<artifactId>flowable-json-converter</artifactId>
+			<version>6.4.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>net.iharder</groupId>
 			<artifactId>base64</artifactId>
@@ -93,16 +104,6 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.6</version>
-		</dependency>
-		<dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-modeler</artifactId>
-			<version>5.21.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-json-converter</artifactId>
-			<version>5.21.0</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
@@ -132,7 +133,7 @@
 		<dependency>
 		    <groupId>org.jsoup</groupId>
 		    <artifactId>jsoup</artifactId>
-		    <version>1.11.2</version>
+		    <version>1.10.3</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.itextpdf</groupId>
@@ -154,15 +155,20 @@
 		    <artifactId>fr.opensagres.xdocreport.document</artifactId>
 		    <version>1.0.5</version>
 		</dependency>
-		<dependency>  
-		    <groupId>fr.opensagres.xdocreport</groupId>  
-		    <artifactId>org.apache.poi.xwpf.converter.xhtml</artifactId>  
-		    <version>1.0.5</version>  
+		<dependency>
+		    <groupId>fr.opensagres.xdocreport</groupId>
+		    <artifactId>org.apache.poi.xwpf.converter.xhtml</artifactId>
+		    <version>1.0.5</version>
 		</dependency>
 		<dependency>
 		    <groupId>de.huxhorn.lilith</groupId>
 		    <artifactId>de.huxhorn.lilith.3rdparty.flyingsaucer.core-renderer</artifactId>
 		    <version>8RC1</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>4.5.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -179,11 +185,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.46</version>
 		</dependency>
-		<dependency>
-			<groupId>com.oracle</groupId>
-				<artifactId>ojdbc6</artifactId>
-				<version>11.2.0.3</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.oracle</groupId>-->
+<!--				<artifactId>ojdbc6</artifactId>-->
+<!--				<version>11.2.0.3</version>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -218,7 +224,7 @@
 		    <groupId>net.sf.json-lib</groupId>
 		    <artifactId>json-lib</artifactId>
 		    <version>2.4</version>
-		    <classifier>jdk15</classifier> 
+		    <classifier>jdk15</classifier>
 		</dependency>
 		<dependency>
 		    <groupId>commons-beanutils</groupId>
@@ -245,6 +251,11 @@
 		    <artifactId>htmlunit</artifactId>
 		    <version>2.21</version>
 		</dependency>
+		<dependency>
+			<groupId>org.dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>2.1.1</version>
+		</dependency>
  		<!-- <dependency>
 	        <groupId>com.jfinal</groupId>
 	        <artifactId>jfinal-undertow</artifactId>
@@ -262,9 +273,16 @@
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+					<include>**/*.tld</include>
+					<include>**/*.html</include>
+					<include>**/*.json</include>
+				</includes>
 			</resource>
 		</resources>
-		<finalName>PointLion</finalName>
+		<finalName>JPointLion</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -281,54 +299,24 @@
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>2.1.2</version>
-					<executions>
-						<execution>
-							<id>attach-sources</id>
-							<phase>verify</phase>
-							<goals>
-								<goal>jar-no-fork</goal>
-							</goals>
-						</execution>
-					</executions>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.7</version>
 				</plugin>
 				<plugin>
-					<groupId>org.mortbay.jetty</groupId>
-					<artifactId>maven-jetty-plugin</artifactId>
-					<version>6.1.5</version>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.12.4</version>
 					<configuration>
-						<webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
-						<connectors>
-							<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-								<port>8080</port>
-							</connector>
-						</connectors>
+						<forkMode>once</forkMode>
+						<argLine>-Dfile.encoding=UTF-8</argLine>
 					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.tomcat.maven</groupId>
-					<artifactId>tomcat7-maven-plugin</artifactId>
-					<version>2.2</version>
-					<configuration>
-						<port>8080</port>
-						<server>tomcat7</server>
-					</configuration>
-					<executions>
-						<execution>
-							<phase>package</phase>
-							<goals>
-								<goal>run</goal>
-							</goals>
-						</execution>
-					</executions>
 				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
-	
-	
-	
+
+
+
 	<repositories>
 		<!-- aliyun repository -->
 		<repository>
@@ -357,6 +345,5 @@
 			</releases>
 		</pluginRepository>
 	</pluginRepositories>
-	
-	
+
 </project>

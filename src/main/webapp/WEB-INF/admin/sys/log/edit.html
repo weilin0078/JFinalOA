@@ -3,7 +3,7 @@
 			<div class="col-lg-12">
 		        <div class="panel">
 		            <div class="panel-heading">
-		                <h3 class="panel-title" style="text-align:center;">
+		                <h3 class="panel-title" style="text-align: right;">
 		                	#@installPJaxGoBackBtn()
 		                	系统日志
 		                </h3>
@@ -12,31 +12,103 @@
 						<input type="hidden"  name="#(formModelName).id" class="form-control" value="#(o?o.id:'')">
 			                <div class="form-group">
 			                    <label class="col-md-2 control-label">操作用户</label>
-			                    <div class="col-md-8">
+			                    <div class="col-md-9">
 			                        <input type="text" class="form-control"  value="#(o?o.username:'')" readonly>
 			                    </div>
 			                </div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">操作模块</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control"  value="#(o?o.module:'')" readonly>
+								</div>
+							</div>
 			                <div class="form-group">
 			                    <label class="col-md-2 control-label">目标url</label>
-			                    <div class="col-md-8">
+			                    <div class="col-md-9">
 			                        <input type="text" class="form-control"  value="#(o?o.target:'')" readonly>
 			                    </div>
 			                </div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">操作方法</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control"  value="#(o?o.operate_method:'')" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">操作类型</label>
+								<div class="col-md-9">
+									#if(o&&o.business_type)
+										#if(o.business_type=='1')
+											#set(businessType = '查询')
+										#elseif(o.business_type=='2')
+											#set(businessType = '新增')
+										#elseif(o.business_type=='3')
+											#set(businessType = '修改')
+										#elseif(o.business_type=='4')
+											#set(businessType = '删除')
+										#elseif(o.business_type=='5')
+											#set(businessType = '授权')
+										#elseif(o.business_type=='6')
+											#set(businessType = '导出')
+										#elseif(o.business_type=='7')
+											#set(businessType = '导入')
+										#elseif(o.business_type=='8')
+											#set(businessType = '办理任务')
+										#elseif(o.business_type=='9')
+											#set(businessType = '撤回')
+										#elseif(o.business_type=='10')
+											#set(businessType = '驳回')
+										#elseif(o.business_type=='11')
+											#set(businessType = '开启')
+										#elseif(o.business_type=='12')
+											#set(businessType = '登录')
+										#else
+											#set(businessType = '其他')
+										#end
+									#end
+									<input type="text" class="form-control"  value="#(businessType)" readonly>
+								</div>
+							</div>
 			                <div class="form-group">
 			                    <label class="col-md-2 control-label">参数</label>
-			                    <div class="col-md-8">
+			                    <div class="col-md-9">
 			                        <textarea rows="8" class="form-control" readonly>#(o?o.para:'')</textarea>
 			                    </div>
 			                </div>
 			                <div class="form-group">
 			                    <label class="col-md-2 control-label">客户端</label>
-			                    <div class="col-md-8">
-			                        <input type="text" class="form-control"  value="#(o?o.client:'')" readonly>
+			                    <div class="col-md-9">
+			                        <input type="text" class="form-control"  value="#if(o&&o.client)#if(o.client=='0')电脑端#elseif(o.client=='1')手机端#end#end" readonly>
 			                    </div>
 			                </div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">是否成功</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control"  value="#if(o&&o.if_success)#if(o.if_success=='0')失败#elseif(o.if_success=='1')成功#end#end" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">是否成功</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control"  value="#(o?o.if_success:'')" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">操作时间</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control"  value="#(o?o.create_time:'')" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">ip地址</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control"  value="#(o?o.ip:'')" readonly>
+								</div>
+							</div>
+
 			                <div class="form-group">
 			                    <label class="col-md-2 control-label">错误信息</label>
-			                    <div class="col-md-8">
+			                    <div class="col-md-9">
 			                    	<textarea rows="8" class="form-control" readonly>#(o?o.error_message:'')</textarea>
 			                    </div>
 			                </div>

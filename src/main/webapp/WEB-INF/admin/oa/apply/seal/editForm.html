@@ -1,0 +1,62 @@
+<form id="editForm" class="panel-body form-horizontal form-padding">
+						<input type="hidden"  name="#(formModelName).id" class="form-control" value="#(o?o.id:'')">
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">申请人</label>
+			                    <div class="col-md-4">
+			                    	<input type="hidden"  name="#(formModelName).userid" class="form-control"  value="#if(o)#(o.userid)#else#(user.id)#end">
+			                        <input type="text"  name="#(formModelName).applyer_name" class="form-control"  value="#if(o)#(o.applyer_name)#else#(user.name)#end" readonly>
+			                    </div>
+			                    <label class="col-md-1 control-label">部门</label>
+			                    <div class="col-md-4">
+			                        <input type="hidden"  name="#(formModelName).org_id" class="form-control"  value="#if(o)#(o.org_id)#else#(org.id)#end">
+			                        <input type="text"  name="#(formModelName).org_name" class="form-control"  value="#if(o)#(o.org_name)#else#(org.name)#end" readonly>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">公章名称</label>
+			                    <div class="col-md-9">
+			                        <input type="text"  name="#(formModelName).seal_name" class="form-control"  value="#(o?o.seal_name:'')" #if(view=='detail') readonly #end>
+			                        <small class="help-block">请输入公章名称</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">用途</label>
+			                    <div class="col-md-9">
+			                        <input type="text"  name="#(formModelName).title" class="form-control"  value="#(o?o.title:'')" #if(view=='detail') readonly #end>
+			                        <small class="help-block">请输入用途</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">申请原因以及意见</label>
+			                    <div class="col-md-9">
+			                        <textarea rows="8" name="#(formModelName).des" class="form-control" #if(view=='detail') readonly #end>#(o?o.des:'')</textarea>
+			                        <small class="help-block">请输入申请意见</small>
+			                    </div>
+			                </div>
+			                <!-- <div class="form-group">
+			                    <label class="col-md-2 control-label">上级领导批示</label>
+			                    <div class="col-md-9">
+			                        <textarea rows="8" name="#(formModelName).leader_message" class="form-control" readonly>#(o?o.leader_message:'')</textarea>
+			                        <small class="help-block">请输入领导批示</small>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="col-md-2 control-label">领导批示</label>
+			                    <div class="col-md-9">
+			                        <textarea rows="8" name="#(formModelName).leader2_message" class="form-control" readonly>#(o?o.leader2_message:'')</textarea>
+			                        <small class="help-block">请输入领导批示</small>
+			                    </div>
+			                </div> -->
+		                	#if(view=='detail')
+			                
+				            #else
+				            	<div class="panel-footer">
+				                    <div class="row">
+				                        <div class="col-sm-8 col-sm-offset-3">
+				                            <button class="btn btn-warning" type="reset">重置</button>
+				                            <button class="btn btn-primary" type="submit" >保存</button>
+				                        </div>
+				                    </div>
+				                </div>
+				            #end
+		            </form>

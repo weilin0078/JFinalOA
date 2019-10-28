@@ -1,0 +1,158 @@
+				<style>
+					.menuSort{
+						padding: 2px !important;
+					}
+					.menuSort input{
+						height: 34px;
+					}
+				</style>
+				
+				#define makeMenu(m,p,canAddChild)
+					<tr data-tt-id="F_#(m.id)" #if(p) data-tt-parent-id="F_#(p.id)" #end>
+						  	<td><span #if(!m.permission) class="folder" #else class="file" #end>#(m.name)</span></td>
+						  	<td>#(m.permission)</td>
+							<td class="menuSort">
+								<input type="text" value="#(m.sort)" class="form-control" onchange="changeSort('#(m.id)',this)" #if(!m.permission) readonly #end>
+							</td>
+						  	<td>
+							  #if(canAddChild)
+							  		<a class="label label-table label-info" href="#(ctx)/admin/sys/menu/getFunEditPage?parentid=#(m.id)" >添加功能按钮</a>&nbsp;
+							  #end
+							  #if(m.permission)
+								<a class="label label-table label-success" href="#(ctx)/admin/sys/menu/getFunEditPage?id=#(m.id)">编辑</a>&nbsp;
+								<a class="label label-table label-danger" onclick="del('#(m.id)')" href="javascript:void(0);" >删除</a>
+							  #end
+						  	</td>
+					</tr>
+				#end
+				<style>
+					.switchery{
+						padding: 0px !important;
+					}
+				</style>
+                <div id="page-content">
+                	<div class="col-sm-12 eq-box-sm">
+			        	<div class="panel ">
+						    		<div class="panel-body">
+											<div class="bootstrap-table">
+												<div class="fixed-table-toolbar">
+													<div class="bars pull-left">
+														<a id="add" class="btn btn-primary data-toolbar" href="#(ctx)/admin/sys/menu/getEditPage"></i> 添加</a>
+													</div>
+												</div>
+												<div class="fixed-table-container" style="padding-bottom: 0px;">
+													<div class="fixed-table-body">
+																<table id="treetable" class="demo-add-niftycheck table table-hover table-striped">
+																	        <thead>
+																	         	<tr>
+																		        	<th style="width: 250px;"><div class="th-inner">名称</div></th>
+																					<th style="width: 200px;"><div class="th-inner">权限标识</div></th>
+																					<th style="width: 50px;"><div class="th-inner">排序</div></th>
+																					<th style="width: 220px;"><div class="th-inner">操作</div></th>
+																		        </tr>
+																	        </thead>
+																	        <tbody>
+																	        	#for(m:menu)
+																	        		#@makeMenu(m,"",false)
+																	        		#if(m.children)
+																	        			#for(a:m.children)
+																	        				#@makeMenu(a,m,false)
+																	        				#if(a.children)
+																	        					#for(b:a.children)
+																	        						#@makeMenu(b,a,true)
+																	        						#if(b.children)
+																			        					#for(c:b.children)
+																			        						#@makeMenu(c,b,false)
+																			        					#end
+																			        				#end 
+																	        					#end
+																	        				#end 
+																	        				
+																	        			#end
+																	        		#end
+																	        	#end 
+																	        </tbody>
+																</table>
+													</div>
+												</div>
+											</div>
+										</div>
+							</div>
+						</div>
+                </div>
+<script>
+	$("#treetable").treetable({ expandable: true });//树表格
+	$('#treetable').treetable('expandAll');//展开所有
+	//删除
+	function del(ids){
+		pointLion.confimMsg("您是否要删除所选信息 ?<br/> 点击确认进行删除 , 点击取消取消该操作",null,function(){
+			//执行删除
+			var data = common_ajax.ajaxFunc("/admin/sys/menu/delete",{"ids":ids}, "json", null);
+			//删除结果
+			if(data.success){
+				pointLion.alertMsg(data.message,"success",null,function(){
+					location.href = ctx+'/admin/sys/menu/getListPage';//跳转到列表页
+				});
+			}else{
+				pointLion.alertMsg(data.message,"success",null,null);
+			}
+		});
+	};
+	
+	//选择展示图标
+	function changeIcon(mid){
+		var index = layer.open({
+			  type: 2,
+			  title: false, //不显示标题栏
+			  area: ['80%', '80%'],
+			  shade: 0.2,
+			  id: 'changeIcon', //设定一个id，防止重复弹出
+			  resize: false,
+			  closeBtn: false,
+			  isOutAnim : false , 
+			  btnAlign: 'c',
+			  content: ctx+'/admin/sys/menu/getChangeIconPage?mid='+mid
+		});
+	}
+	//控制是否显示
+	function changeIfShow(id,o){
+		var ifshow = "";
+		if($(o)[0].checked) {
+		    ifshow = "1";
+		}else{
+			ifshow = "0";
+		}
+		var data = common_ajax.ajaxFunc("/admin/sys/menu/changeIfShow",{"id":id,"ifshow":ifshow}, "json", null);
+		if(data.success){
+			pointLion.alertMsg("保存成功！","success",null,null);
+		}else{
+			pointLion.alertMsg("保存失败！","danger",null,null);
+		}
+	}
+
+	/***
+	 * 改变顺序
+	 */
+	function changeSort(id,o){
+		var sort = $(o).val();
+		var reg = /([0-9]|[1-9][0-9])/;
+		if (!reg.test(sort)) {
+			pointLion.alertMsg("请输入小于99的正整数！","danger",null,null);
+			return;
+		}
+
+		var data = common_ajax.ajaxFunc("/admin/sys/menu/changeSort",{"id":id,"sort":sort}, "json", null);
+		if(data.success){
+			pointLion.alertMsg("保存成功！","success",null,null);
+		}else{
+			pointLion.alertMsg("保存失败！","danger",null,null);
+		}
+	}
+
+	$(document).ready(function(){
+		var ifShowBtnArr = $("input[name='sysMenu.if_show']");
+		$.each(ifShowBtnArr,function(i,d){
+			new Switchery(d);//制做开关按钮
+		})
+	});
+</script>

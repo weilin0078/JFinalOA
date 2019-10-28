@@ -477,9 +477,11 @@ $(document).ready(function () {
             changeTheme = function (themeName, type) {
                 var themeCSS = $('#theme'),
                     fileext = '.css',
-                    filename = ctx+'/common/css/themes/type-' + type + '/' + themeName + fileext;
-                	savepath = '/common/css/themes/type-' + type + '/' + themeName + fileext;
-                	setCustomStatus({"sysCustomSetting.color_theme":savepath});//白色侧边栏
+                    filename = ctx+'/common/css/tab/themes/type-' + type + '/' + themeName + fileext;
+                	savepath = '/common/css/tab/themes/type-' + type + '/' + themeName + fileext;
+                	setCustomStatus({"sysCustomSetting.color_theme":savepath});//nifty皮肤
+                    var mySkin = themeName.replace("theme-","");
+                    setCustomStatus({"sysCustomSetting.skin":mySkin});//我的皮肤
                 if (themeCSS.length) {
                     themeCSS.prop('href', filename);
                 } else {
@@ -522,18 +524,6 @@ $(document).ready(function () {
             }
         });
         
-        //***点击iframe，自定义设置页面缩回去--没实现
-//        var testiframe=document.getElementById("container-iframe");
-//        var iframeWindow=(testiframe.contentWindow || testiframe.contentDocument);
-//        $(iframeWindow).on('click', function (e) {
-//        	alert();
-//            if (demoSetBody.hasClass('in')) {
-//                if (!$(e.target).closest('#demo-set').length) {
-//                    demoSetBtn.trigger('click')
-//                }
-//            }
-//        });
-
         demoSetBtn.one('click', InitializeSettingWindow);
         $('#demo-btn-close-settings').on('click', function () {
             demoSetBtn.trigger('click')

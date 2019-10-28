@@ -159,7 +159,7 @@
 	}
 	//打开编辑页面
 	function getEditPage(){
-		doPjax("#(ctx)/admin/sys/user/getEditPage?orgid="+orgid)
+		location.href = "#(ctx)/admin/sys/user/getEditPage?orgid="+orgid;
 	}
 	//添加人
 	function addSelectUser(){

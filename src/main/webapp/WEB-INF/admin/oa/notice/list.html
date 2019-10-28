@@ -3,7 +3,7 @@
 			        <div class="col-sm-12 eq-box-sm">
 			        	<div class="panel ">
 						    <div class="panel-body">
-						    	<a id="add" class="btn btn-mint data-toolbar" onclick="doPjax('#(ctx)/admin/oa/notice/getEditPage')" href="javascript:void(0);"><i class="demo-pli-add"></i> 起草</a>
+						    	<a id="add" class="btn btn-primary data-toolbar" href="#(ctx)/admin/oa/notice/getEditPage"></i> 起草</a>
 						        <table id="pageTable" class="demo-add-niftycheck" data-toolbar="#del,#add"
 						               data-search="true"
 						               data-show-refresh="true"
@@ -54,9 +54,9 @@
 	       align:'left',
 	       width:'250',
 	       formatter:function(value,row,index){
-	    	   var a  =     '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/oa/notice/getEditPage?id='+row.id+'&view=detail\')" href="javascript:void(0);" >查看</a>&nbsp;';
+	    	   var a  =     '<a class="label label-table label-success" href="'+ctx+'/admin/oa/notice/getEditPage?id='+row.id+'&view=detail" >查看</a>&nbsp;';
 	    	   if(value=='0'){//未发布
-		           	a = a + '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/oa/notice/getEditPage?id='+row.id+'\')" href="javascript:void(0);" >修改</a>&nbsp;';
+		           	a = a + '<a class="label label-table label-success" href="'+ctx+'/admin/oa/notice/getEditPage?id='+row.id+'" >修改</a>&nbsp;';
 		           	a = a + '<a class="label label-table label-info" onclick="publish(\''+row.id+'\')" href="javascript:void(0);" >发布</a>&nbsp;';
 		           	a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>&nbsp;';
 	    	   }else{
@@ -128,7 +128,7 @@
 			//删除结果
 			if(data.success){
 				pointLion.alertMsg(data.message,"success",null,function(){
-					doPjax(ctx+'/admin/oa/notice/getListPage');//跳转到列表页
+					location.href = ctx+'/admin/oa/notice/getListPage';//跳转到列表页
 				});
 			}else{
 				pointLion.alertMsg(data.message,"success",null,null);
@@ -141,7 +141,7 @@
 				var data = common_ajax.ajaxFunc("/admin/oa/notice/publish",{"id":id}, "json", null);
 				if(data.success){
 					pointLion.alertMsg(data.message,"success",null,function(){
-						doPjax(ctx+'/admin/oa/notice/getListPage');//跳转到列表页
+						location.href = ctx+'/admin/oa/notice/getListPage';//跳转到列表页
 					});
 				}
 			});
@@ -154,7 +154,7 @@
 			//删除结果
 			if(data.success){
 				pointLion.alertMsg(data.message,"success",null,function(){
-					doPjax(ctx+'/admin/oa/notice/getListPage');//跳转到列表页
+					location.href = ctx+'/admin/oa/notice/getListPage';//跳转到列表页
 				});
 			}else{
 				pointLion.alertMsg(data.message,"danger",null,null);

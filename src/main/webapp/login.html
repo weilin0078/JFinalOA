@@ -109,6 +109,11 @@
                       timer : 5000
                   });
 			  }
+			  window.onload = function () {
+				  if (window.parent.window != window) {
+					  window.top.location = "#(ctx)/admin/login";
+				  }
+			  }
 		</script>
 
     </body>

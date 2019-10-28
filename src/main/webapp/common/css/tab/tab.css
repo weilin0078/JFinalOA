@@ -1,0 +1,202 @@
+.jfinaloa-tab-wapper #page-tab, .jfinaloa-tab-wapper #page-tab * {
+	margin: 0;
+	padding: 0;
+	-webkit-font-smoothing: antialiased
+}
+
+.jfinaloa-tab-wapper #page-tab, .jfinaloa-tab-wapper #page-tab .jfinaloa-tab-wapper #page-tab-content, .jfinaloa-tab-wapper #page-tab .tab-btn, .jfinaloa-tab-wapper #page-tab #page-operation,
+	.jfinaloa-tab-wapper #page-tab #menu-list, .jfinaloa-tab-wapper #page-tab #menu-list a {
+	height: 30px;
+	line-height: 30px
+}
+
+.jfinaloa-tab-wapper #page-tab {
+	width: 100%;
+	border-top: 1px solid #f1f0f0;
+	border-bottom: 1px solid;
+	border-bottom-color: #eee;
+	position: relative;
+	line-height: 30px;
+	height: 32px;
+}
+
+.jfinaloa-tab-wapper #page-tab-content {
+	margin-left: 30px;
+	width: 100000px;
+	overflow: hidden;
+	background-color: #fff
+}
+
+.jfinaloa-tab-wapper #page-tab button {
+	background: #fff;
+	border: 0;
+	cursor: default
+}
+
+.jfinaloa-tab-wapper #page-tab .tab-btn, .jfinaloa-tab-wapper #page-tab #page-operation {
+	position: absolute;
+	width: 30px;
+	text-align: center;
+	color: #999;
+	z-index: 2;
+	top: 0
+}
+
+.jfinaloa-tab-wapper #page-tab #page-prev {
+	left: 0;
+	border-right: 1px solid #f1f0f0;
+	background-position: 5px 50%;
+	background-size: 20px;
+	background-repeat: no-repeat
+}
+
+.jfinaloa-tab-wapper #page-tab #page-next {
+	right: 30px;
+	border-left: 1px solid #f1f0f0;
+	border-right: 1px solid #f1f0f0;
+	background-position: 5px 50%;
+	background-size: 20px;
+	background-repeat: no-repeat
+}
+
+.jfinaloa-tab-wapper #page-tab #page-operation {
+	right: 0;
+	width: 30px;
+	background-position: 5px 50%;
+	background-size: 16px;
+	background-repeat: no-repeat;
+	background-color: #fff
+}
+
+.jfinaloa-tab-wapper #page-tab #page-operation:hover {
+	background-color: #f1f0f0
+}
+
+.jfinaloa-tab-wapper #page-tab #menu-list {
+	float: left
+}
+
+.jfinaloa-tab-wapper #page-tab #menu-list a {
+	float: left;
+	text-decoration: none;
+	padding: 0 10px 0 20px;
+	border-right: 1px solid #f1f0f0;
+	color: #999;
+	font-size: 12px;
+	cursor: pointer;
+	background-color: #fff;
+	transition: background-color .5s;
+	-moz-transition: background-color .5s;
+	-webkit-transition: background-color .5s;
+	-o-transition: background-color .5s
+}
+
+.jfinaloa-tab-wapper #page-tab #menu-list a:hover {
+	background-color: #f1f0f0
+}
+
+.jfinaloa-tab-wapper #page-tab #menu-list a.active {
+	background-color: #ecf0f5;;
+	color: #444;
+	border-right: 0;
+	transition: color .5s;
+	-moz-transition: color .5s;
+	-webkit-transition: color .5s;
+	-o-transition: color .5s;
+	transition: background-color .5s;
+	-moz-transition: background-color .5s;
+	-webkit-transition: background-color .5s;
+	-o-transition: background-color .5s;
+}
+
+.jfinaloa-tab-wapper #page-tab #menu-list a.active:hover {
+	color: #999
+}
+
+.jfinaloa-tab-wapper #page-tab .menu-close {
+	width: 13px;
+	height: 13px;
+	display: inline-block;
+	margin-left: 15px;
+}
+
+.jfinaloa-tab-wapper #page-tab .menu-close:hover {
+	color: #fff;
+	border-radius: 50%;
+	background-color: #777;
+	line-height: 15px;
+	padding-left: 2px;
+}
+
+#jfinaloa-tab-page-content {
+	width: 100%;
+	height: 100%;
+	overflow: hidden
+}
+
+#jfinaloa-tab-page-content .iframe-content {
+	width: 100%;
+	height: 100%;
+	border: 0;
+	display: none
+}
+
+#jfinaloa-tab-page-content .active {
+	display: block
+}
+
+#jfinaloa-menu-all {
+	width: 175px;
+	border: 1px solid #ecf0f5;
+	position: absolute;
+	right: 0;
+	z-index: 100;
+	min-height: 25px;
+	padding: 1px;
+	overflow-y: auto;
+	display: none;
+	max-height: 380px;
+	top: 31px;
+	background-color: #fff
+}
+
+#jfinaloa-menu-all #jfinaloa-menu-all-ul {
+	width: 100%;
+	height: 100%
+}
+
+#jfinaloa-menu-all #jfinaloa-menu-all-ul li {
+	list-style: none;
+	padding: 5px 19px 5px 7px;
+	cursor: pointer;
+	overflow: hidden;
+	font-size: 12px
+}
+
+#jfinaloa-menu-all #jfinaloa-menu-all-ul li.active {
+	background-color: #efefef;
+	color: #444;
+}
+
+#jfinaloa-menu-all #jfinaloa-menu-all-ul li:not (.active ):hover {
+	background-color: #f1f0f0
+}
+
+html, body, #container, #container .boxed, #container .boxed #content-container,
+	#container .boxed #content-container .jfinaloa-tab-wapper, #container .boxed #content-container .jfinaloa-tab-wapper,
+	#container .boxed #content-container .jfinaloa-tab-wapper #jfinaloa-tab-page-content,
+	#container .boxed #content-container .jfinaloa-tab-wapper #jfinaloa-tab-page-content iframe {
+	height: 100%;
+}
+
+
+
+/*****************页面组件的样式覆盖****************/
+.panel{
+	box-shadow: none !important;
+	/*border: none;*/
+}
+/*引用单页面模式之后，新增了一个顶部块的背景色，如果从单页切换到tab模式，会有该样式，在这里处理成高度为0，则不显示顶部块*/
+ #content-container::before {
+	 height: 0px !important;
+ }

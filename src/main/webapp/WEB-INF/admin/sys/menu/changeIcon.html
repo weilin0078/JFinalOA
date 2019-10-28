@@ -737,7 +737,7 @@
 		        var data = common_ajax.ajaxFunc("/admin/sys/menu/changeIcon", {"icon":data,"mid":mid}, "json", null);
 		        if(data.success){
 					parent.pointLion.alertMsg("保存成功!" , "success" , "small" , null);
-					parent.doPjax(ctx+'/admin/sys/menu/getListPage');//跳转到列表页
+					parent.location.href = ctx+'/admin/sys/menu/getListPage';//跳转到列表页
 					parent.layer.closeAll();
 				}
 		    });

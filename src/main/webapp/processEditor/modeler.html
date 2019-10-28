@@ -143,5 +143,111 @@
 	<script>
 		ctx = ACTIVITI.CONFIG.ctx;
 	</script>
+	<script src="../common/js/common/pointLion.js"></script>
+
+	<script>
+		//selected-item-body
+		//300px
+		//
+	
+	
+		jQuery(document).ready(function() {
+			initWidth();
+			bindEvent();
+		});
+	
+		function initWidth(){
+			
+		}
+	
+		var aaaaa = [ '$scope', function($scope, $modal) {
+	
+		   
+		}];
+	
+		/***
+		 * 绑定事件 
+		 */
+		function bindEvent(){
+			jQuery(document).on("focus","#assigneeField",function(){//办理人绑定事件
+				pointLion.selectOneUser("",function(data){//选择一个人
+					if(data.usernameData){
+						changeAssignee(data.usernameData);
+					}else{
+						changeAssignee("");
+					}
+				})
+			});
+			jQuery(document).on("focus","input[ng-model='candidateUser.value']",function(){//候选人绑定事件
+					var selectCandidateUser;
+					var index = layer.open({
+						  type: 2,
+						  title: false, //不显示标题栏
+						  area: ['400px', '550px'],
+						  shade: 0.2,
+						  id: 'selectOneRole', //设定一个id，防止重复弹出
+						  resize: false,
+						  closeBtn: false,
+						  isOutAnim : false , 
+						  btn: ['确定', '取消'], 
+						  btnAlign: 'c',
+						  content: ctx+'/admin/oa/model/getSelectCandidateUserPage',
+						  success: function(layero){
+								selectCandidateUser = window[layero.find('iframe')[0]['name']];
+						  },
+						  yes: function(){
+							  var data = selectCandidateUser.getSelectData();
+							  if(data){
+								  changeCandidateUser(data);
+							  }else{
+								  changeCandidateUser("");
+							  }
+							  layer.closeAll();
+						  }
+					});
+			}); 
+			jQuery(document).on("focus","input[ng-model='candidateGroup.value']",function(){//候选组绑定事件
+				pointLion.selectOneRole(function(data){//选择一个角色
+					if(data.type){
+						changeCandidateGroup(data.type);
+					}else{
+						changeCandidateGroup("");
+					}
+				})
+			}); 
+			
+		}
+	
+		
+		/***
+		 * 设置办理人
+		 * @param assignee
+		 */
+		function changeAssignee(assignee){
+			var appElement = document.querySelector('[ng-controller=KisBpmAssignmentPopupCtrl]');
+			var $scope = angular.element(appElement).scope();
+			$scope.assignment.assignee=assignee;
+			$scope.$apply();
+		}
+		/***
+		 * 选择候选组
+		 */
+		function changeCandidateUser(userData){
+			var appElement = document.querySelector('[ng-controller=KisBpmAssignmentPopupCtrl]');
+			var $scope = angular.element(appElement).scope();
+			$scope.assignment.candidateUsers=[{value:userData}];
+			$scope.$apply();
+		}
+		/***
+		 * 选择候选组
+		 */
+		function changeCandidateGroup(groupData){
+			var appElement = document.querySelector('[ng-controller=KisBpmAssignmentPopupCtrl]');
+			var $scope = angular.element(appElement).scope();
+			$scope.assignment.candidateGroups=[{value:groupData}];
+			$scope.$apply();
+		}
+
+	</script>
 </body>
 </html>

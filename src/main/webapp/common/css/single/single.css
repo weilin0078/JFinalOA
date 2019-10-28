@@ -1,0 +1,44 @@
+#jfinaloa-single-page-content {
+	width: 100%;
+	overflow: hidden
+}
+
+#jfinaloa-single-page-content .iframe-content {
+	border: 0;
+	width: 100%;
+}
+
+#jfinaloa-single-page-content .active {
+	display: block
+}
+
+html, body{
+	height:100%;
+	font-size: 12px;
+}
+#container,
+#container .boxed,
+#container .boxed #content-container{
+	min-height:100%;
+}
+#container .boxed #content-container #page-content #jfinaloa-single-page-content iframe{
+	min-height:100%;
+}
+#container .boxed #content-container #page-content #jfinaloa-single-page-content{
+	min-height:100%;
+}
+#container .boxed #content-container #page-content{
+	min-height: calc(100% - 80px);
+}
+
+	/*覆盖部分样式*/
+#mainnav .list-header:not(:first-child) {
+	margin-top: 0px !important;
+}
+
+/**覆盖掉主题中的样式，原本是白色的，集成单页模式之后，可能会造成该出为白色，需要覆盖掉。**/
+.mainnav-profile .profile-wrap {
+	background-color: transparent;
+}
+
+

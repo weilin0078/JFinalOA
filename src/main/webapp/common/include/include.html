@@ -1,9 +1,10 @@
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<link rel="shortcut icon" href="#(ctx)/common/img/ico/PointLion.ico" type="image/x-icon" />
-    <link href="#(ctx)/common/css/bootstrap.css" rel="stylesheet">
-    <link href="#(ctx)/common/css/nifty.css" rel="stylesheet">
-    <link href="#(ctx)/common/css/demo/nifty-demo.css" rel="stylesheet">
+    <link href="#(ctx)/common/css/tab/bootstrap.css" rel="stylesheet">
+    <link href="#(ctx)/common/css/tab/nifty.css" rel="stylesheet">
+    <link href="#(ctx)/common/css/tab/demo/nifty-demo.css" rel="stylesheet">
     <link href="#(ctx)/common/plugins/animate-css/animate.min.css" rel="stylesheet">
-    <link href="#(ctx)/common/css/demo/nifty-demo-icons.css" rel="stylesheet">
+    <link href="#(ctx)/common/css/tab/demo/nifty-demo-icons.css" rel="stylesheet">
     <link href="#(ctx)/common/plugins/themify-icons/themify-icons.css" rel="stylesheet">
 	<link href="#(ctx)/common/premium/icon-sets/icons/solid-icons/premium-solid-icons.css" rel="stylesheet">
 	<link href="#(ctx)/common/plugins/ionicons/css/ionicons.css" rel="stylesheet">
@@ -30,10 +31,10 @@
     <link href="#(ctx)/common/plugins/dropzone/dropzone.min.css" rel="stylesheet">
     <link href="#(ctx)/common/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css" rel="stylesheet">
     <link href="#(ctx)/common/plugins/webuploader/webuploader.css" rel="stylesheet">
-    <link href="#(ctx)/common/css/tab.css" rel="stylesheet">
-    
-    <!--JAVASCRIPT-->
     <link href="#(ctx)/common/plugins/pace/pace.css" rel="stylesheet">
+    <link href="#(ctx)/common/css/common.css" rel="stylesheet">
+
+    <!--JAVASCRIPT-->
     <script src="#(ctx)/common/plugins/pace/pace.js"></script>
     <script src="#(ctx)/common/js/jquery-2.2.4.min.js"></script>
     <script src="#(ctx)/common/plugins/layer/layer.js"></script>
@@ -45,6 +46,8 @@
     <script src="#(ctx)/common/plugins/bootstrap-validator/bootstrapValidator.min.js"></script>
     <script src="#(ctx)/common/plugins/x-editable/js/bootstrap-editable.min.js"></script>
     <script src="#(ctx)/common/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="#(ctx)/common/plugins/colResizable/colResizable-1.6.js"></script>
+    <script src="#(ctx)/common/plugins/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js"></script>
     <script src="#(ctx)/common/plugins/bootstrap-table/extensions/pagejump/bootstrap-table-pagejump.js"></script>
     <script src="#(ctx)/common/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
     <script src="#(ctx)/common/plugins/bootstrap-table/extensions/editable/bootstrap-table-editable.js"></script>
@@ -70,111 +73,29 @@
     <script src="#(ctx)/common/plugins/webuploader/webuploader.js"></script>
     <script src="#(ctx)/common/js/common/ajax.js"></script>
     <script src="#(ctx)/common/js/jquery.pjax.js"></script>
+    <!--Flot Chart [ OPTIONAL ]-->
+    <script src="#(ctx)/common/plugins/flot-charts/jquery.flot.min.js"></script>
+    <script src="#(ctx)/common/plugins/flot-charts/jquery.flot.resize.min.js"></script>
+    <script src="#(ctx)/common/plugins/flot-charts/jquery.flot.tooltip.min.js"></script>
+    <!--Sparkline [ OPTIONAL ]-->
+    <script src="#(ctx)/common/plugins/sparkline/jquery.sparkline.min.js"></script>
     <script src="#(ctx)/common/js/common/pointLion.js"></script>
     <script src="#(ctx)/common/js/common/ext.js"></script>
     <script src="#(ctx)/common/js/common/datetimeUtil.js"></script>
-    <script src="#(ctx)/common/js/common/tab.js"></script>
-    <style>
-    	.datepicker-dropdown::before {
-		    content: unset;
-		}
-		.datepicker-dropdown::after {
-		    content: unset;
-		}
-		.datepicker-inline {
-		    width: auto;
-		}
-		/*滚动条样式*/
-		::-webkit-scrollbar  
-		{  
-		    width: 5px;  
-		    height: 5px;  
-		    background-color: #F5F5F5;  
-		} 
-		/*滚动条上下两个按钮*/
-		::-webkit-scrollbar-button{
-	        /*background-color:#26a69a;*/
-	    }
-		/*定义滚动条轨道 内阴影+圆角*/  
-		::-webkit-scrollbar-track  
-		{  
-		    /*border-radius: 10px;  */
-			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);  
-		    background-color: #F5F5F5;  
-		}    
-		/*定义滑块 内阴影+圆角*/  
-		::-webkit-scrollbar-thumb  
-		{  
-		    /*border-radius: 10px;  */
-		    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);  
-		    background-color: #26a69a;  
-		}  
-		/*滑块效果*/
-		::-webkit-scrollbar-thumb:hover
-		{
-			border-radius: 5px;
-			-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-			background: rgba(0,0,0,0.4);
-		}
-		
-		/*bootstrap-table固定标头之后的问题。列不对齐问题。最后一行不显示边框问题*/
-		.demo-add-niftycheck{
-		    table-layout:fixed !important;
-		}
-		.bootstrap-table tr:last-child{
-			border-bottom: 1px solid #ddd;
-		}
-		/*IE滚动条颜色*/
-		html {
-		    scrollbar-face-color:#bfbfbf;/*滚动条颜色*/
-		    scrollbar-highlight-color:#000;
-		    scrollbar-3dlight-color:#000;
-		    scrollbar-darkshadow-color:#000;
-		    scrollbar-Shadow-color:#adadad;/*滑块边色*/
-		    scrollbar-arrow-color:rgba(0,0,0,0.4);/*箭头颜色*/
-		    scrollbar-track-color:#eeeeee;/*背景颜色*/
-		}
-		/***
-		 * 太长的，变成省略号
-		 */
-		.bootstrap-table tbody td{
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
-		/*数字多长强制换行*/
-		.taskHisList td{
-		    word-wrap: break-word;
-		}
-		
-		/*******/
-		.bootbox.modal.in{
-			z-index: 9999999999999999999999;
-		}
-		
-		/*******
-		 * 单选按钮，居中
-		 */
-		.magic-radio + label::after{
-			top:3px !important;
-			left:2.5px !important;
-		}
-		/***
-		*表单样式
-		*/
-		.form-group{
-			margin-top:10px;
-			margin-bottom:10px;
-		}
-		/***
-		**提示信息的字体大小
-		*/
-		small, .small {
-		    font-size: 90% !important;
-		}
-		.row {
-		    margin: 0px;
-		}
-    </style>
+
+    #if(setting)
+        #if(setting.color_theme)
+            <link href="#(ctx)#(setting.color_theme)" rel="stylesheet">
+        #else
+            <link href="#(ctx)/common/css/tab/themes/type-b/theme-light.css" rel="stylesheet">
+        #end
+        #if(setting.skin!=null)
+            <link href="#(ctx)/common/css/skin/skin-#(setting.skin).css" rel="stylesheet">
+        #else
+            <link href="#(ctx)/common/css/skin/skin-info.css" rel="stylesheet">
+        #end
+    #end
+
 	<script>
 		var ctx = "#(ctx)";
 		//PJax
@@ -197,29 +118,18 @@
         	});
 			$.pjax({'url': url, container: container,timeout:999999,cache: false});
 		}
-		//新的iframe容器高度
-		function getIframeHeight(){
-			var height = document.documentElement.clientHeight-110;
-			return height;
-		}
-		//获取主页面panel高度
-		function getLionFullHeight(){
-			var height = document.documentElement.clientHeight-70;
-			return height;
-		}
-		//打开新页面
-		function openNewPage(url){
-			if(url.indexOf("?")>0){
-				url = url + "&action=openPage";
-			}else{
-				url = url + "?action=openPage";
-			}
-			var height = getIframeHeight();
-			$("#iframeContainer").css("height",height);
-			$("#iframeContainer #container-iframe").attr("src",url)
-		}
+		// //获取主页面panel高度
+		// function getLionFullHeight(){
+		// 	var height = document.documentElement.clientHeight-70;
+		// 	return height;
+		// }
 		//bootstrap-table，容器宽度变化的时候，标头与内容不对齐
 		$(window).resize(function () {
 			$("#pageTable").bootstrapTable('resetView');
 		});
 	</script>
+    <style>
+        #container .table td {
+            vertical-align: middle !important;
+        }
+    </style>

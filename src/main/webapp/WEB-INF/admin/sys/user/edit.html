@@ -8,7 +8,7 @@
 			<div class="col-lg-12">
 		        <div class="panel">
 		            <div class="panel-heading">
-		                <h3 class="panel-title" style="text-align:center;">
+		                <h3 class="panel-title" style="text-align: right;">
 		                	#@installPJaxGoBackBtn()
 		                	添加新用户
 		                </h3>
@@ -22,7 +22,7 @@
 			                        <input type="hidden" id="userid" name="sysUser.id" class="form-control" value="#(o?o.id:'')">
 			                        <input type="text" id="orgname" name="sysUser.orgName" class="form-control" disabled value="#(org?org.name:'')">
 			                        <span class="input-group-btn">
-			                            <button class="btn btn-mint" type="button" onclick="selectOneOrg()">选择</button>
+			                            <button class="btn btn-primary" type="button" onclick="selectOneOrg()">选择</button>
 			                        </span>
 		                    	</div>
 		                        <small class="help-block">请选择所属单位</small>
@@ -30,35 +30,35 @@
 		                </div>
 		                <div class="form-group">
 		                    <label class="col-md-2 control-label">用户登录名</label>
-		                    <div class="col-md-8">
+		                    <div class="col-md-9">
 		                        <input type="text"  name="sysUser.username" class="form-control"  value="#(o?o.username:'')">
 		                        <small class="help-block">请输入登录名(用来登录系统)</small>
 		                    </div>
 		                </div>
 		                <div class="form-group">
 		                    <label class="col-md-2 control-label">密码</label>
-		                    <div class="col-md-8">
+		                    <div class="col-md-9">
 		                        <input type="password"  name="sysUser.password" class="form-control"  value="" #if(o) placeholder="如果您不想修改密码,请将此项留空!" #end >
 		                        <small class="help-block">请输入密码</small>
 		                    </div>
 		                </div>
 		                <div class="form-group">
 		                    <label class="col-md-2 control-label">密码确认</label>
-		                    <div class="col-md-8">
+		                    <div class="col-md-9">
 		                        <input type="password"  name="password2" class="form-control"  value="" #if(o) placeholder="如果您不想修改密码,请将此项留空!" #end>
 		                        <small class="help-block">请再次输入密码</small>
 		                    </div>
 		                </div>
 		                <div class="form-group">
 		                    <label class="col-md-2 control-label">用户姓名</label>
-		                    <div class="col-md-8">
+		                    <div class="col-md-9">
 		                        <input type="text"  name="sysUser.name" class="form-control"  value="#(o?o.name:'')">
 		                        <small class="help-block">请输入用户姓名</small>
 		                    </div>
 		                </div>
 		                <div class="form-group">
 	                    	<label class="col-md-2 control-label">性别</label>
-                            <div class="col-md-8">
+                            <div class="col-md-9">
 		                           <input id="sysUserSexMan" class="magic-radio" type="radio" name="sysUser.sex" value="1" #if(o&&o.sex=="1") checked #end>
 		                           <label for="sysUserSexMan">男</label>
 		                           <input id="sysUserSexWoman" class="magic-radio" type="radio" name="sysUser.sex" value="0" #if(o&&o.sex=="0") checked #end>
@@ -67,7 +67,7 @@
                         </div>
                         <div class="form-group">
 	                    	<label class="col-md-2 control-label">工号</label>
-	                        <div class="col-md-8">
+	                        <div class="col-md-9">
 		                        <input type="text"  name="sysUser.work_num" class="form-control"  value="#(o?o.work_num:'')">
 		                        <small class="help-block">请输入工号</small>
 		                    </div>
@@ -101,7 +101,7 @@
 		                        <small class="help-block">请输入邮箱地址</small>
 		                    </div>
 	                    	<label class="col-md-1 control-label">移动电话</label>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
 		                        <input type="text"  name="sysUser.mobile" class="form-control"  value="#(o?o.mobile:'')">
 		                        <small class="help-block">请输入移动电话</small>
 		                    </div>
@@ -120,21 +120,21 @@
 		                            <input type="text" id="userRoleName" class="form-control" readonly value="#(userRoleName)">
 			                        <input type="hidden" id="userRoleId" name="userRoleId" class="form-control" value="#(userRoleId)">
 			                        <span class="input-group-btn">
-			                            <button class="btn btn-mint" type="button" onclick="selectUserRole()">选择</button>
+			                            <button class="btn btn-primary" type="button" onclick="selectUserRole()">选择</button>
 			                        </span>
 			                    </div>
 		                    </div>
                         </div>
                         <div class="form-group">
 	                    	<label class="col-md-2 control-label">用户职位</label>
-	                    	<div class="col-md-8">
+	                    	<div class="col-md-9">
 		                        <input type="text"  name="sysUser.position" class="form-control"  value="#(o?o.position:'')">
 		                        <small class="help-block">请输入用户职位</small>
 		                    </div>
 	                    </div>
                         <div class="form-group">
 	                    	<label class="col-md-2 control-label">用户类型</label>
-                            <div class="col-md-8">
+                            <div class="col-md-9">
 		                           <input id="sysUserTypeText" class="magic-radio" type="radio" name="sysUser.type" value="0" #if(o&&o.type=="0") checked #end>
 		                           <label for="sysUserTypeText">试用</label>
 		                           <input id="sysUserTypeReal" class="magic-radio" type="radio" name="sysUser.type" value="1" #if(o&&o.type=="1") checked #end>
@@ -147,14 +147,14 @@
                         </div>
                         <div class="form-group">
 		                    <label class="col-md-2 control-label">过往经历</label>
-		                    <div class="col-md-8">
+		                    <div class="col-md-9">
 		                        <textarea rows="8" name="sysUser.experience" class="form-control" #if(view=='detail') readonly #end>#(o?o.experience:'')</textarea>
 		                        <small class="help-block">请输入过往经历</small>
 		                    </div>
 		                </div>
 		                <div class="form-group">
 		                    <label class="col-md-2 control-label">教育经历</label>
-		                    <div class="col-md-8">
+		                    <div class="col-md-9">
 		                        <textarea rows="8" name="sysUser.edu_experience" class="form-control" #if(view=='detail') readonly #end>#(o?o.edu_experience:'')</textarea>
 		                        <small class="help-block">请输入教育经历</small>
 		                    </div>
@@ -163,7 +163,7 @@
 		                    <div class="row">
 		                        <div class="col-sm-9 col-sm-offset-3">
 		                            <button class="btn btn-warning" type="reset">重置</button>
-		                            <button class="btn btn-mint" type="submit" >保存</button>
+		                            <button class="btn btn-primary" type="submit" >保存</button>
 		                        </div>
 		                    </div>
 		                </div>
@@ -267,7 +267,7 @@
 			var data = common_ajax.ajaxFunc("/admin/sys/user/save", $('#editForm').serialize(), "json", null);
 			if(data.success){
 				pointLion.alertMsg("保存成功!" , "success" , "small" , function(){
-					doPjax(ctx+'/admin/sys/user/getListPage');//跳转到列表页
+					location.href = ctx+'/admin/sys/user/getListPage';//跳转到列表页
 				});
 			}
 		}

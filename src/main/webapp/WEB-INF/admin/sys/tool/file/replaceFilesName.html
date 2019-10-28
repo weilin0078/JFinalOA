@@ -1,0 +1,52 @@
+<div id="page-content">
+    <div class="col-lg-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title" style="text-align: right;">
+                    批量重命名文件
+                </h3>
+            </div>
+            <form id="editForm" class="panel-body form-horizontal form-padding">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">文件夹目录(程序运行服务器)</label>
+                    <div class="col-md-9">
+                        <input type="text"  name="path" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">需要替换的名称</label>
+                    <div class="col-md-9">
+                        <input type="text"  name="c" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">替换成</label>
+                    <div class="col-md-9">
+                        <input type="text"  name="replace" class="form-control">
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-6">
+                            <button class="btn btn-primary" type="button" onclick="save()">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function save(){
+        var data = common_ajax.ajaxFunc("/admin/sys/tool/file/replaceFilesNameTool", $('#editForm').serialize(), "json", null);
+        if(data.success){
+            pointLion.alertMsg("执行成功!" , "success" , "small" , null,data);
+        }else{
+            pointLion.alertMsg(data.message , "danger" , "small" , null,data);
+        }
+    }
+
+    $(document).ready(function() {
+
+    });
+</script>

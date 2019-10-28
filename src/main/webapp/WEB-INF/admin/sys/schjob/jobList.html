@@ -1,0 +1,155 @@
+<div id="page-content">
+	<div class="col-sm-12 eq-box-sm">
+		<div class="panel ">
+			<div class="panel-body">
+				<a id="add" class="btn btn-primary data-toolbar" href="#(ctx)/admin/sys/schjob/getJobEditPage?view=edit"><i class="demo-pli-add"></i> 添加</a>
+				<a id="del" class="btn btn-danger data-toolbar" onclick="delSel()" href="javascript:void(0);"><i class="demo-pli-cross"></i> 批量删除</a>
+				<table id="pageTable" class="demo-add-niftycheck" data-toolbar="#del,#add"
+					   data-search="true"
+					   data-show-refresh="true"
+					   data-show-toggle="true"
+					   data-show-columns="true"
+					   data-sort-name="id"
+					   data-page-list="[5, 10, 20]"
+					   data-page-size="5"
+					   data-pagination="true" data-show-pagination-switch="true" ></table>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+
+	var col = [{
+		field: 'checked',
+		checkbox : true,
+		align: 'center'
+	},
+		{
+			field: 'JOB_NAME',
+			title: '任务名称',
+			align: 'center'
+		},
+		{
+			field: 'TYPE',
+			title: '任务类型',
+			align: 'center',
+			formatter:function(value,row,index){
+				if("1"==value){
+					return "QuartZ任务";
+				}else if("2"==value){
+					return "OSP任务";
+				}else{
+					return "未知任务类型";
+				}
+			}
+		},
+		{
+			field: 'JOB_CLASS',
+			title: '执行类',
+			align: 'center'
+		},
+		{
+			field: 'JOB_METHOD',
+			title: '执行方法',
+			align: 'center'
+		},
+		{
+			field: 'control',
+			title: '操作',
+			align: 'left',
+			width:'240',
+			formatter:function(value,row,index){
+				//通过formatter可以自定义列显示的内容ID
+				//value：当前field的值，即id
+				//row：当前行的数据
+				var a = '<a class="label label-table label-success" href="'+ctx+'/admin/sys/schjob/getJobEditPage?id='+row.ID+'&view=detail" >查看</a>&nbsp;';
+				a = a + '<a class="label label-table label-success" href="'+ctx+'/admin/sys/schjob/getJobEditPage?id='+row.ID+'&view=edit" >编辑</a>&nbsp;';
+				a = a + '<a class="label label-table label-danger" href="javascript:void(0);" onclick="del(\''+row.ID+'\')" >删除</a>';
+				return a;
+			}
+		}];
+	var opt = {
+		//请求方法
+		method: 'get',
+		//是否显示行间隔色
+		striped: true,
+		//是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+		cache: false,
+		//data-toolbar: "#demo-delete-row",
+		//是否显示分页（*）
+		pagination: true,
+		//是否启用排序
+		sortable: false,
+		//排序方式
+		sortOrder: "asc",
+		//初始化加载第一页，默认第一页
+		//我设置了这一项，但是貌似没起作用，而且我这默认是0,- -
+		//pageNumber:1,
+		//每页的记录行数（*）
+		pageSize: 10,
+		//可供选择的每页的行数（*）
+		pageList: [10, 25, 50, 100],
+		//这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
+		url: ctx+"/admin/sys/schjob/jobListData",
+		//默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+		//queryParamsType:'',
+		////查询参数,每次调用是会带上这个参数，可自定义
+		queryParams : function(params) {
+			return {
+				pageNumber: (params.offset/params.limit)+1,
+				pageSize: params.limit
+			};
+		},
+		//分页方式：client客户端分页，server服务端分页（*）
+		sidePagination: "server",
+		//是否显示搜索
+		search: false,
+		//Enable the strict search.
+		strictSearch: true,
+		//Indicate which field is an identity field.
+		idField : "id",
+		columns: col,
+		pagination:true,paginationShowPageGo: true
+	};
+
+	//表格
+	function initTable(){
+		$('#pageTable').bootstrapTable(opt);
+		$('#pageTable').bootstrapTable('hideColumn', 'id');
+	}
+	function refreshTable(){
+		$("#pageTable").bootstrapTable('refresh', opt);
+		$('#pageTable').bootstrapTable('hideColumn', 'id');
+	}
+
+	//批量删除
+	function delSel(){
+		var data = [];
+		$("#pageTable input[type='checkbox'][name!='btSelectAll']:checked").each(function(){
+			data.push($(this).val());
+		});
+		if(data.length==0){
+			pointLion.alertMsg("请选择要删除的数据!","danger",null,null);
+			return;
+		}
+		del(data.join(","));//执行删除
+	}
+	//删除
+	function del(ids){
+		pointLion.confimMsg("您是否要删除所选信息 ?<br/> 点击确认进行删除 , 点击取消取消该操作",null,function(){
+			//执行删除
+			var data = common_ajax.ajaxFunc("/admin/sys/schjob/deleteJob",{"ids":ids}, "json", null);
+			//删除结果
+			if(data.success){
+				pointLion.alertMsg(data.message,"success",null,function(){
+					location.href = ctx+'/admin/sys/schjob/getJobListPage';//跳转到列表页
+				});
+			}else{
+				pointLion.alertMsg(data.message,"success",null,null);
+			}
+		});
+	};
+	$(document).ready(function(){
+		initTable();//初始化
+	});
+</script>

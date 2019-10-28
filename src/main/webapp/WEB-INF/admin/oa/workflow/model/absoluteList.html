@@ -124,7 +124,7 @@
 			//删除结果
 			if(data.success){
 				pointLion.alertMsg(data.message,"success",null,function(){
-					doPjax(ctx+'/admin/oa/model/getAbsoluteListPage');//跳转到列表页
+					location.href = ctx+'/admin/oa/model/getAbsoluteListPage';//跳转到列表页
 				});
 			}else{
 				pointLion.alertMsg("操作失败","danger",null,null);

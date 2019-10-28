@@ -1,0 +1,596 @@
+<style>
+    .cron_express label{
+        line-height:30px;
+    }
+    .cron_express span{
+        float: left;
+        padding: 0px 10px 0px 10px;
+    }
+    .cron_express input[type='number']{
+        width: 100px;
+        float: left;
+    }
+    .cron_express label::before,label::after{
+        margin-top: 5px;
+    }
+</style>
+<p class="bord-btm pad-ver text-main text-bold">发生频率</p>
+<div class="col-sm-12 cron_express">
+    <div class="tab-base">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#exesecond">秒</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#exemin">分钟</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#exehour">小时</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#exeday">日</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#exemonth">月</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#exeweek">周</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#exeyear">年</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="exesecond" class="tab-pane fade active in">
+                <p>
+                    <input id="exesecond_all" type="radio" class="magic-radio" checked="checked" name="second" onclick="everyTime(this)">
+                    <label for="exesecond_all">
+                        <span>每秒 允许的通配符[, - * /]</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exesecond_rate" type="radio" class="magic-radio" name="second" onclick="cycle(this)">
+                    <label for="exesecond_rate">
+                        <span>周期从</span>
+                        <input id="secondStart_0" type="number" class="form-control numberspinner" data-bv-field="integer" min="1" max="59" value="1">
+                        <span>-</span>
+                        <input id="secondEnd_0" type="number" class="form-control numberspinner" data-bv-field="integer" min="1" max="59" value="2">
+                        <span>秒</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exesecond_rate_start" type="radio" class="magic-radio" name="second" onclick="startOn(this)">
+                    <label for="exesecond_rate_start">
+                        <span>从</span>
+                        <input id="secondStart_1" type="number" class="form-control numberspinner" data-bv-field="integer" min="1" max="59" value="0">
+                        <span>秒开始,每</span>
+                        <input id="secondEnd_1" type="number" class="form-control numberspinner" data-bv-field="integer" min="1" max="59" value="1">
+                        <span>秒执行一次</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="sencond_appoint" type="radio" name="second" class="magic-radio">
+                    <label for="sencond_appoint">
+                        <span>指定</span>
+                        <div class="imp secondList">
+                            <input id="exesecond_00" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="0"> <label for="exesecond_00">00</label>
+                            <input id="exesecond_01" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="1"> <label for="exesecond_01">01</label>
+                            <input id="exesecond_02" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="2"> <label for="exesecond_02">02</label>
+                            <input id="exesecond_03" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="3"> <label for="exesecond_03">03</label>
+                            <input id="exesecond_04" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="4"> <label for="exesecond_04">04</label>
+                            <input id="exesecond_05" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="5"> <label for="exesecond_05">05</label>
+                            <input id="exesecond_06" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="6"> <label for="exesecond_06">06</label>
+                            <input id="exesecond_07" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="7"> <label for="exesecond_07">07</label>
+                            <input id="exesecond_08" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="8"> <label for="exesecond_08">08</label>
+                            <input id="exesecond_09" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="9"> <label for="exesecond_09">09</label>
+                            <input id="exesecond_10" class="magic-checkbox" name="exesecond_special" type="checkbox" value="10"> <label for="exesecond_10">10</label>
+                            <input id="exesecond_11" class="magic-checkbox" name="exesecond_special" type="checkbox" value="11"> <label for="exesecond_11">11</label>
+                            <input id="exesecond_12" class="magic-checkbox" name="exesecond_special" type="checkbox" value="12"> <label for="exesecond_12">12</label>
+                            <input id="exesecond_13" class="magic-checkbox" name="exesecond_special" type="checkbox" value="13"> <label for="exesecond_13">13</label>
+                            <input id="exesecond_14" class="magic-checkbox" name="exesecond_special" type="checkbox" value="14"> <label for="exesecond_14">14</label>
+                            <input id="exesecond_15" class="magic-checkbox" name="exesecond_special" type="checkbox" value="15"> <label for="exesecond_15">15</label>
+                            <input id="exesecond_16" class="magic-checkbox" name="exesecond_special" type="checkbox" value="16"> <label for="exesecond_16">16</label>
+                            <input id="exesecond_17" class="magic-checkbox" name="exesecond_special" type="checkbox" value="17"> <label for="exesecond_17">17</label>
+                            <input id="exesecond_18" class="magic-checkbox" name="exesecond_special" type="checkbox" value="18"> <label for="exesecond_18">18</label>
+                            <input id="exesecond_19" class="magic-checkbox" name="exesecond_special" type="checkbox" value="19"> <label for="exesecond_19">19</label>
+                            <input id="exesecond_20" class="magic-checkbox" name="exesecond_special" type="checkbox" value="20"> <label for="exesecond_20">20</label>
+                            <input id="exesecond_21" class="magic-checkbox" name="exesecond_special" type="checkbox" value="21"> <label for="exesecond_21">21</label>
+                            <input id="exesecond_22" class="magic-checkbox" name="exesecond_special" type="checkbox" value="22"> <label for="exesecond_22">22</label>
+                            <input id="exesecond_23" class="magic-checkbox" name="exesecond_special" type="checkbox" value="23"> <label for="exesecond_23">23</label>
+                            <input id="exesecond_24" class="magic-checkbox" name="exesecond_special" type="checkbox" value="24"> <label for="exesecond_24">24</label>
+                            <input id="exesecond_25" class="magic-checkbox" name="exesecond_special" type="checkbox" value="25"> <label for="exesecond_25">25</label>
+                            <input id="exesecond_26" class="magic-checkbox" name="exesecond_special" type="checkbox" value="26"> <label for="exesecond_26">26</label>
+                            <input id="exesecond_27" class="magic-checkbox" name="exesecond_special" type="checkbox" value="27"> <label for="exesecond_27">27</label>
+                            <input id="exesecond_28" class="magic-checkbox" name="exesecond_special" type="checkbox" value="28"> <label for="exesecond_28">28</label>
+                            <input id="exesecond_29" class="magic-checkbox" name="exesecond_special" type="checkbox" value="29"> <label for="exesecond_29">29</label>
+                            <input id="exesecond_30" class="magic-checkbox" name="exesecond_special" type="checkbox" value="30"> <label for="exesecond_30">30</label>
+                            <input id="exesecond_31" class="magic-checkbox" name="exesecond_special" type="checkbox" value="31"> <label for="exesecond_31">31</label>
+                            <input id="exesecond_32" class="magic-checkbox" name="exesecond_special" type="checkbox" value="32"> <label for="exesecond_32">32</label>
+                            <input id="exesecond_33" class="magic-checkbox" name="exesecond_special" type="checkbox" value="33"> <label for="exesecond_33">33</label>
+                            <input id="exesecond_34" class="magic-checkbox" name="exesecond_special" type="checkbox" value="34"> <label for="exesecond_34">34</label>
+                            <input id="exesecond_35" class="magic-checkbox" name="exesecond_special" type="checkbox" value="35"> <label for="exesecond_35">35</label>
+                            <input id="exesecond_36" class="magic-checkbox" name="exesecond_special" type="checkbox" value="36"> <label for="exesecond_36">36</label>
+                            <input id="exesecond_37" class="magic-checkbox" name="exesecond_special" type="checkbox" value="37"> <label for="exesecond_37">37</label>
+                            <input id="exesecond_38" class="magic-checkbox" name="exesecond_special" type="checkbox" value="38"> <label for="exesecond_38">38</label>
+                            <input id="exesecond_39" class="magic-checkbox" name="exesecond_special" type="checkbox" value="39"> <label for="exesecond_39">39</label>
+                            <input id="exesecond_40" class="magic-checkbox" name="exesecond_special" type="checkbox" value="40"> <label for="exesecond_40">40</label>
+                            <input id="exesecond_41" class="magic-checkbox" name="exesecond_special" type="checkbox" value="41"> <label for="exesecond_41">41</label>
+                            <input id="exesecond_42" class="magic-checkbox" name="exesecond_special" type="checkbox" value="42"> <label for="exesecond_42">42</label>
+                            <input id="exesecond_43" class="magic-checkbox" name="exesecond_special" type="checkbox" value="43"> <label for="exesecond_43">43</label>
+                            <input id="exesecond_44" class="magic-checkbox" name="exesecond_special" type="checkbox" value="44"> <label for="exesecond_44">44</label>
+                            <input id="exesecond_45" class="magic-checkbox" name="exesecond_special" type="checkbox" value="45"> <label for="exesecond_45">45</label>
+                            <input id="exesecond_46" class="magic-checkbox" name="exesecond_special" type="checkbox" value="46"> <label for="exesecond_46">46</label>
+                            <input id="exesecond_47" class="magic-checkbox" name="exesecond_special" type="checkbox" value="47"> <label for="exesecond_47">47</label>
+                            <input id="exesecond_48" class="magic-checkbox" name="exesecond_special" type="checkbox" value="48"> <label for="exesecond_48">48</label>
+                            <input id="exesecond_49" class="magic-checkbox" name="exesecond_special" type="checkbox" value="49"> <label for="exesecond_49">49</label>
+                            <input id="exesecond_50" class="magic-checkbox" name="exesecond_special" type="checkbox" value="50"> <label for="exesecond_50">50</label>
+                            <input id="exesecond_51" class="magic-checkbox" name="exesecond_special" type="checkbox" value="51"> <label for="exesecond_51">51</label>
+                            <input id="exesecond_52" class="magic-checkbox" name="exesecond_special" type="checkbox" value="52"> <label for="exesecond_52">52</label>
+                            <input id="exesecond_53" class="magic-checkbox" name="exesecond_special" type="checkbox" value="53"> <label for="exesecond_53">53</label>
+                            <input id="exesecond_54" class="magic-checkbox" name="exesecond_special" type="checkbox" value="54"> <label for="exesecond_54">54</label>
+                            <input id="exesecond_55" class="magic-checkbox" name="exesecond_special" type="checkbox" value="55"> <label for="exesecond_55">55</label>
+                            <input id="exesecond_56" class="magic-checkbox" name="exesecond_special" type="checkbox" value="56"> <label for="exesecond_56">56</label>
+                            <input id="exesecond_57" class="magic-checkbox" name="exesecond_special" type="checkbox" value="57"> <label for="exesecond_57">57</label>
+                            <input id="exesecond_58" class="magic-checkbox" name="exesecond_special" type="checkbox" value="58"> <label for="exesecond_58">58</label>
+                            <input id="exesecond_59" class="magic-checkbox" name="exesecond_special" type="checkbox" value="59"> <label for="exesecond_59">59</label>
+                        </div>
+                    </label>
+                </p>
+            </div>
+            <div id="exemin" class="tab-pane fade" >
+                <p>
+                    <input id="exemin_all" type="radio" class="magic-radio" checked="checked" name="min" onclick="everyTime(this)">
+                    <label for="exemin_all">
+                        <span>分钟 允许的通配符[, - * /]</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exemin_rate" type="radio" class="magic-radio" name="min" onclick="cycle(this)">
+                    <label for="exemin_rate">
+                        <span>周期从</span>
+                        <input id="minStart_0" type="number" class="form-control numberspinner" min="1" max="59" value="1">
+                        <span>-</span>
+                        <input id="minEnd_0" type="number" class="form-control numberspinner" min="1" max="59" value="2">
+                        <span>分钟</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exemin_rate_min" type="radio" class="magic-radio" name="min" onclick="startOn(this)">
+                    <label for="exemin_rate_min">
+                        <span>从</span>
+                        <input id="minStart_1" type="number" class="form-control numberspinner" min="1" max="59" value="0">
+                        <span>分钟开始,每</span>
+                        <input id="minEnd_1" type="number" class="form-control numberspinner" min="1" max="59" value="1">
+                        <span>分钟执行一次</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="min_appoint" type="radio" class="magic-radio" name="min">
+                    <label for="min_appoint">
+                        <span>指定</span>
+                        <div class="imp minList">
+                            <input id="exemin_00" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="0"> <label for="exemin_00">00</label>
+                            <input id="exemin_01" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="1"> <label for="exemin_01">01</label>
+                            <input id="exemin_02" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="2"> <label for="exemin_02">02</label>
+                            <input id="exemin_03" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="3"> <label for="exemin_03">03</label>
+                            <input id="exemin_04" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="4"> <label for="exemin_04">04</label>
+                            <input id="exemin_05" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="5"> <label for="exemin_05">05</label>
+                            <input id="exemin_06" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="6"> <label for="exemin_06">06</label>
+                            <input id="exemin_07" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="7"> <label for="exemin_07">07</label>
+                            <input id="exemin_08" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="8"> <label for="exemin_08">08</label>
+                            <input id="exemin_09" class="magic-checkbox" name="exesecond_special" type="checkbox"  value="9"> <label for="exemin_09">09</label>
+                            <input id="exemin_10" class="magic-checkbox" name="exesecond_special" type="checkbox" value="10"> <label for="exemin_10">10</label>
+                            <input id="exemin_11" class="magic-checkbox" name="exesecond_special" type="checkbox" value="11"> <label for="exemin_11">11</label>
+                            <input id="exemin_12" class="magic-checkbox" name="exesecond_special" type="checkbox" value="12"> <label for="exemin_12">12</label>
+                            <input id="exemin_13" class="magic-checkbox" name="exesecond_special" type="checkbox" value="13"> <label for="exemin_13">13</label>
+                            <input id="exemin_14" class="magic-checkbox" name="exesecond_special" type="checkbox" value="14"> <label for="exemin_14">14</label>
+                            <input id="exemin_15" class="magic-checkbox" name="exesecond_special" type="checkbox" value="15"> <label for="exemin_15">15</label>
+                            <input id="exemin_16" class="magic-checkbox" name="exesecond_special" type="checkbox" value="16"> <label for="exemin_16">16</label>
+                            <input id="exemin_17" class="magic-checkbox" name="exesecond_special" type="checkbox" value="17"> <label for="exemin_17">17</label>
+                            <input id="exemin_18" class="magic-checkbox" name="exesecond_special" type="checkbox" value="18"> <label for="exemin_18">18</label>
+                            <input id="exemin_19" class="magic-checkbox" name="exesecond_special" type="checkbox" value="19"> <label for="exemin_19">19</label>
+                            <input id="exemin_20" class="magic-checkbox" name="exesecond_special" type="checkbox" value="20"> <label for="exemin_20">20</label>
+                            <input id="exemin_21" class="magic-checkbox" name="exesecond_special" type="checkbox" value="21"> <label for="exemin_21">21</label>
+                            <input id="exemin_22" class="magic-checkbox" name="exesecond_special" type="checkbox" value="22"> <label for="exemin_22">22</label>
+                            <input id="exemin_23" class="magic-checkbox" name="exesecond_special" type="checkbox" value="23"> <label for="exemin_23">23</label>
+                            <input id="exemin_24" class="magic-checkbox" name="exesecond_special" type="checkbox" value="24"> <label for="exemin_24">24</label>
+                            <input id="exemin_25" class="magic-checkbox" name="exesecond_special" type="checkbox" value="25"> <label for="exemin_25">25</label>
+                            <input id="exemin_26" class="magic-checkbox" name="exesecond_special" type="checkbox" value="26"> <label for="exemin_26">26</label>
+                            <input id="exemin_27" class="magic-checkbox" name="exesecond_special" type="checkbox" value="27"> <label for="exemin_27">27</label>
+                            <input id="exemin_28" class="magic-checkbox" name="exesecond_special" type="checkbox" value="28"> <label for="exemin_28">28</label>
+                            <input id="exemin_29" class="magic-checkbox" name="exesecond_special" type="checkbox" value="29"> <label for="exemin_29">29</label>
+                            <input id="exemin_30" class="magic-checkbox" name="exesecond_special" type="checkbox" value="30"> <label for="exemin_30">30</label>
+                            <input id="exemin_31" class="magic-checkbox" name="exesecond_special" type="checkbox" value="31"> <label for="exemin_31">31</label>
+                            <input id="exemin_32" class="magic-checkbox" name="exesecond_special" type="checkbox" value="32"> <label for="exemin_32">32</label>
+                            <input id="exemin_33" class="magic-checkbox" name="exesecond_special" type="checkbox" value="33"> <label for="exemin_33">33</label>
+                            <input id="exemin_34" class="magic-checkbox" name="exesecond_special" type="checkbox" value="34"> <label for="exemin_34">34</label>
+                            <input id="exemin_35" class="magic-checkbox" name="exesecond_special" type="checkbox" value="35"> <label for="exemin_35">35</label>
+                            <input id="exemin_36" class="magic-checkbox" name="exesecond_special" type="checkbox" value="36"> <label for="exemin_36">36</label>
+                            <input id="exemin_37" class="magic-checkbox" name="exesecond_special" type="checkbox" value="37"> <label for="exemin_37">37</label>
+                            <input id="exemin_38" class="magic-checkbox" name="exesecond_special" type="checkbox" value="38"> <label for="exemin_38">38</label>
+                            <input id="exemin_39" class="magic-checkbox" name="exesecond_special" type="checkbox" value="39"> <label for="exemin_39">39</label>
+                            <input id="exemin_40" class="magic-checkbox" name="exesecond_special" type="checkbox" value="40"> <label for="exemin_40">40</label>
+                            <input id="exemin_41" class="magic-checkbox" name="exesecond_special" type="checkbox" value="41"> <label for="exemin_41">41</label>
+                            <input id="exemin_42" class="magic-checkbox" name="exesecond_special" type="checkbox" value="42"> <label for="exemin_42">42</label>
+                            <input id="exemin_43" class="magic-checkbox" name="exesecond_special" type="checkbox" value="43"> <label for="exemin_43">43</label>
+                            <input id="exemin_44" class="magic-checkbox" name="exesecond_special" type="checkbox" value="44"> <label for="exemin_44">44</label>
+                            <input id="exemin_45" class="magic-checkbox" name="exesecond_special" type="checkbox" value="45"> <label for="exemin_45">45</label>
+                            <input id="exemin_46" class="magic-checkbox" name="exesecond_special" type="checkbox" value="46"> <label for="exemin_46">46</label>
+                            <input id="exemin_47" class="magic-checkbox" name="exesecond_special" type="checkbox" value="47"> <label for="exemin_47">47</label>
+                            <input id="exemin_48" class="magic-checkbox" name="exesecond_special" type="checkbox" value="48"> <label for="exemin_48">48</label>
+                            <input id="exemin_49" class="magic-checkbox" name="exesecond_special" type="checkbox" value="49"> <label for="exemin_49">49</label>
+                            <input id="exemin_50" class="magic-checkbox" name="exesecond_special" type="checkbox" value="50"> <label for="exemin_50">50</label>
+                            <input id="exemin_51" class="magic-checkbox" name="exesecond_special" type="checkbox" value="51"> <label for="exemin_51">51</label>
+                            <input id="exemin_52" class="magic-checkbox" name="exesecond_special" type="checkbox" value="52"> <label for="exemin_52">52</label>
+                            <input id="exemin_53" class="magic-checkbox" name="exesecond_special" type="checkbox" value="53"> <label for="exemin_53">53</label>
+                            <input id="exemin_54" class="magic-checkbox" name="exesecond_special" type="checkbox" value="54"> <label for="exemin_54">54</label>
+                            <input id="exemin_55" class="magic-checkbox" name="exesecond_special" type="checkbox" value="55"> <label for="exemin_55">55</label>
+                            <input id="exemin_56" class="magic-checkbox" name="exesecond_special" type="checkbox" value="56"> <label for="exemin_56">56</label>
+                            <input id="exemin_57" class="magic-checkbox" name="exesecond_special" type="checkbox" value="57"> <label for="exemin_57">57</label>
+                            <input id="exemin_58" class="magic-checkbox" name="exesecond_special" type="checkbox" value="58"> <label for="exemin_58">58</label>
+                            <input id="exemin_59" class="magic-checkbox" name="exesecond_special" type="checkbox" value="59"> <label for="exemin_59">59</label>
+                        </div>
+                    </label>
+                </p>
+            </div>
+            <div id="exehour" class="tab-pane fade" >
+                <p>
+                    <input id="exehour_all" type="radio" class="magic-radio" checked="checked" name="hour" onclick="everyTime(this)">
+                    <label for="exehour_all">
+                        <span>小时 允许的通配符[, - * /]</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exehour_rate" type="radio" class="magic-radio" name="hour" onclick="cycle(this)">
+                    <label for="exehour_rate">
+                        <span>周期从</span>
+                        <input id="hourStart_0" type="number" class="form-control numberspinner" min="1" max="12" value="0">
+                        <span>-</span>
+                        <input id="hourEnd_0" type="number" class="form-control numberspinner" min="1" max="12" value="2">
+                        <span>小时</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exehour_rate_hour" type="radio" class="magic-radio" name="hour" onclick="startOn(this)">
+                    <label for="exehour_rate_hour">
+                        <span>从</span>
+                        <input id="hourStart_1" type="number" class="form-control numberspinner" min="1" max="12" value="0">
+                        <span>小时开始,每</span>
+                        <input id="hourEnd_1" type="number" class="form-control numberspinner" min="1" max="12" value="1">
+                        <span>小时执行一次</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="hour_appoint" type="radio" class="magic-radio" name="hour">
+                    <label for="hour_appoint">
+                        <span>指定</span>
+                        <div class="imp hourList">
+                            AM:<br/>
+                            <input id="exehour_00" class="magic-checkbox" name="exesecond_special" type="checkbox" value="0">  <label for="exehour_00">00</label>
+                            <input id="exehour_01" class="magic-checkbox" name="exesecond_special" type="checkbox" value="1">  <label for="exehour_01">01</label>
+                            <input id="exehour_02" class="magic-checkbox" name="exesecond_special" type="checkbox" value="2">  <label for="exehour_02">02</label>
+                            <input id="exehour_03" class="magic-checkbox" name="exesecond_special" type="checkbox" value="3">  <label for="exehour_03">03</label>
+                            <input id="exehour_04" class="magic-checkbox" name="exesecond_special" type="checkbox" value="4">  <label for="exehour_04">04</label>
+                            <input id="exehour_05" class="magic-checkbox" name="exesecond_special" type="checkbox" value="5">  <label for="exehour_05">05</label>
+                            <input id="exehour_06" class="magic-checkbox" name="exesecond_special" type="checkbox" value="6">  <label for="exehour_06">06</label>
+                            <input id="exehour_07" class="magic-checkbox" name="exesecond_special" type="checkbox" value="7">  <label for="exehour_07">07</label>
+                            <input id="exehour_08" class="magic-checkbox" name="exesecond_special" type="checkbox" value="8">  <label for="exehour_08">08</label>
+                            <input id="exehour_09" class="magic-checkbox" name="exesecond_special" type="checkbox" value="9">  <label for="exehour_09">09</label>
+                            <input id="exehour_10" class="magic-checkbox" name="exesecond_special" type="checkbox" value="10"> <label for="exehour_10">10</label>
+                            <input id="exehour_11" class="magic-checkbox" name="exesecond_special" type="checkbox" value="11"> <label for="exehour_11">11</label>
+                            <br/>PM:<br/>
+                            <input id="exehour_12" class="magic-checkbox" name="exesecond_special" type="checkbox" value="12"> <label for="exehour_12">12</label>
+                            <input id="exehour_13" class="magic-checkbox" name="exesecond_special" type="checkbox" value="13"> <label for="exehour_13">13</label>
+                            <input id="exehour_14" class="magic-checkbox" name="exesecond_special" type="checkbox" value="14"> <label for="exehour_14">14</label>
+                            <input id="exehour_15" class="magic-checkbox" name="exesecond_special" type="checkbox" value="15"> <label for="exehour_15">15</label>
+                            <input id="exehour_16" class="magic-checkbox" name="exesecond_special" type="checkbox" value="16"> <label for="exehour_16">16</label>
+                            <input id="exehour_17" class="magic-checkbox" name="exesecond_special" type="checkbox" value="17"> <label for="exehour_17">17</label>
+                            <input id="exehour_18" class="magic-checkbox" name="exesecond_special" type="checkbox" value="18"> <label for="exehour_18">18</label>
+                            <input id="exehour_19" class="magic-checkbox" name="exesecond_special" type="checkbox" value="19"> <label for="exehour_19">19</label>
+                            <input id="exehour_20" class="magic-checkbox" name="exesecond_special" type="checkbox" value="20"> <label for="exehour_20">20</label>
+                            <input id="exehour_21" class="magic-checkbox" name="exesecond_special" type="checkbox" value="21"> <label for="exehour_21">21</label>
+                            <input id="exehour_22" class="magic-checkbox" name="exesecond_special" type="checkbox" value="22"> <label for="exehour_22">22</label>
+                            <input id="exehour_23" class="magic-checkbox" name="exesecond_special" type="checkbox" value="23"> <label for="exehour_23">23</label>
+                        </div>
+                    </label>
+                </p>
+            </div>
+            <div id="exeday" class="tab-pane fade" >
+                <p>
+                    <input id="exeday_all" type="radio" class="magic-radio" checked="checked" name="day" onclick="everyTime(this)">
+                    <label for="exeday_all">
+                        <span>日 允许的通配符[, - * / L W]</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exeday_none" type="radio" class="magic-radio" name="day" onclick="unAppoint(this)">
+                    <label for="exeday_none">
+                        <span>不指定</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exeday_rate" type="radio" class="magic-radio" name="day" onclick="cycle(this)">
+                    <label for="exeday_rate">
+                        <span>周期从</span>
+                        <input id="dayStart_0" type="number" class="form-control numberspinner" min="1" max="31" value="1">
+                        <span>-</span>
+                        <input id="dayEnd_0" type="number" class="form-control numberspinner" min="1" max="31" value="2">
+                        <span>日</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exeday_rate_day" type="radio" class="magic-radio" name="day" onclick="startOn(this)">
+                    <label for="exeday_rate_day">
+                        <span>从</span>
+                        <input id="dayStart_1" type="number" class="form-control numberspinner" min="1" max="31" value="0">
+                        <span>小时开始,每</span>
+                        <input id="dayEnd_1" type="number" class="form-control numberspinner" min="1" max="31" value="1">
+                        <span>小时执行一次</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exeday_every_workday" type="radio" class="magic-radio" name="day" onclick="workDay(this)">
+                    <label for="exeday_every_workday">
+                        <span>每月</span>
+                        <input id="dayStart_2" type="number" class="form-control numberspinner" min="1" max="31" value="1">
+                        <span>号最近的那个工作日</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exeday_endday" type="radio" class="magic-radio" name="day" onclick="lastDay(this)">
+                    <label for="exeday_endday">
+                        <span>本月最后一天</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="day_appoint" type="radio" class="magic-radio" name="day">
+                    <label for="day_appoint">
+                        <span>指定</span>
+                        <div class="imp dayList">
+                            <input id="exeday_00" class="magic-checkbox" name="exesecond_special" type="checkbox" value="0"> <label for="exeday_01">00</label>
+                            <input id="exeday_01" class="magic-checkbox" name="exesecond_special" type="checkbox" value="1"> <label for="exeday_01">01</label>
+                            <input id="exeday_02" class="magic-checkbox" name="exesecond_special" type="checkbox" value="2"> <label for="exeday_02">02</label>
+                            <input id="exeday_03" class="magic-checkbox" name="exesecond_special" type="checkbox" value="3"> <label for="exeday_03">03</label>
+                            <input id="exeday_04" class="magic-checkbox" name="exesecond_special" type="checkbox" value="4"> <label for="exeday_04">04</label>
+                            <input id="exeday_05" class="magic-checkbox" name="exesecond_special" type="checkbox" value="5"> <label for="exeday_05">05</label>
+                            <input id="exeday_06" class="magic-checkbox" name="exesecond_special" type="checkbox" value="6"> <label for="exeday_06">06</label>
+                            <input id="exeday_07" class="magic-checkbox" name="exesecond_special" type="checkbox" value="7"> <label for="exeday_07">07</label>
+                            <input id="exeday_08" class="magic-checkbox" name="exesecond_special" type="checkbox" value="8"> <label for="exeday_08">08</label>
+                            <input id="exeday_09" class="magic-checkbox" name="exesecond_special" type="checkbox" value="9"> <label for="exeday_09">09</label>
+                            <input id="exeday_10" class="magic-checkbox" name="exesecond_special" type="checkbox" value="10"><label for="exeday_10">10</label>
+                            <input id="exeday_11" class="magic-checkbox" name="exesecond_special" type="checkbox" value="11"><label for="exeday_11">11</label>
+                            <input id="exeday_12" class="magic-checkbox" name="exesecond_special" type="checkbox" value="12"><label for="exeday_12">12</label>
+                            <input id="exeday_13" class="magic-checkbox" name="exesecond_special" type="checkbox" value="13"><label for="exeday_13">13</label>
+                            <input id="exeday_14" class="magic-checkbox" name="exesecond_special" type="checkbox" value="14"><label for="exeday_14">14</label>
+                            <input id="exeday_15" class="magic-checkbox" name="exesecond_special" type="checkbox" value="15"><label for="exeday_15">15</label>
+                            <input id="exeday_16" class="magic-checkbox" name="exesecond_special" type="checkbox" value="16"><label for="exeday_16">16</label>
+                            <input id="exeday_17" class="magic-checkbox" name="exesecond_special" type="checkbox" value="17"><label for="exeday_17">17</label>
+                            <input id="exeday_18" class="magic-checkbox" name="exesecond_special" type="checkbox" value="18"><label for="exeday_18">18</label>
+                            <input id="exeday_19" class="magic-checkbox" name="exesecond_special" type="checkbox" value="19"><label for="exeday_19">19</label>
+                            <input id="exeday_20" class="magic-checkbox" name="exesecond_special" type="checkbox" value="20"><label for="exeday_20">20</label>
+                            <input id="exeday_21" class="magic-checkbox" name="exesecond_special" type="checkbox" value="21"><label for="exeday_21">21</label>
+                            <input id="exeday_22" class="magic-checkbox" name="exesecond_special" type="checkbox" value="22"><label for="exeday_22">22</label>
+                            <input id="exeday_23" class="magic-checkbox" name="exesecond_special" type="checkbox" value="23"><label for="exeday_23">23</label>
+                            <input id="exeday_24" class="magic-checkbox" name="exesecond_special" type="checkbox" value="24"><label for="exeday_24">24</label>
+                            <input id="exeday_25" class="magic-checkbox" name="exesecond_special" type="checkbox" value="25"><label for="exeday_25">25</label>
+                            <input id="exeday_26" class="magic-checkbox" name="exesecond_special" type="checkbox" value="26"><label for="exeday_26">26</label>
+                            <input id="exeday_27" class="magic-checkbox" name="exesecond_special" type="checkbox" value="27"><label for="exeday_27">27</label>
+                            <input id="exeday_28" class="magic-checkbox" name="exesecond_special" type="checkbox" value="28"><label for="exeday_28">28</label>
+                            <input id="exeday_29" class="magic-checkbox" name="exesecond_special" type="checkbox" value="29"><label for="exeday_29">29</label>
+                            <input id="exeday_30" class="magic-checkbox" name="exesecond_special" type="checkbox" value="30"><label for="exeday_30">30</label>
+                            <input id="exeday_31" class="magic-checkbox" name="exesecond_special" type="checkbox" value="31"><label for="exeday_31">31</label>
+                        </div>
+                    </label>
+                </p>
+            </div>
+            <div id="exemonth" class="tab-pane fade" >
+                <p>
+                    <input id="exemonth_all" type="radio" class="magic-radio" checked="checked" name="mouth" onclick="everyTime(this)">
+                    <label for="exemonth_all">
+                        <span>月 允许的通配符[, - * /]</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exemonth_none" type="radio" class="magic-radio" name="mouth" onclick="unAppoint(this)">
+                    <label for="exemonth_none">
+                        <span>不指定</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exemonth_rate" type="radio" class="magic-radio" name="mouth" onclick="cycle(this)">
+                    <label for="exemonth_rate">
+                        <span>周期从</span>
+                        <input id="mouthStart_0" type="number" class="form-control numberspinner" min="1" max="31" value="1">
+                        <span>-</span>
+                        <input id="mouthEnd_0" type="number" class="form-control numberspinner" min="1" max="31" value="2">
+                        <span>月</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exemonth_rate_day" type="radio" class="magic-radio" name="mouth" onclick="startOn(this)">
+                    <label for="exemonth_rate_day">
+                        <span>从</span>
+                        <input id="mouthStart_1" type="number" class="form-control numberspinner" min="1" max="31" value="1">
+                        <span>日开始,每</span>
+                        <input id="mouthEnd_1" type="number" class="form-control numberspinner" min="1" max="31" value="1">
+                        <span>月执行一次</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="mouth_appoint" type="radio" class="magic-radio" name="mouth">
+                    <label for="mouth_appoint">
+                        <span>指定</span>
+                        <div class="imp mouthList">
+                            <input id="exemonth_01" class="magic-checkbox" name="exesecond_special" type="checkbox" value="1"> <label for="exemonth_01">01</label>
+                            <input id="exemonth_02" class="magic-checkbox" name="exesecond_special" type="checkbox" value="2"> <label for="exemonth_02">02</label>
+                            <input id="exemonth_03" class="magic-checkbox" name="exesecond_special" type="checkbox" value="3"> <label for="exemonth_03">03</label>
+                            <input id="exemonth_04" class="magic-checkbox" name="exesecond_special" type="checkbox" value="4"> <label for="exemonth_04">04</label>
+                            <input id="exemonth_05" class="magic-checkbox" name="exesecond_special" type="checkbox" value="5"> <label for="exemonth_05">05</label>
+                            <input id="exemonth_06" class="magic-checkbox" name="exesecond_special" type="checkbox" value="6"> <label for="exemonth_06">06</label>
+                            <input id="exemonth_07" class="magic-checkbox" name="exesecond_special" type="checkbox" value="7"> <label for="exemonth_07">07</label>
+                            <input id="exemonth_08" class="magic-checkbox" name="exesecond_special" type="checkbox" value="8"> <label for="exemonth_08">08</label>
+                            <input id="exemonth_09" class="magic-checkbox" name="exesecond_special" type="checkbox" value="9"> <label for="exemonth_09">09</label>
+                            <input id="exemonth_10" class="magic-checkbox" name="exesecond_special" type="checkbox" value="10"><label for="exemonth_10">10</label>
+                            <input id="exemonth_11" class="magic-checkbox" name="exesecond_special" type="checkbox" value="11"><label for="exemonth_11">11</label>
+                            <input id="exemonth_12" class="magic-checkbox" name="exesecond_special" type="checkbox" value="12"><label for="exemonth_12">12</label>
+                        </div>
+                    </label>
+                </p>
+            </div>
+            <div id="exeweek" class="tab-pane fade" >
+                <p>
+                    <input id="exeweek_all" type="radio" class="magic-radio" checked="checked" name="week" onclick="everyTime(this)">
+                    <label for="exeweek_all">
+                        <span>周 允许的通配符[, - * / L #]</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exeweek_none" type="radio" class="magic-radio" name="week" onclick="unAppoint(this)">
+                    <label for="exeweek_none">
+                        <span>不指定</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exeweek_rate" type="radio" class="magic-radio" name="week" onclick="cycle(this)">
+                    <label for="exeweek_rate">
+                        <span>周期 从星期</span>
+                        <input id="weekStart_0" type="number" class="form-control numberspinner" min="1" max="7" value="1">
+                        <span>-</span>
+                        <input id="weekEnd_0" type="number" class="form-control numberspinner" min="1" max="7" value="2">
+                        <span>月</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exeweek_rate_day" type="radio" class="magic-radio" name="week" onclick="weekOfDay(this)">
+                    <label for="exeweek_rate_day">
+                        <span>第</span>
+                        <input id="weekStart_1" type="number" class="form-control numberspinner" min="1" max="4" value="1">
+                        <span>(最大值4)</span>
+                        <span>周 的星期</span>
+                        <input id="weekEnd_1" type="number" class="form-control numberspinner" min="1" max="7" value="1">
+                        <span>(最大值7)</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exeweek_end" type="radio" class="magic-radio" name="week" onclick="lastWeek(this)">
+                    <label for="exeweek_end">
+                        <span>本月最后一个星期</span>
+                        <input id="weekStart_2" type="number" class="form-control numberspinner" min="1" max="4" value="1">
+                        <span>(最大值7)</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="week_appoint" type="radio" class="magic-radio" name="week">
+                    <label for="week_appoint">
+                        <span>指定</span>
+                        <div class="imp weekList">
+                            <input id="exeweek_01" class="magic-checkbox" name="exesecond_special" type="checkbox" value="1"><label for="exeweek_01">1</label>
+                            <input id="exeweek_02" class="magic-checkbox" name="exesecond_special" type="checkbox" value="2"><label for="exeweek_02">2</label>
+                            <input id="exeweek_03" class="magic-checkbox" name="exesecond_special" type="checkbox" value="3"><label for="exeweek_03">3</label>
+                            <input id="exeweek_04" class="magic-checkbox" name="exesecond_special" type="checkbox" value="4"><label for="exeweek_04">4</label>
+                            <input id="exeweek_05" class="magic-checkbox" name="exesecond_special" type="checkbox" value="5"><label for="exeweek_05">5</label>
+                            <input id="exeweek_06" class="magic-checkbox" name="exesecond_special" type="checkbox" value="6"><label for="exeweek_06">6</label>
+                            <input id="exeweek_07" class="magic-checkbox" name="exesecond_special" type="checkbox" value="7"><label for="exeweek_07">7</label>
+                        </div>
+                    </label>
+                </p>
+            </div>
+            <div id="exeyear" class="tab-pane fade" >
+                <p>
+                    <input id="exeyear_all" type="radio" class="magic-radio" checked="checked" name="year" onclick="unAppoint(this)">
+                    <label for="exeyear_all">
+                        <span>不指定 允许的通配符[, - * /] 非必填</span>
+                    </label>
+                </p>
+                <p>
+                    <input id="exeyear_every" type="radio" class="magic-radio" name="year" onclick="everyTime(this)">
+                    <label for="exeyear_every">
+                        <span>每年</span>
+                    </label>
+                </p>
+                <div class="line">
+                    <input id="exeyear_year" type="radio" class="magic-radio" name="year" onclick="cycle(this)">
+                    <label for="exeyear_year">
+                        <span>周期 从</span>
+                        <input id="yearStart_0" type="number" class="form-control numberspinner" value="2019">
+                        <span>-</span>
+                        <input id="yearEnd_0" type="number" class="form-control numberspinner" value="2050">
+                    </label>
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<p class="bord-btm pad-ver text-main text-bold">表达式</p>
+<div class="col-bg-12">
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td>
+            </td>
+            <td align="center">
+                秒
+            </td>
+            <td align="center">
+                分钟
+            </td>
+            <td align="center">
+                小时
+            </td>
+            <td align="center">
+                日
+            </td>
+            <td align="center">
+                月<br />
+            </td>
+            <td align="center">
+                星期
+            </td>
+            <td align="center">
+                年
+            </td>
+        </tr>
+        <tr>
+            <td>
+                表达式字段:
+            </td>
+            <td>
+                <input type="text" name="v_second" class="form-control" value="*" readonly="readonly" />
+            </td>
+            <td>
+                <input type="text" name="v_min" class="form-control" value="*" readonly="readonly" />
+            </td>
+            <td>
+                <input type="text" name="v_hour" class="form-control" value="*" readonly="readonly" />
+            </td>
+            <td>
+                <input type="text" name="v_day" class="form-control" value="*" readonly="readonly" />
+            </td>
+            <td>
+                <input type="text" name="v_mouth" class="form-control" value="*" readonly="readonly" />
+            </td>
+            <td>
+                <input type="text" name="v_week" class="form-control" value="?" readonly="readonly" />
+            </td>
+            <td>
+                <input type="text" name="v_year" class="form-control" readonly="readonly" />
+            </td>
+        </tr>
+        <tr>
+            <td>Cron 表达式:</td>
+            <td colspan="6"><input id="cron" type="text" name="#(formModelName).EXE_PRESSION" class="form-control col-bg-12" value="#(o?o.EXE_PRESSION:'* * * * * ?')"/></td>
+            <td><input id="btnFan"  type="button" value="反解析到UI " class="btn btn-primary" onclick="expressToForm()"/></td>
+        </tr>
+        <!--<tr >
+            <td colspan="8" >最近5次运行时间:</td>
+        </tr>
+        <tr>
+            <td colspan="8" id="runTime">
+            </td>
+        </tr>-->
+        </tbody>
+    </table>
+</div>
+<script src="#(ctx)/common/js/admin/sys/schjob/cron.js"></script>

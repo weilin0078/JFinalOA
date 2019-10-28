@@ -1,0 +1,118 @@
+<div id="page-content">
+	<div class="col-lg-12">
+		<div class="panel">
+			<div class="panel-heading">
+				<h3 class="panel-title" style="text-align: right;">
+					#@installPJaxGoBackBtn()
+					添加执行任务
+				</h3>
+			</div>
+			<form id="editForm" class="panel-body form-horizontal form-padding">
+				<input type="hidden"  name="#(formModelName).ID" class="form-control" value="#(o?o.ID:'')">
+				<div class="form-group">
+					<label class="col-md-1 control-label">选择要执行的任务</label>
+					<div class="col-md-5">
+						<div class="input-group mar-btm">
+							<input type="hidden" id="jobid"  name="#(formModelName).JOB_ID" class="form-control"  value="#(o?o.JOB_ID:'')">
+							<input type="text" id="jobname" class="form-control" disabled value="#(o?o.JOB_NAME:'')">
+							<span class="input-group-btn">
+								<button class="btn btn-primary" type="button" onclick="selectOneJob()">选择</button>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label">启用状态</label>
+					<div class="col-md-1" style="padding-top: 5px;">
+						<input type="hidden" id="IS_ENABLE_VALUE" name="#(formModelName).IS_ENABLE" value="#(o?o.IS_ENABLE:'')">
+						<input type="checkbox" id="IS_ENABLE" #if(o&&o.IS_ENABLE=="1") checked #end >
+					</div>
+					<label class="col-md-2 control-label">是否随应用自动启用</label>
+					<div class="col-md-1" style="padding-top: 5px;">
+						<input type="hidden" id="IS_AUTO_RUN_VALUE" name="#(formModelName).IS_AUTO_RUN" value="#(o?o.IS_AUTO_RUN:'')">
+						<input type="checkbox" id="IS_AUTO_RUN"  #if(o&&o.IS_AUTO_RUN=="1") checked #end >
+					</div>
+				</div>
+				#render("/WEB-INF/admin/sys/schjob/cron.html")
+				#if(view=='detail')
+
+				#else
+				<div class="panel-footer">
+					<div class="row">
+						<div class="col-sm-8 col-sm-offset-3">
+							<button class="btn btn-warning" type="reset" #if(view=='detail') disabled #end>重置</button>
+							<button class="btn btn-primary" type="submit" #if(view=='detail') disabled #end>保存</button>
+						</div>
+					</div>
+				</div>
+				#end
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	function save(){
+		if($("#IS_ENABLE")[0].checked){
+			$("#IS_ENABLE_VALUE").val("1");
+		}else{
+			$("#IS_ENABLE_VALUE").val("0");
+		}
+		if($("#IS_AUTO_RUN")[0].checked){
+			$("#IS_AUTO_RUN_VALUE").val("1");
+		}else{
+			$("#IS_AUTO_RUN_VALUE").val("0");
+		}
+		var data = common_ajax.ajaxFunc("/admin/sys/schjob/saveExecute", $('#editForm').serialize(), "json", null);
+		if(data.success){
+			pointLion.alertMsg("保存成功!" , "success" , "small" , function(){
+				location.href = ctx+'/admin/sys/schjob/getExeListPage';//跳转到列表页
+			},data);
+		}else{
+			pointLion.alertMsg(data.message , "danger" , "small" , function(){
+				$(".btn").removeAttr("disabled");
+			},data);
+		}
+	}
+	function selectOneJob(){
+		var selectOneJob;
+		var index = layer.open({
+			type: 2,
+			title: false, //不显示标题栏
+			area: ['800px', '450px'],
+			shade: 0.2,
+			id: 'selectOneJob', //设定一个id，防止重复弹出
+			resize: false,
+			closeBtn: false,
+			isOutAnim : false ,
+			btnAlign: 'c',
+			content: ctx+'/admin/sys/schjob/getSelectJobDctPage',
+			success: function(layero){
+				selectOneJob = window[layero.find('iframe')[0]['name']];
+			}
+		});
+	}
+
+	/***
+	 * 弹出层选择一个job之后回调的方法
+	 * @param id
+	 * @param name
+	 */
+	function selectedJob(id,name){
+		$("#jobid").val(id);
+		$("#jobname").val(name);
+	}
+
+	$(document).ready(function() {
+		var isenable = $("#IS_ENABLE");
+		var isautorun = $("#IS_AUTO_RUN");
+		new Switchery(isenable[0]);//制做开关按钮
+		new Switchery(isautorun[0]);//制做开关按钮
+		$('#editForm').bootstrapValidator({
+			fields: {
+			}
+		}).on("success.form.bv", function (e) {
+			save();
+			return false;//阻止表单跳转
+		});
+	});
+</script>

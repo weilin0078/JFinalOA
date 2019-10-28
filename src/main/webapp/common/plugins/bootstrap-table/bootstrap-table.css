@@ -1,12 +1,14 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * version: 1.10.1
+ * version: 1.11.1
  * https://github.com/wenzhixin/bootstrap-table/
  */
 
 .bootstrap-table .table {
     margin-bottom: 0 !important;
+    border-bottom: 1px solid #dddddd;
     border-collapse: collapse !important;
+    border-radius: 1px;
 }
 
 .bootstrap-table .table:not(.table-condensed),
@@ -23,10 +25,17 @@
     border-right: 2px solid transparent;
 }
 
+.bootstrap-table .table.table-no-bordered > tbody > tr > td:last-child {
+    border-right: none;
+}
+
 .fixed-table-container {
     position: relative;
     clear: both;
-    border: 1px solid #e9e9e9;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
 }
 
 .fixed-table-container.table-no-bordered {
@@ -39,7 +48,7 @@
 }
 
 .fixed-table-footer {
-    border-top: 1px solid #e9e9e9;
+    border-top: 1px solid #dddddd;
 }
 
 .fixed-table-body {
@@ -56,7 +65,7 @@
     height: 0;
     padding: 0;
     margin: 0;
-    border-left: 1px solid #e9e9e9;
+    border-left: 1px solid #dddddd;
 }
 
 .fixed-table-container thead th:focus {
@@ -65,6 +74,9 @@
 
 .fixed-table-container thead th:first-child {
     border-left: none;
+    border-top-left-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    -moz-border-radius-topleft: 4px;
 }
 
 .fixed-table-container thead th .th-inner,
@@ -101,7 +113,7 @@
 }
 
 .fixed-table-container tbody td {
-    border-left: 1px solid #e9e9e9;
+    border-left: 1px solid #dddddd;
 }
 
 .fixed-table-container tbody tr:first-child td {
@@ -184,7 +196,7 @@
     line-height: 1.428571429;
 }
 
-.fixed-table-toolbar .bars,
+.fixed-table-toolbar .bs-bars,
 .fixed-table-toolbar .search,
 .fixed-table-toolbar .columns {
     position: relative;
@@ -238,6 +250,19 @@
     margin-left: -1px !important;
 }
 
+.fixed-table-toolbar .btn-group > .btn-group > .btn {
+    border-radius: 0;
+}
+
+.fixed-table-toolbar .btn-group > .btn-group:first-child > .btn {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.fixed-table-toolbar .btn-group > .btn-group:last-child > .btn {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
 
 .bootstrap-table .table > thead > tr > th {
     vertical-align: bottom;
@@ -260,7 +285,7 @@
     padding: 0 !important;
 }
 
-.pull-right .dropdown-menu {
+.bootstrap-table .pull-right .dropdown-menu {
     right: 0;
     left: auto;
 }
@@ -278,4 +303,34 @@ div.fixed-table-scroll-outer {
     width: 200px;
     height: 150px;
     overflow: hidden;
+}
+
+/* for get correct heights  */
+.fixed-table-toolbar:after, .fixed-table-pagination:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+
+/* NEW STYLE BY THEMEON */
+.fixed-table-container tbody .selected td {
+    background-color: #fffab4;
+}
+.bs-checkbox input[type="checkbox"],
+.bs-checkbox input[type="radio"]{
+    cursor: pointer
+}
+
+.fixed-table-container{
+    border-radius: 0;
+    border: 0
+}
+
+.bootstrap-table .table{
+    border: 1px solid rgba(0,0,0,0.05)
+}
+.fixed-table-container tbody td,
+.bootstrap-table .table>thead>tr>th{
+    border-color: rgba(0,0,0,0.04)
 }

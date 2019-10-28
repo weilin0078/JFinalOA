@@ -11,18 +11,46 @@
 	<script src="#(ctx)/common/plugins/morris-js/raphael-js/raphael.min.js"></script>
     <script src="#(ctx)/common/plugins/sparkline/jquery.sparkline.min.js"></script>
     <style>
-    	body{
-    		padding: 10px 0px 0px 0px !important;
-    	}
+        #pjax-container>#page-content>[class^="col-"]>.panel:first-child{
+            min-height:calc(100vh - 20px);
+            /*background-color:#fff;*/
+        }
     </style>
+    #if("single"==setting.index_page_type)
+        <style>
+            #pjax-container #page-content , #pjax-container #page-content>[class^="col-"]:not(.pad-no):first-child{
+                padding:0px;
+            }
+        </style>
+        <link href="#(ctx)/common/css/single/single.css" rel="stylesheet">
+    #elseif("tab"==setting.index_page_type)
+        <link href="#(ctx)/common/css/tab/tab.css" rel="stylesheet">
+    #end
 </head>
 <body>
-    <div> 
-        <div>
-            <div id="pjax-container">
+    <div id="main-body"> 
+        <div id="container">
+            <div id="pjax-container" style="min-height: 100%;">
             	#render(iframeRenderUrl)
             </div>
         </div>
     </div>
+    <script>
+	  	//关闭右键菜单，很简单
+		window.onclick=function(e){
+			//用户触发click事件就可以关闭了，因为绑定在window上，按事件冒泡处理，不会影响菜单的功能
+			parent.$('#mouseRightClickMenu').hide();
+			//parent.$('#demo-set-body').removeClass("in");
+	        var demoSetBody = parent.$('#demo-set-body');
+	        var demoSetBtn = parent.$('#demo-set-btn');
+	        $('html').on('click', function (e) {
+	            if (demoSetBody.hasClass('in')) {
+	                //if (!$(e.target).closest('#demo-set').length) {
+	                    demoSetBtn.trigger('click')
+	                //}
+	            }
+	        });
+		}
+    </script>
 </body>
 </html>

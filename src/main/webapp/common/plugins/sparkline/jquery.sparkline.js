@@ -221,8 +221,8 @@
         VShape, VCanvas_base, VCanvas_canvas, VCanvas_vml, pending, shapeCount = 0;
 
     /**
-    * Default configuration settings
-    */
+     * Default configuration settings
+     */
     getDefaults = function () {
         return {
             // Settings common to most/all chart types
@@ -267,7 +267,7 @@
                 chartRangeMax: undefined,
                 chartRangeMinX: undefined,
                 chartRangeMaxX: undefined,
-                tooltipFormat: new SPFormat('{{prefix}}{{y}}{{suffix}}')
+                tooltipFormat: new SPFormat('<span style="color: {{color}}">&#9679;</span> {{prefix}}{{y}}{{suffix}}')
             },
             // Defaults for bar charts
             bar: {
@@ -284,7 +284,7 @@
                 chartRangeMin: undefined,
                 chartRangeClip: false,
                 colorMap: undefined,
-                tooltipFormat: new SPFormat('{{prefix}}{{value}}{{suffix}}')
+                tooltipFormat: new SPFormat('<span style="color: {{color}}">&#9679;</span> {{prefix}}{{value}}{{suffix}}')
             },
             // Defaults for tristate charts
             tristate: {
@@ -294,7 +294,7 @@
                 negBarColor: '#f44',
                 zeroBarColor: '#999',
                 colorMap: {},
-                tooltipFormat: new SPFormat('{{value:map}}'),
+                tooltipFormat: new SPFormat('<span style="color: {{color}}">&#9679;</span> {{value:map}}'),
                 tooltipValueLookups: { map: { '-1': 'Loss', '0': 'Draw', '1': 'Win' } }
             },
             // Defaults for discrete charts
@@ -357,23 +357,27 @@
             'left: 0px;' +
             'top: 0px;' +
             'visibility: hidden;' +
-            'background-color: #37474f;' +
-            'box-shadow: 0 2px 2px rgba(0,0,0,.5);' +
+            'background: rgb(0, 0, 0) transparent;' +
+            'background-color: rgba(0,0,0,0.6);' +
+            'filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);' +
+            '-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";' +
             'color: white;' +
-            'text-align: right;' +
+            'font: 10px arial, san serif;' +
+            'text-align: left;' +
             'white-space: nowrap;' +
-            'padding: 7px 14px;' +
-            'z-index: 1000;' +
+            'padding: 5px;' +
+            'border: 1px solid white;' +
+            'z-index: 10000;' +
             '}' +
             '.jqsfield { ' +
             'color: white;' +
-            'font-size: 14;' +
-            'text-align: right;' +
+            'font: 10px arial, san serif;' +
+            'text-align: left;' +
             '}';
 
     /**
-    * Utilities
-    */
+     * Utilities
+     */
 
     createClass = function (/* [baseclass, [mixin, ...]], definition */) {
         var Class, args;
@@ -400,11 +404,11 @@
     };
 
     /**
-    * Wraps a format string for tooltips
-    * {{x}}
-    * {{x.2}
-    * {{x:months}}
-    */
+     * Wraps a format string for tooltips
+     * {{x}}
+     * {{x.2}
+     * {{x:months}}
+     */
     $.SPFormatClass = SPFormat = createClass({
         fre: /\{\{([\w.]+?)(:(.+?))?\}\}/g,
         precre: /(\w+)\.(\d+)/,
@@ -744,9 +748,9 @@
         mouseleave: function () {
             $(document.body).unbind('mousemove.jqs');
             var splist = this.splist,
-                spcount = splist.length,
-                needsRefresh = false,
-                sp, i;
+                 spcount = splist.length,
+                 needsRefresh = false,
+                 sp, i;
             this.over = false;
             this.currentEl = null;
 
@@ -779,12 +783,12 @@
 
         updateDisplay: function () {
             var splist = this.splist,
-                spcount = splist.length,
-                needsRefresh = false,
-                offset = this.$canvas.offset(),
-                localX = this.currentPageX - offset.left,
-                localY = this.currentPageY - offset.top,
-                tooltiphtml, sp, i, result, changeEvent;
+                 spcount = splist.length,
+                 needsRefresh = false,
+                 offset = this.$canvas.offset(),
+                 localX = this.currentPageX - offset.left,
+                 localY = this.currentPageY - offset.top,
+                 tooltiphtml, sp, i, result, changeEvent;
             if (!this.over) {
                 return;
             }
@@ -876,8 +880,8 @@
             this.getSize(content);
             this.tooltip.html(content)
                 .css({
-                    // 'width': this.width,
-                    // 'height': this.height,
+                    'width': this.width,
+                    'height': this.height,
                     'visibility': 'visible'
                 });
             if (this.hidden) {
@@ -902,8 +906,8 @@
                 return;
             }
 
-            y -= this.height + this.tooltipOffsetY + 20;
-            x += this.tooltipOffsetX - this.width;
+            y -= this.height + this.tooltipOffsetY;
+            x += this.tooltipOffsetX;
 
             if (y < this.scrollTop) {
                 y = this.scrollTop;
@@ -938,8 +942,8 @@
     $.fn.sparkline = function (userValues, userOptions) {
         return this.each(function () {
             var options = new $.fn.sparkline.options(this, userOptions),
-                $this = $(this),
-                render, i;
+                 $this = $(this),
+                 render, i;
             render = function () {
                 var values, width, height, tmp, mhandler, sp, vals;
                 if (userValues === 'html' || userValues === undefined) {
@@ -1040,8 +1044,8 @@
 
 
     /**
-    * User option handler
-    */
+     * User option handler
+     */
     $.fn.sparkline.options = createClass({
         init: function (tag, userOptions) {
             var extendedOptions, defaults, base, tagOptionType;
@@ -1119,8 +1123,8 @@
         },
 
         /**
-        * Setup the canvas
-        */
+         * Setup the canvas
+         */
         initTarget: function () {
             var interactive = !this.options.get('disableInteraction');
             if (!(this.target = this.$el.simpledraw(this.width, this.height, this.options.get('composite'), interactive))) {
@@ -1132,8 +1136,8 @@
         },
 
         /**
-        * Actually render the chart to the canvas
-        */
+         * Actually render the chart to the canvas
+         */
         render: function () {
             if (this.disabled) {
                 this.el.innerHTML = '';
@@ -1143,14 +1147,14 @@
         },
 
         /**
-        * Return a region id for a given x/y co-ordinate
-        */
+         * Return a region id for a given x/y co-ordinate
+         */
         getRegion: function (x, y) {
         },
 
         /**
-        * Highlight an item based on the moused-over x,y co-ordinate
-        */
+         * Highlight an item based on the moused-over x,y co-ordinate
+         */
         setRegionHighlight: function (el, x, y) {
             var currentRegion = this.currentRegion,
                 highlightEnabled = !this.options.get('disableHighlight'),
@@ -1173,8 +1177,8 @@
         },
 
         /**
-        * Reset any currently highlighted item
-        */
+         * Reset any currently highlighted item
+         */
         clearRegionHighlight: function () {
             if (this.currentRegion !== undefined) {
                 this.removeHighlight();
@@ -1195,8 +1199,8 @@
         changeHighlight: function (highlight)  {},
 
         /**
-        * Fetch the HTML to display as a tooltip
-        */
+         * Fetch the HTML to display as a tooltip
+         */
         getCurrentRegionTooltip: function () {
             var options = this.options,
                 header = '',
@@ -1213,7 +1217,7 @@
                 return formatter(this, options, fields);
             }
             if (options.get('tooltipChartTitle')) {
-                header += '<div class="jqs jqstitle text-semibold text-lg">' + options.get('tooltipChartTitle') + '</div>\n';
+                header += '<div class="jqs jqstitle">' + options.get('tooltipChartTitle') + '</div>\n';
             }
             formats = this.options.get('tooltipFormat');
             if (!formats) {
@@ -1344,8 +1348,8 @@
     };
 
     /**
-    * Line charts
-    */
+     * Line charts
+     */
     $.fn.sparkline.line = line = createClass($.fn.sparkline._base, {
         type: 'line',
 
@@ -1554,7 +1558,7 @@
                     canvasTop += Math.ceil(spotRadius);
                 }
                 if (hlSpotsEnabled ||
-                    ((options.get('minSpotColor') || options.get('maxSpotColor')) && (yvalues[0] === this.miny || yvalues[0] === this.maxy))) {
+                     ((options.get('minSpotColor') || options.get('maxSpotColor')) && (yvalues[0] === this.miny || yvalues[0] === this.maxy))) {
                     canvasLeft += Math.ceil(spotRadius);
                     canvasWidth -= Math.ceil(spotRadius);
                 }
@@ -1694,8 +1698,8 @@
     });
 
     /**
-    * Bar charts
-    */
+     * Bar charts
+     */
     $.fn.sparkline.bar = bar = createClass($.fn.sparkline._base, barHighlightMixin, {
         type: 'bar',
 
@@ -1883,8 +1887,8 @@
         },
 
         /**
-        * Render bar(s) for a region
-        */
+         * Render bar(s) for a region
+         */
         renderRegion: function (valuenum, highlight) {
             var vals = this.values[valuenum],
                 options = this.options,
@@ -1950,8 +1954,8 @@
     });
 
     /**
-    * Tristate charts
-    */
+     * Tristate charts
+     */
     $.fn.sparkline.tristate = tristate = createClass($.fn.sparkline._base, barHighlightMixin, {
         type: 'tristate',
 
@@ -2048,8 +2052,8 @@
     });
 
     /**
-    * Discrete charts
-    */
+     * Discrete charts
+     */
     $.fn.sparkline.discrete = discrete = createClass($.fn.sparkline._base, barHighlightMixin, {
         type: 'discrete',
 
@@ -2114,8 +2118,8 @@
     });
 
     /**
-    * Bullet charts
-    */
+     * Bullet charts
+     */
     $.fn.sparkline.bullet = bullet = createClass($.fn.sparkline._base, {
         type: 'bullet',
 
@@ -2245,8 +2249,8 @@
     });
 
     /**
-    * Pie charts
-    */
+     * Pie charts
+     */
     $.fn.sparkline.pie = pie = createClass($.fn.sparkline._base, {
         type: 'pie',
 
@@ -2291,8 +2295,8 @@
 
         changeHighlight: function (highlight) {
             var currentRegion = this.currentRegion,
-                newslice = this.renderSlice(currentRegion, highlight),
-                shapeid = this.valueShapes[currentRegion];
+                 newslice = this.renderSlice(currentRegion, highlight),
+                 shapeid = this.valueShapes[currentRegion];
             delete this.shapes[shapeid];
             this.target.replaceWithShape(shapeid, newslice);
             this.valueShapes[currentRegion] = newslice.id;
@@ -2357,8 +2361,8 @@
     });
 
     /**
-    * Box plots
-    */
+     * Box plots
+     */
     $.fn.sparkline.box = box = createClass($.fn.sparkline._base, {
         type: 'box',
 
@@ -2373,8 +2377,8 @@
         },
 
         /**
-        * Simulate a single region
-        */
+         * Simulate a single region
+         */
         getRegion: function () {
             return 1;
         },
@@ -2600,15 +2604,15 @@
         },
 
         /**
-        * Return the most recently inserted shape id
-        */
+         * Return the most recently inserted shape id
+         */
         getLastShapeId: function () {
             return this.lastShapeId;
         },
 
         /**
-        * Clear and reset the canvas
-        */
+         * Clear and reset the canvas
+         */
         reset: function () {
             alert('reset not implemented');
         },
@@ -2618,8 +2622,8 @@
         },
 
         /**
-        * Calculate the pixel dimensions of the canvas
-        */
+         * Calculate the pixel dimensions of the canvas
+         */
         _calculatePixelDims: function (width, height, canvas) {
             // XXX This should probably be a configurable option
             var match;
@@ -2638,8 +2642,8 @@
         },
 
         /**
-        * Generate a shape object and id for later rendering
-        */
+         * Generate a shape object and id for later rendering
+         */
         _genShape: function (shapetype, shapeargs) {
             var id = shapeCount++;
             shapeargs.unshift(id);
@@ -2647,43 +2651,43 @@
         },
 
         /**
-        * Add a shape to the end of the render queue
-        */
+         * Add a shape to the end of the render queue
+         */
         appendShape: function (shape) {
             alert('appendShape not implemented');
         },
 
         /**
-        * Replace one shape with another
-        */
+         * Replace one shape with another
+         */
         replaceWithShape: function (shapeid, shape) {
             alert('replaceWithShape not implemented');
         },
 
         /**
-        * Insert one shape after another in the render queue
-        */
+         * Insert one shape after another in the render queue
+         */
         insertAfterShape: function (shapeid, shape) {
             alert('insertAfterShape not implemented');
         },
 
         /**
-        * Remove a shape from the queue
-        */
+         * Remove a shape from the queue
+         */
         removeShapeId: function (shapeid) {
             alert('removeShapeId not implemented');
         },
 
         /**
-        * Find a shape at the specified x/y co-ordinates
-        */
+         * Find a shape at the specified x/y co-ordinates
+         */
         getShapeAt: function (el, x, y) {
             alert('getShapeAt not implemented');
         },
 
         /**
-        * Render all queued shapes onto the canvas
-        */
+         * Render all queued shapes onto the canvas
+         */
         render: function () {
             alert('render not implemented');
         }
@@ -2916,9 +2920,9 @@
             fill = fillColor === undefined ? ' filled="false"' : ' fillColor="' + fillColor + '" filled="true" ';
             closed = vpath[0] === vpath[vpath.length - 1] ? 'x ' : '';
             vel = '<v:shape coordorigin="0 0" coordsize="' + this.pixelWidth + ' ' + this.pixelHeight + '" ' +
-                ' id="jqsshape' + shapeid + '" ' +
-                stroke +
-                fill +
+                 ' id="jqsshape' + shapeid + '" ' +
+                 stroke +
+                 fill +
                 ' style="position:absolute;left:0px;top:0px;height:' + this.pixelHeight + 'px;width:' + this.pixelWidth + 'px;padding:0px;margin:0px;" ' +
                 ' path="m ' + initial + ' l ' + vpath.join(', ') + ' ' + closed + 'e">' +
                 ' </v:shape>';
@@ -2932,7 +2936,7 @@
             stroke = lineColor === undefined ? ' stroked="false" ' : ' strokeWeight="' + lineWidth + 'px" strokeColor="' + lineColor + '" ';
             fill = fillColor === undefined ? ' filled="false"' : ' fillColor="' + fillColor + '" filled="true" ';
             vel = '<v:oval ' +
-                ' id="jqsshape' + shapeid + '" ' +
+                 ' id="jqsshape' + shapeid + '" ' +
                 stroke +
                 fill +
                 ' style="position:absolute;top:' + y + 'px; left:' + x + 'px; width:' + (radius * 2) + 'px; height:' + (radius * 2) + 'px"></v:oval>';
@@ -2973,9 +2977,9 @@
             stroke = lineColor === undefined ? ' stroked="false" ' : ' strokeWeight="1px" strokeColor="' + lineColor + '" ';
             fill = fillColor === undefined ? ' filled="false"' : ' fillColor="' + fillColor + '" filled="true" ';
             vel = '<v:shape coordorigin="0 0" coordsize="' + this.pixelWidth + ' ' + this.pixelHeight + '" ' +
-                ' id="jqsshape' + shapeid + '" ' +
-                stroke +
-                fill +
+                 ' id="jqsshape' + shapeid + '" ' +
+                 stroke +
+                 fill +
                 ' style="position:absolute;left:0px;top:0px;height:' + this.pixelHeight + 'px;width:' + this.pixelWidth + 'px;padding:0px;margin:0px;" ' +
                 ' path="m ' + x + ',' + y + ' wa ' + vpath.join(', ') + ' x e">' +
                 ' </v:shape>';
@@ -3024,7 +3028,7 @@
 
         insertAfterShape: function (shapeid, shape) {
             var existing = $('#jqsshape' + shapeid),
-                vel = this['_draw' + shape.type].apply(this, shape.args);
+                 vel = this['_draw' + shape.type].apply(this, shape.args);
             existing[0].insertAdjacentHTML('afterEnd', vel);
         },
 

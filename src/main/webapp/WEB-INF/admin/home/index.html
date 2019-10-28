@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PointLion | JFinalOA</title>
     #include("/common/include/include.html")
-	#if(setting.color_theme!=null)
-		<link id="theme" href="#(ctx)#(setting.color_theme)" rel="stylesheet">
-	#end
+	<link href="#(ctx)/common/css/tab/tab.css" rel="stylesheet">
+	<script src="#(ctx)/common/js/common/tab.js"></script>
     <script src="#(ctx)/common/js/demo/nifty-demo.js"></script>
     <script src="#(ctx)/common/plugins/morris-js/morris.min.js"></script>
 	<script src="#(ctx)/common/plugins/morris-js/raphael-js/raphael.min.js"></script>
@@ -31,20 +30,16 @@
     	#if(setting.box_lay=='1'&&setting.box_back_img!=null&&setting.box_back_img!='') 
     		style="background-image: url(#(setting.box_back_img));background-repeat: no-repeat;background-size: cover;"  
     	#end> 
-        #include("/common/include/header.html")
+        #include("/common/include/tab/header.html")
         <div class="boxed">
             <div id="content-container" style="padding-bottom:0px;">
-	           	<!-- #include("/common/include/pageTitleBread.html")
-	           	<div id="iframeContainer">
-            		<iframe id="container-iframe" src="#(ctx)/admin/home/getHomePage?action=openPage" allowTransparency="true" style="border:none;width:100%;height:100%;margin-top: 35px;"></iframe>
-            	</div> -->
             	<div class="jfinaloa-tab-wapper">
 					<!--菜单HTML Start-->
 					<div id="page-tab">
 						<button class="tab-btn" id="page-prev"><i class="psi-arrow-left" ></i></button>
 						<nav id="page-tab-content">
 							<div id="menu-list">
-								<a id="jfinaloa-home-tab" href="javascript:void(0);" onclick="moveToHomeTab()" data-url="#(contextUrl)/admin/home/getHomePage?action=openPage" data-value="首页" class="active" style="padding-right: 20px;">首页</a>
+								<a id="jfinaloa-home-tab" href="javascript:void(0);" onclick="moveToHomeTab()" data-url="#(ctx)/admin/home/getHomePage?action=openPage" data-value="首页" class="active" style="padding-right: 20px;">首页</a>
 							</div>
 						</nav>
 						<button class="tab-btn" id="page-next"><i class="psi-arrow-right" ></i></button>
@@ -52,32 +47,25 @@
 							<i class="psi-arrow-down-3"></i>
 							<div id="jfinaloa-menu-all">
 								<ul id="jfinaloa-menu-all-ul">
-									<li onclick="moveToHomeTab()" data-url="#(contextUrl)/admin/home/getHomePage?action=openPage" data-value="首页" class="active">首页</li>
+									<li onclick="moveToHomeTab()" data-url="#(ctx)/admin/home/getHomePage?action=openPage" data-value="首页" class="active">首页</li>
 								</ul>
 							</div>
 						</div>
 					</div>
 					<!--菜单HTML End-->
 					<!--iframe Start (根据页面顶部占用高度，自行调整高度数值)-->
-					<div id="jfinaloa-tab-page-content" style="height: calc(100% - 60px);">
-							<iframe class="iframe-content active" data-url="#(contextUrl)/admin/home/getHomePage?action=openPage" data-value="首页" src="#(contextUrl)/admin/home/getHomePage?action=openPage"></iframe>
+					<div id="jfinaloa-tab-page-content" style="height: calc(100% - 65px);">
+							<iframe class="iframe-content active" data-url="#(ctx)/admin/home/getHomePage?action=openPage" data-value="首页" src="#(ctx)/admin/home/getHomePage?action=openPage" ></iframe>
 					</div>
 					<!--iframe End-->
 				</div>
-            #include("/common/include/aside.html")
-            #include("/common/include/nav.html")
-            <script type="text/javascript">
-          		//初始化a标签链接到tab
-            	$("#mainnav-menu a.open-menu").tab();
-            	$("#iframeContainer").css("height",getIframeHeight()+"px");
-            </script>
+				#include("/common/include/aside.html")
+				#include("/common/include/nav.html")
+			</div>
         </div>
         #include("/common/include/footer.html")
-        <button class="scroll-top btn">
-            <i class="pci-chevron chevron-up"></i>
-        </button>
     </div>
 	#include("/common/include/tab.html")
-    #include("/common/include/setting.html")
+	#include("/common/include/setting-tab.html")
 </body>
 </html>

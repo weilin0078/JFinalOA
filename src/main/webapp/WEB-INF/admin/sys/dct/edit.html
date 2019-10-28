@@ -3,7 +3,7 @@
 			<div class="col-lg-12">
 		        <div class="panel">
 		            <div class="panel-heading">
-		                <h3 class="panel-title" style="text-align:center;">
+		                <h3 class="panel-title" style="text-align: right;">
 		                	#@installPJaxGoBackBtn()
 		                	#if(view=='detail')
 		                		系统字典
@@ -22,7 +22,7 @@
 			                    		<input type="hidden" id="groupid" name="#(formModelName).group_id" class="form-control" value="#(group.id)">
 			                        	<input type="text" id="groupname" class="form-control" disabled value="#(group.name)">
 				                        <span class="input-group-btn">
-				                            <button class="btn btn-mint" type="button" onclick="selectDctGroup()">选择</button>
+				                            <button class="btn btn-primary" type="button" onclick="selectDctGroup()">选择</button>
 				                        </span>
 			                    	</div>
 			                        <small class="help-block">请选择所属分组</small>
@@ -30,28 +30,28 @@
 			                </div>
 			                <div class="form-group">
 			                    <label class="col-md-2 control-label">名称</label>
-			                    <div class="col-md-8">
+			                    <div class="col-md-9">
 			                        <input type="text"  name="#(formModelName).name" class="form-control"  value="#(o?o.name:'')" #if(view=='detail') readonly #end>
 			                        <small class="help-block">请输入名称</small>
 			                    </div>
 			                </div>
 			                <div class="form-group">
 			                    <label class="col-md-2 control-label">键</label>
-			                    <div class="col-md-8">
+			                    <div class="col-md-9">
 			                        <input type="text"  name="#(formModelName).key" class="form-control"  value="#(o?o.key:'')" #if(view=='detail') readonly #end>
 			                        <small class="help-block">请输入键值</small>
 			                    </div>
 			                </div>
 			                <div class="form-group">
 			                    <label class="col-md-2 control-label">值</label>
-			                    <div class="col-md-8">
+			                    <div class="col-md-9">
 			                        <input type="text"  name="#(formModelName).value" class="form-control"  value="#(o?o.value:'')" #if(view=='detail') readonly #end>
 			                        <small class="help-block">请输入键值</small>
 			                    </div>
 			                </div>
 			                <div class="form-group">
 			                    <label class="col-md-2 control-label">类型</label>
-			                    <div class="col-md-8">
+			                    <div class="col-md-9">
 			                        <input type="text"  name="#(formModelName).type" class="form-control"  value="#(o?o.type:'')" #if(view=='detail') readonly #end>
 			                        <small class="help-block">请输入类型</small>
 			                    </div>
@@ -63,7 +63,7 @@
 			                    <div class="row">
 			                        <div class="col-sm-8 col-sm-offset-3">
 			                            <button class="btn btn-warning" type="reset" #if(view=='detail') disabled #end>重置</button>
-			                            <button class="btn btn-mint" type="submit" #if(view=='detail') disabled #end>保存</button>
+			                            <button class="btn btn-primary" type="submit" #if(view=='detail') disabled #end>保存</button>
 			                        </div>
 			                    </div>
 			                </div>
@@ -77,7 +77,7 @@
 			var data = common_ajax.ajaxFunc("/admin/sys/dct/save", $('#editForm').serialize(), "json", null);
 			if(data.success){
 				pointLion.alertMsg("保存成功!" , "success" , "small" , function(){
-					doPjax(ctx+'/admin/sys/dct/getListPage');//跳转到列表页
+					location.href = ctx+'/admin/sys/dct/getListPage';//跳转到列表页
 				},data);
 			}else{
 				pointLion.alertMsg(data.message , "danger" , "small" , function(){

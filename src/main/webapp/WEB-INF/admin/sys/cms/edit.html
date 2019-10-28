@@ -11,7 +11,7 @@
 		            	<input type="hidden" id="imgpath" name="cmsContent.img" value="#(o?o.img:'')">
 		            	<div class="form-group">
 		                    <label class="col-md-2 control-label">标题</label>
-		                    <div class="col-md-8">
+		                    <div class="col-md-9">
 				                <input type="text"  name="cmsContent.title" class="form-control"  value="#(o?o.title:'')" #if(view=="detail") readonly #end />
 				                <small class="help-block">请输入公告标题</small>
 		                    </div>
@@ -30,7 +30,7 @@
 		                
 		                <div class="form-group">
 		                    <label class="col-md-2 control-label">缩略图</label>
-		                    <div class="col-md-8">
+		                    <div class="col-md-9">
 		                    	<div id="uploader-demo">
 							    	<!--用来存放item-->
 								    <div id="filePicker">选择图片</div>
@@ -60,7 +60,7 @@
 			                    <div class="row">
 			                        <div class="col-sm-9 col-sm-offset-3">
 			                            <button class="btn btn-warning" type="reset">重置</button>
-			                            <button class="btn btn-mint" type="button" onclick="doSave()" >保存</button>
+			                            <button class="btn btn-primary" type="button" onclick="doSave()" >保存</button>
 			                        </div>
 			                    </div>
 			                </div>
@@ -85,7 +85,7 @@
 			var data = common_ajax.ajaxFunc("/admin/sys/cms/save", $('#editForm').serialize(), "json", null);
 			if(data.success){
 				pointLion.alertMsg("保存成功!" , "success" , "small" , function(){
-					doPjax(ctx+'/admin/sys/cms/getListPage?type=#(type)');//跳转到列表页
+					location.href = ctx+'/admin/sys/cms/getListPage?type=#(type)';//跳转到列表页
 				});
 			}
 		}

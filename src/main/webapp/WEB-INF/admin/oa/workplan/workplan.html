@@ -1,0 +1,208 @@
+<link href="#(ctx)/common/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet">
+<link href="#(ctx)/common/plugins/fullcalendar/nifty-skin/fullcalendar-nifty.min.css" rel="stylesheet">
+<script src="#(ctx)/common/plugins/fullcalendar/lib/moment.min.js"></script>
+<script src="#(ctx)/common/plugins/fullcalendar/lib/jquery-ui.custom.min.js"></script>
+<script src="#(ctx)/common/plugins/fullcalendar/fullcalendar.min.js"></script>
+
+
+<div class="row">
+	    <div class="col-md-4 col-lg-3">
+	        <div class="panel">
+	            <div class="panel-heading">
+	                <h3 class="panel-title">Events</h3>
+	            </div>
+	            <div class="panel-body">
+	                <div class="form-group">
+	                    <input type="text" id="event_title" placeholder="事件标题" class="form-control" value="">
+	                </div>
+	                <button class="btn btn-block btn-mint">添加新事件</button>
+	                <hr>
+	
+	                <!-- Draggable Events -->
+	                <!-- ============================================ -->
+	                <p class="text-semibold">拖放完成常用事件添加</p>
+	                <div id="demo-external-events">
+	                    <div class="fc-event fc-list" data-class="warning">重要事件</div>
+	                    <div class="fc-event fc-list" data-class="purple">次要事件</div>
+	                    <div class="fc-event fc-list">普通事件</div>
+	                    <div class="fc-event fc-list" data-class="mint">备忘事件</div>
+	                    <div class="fc-event fc-list" data-class="success">备忘事件</div>
+	                    <hr>
+	                    
+	                    <!-- <div>
+	                        <label class="form-checkbox form-normal form-primary">
+	                            <input type="checkbox" id="drop-remove">
+	                            Remove after drop
+	                        </label>
+	                    </div>
+	                    <hr>
+	                    <div class="fc-event" data-class="warning">All Day Event</div>
+	                    <div class="fc-event" data-class="success">Meeting</div>
+	                    <div class="fc-event" data-class="mint">Birthday Party</div>
+	                    <div class="fc-event" data-class="purple">Happy Hour</div>
+	                    <div class="fc-event">Lunch</div> -->
+	                </div>
+	                <!-- ============================================ -->
+	
+	
+	            </div>
+	        </div>
+	    </div>
+	    <div class="col-md-8 col-lg-9">
+	        <div class="panel">
+	            <div class="panel-heading">
+	                <h3 class="panel-title">Calendar</h3>
+	            </div>
+	            <div class="panel-body">
+	
+	                <!-- Calendar placeholder-->
+	                <!-- ============================================ -->
+	                <div id='demo-calendar'></div>
+	                <!-- ============================================ -->
+	
+	            </div>
+	        </div>
+	    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+	$('#demo-external-events .fc-event').each(function() {
+		$(this).data('event', {
+			title: $.trim($(this).text()), // use the element's text as the event title
+			stick: true, // maintain when user navigates (see docs on the renderEvent method)
+			className : $(this).data('class')
+		});
+		$(this).draggable({
+			zIndex: 99999,
+			revert: true,      // will cause the event to go back to its
+			revertDuration: 0  //  original position after the drag
+		});
+	});
+	$('#demo-calendar').fullCalendar({
+		header: {
+			left: 'prev,next,prevYear,nextYear today',
+			center: 'title',
+			right: 'month,agendaWeek,agendaDay'
+		},
+		buttonText:{
+				prev: '‹', // ‹
+				next: '›', // ›
+				prevYear: '«', // «
+				nextYear: '»', // »
+				today: '今天',
+				month: '月',
+				week: '周',
+				day: '天'
+			},
+		editable: true,
+		droppable: true, // this allows things to be dropped onto the calendar
+		drop: function() {
+			if ($('#drop-remove').is(':checked')) {
+				$(this).remove();
+			}
+		},
+		dayClick: function(date, allDay, jsEvent, view) {
+			/* date是点击的day的时间(如果在agenda view, 还包含时间)，在月view下点击一天时，allDay是true，
+			在agenda模式下，点击all-day的窄条时，allDay是true，点击其他的agenda view下的day则为false，
+			jsEvent就是一个普通的javascript事件，包含的是click事件的基础信息。 */
+		},
+		eventClick: function(event, jsEvent, view) {
+			alert();
+		},
+		selectable:true,
+		weekNumbers:true,
+		weekNumberTitle:'周次',
+		monthNames:['一月', '二月', '三月', '四月', '五月', '六月','七月', '八月', '九月', '十月', '十一月', '十二月'],
+		monthNamesShort:['一月', '二月', '三月', '四月', '五月', '六月','七月', '八月', '九月', '十月', '十一月', '十二月'],
+		dayNames:['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+		dayNamesShort:['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+		defaultDate: '2019-01-12',
+		eventLimit: true, // allow "more" link when too many events
+		events: [
+			{
+				title: '请假',
+				start: '2019-01-05',
+				end: '2019-01-07',
+				className: 'purple'
+			},
+			{
+				title: '生日聚会',
+				start: '2019-01-15',
+				end: '2019-01-17',
+				className: 'mint'
+			},
+			{
+				title: 'All Day Event',
+				start: '2019-01-15',
+				className: 'warning'
+			},
+			{
+				title: '开会',
+				start: '2019-01-20T10:30:00',
+				end: '2019-01-20T12:30:00',
+				className: 'danger'
+			},
+			{
+				title: 'All Day Event',
+				start: '2019-02-01',
+				className: 'warning'
+			},
+			{
+				title: 'Long Event',
+				start: '2019-02-07',
+				end: '2019-02-10',
+				className: 'purple'
+			},
+			{
+				id: 999,
+				title: 'Repeating Event',
+				start: '2019-02-09T16:00:00'
+			},
+			{
+				id: 999,
+				title: 'Repeating Event',
+				start: '2019-02-16T16:00:00',
+				className: 'success'
+			},
+			{
+				title: 'Conference',
+				start: '2019-02-11',
+				end: '2019-02-13',
+				className: 'dark'
+			},
+			{
+				title: '开会',
+				start: '2019-02-12T10:30:00',
+				end: '2019-02-12T12:30:00'
+			},
+			{
+				title: '同学聚会',
+				start: '2019-02-12T12:00:00',
+				className: 'pink'
+			},
+			{
+				title: '开会',
+				start: '2019-02-12T14:30:00'
+			},
+			{
+				title: '娱乐',
+				start: '2019-02-12T17:30:00'
+			},
+			{
+				title: '晚上聚会',
+				start: '2019-02-12T20:00:00'
+			},
+			{
+				title: '生日聚餐',
+				start: '2019-02-13T07:00:00'
+			},
+			{
+				title: 'Click for Google',
+				url: 'http://google.com/',
+				start: '2019-02-28'
+			}
+		]
+	});
+});
+</script>

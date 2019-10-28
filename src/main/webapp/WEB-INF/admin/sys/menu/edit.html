@@ -3,7 +3,7 @@
 			<div class="col-lg-12">
 		        <div class="panel">
 		            <div class="panel-heading">
-		                <h3 class="panel-title" style="text-align:center;">
+		                <h3 class="panel-title" style="text-align: right;">
 		                	#@installPJaxGoBackBtn()
 		                	添加新菜单
 		                </h3>
@@ -18,7 +18,7 @@
 									<input type="hidden" id = "menuId" name="sysMenu.id" value="#(m?m.id:'')">
 			                        
 			                        <span class="input-group-btn">
-			                            <button class="btn btn-mint" type="button" onclick="selectOneMenu()">选择</button>
+			                            <button class="btn btn-primary" type="button" onclick="selectOneMenu()">选择</button>
 			                        </span>
 			                    </div>
 		                        <small class="help-block">请选择</small>
@@ -28,25 +28,18 @@
 		                    <label class="col-md-3 control-label">名称</label>
 		                    <div class="col-md-9">
 		                        <input type="text"  name="sysMenu.name" class="form-control"  value="#(m?m.name:'')">
-		                        <small class="help-block">请输入机构名称</small>
-		                    </div>
-		                </div>
-		                <div class="form-group">
-		                    <label class="col-md-3 control-label">权限标识</label>
-		                    <div class="col-md-9">
-		                        <input type="text"  name="sysMenu.permission" class="form-control"  value="#(m?m.permission:'')">
-		                        <small class="help-block">请输入权限标识</small>
+		                        <small class="help-block">请输入名称</small>
 		                    </div>
 		                </div>
 		                <div class="form-group">
 		                    <label class="col-md-3 control-label">访问地址</label>
 		                    <div class="col-md-9">
 		                        <input type="text"  name="sysMenu.url" class="form-control"  value="#(m?m.url:'')">
-		                        <small class="help-block">请输入权限标识</small>
+		                        <small class="help-block">请输入访问地址</small>
 		                    </div>
 		                </div>
 		                <div class="form-group">
-		                    <label class="col-md-3 control-label" for="demo-textarea-input">描述信息</label>
+		                    <label class="col-md-3 control-label">描述信息</label>
 		                    <div class="col-md-9">
 		                        <textarea name="sysMenu.description" rows="9" class="form-control">#(m?m.description:'')</textarea>
 		                        <small class="help-block">请输入机构的描述信息</small>
@@ -69,7 +62,7 @@
 		                    <div class="row">
 		                        <div class="col-sm-9 col-sm-offset-3">
 		                            <button class="btn btn-warning" type="reset">重置</button>
-		                            <button class="btn btn-mint" type="submit" >保存</button>
+		                            <button class="btn btn-primary" type="submit" >保存</button>
 		                        </div>
 		                    </div>
 		                </div>
@@ -82,7 +75,7 @@
 			var data = common_ajax.ajaxFunc("/admin/sys/menu/save", $('#editForm').serialize(), "json", null);
 			if(data.success){
 				pointLion.alertMsg("保存成功!" , "success" , "small" , function(){
-					doPjax(ctx+'/admin/sys/menu/getListPage');//跳转到列表页
+					location.href = ctx+'/admin/sys/menu/getListPage';//跳转到列表页
 				});
 			}
 		}
@@ -165,8 +158,8 @@
 		                "sysMenu.permission": {
 		                    validators: {
 		                    	stringLength: {
-		                            max: 20,
-		                            message: '*权限标识长度须小于20'
+		                            max: 50,
+		                            message: '*权限标识长度须小于50'
 		                        }
 		                    }
 		                }

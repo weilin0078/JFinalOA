@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PointLion | JFinalOA</title>
+    <link rel="shortcut icon" href="#(ctx)/common/img/ico/PointLion.ico" type="image/x-icon" />
+    <link href="#(ctx)/common/css/single/bootstrap.css" rel="stylesheet">
+    <link href="#(ctx)/common/css/single/nifty.css" rel="stylesheet">
+    <link href="#(ctx)/common/plugins/layer/skin/default/layer.css" rel="stylesheet">
+    <link href="#(ctx)/common/plugins/pace/pace.css" rel="stylesheet">
+    <link href="#(ctx)/common/css/single/demo/nifty-demo.css" rel="stylesheet">
+    <link href="#(ctx)/common/css/single/demo/nifty-demo-icons.css" rel="stylesheet">
+    <link href="#(ctx)/common/plugins/themify-icons/themify-icons.css" rel="stylesheet">
+    <link href="#(ctx)/common/premium/icon-sets/icons/solid-icons/premium-solid-icons.css" rel="stylesheet">
+    <link href="#(ctx)/common/css/single/single.css" rel="stylesheet">
+    <link href="#(ctx)/common/css/common.css" rel="stylesheet">
+    #if(setting)
+        #if(setting.color_theme)
+            <link href="#(ctx)#(setting.color_theme)" rel="stylesheet">
+        #else
+            <link href="#(ctx)/common/css/tab/themes/type-b/theme-light.css" rel="stylesheet">
+        #end
+        #if(setting.skin!=null)
+            <link href="#(ctx)/common/css/skin/skin-#(setting.skin).css" rel="stylesheet">
+        #else
+            <link href="#(ctx)/common/css/skin/skin-info.css" rel="stylesheet">
+        #end
+    #end
+    <script src="#(ctx)/common/js/jquery-2.2.4.min.js"></script>
+    <script src="#(ctx)/common/plugins/morris-js/morris.js"></script>
+    <script src="#(ctx)/common/js/bootstrap.min.js"></script>
+    <script src="#(ctx)/common/plugins/layer/layer.js"></script>
+    <script src="#(ctx)/common/js/nifty.min.js"></script>
+    <script src="#(ctx)/common/js/demo/nifty-demo-single.js"></script>
+    <script src="#(ctx)/common/plugins/flot-charts/jquery.flot.min.js"></script>
+    <script src="#(ctx)/common/plugins/flot-charts/jquery.flot.resize.min.js"></script>
+    <script src="#(ctx)/common/plugins/flot-charts/jquery.flot.tooltip.min.js"></script>
+    <script src="#(ctx)/common/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="#(ctx)/common/js/common/ajax.js"></script>
+    <script src="#(ctx)/common/plugins/pace/pace.js"></script>
+    <script>
+        var ctx = "#(ctx)";
+    </script>
+</head>
+<body>
+        <!--
+
+                该页为“单页模式”的首页面。
+                由于nifty会不定时更新，为了获取最新nifty文件，对nifty改造越少越好。
+                所以该文件尽可能保留nifty原样的风格。
+        -->
+    <div id="container" class="
+	    	#if(setting.box_lay=='1') boxed-layout #end
+	    	#if(setting.animate=='1') effect #(setting.animate_type) #end
+	    	#if(setting.fixed_navbar=='1') navbar-fixed #end
+	    	#if(setting.fixed_footer=='1') footer-fixed #end
+	    	#if(setting.fixed_nav=='1') mainnav-fixed #end
+	    	#if(setting.show_asd=='1') aside-in #end
+	    	#if(setting.fixed_asd=='1') aside-fixed #end
+	    	#if(setting.left_asd=='1') aside-left #end
+	    	#if(setting.float_asd=='1') aside-float #end
+	    	#if(setting.dark_asd=='0') aside-bright #end
+	    	#if(setting.nav_coll=='1') mainnav-sm #else mainnav-lg #end
+    	"
+         #if(setting.box_lay=='1'&&setting.box_back_img!=null&&setting.box_back_img!='')
+         style="background-image: url(#(setting.box_back_img));background-repeat: no-repeat;background-size: cover;"
+         #end>
+        #include("/common/include/single/header.html")
+
+        <div class="boxed">
+            <div id="content-container">
+                <div id="page-head">
+                    <div id="page-title">
+                        <h1 class="page-header text-overflow">首页</h1>
+                    </div>
+                    <ol class="breadcrumb">
+                        <li><a href="javascript:void(0);" onclick="openNewPage('#(ctx)/admin/home/getHomePage','首页')"><i class="demo-pli-home"></i></a></li>
+                        <li><a id="thisPageFromMenu" href="javascript:void(0);">首页</a></li>
+                        <li class="active">管理</li>
+                    </ol>
+                </div>
+                <div id="page-content">
+                    <div id="jfinaloa-single-page-content">
+                        <iframe id="singlePageIframe" class="iframe-content active" data-url="#(ctx)/admin/home/getHomePage?action=openPage" data-value="首页" src="#(ctx)/admin/home/getHomePage?action=openPage" ></iframe>
+                    </div>
+                </div>
+            </div>
+            <!--===================================================-->
+            <!--END CONTENT CONTAINER-->
+            #include("/common/include/aside.html")
+            #include("/common/include/nav.html")
+        </div>
+        #include("/common/include/footer.html")
+    </div>
+<script>
+    /*******iframe自适应高度----开始********/
+    var mainHeight =  document.documentElement.clientHeight;
+    var iframe = document.getElementById("singlePageIframe");
+    function reinitIframe(){
+        try{
+            var bHeight = iframe.contentWindow.document.body.scrollHeight;
+            var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+            var height = Math.max(bHeight, dHeight);
+            console.log(height);
+            iframe.height = height;
+        }catch (ex){
+
+        }
+    };
+
+    iframe.onload = function() {
+        iframe.style.visibility = 'hidden';
+        iframe.setAttribute('height', 'auto');
+        reinitIframe();
+        this.style.minHeight = mainHeight-195+"px";
+        this.style.visibility = 'visible';
+    };
+    $(document).on('nifty.ready', function() {//iframe内容变化的时候，动态调整iframe高度。禁止出现iframe内滚动条。
+        window.setInterval("reinitIframe()", 200);
+    });
+    /*******iframe自适应高度----结束********/
+
+</script>
+
+
+</body>
+</html>

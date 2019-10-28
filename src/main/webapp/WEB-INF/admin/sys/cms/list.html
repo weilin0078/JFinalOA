@@ -3,7 +3,7 @@
 			        <div class="col-sm-12 eq-box-sm">
 			        	<div class="panel ">
 						    <div class="panel-body">
-						    	<a id="add" class="btn btn-mint data-toolbar" onclick="doPjax('#(ctx)/admin/sys/cms/getEditPage?type=#(type)')" href="javascript:void(0);"><i class="demo-pli-add"></i> 起草</a>
+						    	<a id="add" class="btn btn-primary data-toolbar" href="#(ctx)/admin/sys/cms/getEditPage?type=#(type)"></i> 起草</a>
 						    	<a id="del" class="btn btn-danger data-toolbar" onclick="delSel()" href="javascript:void(0);"><i class="demo-pli-cross"></i> 批量删除</a>
 						        <table id="pageTable" class="demo-add-niftycheck" data-toolbar="#del,#add"
 						               data-search="true"
@@ -61,14 +61,14 @@
 	       align:'left',
 	       width:'250',
 	       formatter:function(value,row,index){
-	    	   var a  =     '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/sys/cms/getEditPage?type=#(type)&id='+row.id+'&view=detail\')" href="javascript:void(0);" >查看</a>&nbsp;';
+	    	   var a  =     '<a class="label label-table label-success" href="'+ctx+'/admin/sys/cms/getEditPage?type=#(type)&id='+row.id+'&view=detail" >查看</a>&nbsp;';
 	    	   if(value=='0'){//未发布
-		           	a = a + '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/sys/cms/getEditPage?type=#(type)&id='+row.id+'\')" href="javascript:void(0);" >修改</a>&nbsp;';
+		           	a = a + '<a class="label label-table label-success" href="'+ctx+'/admin/sys/cms/getEditPage?type=#(type)&id='+row.id+'" >修改</a>&nbsp;';
 		           	a = a + '<a class="label label-table label-info" onclick="publish(\''+row.id+'\')" href="javascript:void(0);" >发布</a>&nbsp;';
 		           	a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>&nbsp;';
 	    	   }else{
 	    		    if("#(type)"=="4"){//帮扶认领
-	    		    	a = a + '<a class="label label-table label-info" onclick="doPjax(\''+ctx+'/admin/sys/cms/getReceiveListPage?id='+row.id+'\')" href="javascript:void(0);" >认领情况</a>&nbsp;';	
+	    		    	a = a + '<a class="label label-table label-info" href="'+ctx+'/admin/sys/cms/getReceiveListPage?id='+row.id+'" >认领情况</a>&nbsp;';
 	    		    }
 	    		    a = a + '<a class="label label-table label-danger" onclick="callBack(\''+row.id+'\')" href="javascript:void(0);" >取回</a>&nbsp;';
 	    	   }
@@ -150,7 +150,7 @@
 			//删除结果
 			if(data.success){
 				pointLion.alertMsg(data.message,"success",null,function(){
-					doPjax(ctx+'/admin/sys/cms/getListPage?type=#(type)');//跳转到列表页
+					location.href = ctx+'/admin/sys/cms/getListPage?type=#(type)';//跳转到列表页
 				});
 			}else{
 				pointLion.alertMsg(data.message,"success",null,null);
@@ -163,7 +163,7 @@
 				var data = common_ajax.ajaxFunc("/admin/sys/cms/publish",{"id":id}, "json", null);
 				if(data.success){
 					pointLion.alertMsg(data.message,"success",null,function(){
-						doPjax(ctx+'/admin/sys/cms/getListPage?type=#(type)');//跳转到列表页
+						location.href = ctx+'/admin/sys/cms/getListPage?type=#(type)';//跳转到列表页
 					});
 				}
 			});
@@ -176,7 +176,7 @@
 			//删除结果
 			if(data.success){
 				pointLion.alertMsg(data.message,"success",null,function(){
-					doPjax(ctx+'/admin/sys/cms/getListPage?type=#(type)');//跳转到列表页
+					location.href = ctx+'/admin/sys/cms/getListPage?type=#(type)';//跳转到列表页
 				});
 			}else{
 				pointLion.alertMsg(data.message,"danger",null,null);

@@ -1,0 +1,34 @@
+<ul class="head-list">
+    <li>
+        <a href="#"><i class="demo-pli-male icon-lg icon-fw"></i> Profile</a>
+    </li>
+    <li>
+        <a href="#"><span class="badge badge-danger pull-right">9</span><i class="demo-pli-mail icon-lg icon-fw"></i> Messages</a>
+    </li>
+    <li>
+        <a href="#"><span class="label label-success pull-right">New</span><i class="demo-pli-gear icon-lg icon-fw"></i> Settings</a>
+    </li>
+    #if("tab"==setting.index_page_type)
+    <li>
+        <a href="javascript:void(0);" onclick="changeIndexPageType('single')"><span class="label label-success pull-right">New</span><i class="demo-pli-gear icon-lg icon-fw"></i> 切换到单页模式</a>
+    </li>
+    #elseif("single"==setting.index_page_type)
+    <li>
+        <a href="javascript:void(0);" onclick="changeIndexPageType('tab')"><span class="label label-success pull-right">New</span><i class="demo-pli-gear icon-lg icon-fw"></i> 切换到页签模式</a>
+    </li>
+    #end
+
+    <li>
+        <a href="#"><i class="demo-pli-computer-secure icon-lg icon-fw"></i> Lock screen</a>
+    </li>
+    <li>
+        <a href="#(ctx)/admin/login/logout"><i class="demo-pli-unlock icon-lg icon-fw"></i> 登出</a>
+    </li>
+</ul>
+<script>
+    function changeIndexPageType(type){
+        var data = {"sysCustomSetting.index_page_type":type};
+        setCustomStatus(data);
+        location.reload()
+    }
+</script>

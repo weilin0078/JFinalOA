@@ -3,7 +3,7 @@
 			        <div class="col-sm-12 eq-box-sm">
 			        	<div class="panel ">
 						    <div class="panel-body">
-						        <a id="add" class="btn btn-mint data-toolbar" onclick="doPjax('#(ctx)/admin/sys/role/getEditPage')" href="javascript:void(0);"><i class="demo-pli-add"></i> 添加</a>
+						        <a id="add" class="btn btn-primary data-toolbar" href="#(ctx)/admin/sys/role/getEditPage"></i> 添加</a>
 								<a id="del" class="btn btn-danger data-toolbar" onclick="delSel()" href="javascript:void(0);"><i class="demo-pli-cross"></i> 批量删除</a>
 						        <table id="pageTable" class="demo-add-niftycheck" data-toolbar="#del,#add"
 						               data-search="true"
@@ -51,7 +51,7 @@
 	           //row：当前行的数据
 	           var a = '<a class="label label-table label-info" onclick="giveAuth(\''+row.id+'\')" href="javascript:void(0);" >授权</a>&nbsp;';
 	           	   a = a + '<a class="label label-table label-info" onclick="editRoleUser(\''+row.id+'\')" href="javascript:void(0);" >角色下用户</a>&nbsp;';
-					a = a + '<a class="label label-table label-success" onclick="doPjax(\''+ctx+'/admin/sys/role/getEditPage?id='+row.id+'\')" href="javascript:void(0);" >编辑</a>&nbsp;';
+					a = a + '<a class="label label-table label-success" href="'+ctx+'/admin/sys/role/getEditPage?id='+row.id+'" >编辑</a>&nbsp;';
 					a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>';
 	           return a;
 	       } 
@@ -130,17 +130,17 @@
 			//删除结果
 			if(data.success){
 				pointLion.alertMsg(data.message,"success",null,function(){
-					doPjax(ctx+'/admin/sys/role/getListPage');//跳转到列表页
+					location.href = ctx+'/admin/sys/role/getListPage';//跳转到列表页
 				});
 			}else{
 				pointLion.alertMsg(data.message,"success",null,null);
 			}
 		});
 	};
-	//选择权限
-	var giveAuthIframe;
 	function giveAuth(roleid){
-			var index = layer.open({
+		//选择权限
+		var giveAuthIframe;
+		var index = parent.layer.open({
 							  type: 2,
 							  title: false, //不显示标题栏
 							  area: ['370px', '650px'],
@@ -153,7 +153,7 @@
 							  btnAlign: 'c',
 							  content: ctx+'/admin/sys/role/getGiveAuthPage?roleid='+roleid,
 							  success: function(layero){
-								  giveAuthIframe = window[layero.find('iframe')[0]['name']]; 
+								  giveAuthIframe = parent.window[layero.find('iframe')[0]['name']];
 							  },
 							  yes: function(){
 								  	var nodes = giveAuthIframe.getCheckedNodes();
@@ -168,7 +168,7 @@
 								  	}else{
 								  		pointLion.alertMsg("保存失败","danger",null,null);
 								  	}
-								  	layer.closeAll();
+								  parent.layer.closeAll();
 							  }
 						});
 	}

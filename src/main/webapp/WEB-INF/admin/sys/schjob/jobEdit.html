@@ -1,0 +1,78 @@
+<div id="page-content">
+	<div class="col-lg-12">
+		<div class="panel">
+			<div class="panel-heading">
+				<h3 class="panel-title" style="text-align: right;">
+					#@installPJaxGoBackBtn()
+					添加任务
+				</h3>
+			</div>
+			<form id="editForm" class="panel-body form-horizontal form-padding">
+				<input type="hidden"  name="#(formModelName).ID" class="form-control" value="#(o?o.ID:'')">
+				<div class="form-group">
+					<label class="col-md-1 control-label">任务名称</label>
+					<div class="col-md-5">
+						<input type="text"  name="#(formModelName).JOB_NAME" class="form-control"  value="#(o?o.JOB_NAME:'')" #if(view=='detail') readonly #end>
+						<small class="help-block">请输入任务名称</small>
+					</div>
+					<label class="col-md-1 control-label">任务类型</label>
+					<div class="col-md-5" style="padding-top: 7px;">
+						<input id="sysUserSexMan" class="magic-radio" type="radio" name="#(formModelName).TYPE" value="1" checked >
+						<label for="sysUserSexMan">QuartZ任务</label>
+						<input id="sysUserSexWoman" class="magic-radio" type="radio" name="#(formModelName).TYPE" value="2" #if(o&&o.sex=="2") checked #end>
+						<label for="sysUserSexWoman">OSP任务</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label">执行类</label>
+					<div class="col-md-11">
+						<input type="text"  name="#(formModelName).JOB_CLASS" class="form-control"  value="#(o?o.JOB_CLASS:'')" #if(view=='detail') readonly #end>
+						<small class="help-block">请输入执行类</small>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label">执行方法</label>
+					<div class="col-md-11">
+						<input type="text"  name="#(formModelName).JOB_METHOD" class="form-control"  value="#(o?o.JOB_METHOD:'')" #if(view=='detail') readonly #end>
+						<small class="help-block">请输入执行方法</small>
+					</div>
+				</div>
+				#if(view=='detail')
+
+				#else
+				<div class="panel-footer">
+					<div class="row">
+						<div class="col-sm-8 col-sm-offset-3">
+							<button class="btn btn-warning" type="reset" #if(view=='detail') disabled #end>重置</button>
+							<button class="btn btn-primary" type="submit" #if(view=='detail') disabled #end>保存</button>
+						</div>
+					</div>
+				</div>
+				#end
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	function save(){
+		var data = common_ajax.ajaxFunc("/admin/sys/schjob/saveJob", $('#editForm').serialize(), "json", null);
+		if(data.success){
+			pointLion.alertMsg("保存成功!" , "success" , "small" , function(){
+				location.href = ctx+'/admin/sys/schjob/getJobListPage';//跳转到列表页
+			},data);
+		}else{
+			pointLion.alertMsg(data.message , "danger" , "small" , function(){
+				$(".btn").removeAttr("disabled");
+			},data);
+		}
+	}
+	$(document).ready(function() {
+		$('#editForm').bootstrapValidator({
+			fields: {
+			}
+		}).on("success.form.bv", function (e) {
+			save();
+			return false;//阻止表单跳转
+		});
+	});
+</script>
