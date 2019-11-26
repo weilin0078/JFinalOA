@@ -4,6 +4,7 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.pointlion.mvc.admin.oa.common.OAConstants;
 import com.pointlion.mvc.admin.oa.notice.NoticeService;
 import com.pointlion.mvc.admin.oa.workflow.WorkFlowService;
 import com.pointlion.mvc.admin.oa.workflow.WorkFlowUtil;
@@ -15,6 +16,7 @@ import com.pointlion.mvc.common.utils.StringUtil;
 import com.pointlion.plugin.shiro.ShiroKit;
 import com.pointlion.plugin.shiro.ext.SimpleUser;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,8 +32,6 @@ public class FlowTaskController extends BaseController{
 		SimpleUser user = ShiroKit.getLoginUser();
     	String username = user.getUsername();
     	setAttrToDoList(username);//获取待办
-    	setAttrHavedoneList(username);//获取已办
-		setAttr("NoticeList",noticeService.getMyNotice(user.getId()));//获取首页通知公告
 		renderIframe("todoList.html");
 	}
 	/***
@@ -40,10 +40,9 @@ public class FlowTaskController extends BaseController{
 	public void getHaveDonePage(){
 		SimpleUser user = ShiroKit.getLoginUser();
 		String username = user.getUsername();
-    	setAttrToDoList(username);//获取待办
     	setAttrHavedoneList(username);//获取已办
 		setAttr("NoticeList",noticeService.getMyNotice(user.getId()));//获取首页通知公告
-		renderIframe("todoList.html");
+		renderIframe("havedoneList.html");
 	}
 	/****
 	 * 获取申请办理任务页面
@@ -99,14 +98,21 @@ public class FlowTaskController extends BaseController{
     				setAttr("user", user);
     			}
     		}
-			setPageUrl(defKey,o);//设置渲染的页面，以及所需要的属性
+			setPageUrl(defKey,o,task);//设置不同业务需要渲染的页面，以及所需要的属性
 			renderIframe("doTask.html");
     	}
 	}
-	public void setPageUrl(String defKey,Record o){
+
+	/***
+	 * 设置不同业务需要渲染的页面，以及所需要的属性（task可能为null，注意空指针）
+	 * @param defKey
+	 * @param o
+	 * @param task
+	 */
+	public void setPageUrl(String defKey,Record o,VTasklist task){
 		if(StrKit.notBlank(WorkFlowUtil.getTablenameByDefkey(defKey))){//如果属于固定流程
-    			setAttr("pageUrl", "/WEB-INF/admin/oa/apply/"+defKey.toLowerCase()+"/editForm.html");
-		}else{
+			setAttr("pageUrl", "/WEB-INF/admin/oa/apply/"+defKey.toLowerCase()+"/editForm.html");
+		}else{//自定义流程
 			setAttr("defName", wfservice.getDefNameByDefKey(defKey));
 			setAttr("pageUrl", "/WEB-INF/admin/oa/apply/custom/editForm.html");
 		}
@@ -148,7 +154,7 @@ public class FlowTaskController extends BaseController{
     				setAttr("user", user);
     			}
     		}
-    		setPageUrl(defKey,o);//设置渲染的页面
+    		setPageUrl(defKey,o,new VTasklist());//设置渲染的页面
     	}
 		renderIframe("havedoneBusinessPage.html");
 	}
@@ -159,6 +165,7 @@ public class FlowTaskController extends BaseController{
 	@SuppressWarnings("rawtypes")
 	public void submitTask(){
 		try{
+			//正常办理
 			String taskid = getPara("taskId");
 			VTasklist task = VTasklist.dao.getTaskRecord(taskid);
 			Map<String,Object> var = new HashMap<String,Object>();
@@ -173,6 +180,15 @@ public class FlowTaskController extends BaseController{
 			}
 			String comment = getPara("comment");
 			var.put("pass", getPara("pass"));
+
+			//是否需要其他人会签审批
+			String ifNeedAddAssignee = getPara(OAConstants.WORKFLOW_OPEN_ADD_ASSIGNEE,"0");
+			var.put(OAConstants.WORKFLOW_OPEN_ADD_ASSIGNEE, ifNeedAddAssignee);//是否需要添加其他人办理。会签。
+			if("1".equals(ifNeedAddAssignee)){
+				String usernames = getPara("addOtherPersonAuditUsernames","");
+				List jointlyUsers = Arrays.asList(usernames.split(","));
+				var.put(OAConstants.WORKFLOW_VAR_JOINTLY_USERLIST, jointlyUsers);
+			}
 			wfservice.completeTask(taskid,ShiroKit.getUsername(), comment, var);
 			renderSuccess();
 		}catch(Exception e){

@@ -15,4 +15,6 @@ public class SysUserService {
 	public List<SysUser> getAllUser(){
 		return SysUser.dao.find("select * from sys_user");
 	}
+
+
 }

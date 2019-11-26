@@ -3,20 +3,18 @@
  */
 package com.pointlion.mvc.admin.sys.role;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
 
+import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.mvc.admin.oa.workflow.WorkFlowIdentityService;
 import com.pointlion.mvc.common.base.BaseController;
 import com.pointlion.mvc.common.model.SysRole;
-import com.pointlion.mvc.common.model.SysRoleAuth;
+import com.pointlion.mvc.common.model.SysRoleMenu;
 import com.pointlion.mvc.common.model.SysUser;
-import com.pointlion.mvc.common.model.SysUserRole;
+import com.pointlion.mvc.common.model.SysRoleUser;
 import com.pointlion.mvc.common.utils.UuidUtil;
 import com.pointlion.plugin.shiro.ShiroKit;
 
@@ -94,7 +92,26 @@ public class RoleController extends BaseController{
     	renderIframe("giveAuth.html");
     }
 
-    
+	/***
+	 * 打开角色下用户页面
+	 */
+	public void getRoleUserPage(){
+		setAttr("roleId", getPara("roleId",""));
+		renderIframe("roleUser.html");
+	}
+
+	/***
+	 * 角色下用户列表
+	 */
+	public void getRoleUserListData(){
+		String roleId = getPara("roleId","");
+		String pageNumber = getPara("pageNumber","");
+		String pageSize = getPara("pageSize","");
+		Page<Record> page = SysUser.dao.getPageByRoleid(Integer.valueOf(pageNumber),Integer.valueOf(pageSize),roleId);
+		renderPage(page.getList(),"" ,page.getTotalRow());
+	}
+
+
     /***
      * 给角色赋权
      */
@@ -111,7 +128,7 @@ public class RoleController extends BaseController{
      */
     public void getRoleAuthByRoleid(){
     	String roleid = getPara("roleid");
-    	List<SysRoleAuth> list = SysRole.dao.getRoleAuthByRoleId(roleid);
+    	List<SysRoleMenu> list = SysRole.dao.getRoleAuthByRoleId(roleid);
     	renderJson(list);
     }
     /***
@@ -180,35 +197,40 @@ public class RoleController extends BaseController{
      * 将角色下添加用户
      */
     public void addUserToRole(){
-    	String userid = getPara("userid");
-    	String roleid = getPara("roleid");
-    	SysUserRole ur = SysUserRole.dao.getByUseridAndRoleid(userid,roleid);
-		if(ur!=null){
-			renderError("该角色下已有该用户");
+    	String userId = getPara("userId");
+    	String roleId = getPara("roleId");
+    	if(StrKit.notBlank(userId)&&StrKit.notBlank(roleId)){
+			SysRoleUser ur = SysRoleUser.dao.getByUseridAndRoleid(userId,roleId);
+			if(ur!=null){
+				renderError("该角色下已有该用户");
+			}else{
+				SysUser user = SysUser.dao.getById(userId);//用户
+				SysRole role = SysRole.dao.findById(roleId);//角色
+				ur = new SysRoleUser();
+				ur.setId(UuidUtil.getUUID());
+				ur.setUserId(userId);
+				ur.setRoleId(roleId);
+				ur.save();
+				idService.createRelationShip(user, role);//没有用户会创建,没有角色会创建。流程引擎
+				ShiroKit.clearAllCachedAuthorizationInfo();//清除所有人shiro缓存，将重新执行初始化权限操作（ShiroDbRealm.doGetAuthorizationInfo方法）
+				renderSuccess();
+			}
 		}else{
-			SysUser user = SysUser.dao.getById(userid);//用户
-			SysRole role = SysRole.dao.findById(roleid);//角色
-			ur = new SysUserRole();
-			ur.setId(UuidUtil.getUUID());
-			ur.setUserId(userid);
-			ur.setRoleId(roleid);
-			ur.save();
-			idService.createRelationShip(user, role);//没有用户会创建,没有角色会创建。流程引擎
-			ShiroKit.clearAllCachedAuthorizationInfo();//清除所有人shiro缓存，将重新执行初始化权限操作（ShiroDbRealm.doGetAuthorizationInfo方法）
-			renderSuccess();
+			renderError("数据获取失败");
 		}
+
     }
     
     /***
      * 角色下删除用户
      */
     public void removeUserFromRole(){
-    	String userid = getPara("userid");
-    	String roleid = getPara("roleid");
-		SysUser user = SysUser.dao.getById(userid);//用户
-		SysRole role = SysRole.dao.findById(roleid);//角色
+    	String userId = getPara("userId");
+    	String roleId = getPara("roleId");
+		SysUser user = SysUser.dao.getById(userId);//用户
+		SysRole role = SysRole.dao.findById(roleId);//角色
 		idService.removeRelationShip(user.getUsername(), role.getKey());//没有用户会创建,没有角色会创建
-		SysUserRole ur = SysUserRole.dao.getByUseridAndRoleid(userid,roleid);
+		SysRoleUser ur = SysRoleUser.dao.getByUseridAndRoleid(userId,roleId);
 		if(ur!=null){
 			ur.delete();
 		}

@@ -40,7 +40,7 @@ public class SysDataAuthVariable {
 				value = value.replace(Constants.CurrentUser_Id, userid);
 			}
 			if(value.indexOf(Constants.CurrentUser_Org_AllChildId)>=0){//登录人递归子公司(这种情况必须是in)
-				List<SysOrg> list = SysOrg.dao.getChildrenAll(user.getOrgid());//查询出来的不包括自己
+				List<SysOrg> list = SysOrg.dao.getChildrenAllTree(user.getOrgid());//查询出来的不包括自己
 				list.add(SysOrg.dao.getById(user.getOrgid()));//将自己的部门添加进去
 				List<String> idList = new ArrayList<String>();
 				for(SysOrg org:list){

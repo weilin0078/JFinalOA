@@ -41,7 +41,15 @@
 							var linkHtml = $(this).data("value").trim();
 							$('#mouseRightClickMenu a').data("url",linkUrl);
 							$('#mouseRightClickMenu a').data("value",linkHtml);
+                            e.preventDefault();
+							return false;
 		            });
+					$("#mouseRightClickMenu").on("mouseup",function(){
+					   return false;
+                    });
+                    $("#mouseRightClickMenu").on("mousedown",function(){
+                        return false;
+                    });
 					//关闭右键菜单，很简单
 					window.onclick=function(e){
 						//用户触发click事件就可以关闭了，因为绑定在window上，按事件冒泡处理，不会影响菜单的功能

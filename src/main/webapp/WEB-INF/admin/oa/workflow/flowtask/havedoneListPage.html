@@ -1,0 +1,166 @@
+<!-- 传递进来只有流程defkey -->
+#define makeHavedoneList(defkey)
+                <div id="page-content">
+			        <div class="col-sm-12 eq-box-sm">
+			        	<div class="panel">
+						    <div class="panel-body">
+						        <table id="pageTable_#(defkey)" class="demo-add-niftycheck" data-toolbar="#del,#add"
+						               data-page-list="[5, 10, 20]"
+						               data-page-size="5"
+						               data-pagination="true"></table>
+						    </div>
+						</div>
+			        </div>
+                </div>
+	<script>
+	var col_#(defkey) = [{
+	       field: 'checked',
+	       checkbox : true,
+	       align: 'center'
+	   },
+	   
+	   {
+	       field: 'id',
+	       title: '主键',
+	       align: 'center'
+	   },
+	   {
+	       field: 'applyer_name',
+	       title: '申请人',
+	       align: 'center',
+	   },
+	   {
+	       field: 'org_name',
+	       title: '部门',
+	       align: 'center',
+	   },
+	   {
+	       field: 'title',
+	       title: '标题',
+	       align: 'center',
+	   },
+	   {
+	       field: 'if_submit',
+	       title: '是否提交',
+	       align: 'center',
+	       width:'50',
+	       formatter:function(value,row,index){
+	           if(value=="1"){
+	        	   return "<span style='color:green'>已提交</span>";
+	           }else{
+	        	   return "未提交";
+	           }
+	       } 
+	   },
+	   {
+	       field: 'if_complete',
+	       title: '是否完成',
+	       align: 'center',
+	       formatter:function(value,row,index){
+	           if(value=="1"){
+	        	   return "<span style='color:green'>已完成</span>";
+	           }else{
+	        	   return "<span style='color:red'>未完成</span>";
+	           }
+	       } 
+	   },
+	   {
+	       field: 'if_agree',
+	       title: '是否同意',
+	       align: 'center',
+	       formatter:function(value,row,index){
+	    	   if(value=="1"){
+	        	   return "<span style='color:green;'>同意</span>";
+	           }else if(value=="2"){
+	        	   return "<span style='color:red;'>未同意</span>";
+	           }else{
+	        	   return "<span style='color:gray;'>未知</span>";
+	           }
+	       } 
+	   },
+	   {
+	       field: 'if_submit',
+	       title: '操作',
+	       align: 'left',
+	       formatter:function(value,row,index){
+	           	//通过formatter可以自定义列显示的内容
+	           	//value：当前field的值，即id
+	           	//row：当前行的数据
+	               var a = '';
+	    		   a = a + '<a class="label label-table label-info" href="javascript:void(0);" onclick="pointLion.openTaskHisListPage(\''+row.proc_ins_id+'\')">流转</a>&nbsp;';
+	    		   a = a + '<a class="label label-table label-success" onclick="openHavedoneBusinessPage_#(defkey)(\''+row.id+'\')" href="javascript:void(0);" >查看</a>&nbsp;';
+			       return a;
+	       }
+	   }];
+	var opt_#(defkey) = {
+		    //请求方法
+			   method: 'get',
+			    //是否显示行间隔色
+			   striped: true,
+			   //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）     
+			   cache: false,  
+			   //data-toolbar: "#demo-delete-row",
+			   //是否显示分页（*）  
+			   pagination: true,   
+			    //是否启用排序  
+			   sortable: false,    
+			    //排序方式 
+			   sortOrder: "asc",    
+			   //初始化加载第一页，默认第一页
+			   //我设置了这一项，但是貌似没起作用，而且我这默认是0,- -
+			   //pageNumber:1,   
+			   //每页的记录行数（*）   
+			   pageSize: 10,
+			   //可供选择的每页的行数（*）    
+			   pageList: [10, 25, 50, 100],
+			   //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据  
+			   url: ctx+"/admin/oa/workflow/flowtask/getHaveDoneTaskDataList",
+			   //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+			   //queryParamsType:'',   
+			   ////查询参数,每次调用是会带上这个参数，可自定义                         
+			   queryParams : function(params) {
+			       return {
+			             pageNumber: (params.offset/params.limit)+1,
+			             pageSize: params.limit,
+			             defkey:"#(defkey)"
+			           };
+			   },
+			   //分页方式：client客户端分页，server服务端分页（*）
+			   sidePagination: "server",
+			   //是否显示搜索
+			   search: false,  
+			   //Enable the strict search.    
+			   strictSearch: true,
+			   //Indicate which field is an identity field.
+			   idField : "id",
+			   columns: col_#(defkey),
+			   pagination:true,paginationShowPageGo: true
+			}; 
+		//表格
+		function initTable_#(defkey)(){
+			$('#pageTable_#(defkey)').bootstrapTable(opt_#(defkey));
+			$('#pageTable_#(defkey)').bootstrapTable('hideColumn', 'id');
+		}
+		//打开详情页面
+		function openHavedoneBusinessPage_#(defkey)(id){
+			layer.open({
+				  type: 2,
+				  title: false, //不显示标题栏
+				  area: ['1000px', '620px'],
+				  shade: 0.2,
+				  id: 'selectOneMenu', //设定一个id，防止重复弹出
+				  resize: false,
+				  closeBtn: false,
+				  isOutAnim : false , 
+				  btnAlign: 'c',
+				  content: ctx+'/admin/oa/workflow/flowtask/openHavedoneBusinessPage?id='+id+"&defkey=#(defkey)",
+				  success: function(layero){
+					  
+				  }
+			});
+		}
+		$(document).ready(function(){
+			initTable_#(defkey)();//初始化
+		});
+	</script>                
+#end

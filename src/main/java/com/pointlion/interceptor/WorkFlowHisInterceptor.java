@@ -12,6 +12,7 @@ public class WorkFlowHisInterceptor implements Interceptor {
         String procInsId = inv.getController().getAttr("procInsId","");
         if(StrKit.notBlank(procInsId)){
         	inv.getController().setAttr("hislist",WorkFlowService.me.getHisTaskList(procInsId));
+        	inv.getController().setAttr("procInsId",procInsId);
         }
     }
 }

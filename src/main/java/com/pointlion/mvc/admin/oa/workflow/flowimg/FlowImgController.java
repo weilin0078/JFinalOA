@@ -1,12 +1,13 @@
 package com.pointlion.mvc.admin.oa.workflow.flowimg;
 
 import com.pointlion.mvc.common.base.BaseController;
+import sun.java2d.pipe.RenderBuffer;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.nio.Buffer;
 
 /**
  * @Description: FlowImgController
@@ -20,19 +21,22 @@ public class FlowImgController extends BaseController {
     /***
      * 图片生成，接口返回
      */
-    public void generateImage() throws Exception {
-        String procInstId = getPara("procInstId");
-        flowImgService.generateImageByProcInstId(procInstId);
+    public void getFlowImg() throws Exception {
+        String processInstanceId = getPara("processInstanceId");
+        byte[] b = flowImgService.generateImageByProcInstId(processInstanceId);
+        ByteArrayInputStream in = new ByteArrayInputStream(b);
+        BufferedImage bi = ImageIO.read(in);
+        ImageIO.write(bi,"png",this.getResponse().getOutputStream());
+        renderNull();
     }
 
 
     /***
      * 生成到本地文件夹下，前端再读取
-     * @param processId
-     * @param response
      * @throws IOException
      */
-    public void viewProcessImg(String processId, HttpServletResponse response) throws IOException {
+    public void viewProcessImg() throws IOException {
+        String processInstanceId = getPara("processInstanceId");
         OutputStream os = null;
         try {
             String directory = "F:" + File.separator + "temp" + File.separator;
@@ -40,12 +44,12 @@ public class FlowImgController extends BaseController {
             File folder = new File(directory);
             File[] files = folder.listFiles();
             for (File file : files) {
-                if (file.getName().equals(processId + suffix)) {
+                if (file.getName().equals(processInstanceId + suffix)) {
                     file.delete();
                 }
             }
-            byte[] processImage = flowImgService.generateImageByProcInstId(processId);
-            File dest = new File(directory + processId + suffix);
+            byte[] processImage = flowImgService.generateImageByProcInstId(processInstanceId);
+            File dest = new File(directory + processInstanceId + suffix);
             os = new FileOutputStream(dest, true);
             os.write(processImage, 0, processImage.length);
             os.flush();

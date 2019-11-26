@@ -47,34 +47,19 @@
 
 <script>
 	var orgid = '#(orgid)';
-	var col = [{
-	       field: 'checked',
-	       checkbox : true,
-	       align: 'center'
-	   }, {
-	       field: 'username',
-	       title: '登录名称',
-	       align: 'center'
-	   }, {
-	       field: 'name',
-	       title: '用户名称',
-	       align: 'center'
-	   }, {
-	       field: 'sex',
-	       title: '性别',
-	       align: 'center',
-	       formatter:function(value,row,index){
-	           if(value=="1"){
-	        	   return "男";
-	           }else{
-	        	   return "女";
-	           }
-	       } 
-	   }, {
-	       field: 'orgname',
-	       title: '所属单位',
-	       align: 'center'
-	   }];
+	var col = [{field: 'checked', checkbox : true, align: 'center'},
+				{field: 'username', title: '登录名称', align: 'center'},
+				{field: 'name', title: '用户名称', align: 'center'},
+				{field: 'sex', title: '性别', align: 'center',
+				   formatter:function(value,row,index){
+					   if(value=="1"){
+						   return "男";
+					   }else{
+						   return "女";
+					   }
+				   }
+			    },
+				{field: 'orgname', title: '所属单位', align: 'center'}];
 	var opt = {
 		    //请求方法
 			   method: 'get',

@@ -1,10 +1,13 @@
 package com.pointlion.config.routes;
 
 import com.jfinal.config.Routes;
+import com.pointlion.mvc.admin.oa.apply.custom.OaApplyCustomController;
 import com.pointlion.mvc.admin.oa.apply.seal.OaApplySealController;
 import com.pointlion.mvc.admin.oa.common.CommonBusinessController;
 import com.pointlion.mvc.admin.oa.notice.NoticeController;
 import com.pointlion.mvc.admin.oa.workflow.WorkFlowController;
+import com.pointlion.mvc.admin.oa.workflow.flowimg.FlowImgController;
+import com.pointlion.mvc.admin.oa.workflow.flowtask.FlowTaskController;
 import com.pointlion.mvc.admin.oa.workflow.model.ModelController;
 import com.pointlion.mvc.admin.oa.workflow.model.ModelEditorJsonRestResource;
 import com.pointlion.mvc.admin.oa.workflow.model.ModelSaveRestResource;
@@ -28,11 +31,15 @@ public class OARoutes extends Routes{
 		add("/admin/oa/notice",NoticeController.class,"/notice");//通知公告
 		//工作计划
 		add("/admin/oa/workplan",WorkPlanController.class,"/workplan");//工作计划
+		//在线办公---各种各样的申请申请
+		add("/admin/oa/workflow/flowtask",FlowTaskController.class,"/workflow/flowtask");//处理通用任务
+		add("/admin/oa/apply/custom",OaApplyCustomController.class,"/apply/custom");//自定义流程
 		add("/admin/oa/apply/seal",OaApplySealController.class,"/apply/seal");//用章申请
 		//流程在线编辑器和流程跟踪所用路由
 		add("/admin/oa/process-instance/highlights",ProcessInstanceHighlightsResource.class);//modeler
 		add("/admin/oa/process-instance/diagram-layout",ProcessInstanceDiagramLayoutResource.class);//modeler
 		add("/admin/oa/process-definition/diagram-layout",ProcessDefinitionDiagramLayoutResource.class);//modeler
+		add("/admin/oa/workflow/flowimg", FlowImgController.class);//流程图片展示
 		add("/admin/oa/modelEditor/save",ModelSaveRestResource.class);
 		add("/admin/oa/modelEditor/json",ModelEditorJsonRestResource.class);
 		add("/admin/oa/editor/stencilset",StencilsetRestResource.class);

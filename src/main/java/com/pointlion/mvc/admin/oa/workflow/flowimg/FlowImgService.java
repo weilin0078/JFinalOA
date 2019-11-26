@@ -5,6 +5,7 @@ import com.pointlion.mvc.admin.oa.workflow.flowimg.img.CustomProcessDiagramGener
 import com.pointlion.plugin.flowable.FlowablePlugin;
 import org.apache.commons.lang3.StringUtils;
 import org.flowable.bpmn.model.BpmnModel;
+import org.flowable.bpmn.model.FlowElement;
 import org.flowable.bpmn.model.FlowNode;
 import org.flowable.bpmn.model.SequenceFlow;
 import org.flowable.engine.HistoryService;
@@ -93,12 +94,15 @@ public class FlowImgService {
 
         for (HistoricActivityInstance historicActivityInstance : historicActivityInstanceList) {
             // 获取流程节点
-            FlowNode flowNode = (FlowNode) bpmnModel.getMainProcess().getFlowElement(historicActivityInstance
-                    .getActivityId(), true);
-            allHistoricActivityNodeList.add(flowNode);
-            // 结束时间不为空，当前节点则已经完成
-            if (historicActivityInstance.getEndTime() != null) {
-                finishedActivityInstanceList.add(historicActivityInstance);
+            FlowElement flowElement = bpmnModel.getMainProcess().getFlowElement(historicActivityInstance.getActivityId(), true);
+            String className = flowElement.getClass().getSimpleName();
+            if(!"SequenceFlow".equals(className)){
+                FlowNode flowNode = (FlowNode) flowElement;
+                allHistoricActivityNodeList.add(flowNode);
+                // 结束时间不为空，当前节点则已经完成
+                if (historicActivityInstance.getEndTime() != null) {
+                    finishedActivityInstanceList.add(historicActivityInstance);
+                }
             }
         }
 
@@ -282,6 +286,7 @@ public class FlowImgService {
             imageStream.read(buffer);
             return buffer;
         } catch (Exception e) {
+            e.printStackTrace();
             LOG.error("通过流程实例ID["+procInstId+"]获取流程图时出现异常！", e);
             throw new Exception("通过流程实例ID" + procInstId + "获取流程图时出现异常！", e);
         } finally {

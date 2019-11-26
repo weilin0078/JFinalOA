@@ -40,7 +40,7 @@ public class FlowTaskService{
 		Record o = Db.findFirst("select * from "+tableName+" o where o.id='"+id+"'");
 		return o;
 	}
-
+	
 	/***
 	 * 获取已经办理流程DefKey集合
 	 */

@@ -86,6 +86,7 @@ public class DoGenerator {
      */
     public String htmlRender(String tableName,HtmlGenerateBean b){
     	String result = "";
+    	//生成list.html
     	Integer ret = htmlList(tableName,b);
         if(ret.equals(Enjoy.EXIST)){//已存在
         	result = result + "html已存在<br/>";
@@ -94,6 +95,7 @@ public class DoGenerator {
         }else{//-1:失败
         	result = result + "html生成失败<br/>";
         }
+        //生成edit.html
         ret = htmlEdit(tableName,b);
         if(ret.equals(Enjoy.EXIST)){//已存在
         	result = result + "edit已存在<br/>";
@@ -101,6 +103,15 @@ public class DoGenerator {
         	result = result + "edit生成成功<br/>";
         }else{//-1:失败
         	result = result + "edit生成失败<br/>";
+        }
+        //生成editForm.html
+        ret = htmlEditForm(tableName,b);
+        if(ret.equals(Enjoy.EXIST)){//已存在
+            result = result + "edit已存在<br/>";
+        }else if(ret.equals(Enjoy.SUCCESS)){//成功！
+            result = result + "edit生成成功<br/>";
+        }else{//-1:失败
+            result = result + "edit生成失败<br/>";
         }
         return result;
     }
@@ -128,8 +139,8 @@ public class DoGenerator {
     
     /**
      * 生成Service
-     * @param className         类名称
      * @param tableName         表名
+     * @param b         类名称
      */
     public Integer service(String tableName,HtmlGenerateBean b){
     	String className = tableNameToClassName(tableName);
@@ -152,7 +163,12 @@ public class DoGenerator {
         String filePath = workSpacePath+sourceFolder+getPageFilePath(className)+"/edit.html";
         return enjoy.render("/html/edit.html", kv, filePath);
     }
-    
+    public Integer htmlEditForm(String tableName,HtmlGenerateBean b){
+        String className = tableNameToClassName(tableName);
+        Kv kv = getKv(tableName,b);
+        String filePath = workSpacePath+sourceFolder+getPageFilePath(className)+"/editForm.html";
+        return enjoy.render("/html/editForm.html", kv, filePath);
+    }
 
     /****************工具类START*************************/
     private Kv getKv(String tableName,HtmlGenerateBean b){
@@ -251,10 +267,10 @@ public class DoGenerator {
 		generator.setGenerateChainSetter(false);
 		// 添加不需要生成的表名
 		generator.addExcludedTable("sys_user");//用户
-		generator.addExcludedTable("sys_user_role");//用户角色
+		generator.addExcludedTable("sys_role_user");//用户角色
 		generator.addExcludedTable("sys_menu");//菜单
 		generator.addExcludedTable("sys_role");//角色
-		generator.addExcludedTable("sys_role_auth");//角色对应功能权限
+		generator.addExcludedTable("sys_role_menu");//角色对应功能权限
 		generator.addExcludedTable("sys_org");//组织结构
 		generator.addExcludedTable("sys_friend");//用户好友
 		generator.addExcludedTable("oa_notice");

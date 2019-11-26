@@ -406,7 +406,7 @@ public class WorkFlowService {
 		if(StrKit.isBlank(tableName)){
 			tableName = OaApplyCustom.tableName;
 		}
-		String sql = "FROM "+tableName+" o, ( SELECT DISTINCT p.BUSINESS_KEY_, d.ID_ defid FROM act_hi_taskinst t, act_hi_procinst p, act_re_procdef d WHERE t.ASSIGNEE_='"+username+"' AND p.PROC_DEF_ID_ = d.ID_ AND d.KEY_ = '"+defkey+"' AND t.END_TIME_ is not NULL AND t.DELETE_REASON_='completed' AND t.PROC_INST_ID_ = p.ID_) tt WHERE tt.BUSINESS_KEY_ = o.id ";
+		String sql = "FROM "+tableName+" o, ( SELECT DISTINCT p.BUSINESS_KEY_, d.ID_ defid FROM act_hi_taskinst t, act_hi_procinst p, act_re_procdef d WHERE t.ASSIGNEE_='"+username+"' AND p.PROC_DEF_ID_ = d.ID_ AND d.KEY_ = '"+defkey+"' AND t.END_TIME_ is not NULL AND t.PROC_INST_ID_ = p.ID_) tt WHERE tt.BUSINESS_KEY_ = o.id ";
 //		String sql  = " from "+tableName+" o , (select BUSINESS_KEY_,d.ID_ defid from act_hi_identitylink i,act_hi_procinst p,act_re_procdef d where i.TYPE_='participant' and p.ID_=i.PROC_INST_ID_ and p.PROC_DEF_ID_=d.ID_ and d.KEY_='"+defkey+"' and i.USER_ID_='"+username+"') tt where tt.BUSINESS_KEY_=o.id";
 		if(StrKit.notBlank(sqlEXT)){
 			sql = sql + sqlEXT;
@@ -436,7 +436,7 @@ public class WorkFlowService {
 	public List<Record> getHisTaskList(String insid){
 		//oracle版本遇到comment为event问题，用如下sql解决
 		//select  t.NAME_ taskName,t.ASSIGNEE_ assignee,t.EXECUTION_ID_ exeId,t.ID_ taskId,t.END_TIME_ endTime,c.MESSAGE_ message from act_hi_taskinst t LEFT JOIN (select * from ACT_HI_COMMENT dd where dd.TYPE_!='event')c  ON c.TASK_ID_=t.ID_ where t.proc_inst_id_ = '18fb7c365c99425da16cfdb2c1a643f9' and c.ACTION_='AddComment' order by t.end_time_ asc
-		List<Record> taskList = Db.find("select  t.NAME_ taskName,t.ASSIGNEE_ assignee,t.EXECUTION_ID_ exeId,t.ID_ taskId,t.END_TIME_ endTime,c.MESSAGE_ message from act_hi_taskinst t LEFT JOIN act_hi_comment c  ON c.TASK_ID_=t.ID_ where t.proc_inst_id_ = '"+insid+"' order by t.end_time_ is null,t.end_time_ asc");
+		List<Record> taskList = Db.find("select  t.NAME_ taskName,t.ASSIGNEE_ assignee,t.EXECUTION_ID_ exeId,t.ID_ taskId,t.END_TIME_ endTime,c.MESSAGE_ message from act_hi_taskinst t LEFT JOIN act_hi_comment c  ON c.TASK_ID_=t.ID_ where t.proc_inst_id_ = '"+insid+"' and (c.TYPE_='comment' or c.TYPE_ is null) order by t.end_time_ is null,t.end_time_ asc");
 		for(Record r : taskList){
 			String assignee = r.getStr("assignee");
 			if(StrKit.notBlank(assignee)){

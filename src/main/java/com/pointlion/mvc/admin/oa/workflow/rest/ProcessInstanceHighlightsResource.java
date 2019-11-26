@@ -13,6 +13,10 @@
 
 package com.pointlion.mvc.admin.oa.workflow.rest;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 import org.flowable.engine.*;
 //import org.flowable.engine.impl.pvm.PvmTransition;
 //import org.flowable.engine.impl.pvm.process.ActivityImpl;
@@ -20,6 +24,10 @@ import org.flowable.engine.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfinal.core.Controller;
 import com.pointlion.plugin.flowable.FlowablePlugin;
+import org.flowable.engine.history.HistoricProcessInstance;
+import org.flowable.engine.impl.persistence.entity.ProcessDefinitionEntity;
+
+import java.util.List;
 
 public class ProcessInstanceHighlightsResource extends Controller{
 	private ProcessEngine pEngine = FlowablePlugin.buildProcessEngine();
@@ -33,34 +41,34 @@ public class ProcessInstanceHighlightsResource extends Controller{
 	protected ObjectMapper objectMapper = new ObjectMapper();
 
 	public void getHighlighted() {
-//		String processInstanceId = getPara("processInstanceId");
-//		String callback = getPara("callback").toString();
-//		ObjectNode responseJSON = objectMapper.createObjectNode();
-//		responseJSON.put("processInstanceId", processInstanceId);
-//		ArrayNode activitiesArray = objectMapper.createArrayNode();
-//		ArrayNode flowsArray = objectMapper.createArrayNode();
-//		try {
-////			ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
-//			HistoricProcessInstance processInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
-//			ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) repositoryService.getProcessDefinition(processInstance.getProcessDefinitionId());
-//			responseJSON.put("processDefinitionId", processInstance.getProcessDefinitionId());
-//			List<Record> list = Db.find("select * from act_ru_task t where t.PROC_INST_ID_='"+processInstanceId+"'");
-//			if(list!=null&&list.size()>0){
-//				List<String> highLightedActivities = runtimeService.getActiveActivityIds(processInstanceId);
-//				for (String activityId : highLightedActivities) {
-//					activitiesArray.add(activityId);
-//				}
-//			}
+		String processInstanceId = getPara("processInstanceId");
+		String callback = getPara("callback").toString();
+		ObjectNode responseJSON = objectMapper.createObjectNode();
+		responseJSON.put("processInstanceId", processInstanceId);
+		ArrayNode activitiesArray = objectMapper.createArrayNode();
+		ArrayNode flowsArray = objectMapper.createArrayNode();
+		try {
+//			ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+			HistoricProcessInstance processInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+			ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) repositoryService.getProcessDefinition(processInstance.getProcessDefinitionId());
+			responseJSON.put("processDefinitionId", processInstance.getProcessDefinitionId());
+			List<Record> list = Db.find("select * from act_ru_task t where t.PROC_INST_ID_='"+processInstanceId+"'");
+			if(list!=null&&list.size()>0){
+				List<String> highLightedActivities = runtimeService.getActiveActivityIds(processInstanceId);
+				for (String activityId : highLightedActivities) {
+					activitiesArray.add(activityId);
+				}
+			}
 //			List<String> highLightedFlows = getHighLightedFlows(processDefinition, processInstanceId);
 //			for (String flow : highLightedFlows) {
 //				flowsArray.add(flow);
 //			}
-//		} catch (Exception e) {
-//		  e.printStackTrace();
-//		}
-//		responseJSON.put("activities", activitiesArray);
-//		responseJSON.put("flows", flowsArray);
-//		renderJson(callback+"("+responseJSON.toString()+")");
+		} catch (Exception e) {
+		  e.printStackTrace();
+		}
+		responseJSON.put("activities", activitiesArray);
+		responseJSON.put("flows", flowsArray);
+		renderJson(callback+"("+responseJSON.toString()+")");
 	}
 
 //

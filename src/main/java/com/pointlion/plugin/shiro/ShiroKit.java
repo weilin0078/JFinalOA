@@ -133,7 +133,11 @@ public class ShiroKit {
 		SimpleUser user = ShiroKit.getLoginUser();
 		return user.getName();
 	}
-	
+
+	/***
+	 *
+	 * @return
+	 */
 	public static String getUserOrgId(){
 		SysUser user = SysUser.dao.getById(getUserId());
 		if(user!=null){

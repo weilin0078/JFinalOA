@@ -87,6 +87,8 @@
 		var linkHtml = $(o).data("value").trim();
 		$('#mouseRightClickMenu a').data("url",linkUrl);
 		$('#mouseRightClickMenu a').data("value",linkHtml);
+        e.preventDefault();//取消默认的浏览器自带右键 很重要！！
+        return false;
     },
     init = function() {//初始化
         $("#page-prev").bind("click",function() {//绑定向前

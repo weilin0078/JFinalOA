@@ -35,12 +35,16 @@
 		</script>
 #end
 
-<!-- 选择字典按钮 -->
-#define installSelectDctBtn(name,groupKey,idCol,nameCol,idValue,nameValue)
+<!-- 选择字典按钮
+	name：表单中label
+	groupKey：字典的groupKey
+-->
+#define installDctSelectBtn(name,groupKey,idCol,nameCol,idValue,nameValue)
 	<div class="form-group">
 	    <label class="col-md-2 control-label">#(name)</label>
 	    <div class="col-md-4">
 	    	<div class="input-group mar-btm col-md-12">
+<!--				表单存储表，用来存储字典属性的字段-->
 	    		<input type="hidden"  name="#(formModelName).#(idCol)" id="dctId" class="form-control"  value="#(idValue)">
 			    <input type="text"  name="#(formModelName).#(nameCol)" id="dctName" class="form-control"  value="#(nameValue)" readonly>
 		        

@@ -9,14 +9,14 @@ public class #(tableMeta.modelName) extends #(tableMeta.baseModelName)<#(tableMe
 	public static final String tableName = "#(tableMeta.name)";
 	
 	/***
-	 * 根据主键查询
+	 * query by id
 	 */
 	public #(tableMeta.modelName) getById(String id){
 		return #(tableMeta.modelName).dao.findById(id);
 	}
 	
 	/***
-	 * 删除
+	 * del
 	 * @param ids
 	 */
 	@Before(Tx.class)

@@ -49,4 +49,12 @@ public abstract class BaseSysRole<M extends BaseSysRole<M>> extends Model<M> imp
 		return get("description");
 	}
 
+	public void setDataScope(java.lang.String data_scope) {
+		set("data_scope", data_scope);
+	}
+
+	public java.lang.String getDataScope() {
+		return get("data_scope");
+	}
+
 }

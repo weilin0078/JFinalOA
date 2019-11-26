@@ -1,0 +1,43 @@
+<form id="editForm" class="panel-body form-horizontal form-padding">
+	<input type="hidden"  name="#('#')(formModelName).id" class="form-control" value="#('#')(o?o.id:'')">
+	<div class="form-group">
+		<label class="col-md-2 control-label">申请人</label>
+		<div class="col-md-4">
+			<input type="hidden"  name="#('#')(formModelName).userid" class="form-control"  value="#('#')(o?o.user_id:'')">
+			<input type="text"  name="#('#')(formModelName).applyer_name" class="form-control"  value="#('#')(o?o.applyer_name:'')" readonly>
+		</div>
+		<label class="col-md-1 control-label">部门</label>
+		<div class="col-md-4">
+			<input type="hidden"  name="#('#')(formModelName).org_id" class="form-control"  value="#('#')(o?o.org_id:'')">
+			<input type="text"  name="#('#')(formModelName).org_name" class="form-control"  value="#('#')(o?o.org_name:'')" readonly>
+		</div>
+	</div>
+	#for(col:ifShowOnColA)
+		<div class="form-group">
+			<label class="col-md-2 control-label">#(ifShowOnColN[for.index])</label>
+			<div class="col-md-9">
+				<input type="text"  name="#('#')(formModelName).#(col)" class="form-control"  value="#('#')(o?o.#(col):'')" #('#')if(view=='detail') readonly #('#')end>
+				<small class="help-block">请输入#(ifShowOnColN[for.index])</small>
+			</div>
+		</div>
+	#end
+	<div class="form-group">
+		<label class="col-md-2 control-label">备注</label>
+		<div class="col-md-9">
+			<textarea rows="8" name="#('#')(formModelName).des" class="form-control" #('#')if(view=='detail') readonly #('#')end>#(o?o.des:'')</textarea>
+			<small class="help-block">请输入备注</small>
+		</div>
+	</div>
+	#("#")if(view=='edit')
+	<div class="panel-footer">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-3">
+				<button class="btn btn-warning" type="reset" #('#')if(view=='detail') disabled #('#')end>重置</button>
+				<button class="btn btn-primary" type="submit" #('#')if(view=='detail') disabled #('#')end>保存</button>
+			</div>
+		</div>
+	</div>
+	#("#")else
+
+	#("#")end
+</form>

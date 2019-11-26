@@ -8,4 +8,5 @@ public class AMSRoutes extends Routes{
 	public void config() {
 		setBaseViewPath("/WEB-INF/admin/ams");
 	}
+
 }

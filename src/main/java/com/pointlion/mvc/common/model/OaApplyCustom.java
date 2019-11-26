@@ -6,7 +6,6 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.pointlion.mvc.common.model.base.BaseOaApplyCustom;
-
 @SuppressWarnings("serial")
 public class OaApplyCustom extends BaseOaApplyCustom<OaApplyCustom> {
 	public static final OaApplyCustom dao = new OaApplyCustom();

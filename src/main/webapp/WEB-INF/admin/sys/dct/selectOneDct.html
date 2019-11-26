@@ -79,7 +79,7 @@ var col = [{
 	        	//通过formatter可以自定义列显示的内容
 	        	//value：当前field的值，即id
 	        	//row：当前行的数据
-	        	var a = '<a class="label label-table label-success" onclick="selectThis(\''+row.id+'\',\''+row.name+'\')" href="javascript:void(0);" >选择</a>&nbsp;';
+	        	var a = '<a class="label label-table label-success" onclick="selectThis(\''+row.value+'\',\''+row.name+'\')" href="javascript:void(0);" >选择</a>&nbsp;';
 	        	return a;
 	    }
 	}];
@@ -148,7 +148,7 @@ var opt = {
 	}
 	$(document).ready(function() {
 		//var clientH = document.body.clientHeight-131;
-		var clientH = 440;
+		var clientH = 496;
 		$(".lay-body").css("height",clientH+"px");
 		initTable();//初始化
 	});

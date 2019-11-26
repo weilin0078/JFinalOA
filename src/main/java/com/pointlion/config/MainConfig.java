@@ -50,12 +50,18 @@ public class MainConfig extends JFinalConfig {
 		me.setBaseUploadPath("upload/");
 		//设置上传最大限制尺寸
 		me.setMaxPostSize(100*Const.DEFAULT_MAX_POST_SIZE);
+		// 开启对 jfinal web 项目组件 Controller、Interceptor、Validator 的注入
+		me.setInjectDependency(true);
+		// 开启对超类的注入。不开启时可以在超类中通过 Aop.get(...) 进行注入
+		me.setInjectSuperClass(true);
+
 		//获取beetl模版引擎
 //		me.setRenderFactory(new BeetlRenderFactory());
 //		me.setError404View("/error/404.html");
 		// 获取GroupTemplate ,可以设置共享变量等操作
 //        @SuppressWarnings("unused")
 //		GroupTemplate groupTemplate = BeetlRenderFactory.groupTemplate ;
+
 	}
 	
 	/**
@@ -132,6 +138,7 @@ public class MainConfig extends JFinalConfig {
 	public void configRoute(Routes me) {
 		MainConfig.routes = me;//shiro使用
 		me.add(new OARoutes());//办公路由
+		me.add(new CRMRoutes());//客户路由
 		me.add(new AMSRoutes());//资产路由
 		me.add(new SysRoutes());//系统管理路由
 		me.add(new GrapRoutes());//爬取网站数据路由
@@ -147,7 +154,7 @@ public class MainConfig extends JFinalConfig {
 		me.addSharedObject("OAConstants", new OAConstants());//提供给模板能引用后台常量类
 		me.addSharedObject("WorkFlowUtil", new WorkFlowUtil());//提供给模板使用能流程工具类
 		me.addSharedObject("UuidUtil", new UuidUtil());//提供给模板能生成UUID
-		//业务通用的工具函数
+		//业务通用的工具函数。
 		me.addSharedFunction("/WEB-INF/admin/sys/template/commonTemplate.html");
 		//业务通用的工具函数
 		me.addSharedFunction("/WEB-INF/admin/sys/attachment/businessIncludeBtn.html");

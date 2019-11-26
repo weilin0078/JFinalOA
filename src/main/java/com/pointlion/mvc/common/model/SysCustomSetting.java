@@ -32,7 +32,7 @@ public class SysCustomSetting extends BaseSysCustomSetting<SysCustomSetting> {
 		set.setDarkAsd("0");
 		set.setColorTheme("/common/css/tab/themes/type-a/theme-mint.css");//颜色主题
 		set.setIndexPageType("tab");//默认页签模式
-		set.setIndexPageType("info");//默认页签模式
+		set.setSkin("light");//默认页签模式
 		return set;
 	}
 	

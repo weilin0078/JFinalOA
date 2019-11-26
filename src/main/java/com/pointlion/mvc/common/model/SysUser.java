@@ -54,7 +54,7 @@ public class SysUser extends BaseSysUser<SysUser> {
 	 * 获取用户所有的角色
 	 */
 	public List<SysRole> getAllRole(String id){
-		return SysRole.dao.find("select r.* from sys_user_role u ,sys_role r where u.role_id=r.id and u.user_id='"+id+"'");
+		return SysRole.dao.find("select r.* from sys_role_user u ,sys_role r where u.role_id=r.id and u.user_id='"+id+"'");
 	}
 	/***
 	 * 根据机构下所有用户
@@ -86,7 +86,7 @@ public class SysUser extends BaseSysUser<SysUser> {
 	 * 获取分页
 	 */
 	public Page<Record> getPageByRoleid(int pnum,int psize,String roleid){
-		String sql  = " from sys_user u , sys_user_role r  where r.user_id=u.id ";
+		String sql  = " from sys_user u , sys_role_user r  where r.user_id=u.id ";
 		if(!ShiroKit.getLoginUser().getUsername().equals("lion")){
 			sql = sql + " and u.username !='"+Constants.SUUUUUUUUUUUUUPER_USER_NAME+"' ";
 		}
@@ -110,7 +110,7 @@ public class SysUser extends BaseSysUser<SysUser> {
 	 * @return
 	 */
 	public List<SysUser> getUserByOrgidAndRoleId(String orgid,String roleid){
-		return dao.find("select u.* from sys_user u ,sys_org o,sys_user_role r where u.orgid=o.id and u.id=r.user_id and o.id='"+orgid+"' and r.role_id='"+roleid+"'");
+		return dao.find("select u.* from sys_user u ,sys_org o,sys_role_user r where u.orgid=o.id and u.id=r.user_id and o.id='"+orgid+"' and r.role_id='"+roleid+"'");
 	}
 	/***
 	 * 根据组织机构key，和，角色id。
@@ -118,7 +118,7 @@ public class SysUser extends BaseSysUser<SysUser> {
 	 * @return
 	 */
 	public List<SysUser> getUserByOrgidAndRoleKey(String orgid,String key){
-		String sql = "select u.* from sys_org o,sys_user_role ur,sys_role r,sys_user u where r.id=ur.role_id and ur.user_id=u.id and u.orgid=o.id and r.key='"+key+"' and u.orgid='"+orgid+"'";
+		String sql = "select u.* from sys_org o,sys_role_user ur,sys_role r,sys_user u where r.id=ur.role_id and ur.user_id=u.id and u.orgid=o.id and r.key='"+key+"' and u.orgid='"+orgid+"'";
 		return dao.find(sql);
 	}
 	/***
@@ -148,7 +148,7 @@ public class SysUser extends BaseSysUser<SysUser> {
 			list.addAll(l);
 		}
 		//自己单位下的所有的单位--包括自己公司下面的--其他子级的子公司
-		List<SysOrg> oList = SysOrg.dao.getChildrenAll(orgid);//分公司下所有单位
+		List<SysOrg> oList = SysOrg.dao.getChildrenAllTree(orgid);//分公司下所有单位
 		if(oList!=null){
 			for(SysOrg o : oList){
 				List<SysUser> ll = getUserByOrgidAndRoleKey(o.getId(),key);
@@ -202,13 +202,13 @@ public class SysUser extends BaseSysUser<SysUser> {
 	 */
 	@Before(Tx.class)
 	public Integer deleteRoleByUserid(String userid){
-		return Db.update("delete from sys_user_role  where user_id='"+userid+"'");
+		return Db.update("delete from sys_role_user  where user_id='"+userid+"'");
 	}
 	/***
 	 * 获取某个角色下所有用户
 	 */
 	public List<SysUser> getUserByRoleKey(String key){
-		return SysUser.dao.find("select u.* from sys_user_role ur ,sys_user u ,sys_role r where r.id=ur.role_id and u.id=ur.user_id and r.key='"+key+"'");
+		return SysUser.dao.find("select u.* from sys_role_user ur ,sys_user u ,sys_role r where r.id=ur.role_id and u.id=ur.user_id and r.key='"+key+"'");
 	}
 	/***
 	 * 给用户赋值角色
@@ -225,7 +225,7 @@ public class SysUser extends BaseSysUser<SysUser> {
 			for(String roleid : rolearr){//循环插入所有新关系
 	    		SysRole role = SysRole.dao.findById(roleid);//角色
 	    		idService.createRelationShip(user, role);//没有用户会创建,没有角色会创建
-	    		SysUserRole ur = new SysUserRole();
+	    		SysRoleUser ur = new SysRoleUser();
 	    		ur.setId(UuidUtil.getUUID());
 	    		ur.setUserId(userid);
 	    		ur.setRoleId(roleid);
@@ -264,5 +264,35 @@ public class SysUser extends BaseSysUser<SysUser> {
 	 */
 	public List<SysUser> getAllUser(){
 		return SysUser.dao.find("select * from sys_user u where u.username!='lion' order by u.name");
+	}
+
+	/***
+	 *获取某个角色下的用户
+	 * @param roleKey
+	 * @return
+	 */
+	public List<SysUser> getUserListByRoleKey(String roleKey){
+		return dao.find("select u.* from sys_role_user ru , sys_role r , sys_user u where r.id = ru.role_id and r.key='"+roleKey+"' and u.id=ru.user_id");
+	}
+
+	/***
+	 * 获取某个组织机构下的拥有某个角色的用户
+	 *根据角色key和orgid获取角色下用户
+	 * @param roleKey
+	 * @param orgid
+	 * @return
+	 */
+	public List<SysUser> getUserListByRoleKeyAndOrgid(String roleKey,String orgid){
+		return dao.find("select u.* from sys_role_user ru , sys_role r , sys_user u where r.id = ru.role_id and r.key='"+roleKey+"' and u.id=ru.user_id and u.orgid='"+orgid+"'");
+	}
+
+	/***
+	 * 获取某个用户的组织结构下，拥有某个角色用户
+	 * @param roleKey
+	 * @param username
+	 * @return
+	 */
+	public List<SysUser> getUserListByMyRoleAndMyOrg(String roleKey,String username){
+		return dao.find("select u.* from sys_role_user ru , sys_role r , sys_user u ,(select sysu.orgid orgid from sys_user sysu where sysu.username='"+username+"') applyer where r.id = ru.role_id and r.key='"+roleKey+"' and u.id=ru.user_id and u.orgid=applyer.orgid");
 	}
 }

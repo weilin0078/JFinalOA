@@ -194,7 +194,7 @@ html, body, #container, #container .boxed, #container .boxed #content-container,
 /*****************页面组件的样式覆盖****************/
 .panel{
 	box-shadow: none !important;
-	/*border: none;*/
+	border: none;
 }
 /*引用单页面模式之后，新增了一个顶部块的背景色，如果从单页切换到tab模式，会有该样式，在这里处理成高度为0，则不显示顶部块*/
  #content-container::before {

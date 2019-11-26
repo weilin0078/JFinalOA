@@ -71,7 +71,7 @@
 	       align: 'left',
 	       width:'240',
 	       formatter:function(value,row,index){
-	           var  a = '<a class="label label-table label-info" href="#(ctx)/processEditor/diagram-viewer/index.html?processDefinitionId='+row.ID_+'" target="_blank">预览</a>&nbsp;';
+	           var  a = '';
 					a = a + '<a class="label label-table label-success" onclick="convertToModel(\''+row.ID_+'\')" href="javascript:void(0);">转化为模型</a>&nbsp;';
 	           if(row.SUSPENSION_STATE_=="1"){//正在运行
 	        	    a = a + '<a class="label label-table label-danger" onclick="updateState(\'suspend\',\''+row.ID_+'\')" href="javascript:void(0);" >挂起</a>&nbsp;';   

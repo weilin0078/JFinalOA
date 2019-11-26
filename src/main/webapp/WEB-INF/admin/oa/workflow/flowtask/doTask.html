@@ -44,6 +44,7 @@
 											#@buildFormPanelContainer(title+"单",pageUrl)
 										</div>
 							            <form id="taskForm" class="panel-body form-horizontal form-padding">
+											#@buildWorkFlowHisTable(procInsId,hislist)
 											<div class="panel skin-border form-panel">
 												<div class="panel-heading form-panel-header skin-bgcolor">
 													<h3 class="panel-title">办理信息</h3>
@@ -56,17 +57,19 @@
 															<textarea name="comment" rows="8" class="form-control"></textarea>
 														</div>
 													</div>
+<!--													是否需要加签-->
+													#if(ifNeedAddAssignee=='1')
+														#@installAddOtherPersonDoTask()
+													#end
 												</div>
 											</div>
-
-									        #@buildWorkFlowHisTable(hislist)
 									        <div class="panel-footer">
 							                    <div class="row">
 							                        <div class="col-sm-9 col-sm-offset-3">
 							                            #if(task.TASKDEFKEY.indexOf("audit")==0)
 								                            <button class="btn btn-warning" type="reset">重置</button>
-								                            <button class="btn btn-danger" type="button" onclick="completeTask(0)">不提交</button>
-								                            <button class="btn btn-primary" type="button" onclick="completeTask(1)">提交</button>
+								                            <button class="btn btn-danger" type="button" onclick="completeTask(0)">不同意</button>
+								                            <button class="btn btn-primary" type="button" onclick="completeTask(1)">同意</button>
 								                        #elseif(task.TASKDEFKEY=="ReEdit")
 								                        	<button class="btn btn-primary" type="button" onclick="completeTask(1)">保存并提交</button>
 								                        #else
@@ -84,6 +87,16 @@
 	<script>
 		function completeTask(pass){
 			pointLion.confimMsg("确定要提交该任务 ？ <br/> 点击确认进行提交 , 点击取消取消该操作",null,function(){
+				if("1"=="#(ifNeedAddAssignee)"){//如果需要加签
+					var ifNeed = $('input[name="#(OAConstants.WORKFLOW_OPEN_ADD_ASSIGNEE)"]:checked').val();
+					if("1"==ifNeed){//需要加签
+						var val = $("#addOtherPersonAuditValues").val();
+						if(!val){
+							pointLion.alertMsg("请选择需要增加审批的人员！" , "danger" , "small" , null);
+							return;
+						}
+					}
+				}
 				var data = common_ajax.ajaxFunc("/admin/oa/workflow/flowtask/submitTask?pass="+pass, $('#taskForm').serialize()+"&"+$("#editForm").serialize(), "json", null);
 				if(data.success){
 					pointLion.alertMsg(data.message , "success" , "small" , function(){

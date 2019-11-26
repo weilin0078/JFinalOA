@@ -7,7 +7,6 @@ import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
-import com.pointlion.interceptor.MainPageTitleInterceptor;
 import com.pointlion.mvc.common.base.BaseController;
 import com.pointlion.mvc.admin.oa.workflow.WorkFlowService;
 import com.pointlion.mvc.common.utils.StringUtil;
@@ -22,28 +21,29 @@ import com.pointlion.plugin.shiro.ShiroKit;
 
 
 
-@Before(MainPageTitleInterceptor.class)
 public class #(className)Controller extends BaseController {
 	public static final #(className)Service service = #(className)Service.me;
 	public static WorkFlowService wfservice = WorkFlowService.me;
 	/***
-	 * 列表页面
+	 * get list page
 	 */
 	public void getListPage(){
-		setBread("功能名称",this.getRequest().getServletPath(),"管理");
-    	render("list.html");
+		renderIframe("list.html");
     }
 	/***
-     * 获取分页数据
+     * list page data
      **/
     public void listData(){
     	String curr = getPara("pageNumber");
     	String pageSize = getPara("pageSize");
-    	Page<Record> page = service.getPage(Integer.valueOf(curr),Integer.valueOf(pageSize));
+		String endTime = getPara("endTime","");
+		String startTime = getPara("startTime","");
+		String applyUser = getPara("applyUser","");
+    	Page<Record> page = service.getPage(Integer.valueOf(curr),Integer.valueOf(pageSize),startTime,endTime,applyUser);
     	renderPage(page.getList(),"",page.getTotalRow());
     }
     /***
-     * 保存
+     * save data
      */
     public void save(){
     	#(className) o = getModel(#(className).class);
@@ -51,25 +51,22 @@ public class #(className)Controller extends BaseController {
     		o.update();
     	}else{
     		o.setId(UuidUtil.getUUID());
-    		o.setCreateTime(DateUtil.getTime());
+    		o.setCreateTime(DateUtil.getCurrentTime());
     		o.save();
     	}
     	renderSuccess();
     }
     /***
-     * 获取编辑页面
+     * edit page
      */
     public void getEditPage(){
-    	setBread("功能名称",this.getRequest().getServletPath().substring(0,this.getRequest().getServletPath().lastIndexOf("/")+1)+"getListPage","功能名称");
     	String id = getPara("id");
     	String view = getPara("view");
 		setAttr("view", view);
-    	if(StrKit.notBlank(id)){//修改
-    		#(className) o = service.getById(id);
-    		setAttr("o", o);
-    		//是否是查看详情页面
+		#(className) o = new #(className)();
+		if(StrKit.notBlank(id)){
+    		o = service.getById(id);
     		if("detail".equals(view)){
-    			setAttr("view", view);
     			if(StrKit.notBlank(o.getProcInsId())){
     				setAttr("procInsId", o.getProcInsId());
     				setAttr("defId", wfservice.getDefIdByInsId(o.getProcInsId()));
@@ -78,36 +75,39 @@ public class #(className)Controller extends BaseController {
     	}else{
     		SysUser user = SysUser.dao.findById(ShiroKit.getUserId());
     		SysOrg org = SysOrg.dao.findById(user.getOrgid());
-    		setAttr("user", user);
-    		setAttr("org", org);
+			o.setType(type);
+			o.setOrgId(org.getId());
+			o.setOrgName(org.getName());
+			o.setUserid(user.getId());
+			o.setApplyerName(user.getName());
     	}
-    	setAttr("formModelName",StringUtil.toLowerCaseFirstOne(#(className).class.getSimpleName()));//模型名称
-    	render("edit.html");
+		setAttr("o", o);
+    	setAttr("formModelName",StringUtil.toLowerCaseFirstOne(#(className).class.getSimpleName()));
+		renderIframe("edit.html");
     }
     /***
-     * 删除
+     * del
      * @throws Exception
      */
     public void delete() throws Exception{
 		String ids = getPara("ids");
-    	//执行删除
 		service.deleteByIds(ids);
     	renderSuccess("删除成功!");
     }
     /***
-     * 提交
+     * submit
      */
     public void startProcess(){
     	String id = getPara("id");
     	#(className) o = #(className).dao.getById(id);
     	o.setIfSubmit(Constants.IF_SUBMIT_YES);
-    	String insId = wfservice.startProcess(id, OAConstants.DEFKEY_PROJECT_CHANGE_MEMBER,o.getTitle(),null);
+		String insId = wfservice.startProcess(id, o,null,null);
     	o.setProcInsId(insId);
     	o.update();
-    	renderSuccess("提交成功");
+    	renderSuccess("submit success");
     }
     /***
-     * 撤回
+     * callBack
      */
     public void callBack(){
     	String id = getPara("id");
@@ -117,10 +117,10 @@ public class #(className)Controller extends BaseController {
         	o.setIfSubmit(Constants.IF_SUBMIT_NO);
         	o.setProcInsId("");
         	o.update();
-    		renderSuccess("撤回成功");
+    		renderSuccess("callback success");
     	}catch(Exception e){
     		e.printStackTrace();
-    		renderError("撤回失败");
+    		renderError("callback fail");
     	}
     }
 

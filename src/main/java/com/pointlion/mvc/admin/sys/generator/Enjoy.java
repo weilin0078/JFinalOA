@@ -30,11 +30,8 @@ public class Enjoy {
      * -1：失败
      */
     public Integer render(String templateFileName, Kv kv, String filePath)  {
-        BufferedWriter output = null;
-        try {
             String baseTemplatePath = new StringBuilder(PathKit.getRootClassPath())
             .append("/")
-//            .append(PathKit.getPackagePath(this))
             .append("/template")
             .toString();
             File file = new File(filePath.toString());
@@ -45,19 +42,12 @@ public class Enjoy {
             if ( ! path.exists() ) {
                 path.mkdirs();
             }
-            output = new BufferedWriter(new FileWriter(file));
             Engine.use()
             .setBaseTemplatePath(baseTemplatePath)
             //.setSourceFactory(new ClassPathSourceFactory())
             .getTemplate(templateFileName)
-            .render(kv, output);
+            .render(kv, file);
             return SUCCESS;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return FAIL;
-        }finally{
-            try { if( output != null ) output.close(); } catch (IOException e) {}
-        }
     }
     
     /**

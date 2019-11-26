@@ -11,7 +11,7 @@ import com.jfinal.kit.StrKit;
 import com.pointlion.mvc.admin.oa.workflow.WorkFlowIdentityService;
 import com.pointlion.mvc.common.model.SysOrg;
 import com.pointlion.mvc.common.model.SysUser;
-import com.pointlion.mvc.common.model.SysUserRole;
+import com.pointlion.mvc.common.model.SysRoleUser;
 import com.pointlion.mvc.common.utils.PinYinUtil;
 import com.pointlion.mvc.common.utils.UuidUtil;
 
@@ -102,7 +102,7 @@ public class SysUserImportService {
 					user.save();
 					
 					
-					SysUserRole a = new SysUserRole();
+					SysRoleUser a = new SysRoleUser();
 					String roleid = "";
 					String rolekey = "";
 					if(roleName.indexOf("总")>=0){

@@ -407,6 +407,7 @@ public abstract class BaseController extends Controller {
 	/***
 	 * tab页签，iframe方式的统一处理方式
 	 */
+	@Override
 	public void render(String view){
 		String action = getPara("action","");
 		SysCustomSetting setting = getAttr("setting");

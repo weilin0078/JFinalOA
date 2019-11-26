@@ -29,30 +29,30 @@
 			                    </div>
 			                </div>
 			                <div class="form-group">
-			                    <label class="col-md-2 control-label">名称</label>
+			                    <label class="col-md-2 control-label">名称(用来展示，相当于label)</label>
 			                    <div class="col-md-9">
 			                        <input type="text"  name="#(formModelName).name" class="form-control"  value="#(o?o.name:'')" #if(view=='detail') readonly #end>
 			                        <small class="help-block">请输入名称</small>
 			                    </div>
 			                </div>
 			                <div class="form-group">
-			                    <label class="col-md-2 control-label">键</label>
+			                    <label class="col-md-2 control-label">键(用户支持map类型)</label>
 			                    <div class="col-md-9">
 			                        <input type="text"  name="#(formModelName).key" class="form-control"  value="#(o?o.key:'')" #if(view=='detail') readonly #end>
-			                        <small class="help-block">请输入键值</small>
+			                        <small class="help-block">请输入键值(用于支持map类型,正常name-value字典类型该项可不填写)</small>
 			                    </div>
 			                </div>
 			                <div class="form-group">
-			                    <label class="col-md-2 control-label">值</label>
+			                    <label class="col-md-2 control-label">值(相当于value)</label>
 			                    <div class="col-md-9">
 			                        <input type="text"  name="#(formModelName).value" class="form-control"  value="#(o?o.value:'')" #if(view=='detail') readonly #end>
 			                        <small class="help-block">请输入键值</small>
 			                    </div>
 			                </div>
 			                <div class="form-group">
-			                    <label class="col-md-2 control-label">类型</label>
+			                    <label class="col-md-2 control-label">类型(group的key)</label>
 			                    <div class="col-md-9">
-			                        <input type="text"  name="#(formModelName).type" class="form-control"  value="#(o?o.type:'')" #if(view=='detail') readonly #end>
+			                        <input type="text"  name="#(formModelName).type" class="form-control"  value="#(group?group.key:'')" readonly>
 			                        <small class="help-block">请输入类型</small>
 			                    </div>
 			                </div>
@@ -114,6 +114,13 @@
 		$(document).ready(function() {
 			$('#editForm').bootstrapValidator({
 	            fields: {
+					"#(formModelName).type": {
+						validators: {
+							notEmpty: {
+								message: '*类型不能为空。（请先选择左侧字段分组，确定类型）'
+							}
+						}
+					},
 	            }
 	        }).on("success.form.bv", function (e) {
 	            save();

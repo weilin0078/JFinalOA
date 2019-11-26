@@ -1,0 +1,55 @@
+<form id="editForm" class="panel-body form-horizontal form-padding">
+	<input type="hidden"  name="#(formModelName).id" class="form-control" value="#(o?o.id:'')">
+		<div class="form-group">
+		    <label class="col-md-2 control-label">申请人</label>
+		    <div class="col-md-4">
+		    	<input type="hidden" value="#(defKey)" name="defKey">
+		    	<input type="hidden"  name="#(formModelName).userid" class="form-control"  value="#if(o)#(o.userid)#else#(user.id)#end">
+		        <input type="text"  name="#(formModelName).applyer_name" class="form-control"  value="#if(o)#(o.applyer_name)#else#(user.name)#end" readonly>
+		    </div>
+		    <label class="col-md-1 control-label">部门</label>
+		    <div class="col-md-4">
+		        <input type="hidden"  name="#(formModelName).org_id" class="form-control"  value="#if(o)#(o.org_id)#else#(org.id)#end">
+		        <input type="text"  name="#(formModelName).org_name" class="form-control"  value="#if(o)#(o.org_name)#else#(org.name)#end" readonly>
+		    </div>
+		</div>
+		<div class="form-group">
+	        <label class="col-md-2 control-label">启动流程</label>
+	        <div class="col-md-4">
+	            <input type="text" name="#(formModelName).def_name" class="form-control"  value="#(defName)" readonly>
+	        </div>
+	    </div>
+		<div class="form-group">
+	        <label class="col-md-2 control-label">标题</label>
+	        <div class="col-md-9">
+	            <input type="text"  name="#(formModelName).title" class="form-control"  value="#(o?o.title:'')" #if(view=='detail') readonly #end>
+	            <small class="help-block">请输入标题</small>
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <label class="col-md-2 control-label">原因</label>
+	        <div class="col-md-9">
+	            <textarea rows="8" name="#(formModelName).reason" class="form-control" #if(view=='detail') readonly #end>#(o?o.reason:'')</textarea>
+	            <small class="help-block">请输入原因</small>
+	        </div>
+	    </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">描述信息</label>
+            <div class="col-md-9">
+                <textarea rows="8" name="#(formModelName).des" class="form-control" #if(view=='detail') readonly #end>#(o?o.des:'')</textarea>
+                <small class="help-block">请输入描述信息</small>
+            </div>
+        </div>
+        
+    	#if(view=='edit')
+			<div class="panel-footer">
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-3">
+						<button class="btn btn-warning" type="reset" #if(view=='detail') disabled #end>重置</button>
+						<button class="btn btn-primary" type="submit" #if(view=='detail') disabled #end>保存</button>
+					</div>
+				</div>
+			</div>
+		#else
+        #end
+</form>

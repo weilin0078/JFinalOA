@@ -71,6 +71,24 @@ html {
     word-wrap: break-word;
 }
 
+/*主页面小的时候不要有滚动条*/
+#main-body{
+    min-height: 100%;
+}
+
+/*样式*/
+.panel-body{
+    padding: 5px 20px 5px !important;
+}
+/*列表页面，查询条件面板*/
+.panel-search{
+    border-bottom: 5px solid rgb(236, 240, 245) !important;
+    padding-top: 0px;
+}
+.panel-search .form-group{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 /*******/
 .bootbox.modal.in{
     z-index: 9999999999999999999999;
@@ -102,7 +120,7 @@ small, .small {
 
 
 .panel{
-    /*border: none;*/
+    border: none;
 }
 
 /*解决footer顶部有两天边框问题*/
@@ -131,4 +149,11 @@ small, .small {
     height: 30px;
     line-height: 30px;
     text-align: center;
+}
+
+
+.workFlow-flowImg{
+    width: auto;
+    height: auto;
+    max-width: 100%;
 }

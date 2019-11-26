@@ -3,7 +3,7 @@
 			        <div class="col-sm-12 eq-box-sm">
 			        	<div class="panel ">
 						    <div class="panel-body">
-						        <a id="add" class="btn btn-primary data-toolbar" href="#(ctx)/admin/oa/apply/seal/getEditPage"></i>&nbsp;申请</a>
+						        <a id="add" class="btn btn-primary data-toolbar" href="#(ctx)/admin/oa/apply/seal/getEditPage?view=edit"></i>&nbsp;申请</a>
 								<!-- <a id="del" class="btn btn-danger data-toolbar" onclick="delSel()" href="javascript:void(0);"><i class="demo-pli-cross"></i> 批量删除</a> -->
 						        <table id="pageTable" class="demo-add-niftycheck" data-toolbar="#del,#add"
 						               data-search="true"
@@ -64,11 +64,10 @@
 					   if(value=='0'){//未提交
 							a = a + '<a class="label label-table label-info" onclick="startProcess(\''+row.id+'\')" href="javascript:void(0);" >提交</a>&nbsp;';
 							a = a + '<a class="label label-table label-success" href="'+ctx+'/admin/oa/apply/seal/getEditPage?id='+row.id+'&view=detail" >查看</a>&nbsp;';
-							a = a + '<a class="label label-table label-success" href="'+ctx+'/admin/oa/apply/seal/getEditPage?id='+row.id+'" >编辑</a>&nbsp;';
+							a = a + '<a class="label label-table label-success" href="'+ctx+'/admin/oa/apply/seal/getEditPage?id='+row.id+'&view=edit" >编辑</a>&nbsp;';
 							a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>';
 					   }else{
 						   a = a + '<a class="label label-table label-info" href="javascript:void(0);" onclick="pointLion.openTaskHisListPage(\''+row.proc_ins_id+'\')">流转</a>&nbsp;';
-						   a = a + '<a class="label label-table label-info" target="_blank" href="#(ctx)/processEditor/diagram-viewer/index.html?processDefinitionId='+row.defid+'&processInstanceId='+row.proc_ins_id+'" >流程</a>&nbsp;';
 						   a = a + '<a class="label label-table label-success" href="'+ctx+'/admin/oa/apply/seal/getEditPage?id='+row.id+'&view=detail" >查看</a>&nbsp;';
 						   if(row.if_complete=="0"){
 							   a = a + '<a class="label label-table label-danger" href="javascript:void(0);" onclick="callBack(\''+row.id+'\')" >撤回</a>&nbsp;';

@@ -384,7 +384,7 @@ var pointLion = function(){
 					  callback(data);
 				  }
 				  if(data){
-					  parent.layer.close(index);
+					 layer.close(index);
 				  }
 			  }
 			});
@@ -420,11 +420,11 @@ var pointLion = function(){
 		};
 		return {
 			selectOneOrg : selectOneOrg,//选择一个单位
-			setOneOrgNode : setOneOrgNode,//选择一个单位
+			setOneOrgNode : setOneOrgNode,
 			selectManyOrg : selectManyOrg,//选择多个单位
-			setManyOrgNode : setManyOrgNode,//选择多个单位
+			setManyOrgNode : setManyOrgNode,
 			selectOneRole : selectOneRole,//选择一个角色
-			setOneRoleNode : setOneRoleNode,//选择一个角色
+			setOneRoleNode : setOneRoleNode,
 			alertMsg : alertMsg ,//通用提醒框
 			confimMsg : confimMsg,//通用确认
 			openChat : openChat,//打开聊天

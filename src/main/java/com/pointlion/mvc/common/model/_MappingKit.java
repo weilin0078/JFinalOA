@@ -8,10 +8,11 @@ public class _MappingKit {
 	public static void mapping(ActiveRecordPlugin arp) {
 		//系统设置的
 		arp.addMapping("sys_user", "id", SysUser.class);//用户
-		arp.addMapping("sys_user_role", "id", SysUserRole.class);//用户角色
 		arp.addMapping("sys_menu", "id", SysMenu.class);//菜单
 		arp.addMapping("sys_role", "id", SysRole.class);//角色
-		arp.addMapping("sys_role_auth", "id", SysRoleAuth.class);//角色对应功能权限
+		arp.addMapping("sys_role_menu", "id", SysRoleMenu.class);//角色对应功能权限
+		arp.addMapping("sys_role_user", "id", SysRoleUser.class);//用户角色
+		arp.addMapping("sys_role_org", "id", SysRoleOrg.class);//用户组织结构-数据权限
 		arp.addMapping("sys_org", "id", SysOrg.class);//组织结构
 		arp.addMapping("sys_friend", "id", SysFriend.class);//用户好友
 		arp.addMapping("sys_custom_setting", "id", SysCustomSetting.class);//自定义设置
@@ -26,8 +27,6 @@ public class _MappingKit {
 		arp.addMapping("SCH_JOB_EXECUTE", "ID", SchJobExecute.class);//定时任务执行管理
 		arp.addMapping("SCH_JOB", "ID", SchJob.class);//定时任务字典管理
 		//内容管理的
-		arp.addMapping("cms_content", "id", CmsContent.class);//内容
-		arp.addMapping("cms_type", "id", CmsType.class);//内容类型
 		//即时通讯的
 		arp.addMapping("chat_history", "id", ChatHistory.class);//群聊
 		//办公的
@@ -36,8 +35,10 @@ public class _MappingKit {
 		arp.addMapping("v_tasklist", "TASKID", VTasklist.class);//任务--视图
 		arp.addMapping("oa_notice", "id", OaNotice.class);//通知公告
 		arp.addMapping("oa_notice_user", "id", OaNoticeUser.class);//通知公告收
+		arp.addMapping("oa_apply_custom", "id", OaApplyCustom.class);//自定义流程
 		arp.addMapping("oa_apply_seal", "id", OaApplySeal.class);//用章申请
 		arp.addMapping("oa_flow_carbon_c", "id", OaFlowCarbonC.class);//流程抄送
+		//资产管理的
 	}
 }
 

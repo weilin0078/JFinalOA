@@ -1,34 +1,49 @@
 package #(package);
 
 import com.jfinal.aop.Before;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.pointlion.mvc.common.model.#(className);
 import com.pointlion.plugin.shiro.ShiroKit;
+import com.pointlion.mvc.common.model.SysRoleOrg;
+import com.pointlion.mvc.common.utils.DateUtil;
 
 public class #(className)Service{
 	public static final #(className)Service me = new #(className)Service();
 	public static final String TABLE_NAME = #(className).tableName;
 	
 	/***
-	 * 根据主键查询
+	 * query by id
 	 */
 	public #(className) getById(String id){
 		return #(className).dao.findById(id);
 	}
 	
 	/***
-	 * 获取分页
+	 * get page
 	 */
-	public Page<Record> getPage(int pnum,int psize){
-		String sql  = " from "+TABLE_NAME+" o LEFT JOIN act_hi_procinst p ON o.proc_ins_id=p.ID_  where o.userid='"+ShiroKit.getUserId()+"'  order by o.create_time desc";
+	public Page<Record> getPage(int pnum,int psize,String startTime,String endTime,String applyUser){
+		String userId = ShiroKit.getUserId();
+		String sql  = " from "+TABLE_NAME+" o LEFT JOIN act_hi_procinst p ON o.proc_ins_id=p.ID_  where 1=1";
+		sql = sql + SysRoleOrg.dao.getRoleOrgSql(userId) ;
+		if(StrKit.notBlank(startTime)){
+			sql = sql + " and o.create_time>='"+ DateUtil.formatSearchTime(startTime,"0")+"'";
+		}
+		if(StrKit.notBlank(endTime)){
+			sql = sql + " and o.create_time<='"+DateUtil.formatSearchTime(endTime,"1")+"'";
+		}
+		if(StrKit.notBlank(applyUser)){
+			sql = sql + " and o.applyer_name like '%"+applyUser+"%'";
+		}
+		sql = sql + " order by o.create_time desc";
 		return Db.paginate(pnum, psize, " select * ", sql);
 	}
 	
 	/***
-	 * 删除
+	 * del
 	 * @param ids
 	 */
 	@Before(Tx.class)

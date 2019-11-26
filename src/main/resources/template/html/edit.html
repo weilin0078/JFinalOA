@@ -4,33 +4,12 @@
 		            <div class="panel-heading">
 		                <h3 class="panel-title" style="text-align: right;">
 		                	#('#')@installPJaxGoBackBtn()
-		                	添加
+							#('#')@installFlowHisBtn(defId,procInsId)
+							#('#')@installAttachment(o?o.id:'')
 		                </h3>
 		            </div>
-		            <form id="editForm" class="panel-body form-horizontal form-padding">
-						<input type="hidden"  name="#('#')(formModelName).id" class="form-control" value="#('#')(o?o.id:'')">
-		                #for(col:ifShowOnColA)
-			                <div class="form-group">
-			                    <label class="col-md-2 control-label">#(ifShowOnColN[for.index])</label>
-			                    <div class="col-md-8">
-			                        <input type="text"  name="#('#')(formModelName).#(col)" class="form-control"  value="#('#')(o?o.#(col):'')" #('#')if(view=='detail') readonly #('#')end>
-			                        <small class="help-block">请输入#(ifShowOnColN[for.index])</small>
-			                    </div>
-			                </div>
-		                #end
-		                	#("#")if(view=='detail')
-			                
-				            #("#")else
-			            	<div class="panel-footer">
-			                    <div class="row">
-			                        <div class="col-sm-8 col-sm-offset-3">
-			                            <button class="btn btn-warning" type="reset" #('#')if(view=='detail') disabled #('#')end>重置</button>
-			                            <button class="btn btn-primary" type="submit" #('#')if(view=='detail') disabled #('#')end>保存</button>
-			                        </div>
-			                    </div>
-			                </div>
-				            #("#")end
-		            </form>
+					#('#')@buildFormPanelContainer("名片印刷申请单","/WEB-INF/admin/oa/apply/businesscard/editForm.html")
+					#('#')@buildWorkFlowHisTable(hislist)
 		        </div>
 		    </div>
 	</div>

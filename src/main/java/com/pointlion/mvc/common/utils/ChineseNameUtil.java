@@ -11,7 +11,7 @@ import org.apache.shiro.authc.credential.PasswordService;
 import com.pointlion.mvc.admin.oa.workflow.WorkFlowIdentityService;
 import com.pointlion.mvc.common.model.SysOrg;
 import com.pointlion.mvc.common.model.SysUser;
-import com.pointlion.mvc.common.model.SysUserRole;
+import com.pointlion.mvc.common.model.SysRoleUser;
  
 public class ChineseNameUtil {
  
@@ -99,7 +99,7 @@ public class ChineseNameUtil {
         			u.setUsername(username);
         			PasswordService svc = new DefaultPasswordService();
     				u.setPassword(svc.encryptPassword(username));//加密新密码
-    				SysUserRole r = new SysUserRole();
+    				SysRoleUser r = new SysRoleUser();
     				r.setId(UuidUtil.getUUID());
     				r.setUserId(userid);
     				r.setRoleId("8");

@@ -35,7 +35,7 @@ var common_ajax = function() {
 				result = response;
 				//扩展回调函数
 				if( callback != null ){
-					callback();
+					callback(response);
 				}
 			}
 		});

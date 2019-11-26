@@ -51,6 +51,12 @@ public class SysRoutes extends Routes{
 		add("/admin/sys/generator",GeneratorController.class,"/generator");//代码生成器
 		//数据库备份
 		add("/admin/sys/dbbackup",DatabaseBackupController.class,"");
+
+
+		//客户端工具类
+		add("/admin/sys/tool/file", FileController.class,"/tool/file");
+
+		
 		//***测试类
 		add("/admin/sys/test", TestController.class,"/test");
 	}

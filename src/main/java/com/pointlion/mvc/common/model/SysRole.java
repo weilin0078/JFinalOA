@@ -60,7 +60,7 @@ public class SysRole extends BaseSysRole<SysRole> {
 	 * @return
 	 */
 	public Integer deleteAllRoleAuthByRolieid(String roleid){
-		return Db.update("delete from sys_role_auth where role_id='"+roleid+"'");
+		return Db.update("delete from sys_role_menu where role_id='"+roleid+"'");
 	}
 	/***
 	 * 给角色赋权
@@ -73,7 +73,7 @@ public class SysRole extends BaseSysRole<SysRole> {
 			deleteAllRoleAuthByRolieid(roleid);//删除角色下所有权限
 			String darr[] = data.split(",");//添加权限
 			for(String d:darr){
-				SysRoleAuth ro = new SysRoleAuth();
+				SysRoleMenu ro = new SysRoleMenu();
 				ro.setId(UuidUtil.getUUID());
 				ro.setMenuId(d);
 				ro.setRoleId(roleid);
@@ -88,8 +88,8 @@ public class SysRole extends BaseSysRole<SysRole> {
 	 * @param roleid
 	 * @return
 	 */
-	public List<SysRoleAuth> getRoleAuthByRoleId(String roleid){
-		return SysRoleAuth.dao.find("select * from sys_role_auth where role_id='"+roleid+"'");
+	public List<SysRoleMenu> getRoleAuthByRoleId(String roleid){
+		return SysRoleMenu.dao.find("select * from sys_role_menu where role_id='"+roleid+"'");
 	}
 	/***
 	 * 根据用户的id 查询所有的权限(菜单)
@@ -97,7 +97,7 @@ public class SysRole extends BaseSysRole<SysRole> {
 	 * @return
 	 */
 	public List<SysMenu> getRoleAuthByUserid(String userid,String if_show,String parentId){
-		String sql = "select DISTINCT m.* from sys_user u ,sys_user_role ur , sys_role_auth ra ,sys_menu m where ur.user_id=u.id and u.id='"+userid+"' and ur.role_id=ra.role_id and ra.menu_id=m.id ";
+		String sql = "select DISTINCT m.* from sys_user u ,sys_role_user ur , sys_role_menu ra ,sys_menu m where ur.user_id=u.id and u.id='"+userid+"' and ur.role_id=ra.role_id and ra.menu_id=m.id ";
 		if(StrKit.notBlank(if_show)){
 			sql = sql + " and m.if_show='"+if_show+"' ";
 		}
@@ -138,15 +138,29 @@ public class SysRole extends BaseSysRole<SysRole> {
 	 * 获取用户下所有角色
 	 */
 	public List<SysRole> getAllRoleByUserid(String id){
-		return SysRole.dao.find("select r.* from sys_role r ,sys_user_role ur , sys_user u where ur.user_id=u.id and ur.role_id=r.id and u.id='"+id+"'");
+		return SysRole.dao.find("select r.* from sys_role r ,sys_role_user ur , sys_user u where ur.user_id=u.id and ur.role_id=r.id and u.id='"+id+"'");
 	}
-	
+
+	/***
+	 * 获取用户下所有的数据权限级别
+	 * @param id
+	 * @return
+	 */
+	public List<String> getDataScopeListByUserId(String id){
+		List<String> scopeList = new ArrayList<String>();
+		List<SysRole> roleList = SysRole.dao.find("select r.data_scope from sys_role r ,sys_role_user ur , sys_user u where ur.user_id=u.id and ur.role_id=r.id and u.id='"+id+"' GROUP BY r.data_scope");
+		for(SysRole role:roleList){
+			scopeList.add(role.getDataScope());
+		}
+		return scopeList;
+	}
+
 	/***
 	 * 获取角色下所有用户,
 	 * 带组织单位
 	 */
 	public List<SysRole> getAllUserByRoleid(String roleid){
-		return SysRole.dao.find("SELECT o.name orgname,r.*,u.* FROM sys_role r,sys_user_role ur,sys_user u,sys_org o WHERE o.id=u.orgid AND ur.user_id = u.id AND ur.role_id = r.id AND r.id='"+roleid+"'");
+		return SysRole.dao.find("SELECT o.name orgname,r.*,u.* FROM sys_role r,sys_role_user ur,sys_user u,sys_org o WHERE o.id=u.orgid AND ur.user_id = u.id AND ur.role_id = r.id AND r.id='"+roleid+"'");
 	}
 	
 	/***
@@ -168,7 +182,7 @@ public class SysRole extends BaseSysRole<SysRole> {
 	public Boolean ifSuperAdmin(String userid){
 		List<SysRole> roleList = SysRole.dao.getAllRoleByUserid(userid);//登录人所有角色
 		for(SysRole r:roleList){
-			if(Constants.SuperAdmin.equals(r.getKey())){
+			if(Constants.SYS_ROLE_SUPERADMIN.equals(r.getKey())){
 				return true;
 			}
 		}

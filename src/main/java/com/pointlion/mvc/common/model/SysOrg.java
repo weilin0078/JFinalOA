@@ -19,7 +19,7 @@ import com.pointlion.mvc.common.utils.ContextUtil;
 @SuppressWarnings("serial")
 public class SysOrg extends BaseSysOrg<SysOrg> {
 	public static final SysOrg dao = new SysOrg();
-	
+	public static List<SysOrg> allChildren = new ArrayList<SysOrg>();
 	/***
 	 * 根据主键查询
 	 */
@@ -38,22 +38,23 @@ public class SysOrg extends BaseSysOrg<SysOrg> {
     		o.delete();
     	}
 	}
+
 	/***
-	 * 根据id 查询孩子
+	 * 根据id 查询孩子(只查一级孩子)
 	 * @param id
+	 * @param type  0:部门 1:公司
 	 * @return
 	 */
 	public List<SysOrg> getChildrenByPid(String id,String type){
 		String sql = "select * from sys_org m where m.parent_id='"+id+"' ";
 		if(StrKit.notBlank(type)){
-			sql = sql + " and m.type='0' ";
+			sql = sql + " and m.type='"+type+"' ";
 		}
 		sql = sql + " order by m.sort";
 		return SysOrg.dao.find(sql);
 	}
 	/***
-	 * 递归
-	 * 查询孩子
+	 * 递归查询，所有的的孩子（不包含自己）,树形结构
 	 * @param id
 	 * @return
 	 */
@@ -66,15 +67,23 @@ public class SysOrg extends BaseSysOrg<SysOrg> {
 	}
 	/***
 	 * 递归查询，所有的的孩子（不包含自己）
+	 * @return
 	 */
-	public List<SysOrg> getChildrenAll(String id){
-		List<SysOrg> result = new ArrayList<SysOrg>();
-		List<SysOrg> list =  getChildrenByPid(id,null);//根据id查询孩子
-		result.addAll(list);
-		for(SysOrg o : list){
-			result.addAll(getChildrenAll(o.getId()));
+	public List<SysOrg> getAllChildren(String pid){
+		allChildren.clear();
+		List<SysOrg> orgList = dao.findAll();
+		return getChildrenAll(orgList,pid);
+	}
+	private List<SysOrg> getChildrenAll(List<SysOrg>  orgs ,String pid){
+		for (SysOrg org : orgs) {
+			// 判断是否存在孩子
+			if (pid.equals(org.getParentId())) {
+				// 递归遍历上一级
+				getChildrenAll(orgs, org.getId());
+				allChildren.add(org);
+			}
 		}
-		return result;
+		return allChildren;
 	}
 	/***
 	 * 查询同一级的子公司下的所有单位
@@ -160,10 +169,12 @@ public class SysOrg extends BaseSysOrg<SysOrg> {
 //		node.setLevel(menu.getLevel());
 		return node;
 	}
-	
+
 	/***
 	 * 根据id 查询孩子分页
-	 * @param id
+	 * @param pnum
+	 * @param psize
+	 * @param pid
 	 * @return
 	 */
 	public Page<Record> getChildrenPageByPid(int pnum,int psize, String pid){

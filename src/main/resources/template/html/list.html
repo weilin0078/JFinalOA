@@ -1,50 +1,64 @@
                 <div id="page-content">
 			        <div class="col-sm-12 eq-box-sm">
-			        	<div class="panel ">
-						    <div class="panel-body">
-						        <a id="add" class="btn btn-primary data-toolbar" href="#('#')(ctx)/admin/#(parentPackageName)/getEditPage?view=edit"><i class="demo-pli-add"></i> 添加</a>
-								<a id="del" class="btn btn-danger data-toolbar" onclick="delSel()" href="javascript:void(0);"><i class="demo-pli-cross"></i> 批量删除</a>
-						        <table id="pageTable" class="demo-add-niftycheck" data-toolbar="#del,#add"
-						               data-search="true"
-						               data-show-refresh="true"
-						               data-show-toggle="true"
-						               data-show-columns="true"
-						               data-sort-name="id"
-						               data-page-list="[5, 10, 20]"
-						               data-page-size="5"
-						               data-pagination="true" data-show-pagination-switch="true" ></table>
-						    </div>
-						</div>
-			        </div>
-                </div>
+						<div class="panel">
+							<div class="panel panel-search">
+								<div class="panel-body">
+									<div class="form-inline">
+										<div class="form-group">
+											<input id="applyUser" placeholder="制单人" class="form-control">
+										</div>
+										<div class="form-group">
+											<div class="input-group date form_datetime">
+												<input id="searchStartTime" placeholder="开始时间" class="form-control">
+												<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="input-group date form_datetime">
+												<input id="searchEndTime" placeholder="结束时间" class="form-control">
+												<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<button class="btn btn-primary" type="button" onclick="searchTable()">搜索</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel ">
+								<div class="panel-body">
+									<a id="add" class="btn btn-primary data-toolbar" href="#('#')(ctx)/admin/#(parentPackageName)/getEditPage?view=edit"><i class="demo-pli-add"></i> 添加</a>
+									<a id="del" class="btn btn-danger data-toolbar" onclick="delSel()" href="javascript:void(0);"><i class="demo-pli-cross"></i> 批量删除</a>
+									<table id="pageTable" class="demo-add-niftycheck" data-toolbar="#del,#add"
+										   data-search="true"
+										   data-show-refresh="true"
+										   data-show-toggle="true"
+										   data-show-columns="true"
+										   data-sort-name="id"
+										   data-page-list="[5, 10, 20]"
+										   data-page-size="5"
+										   data-pagination="true" data-show-pagination-switch="true" ></table>
+								</div>
+							</div>
+			        	</div>
+                	</div>
+				</div>
 <script>
 	
-	var col = [{
-	       field: 'checked',
-	       checkbox : true,
-	       align: 'center'
-	   },
+	var col = [{field: 'checked', checkbox : true, align: 'center'},
 	   
 	   #for(col:ifShowOnColA)
-		   {
-		       field: '#(col)',
-		       title: '#(ifShowOnColN[for.index])',
-		       align: 'center'
-		   },
+		   {field: '#(col)', title: '#(ifShowOnColN[for.index])', align: 'center'},
 	   #end
 	   
 	   
-	   {
-	       field: 'control',
-	       title: '操作',
-	       align: 'left',
-	       width:'240',
+	   {field: 'control', title: '操作', align: 'left', width:'200',
 	       formatter:function(value,row,index){
 	           	//通过formatter可以自定义列显示的内容
 	           	//value：当前field的值，即id
 	           	//row：当前行的数据
-	           	var a = '<a class="label label-table label-success" href="\'+ctx+\'/admin/#(parentPackageName)/getEditPage?id=\'+row.id+\'&view=detail" >查看</a>&nbsp;';
-	           	a = a + '<a class="label label-table label-success" href="\'+ctx+\'/admin/#(parentPackageName)/getEditPage?id=\'+row.id+\'&view=edit" >编辑</a>&nbsp;';
+	           	var a = '<a class="label label-table label-success" href="'+ctx+'/admin/#(parentPackageName)/getEditPage?id='+row.id+'&view=detail" >查看</a>&nbsp;';
+	           	a = a + '<a class="label label-table label-success" href="'+ctx+'/admin/#(parentPackageName)/getEditPage?id='+row.id+'&view=edit" >编辑</a>&nbsp;';
 				a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>';
 	           	return a;
 	       }
@@ -158,8 +172,25 @@
 			}
 		});
 	}
+
+	//查询
+	function searchTable(){
+		var startTime = $("#searchStartTime").val();
+		var endTime = $("#searchEndTime").val();
+		var applyUser = $("#applyUser").val();
+		var param = {
+			query: {
+				"startTime":startTime,
+				"endTime":endTime,
+				"applyUser":applyUser
+			}
+		}
+		// 刷新表格
+		$('#pageTable').bootstrapTable('refresh',param);
+	}
+
 	$(document).ready(function(){
-		
+		$('.form_datetime').datepicker({format: 'yyyy-mm-dd',weekStart: 1,todayBtn:  1,autoclose: 1,language:  'zh-CN',todayHighlight: 1,forceParse: 0,clearBtn: true }).on('changeDate',null);
 		initTable();//初始化
 	});
 </script>
