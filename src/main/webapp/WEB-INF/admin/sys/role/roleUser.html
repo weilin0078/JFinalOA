@@ -117,7 +117,7 @@
 	};
 	//添加授权
 	function addRoleUser(){
-		pointLion.selectOneUser(encodeURIComponent("#root"),function(data){
+		pointLion.selectOneUser(encodeURIComponent("root"),function(data){
 			if(data){
 				common_ajax.ajaxFunc("/admin/sys/role/addUserToRole",{"userId":data.idData,"roleId":roleId}, "json", function(re){
 					if(re.success){

@@ -29,7 +29,7 @@
 	//树
 	var setting = {
 		check: {
-			enable: true
+			enable: true,
 		},
 		async : {
 			enable : true,
@@ -38,7 +38,7 @@
 		callback: {
 			onAsyncSuccess: function(){//默认勾选已有的权限
 				var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-				var data = common_ajax.ajaxFunc("/admin/sys/role/getRoleAuthByRoleid", {"roleid":roleid}, "json", null);
+				var data = common_ajax.ajaxFunc("/admin/sys/role/getRoleMenuAuthByRoleid", {"roleId":roleid}, "json", null);
 				if(data&&data.length>0){
 					$.each(data,function(i,d){
 						var node = zTree.getNodeByParam("id", d.menu_id, null);//根据menuid获取节点

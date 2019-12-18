@@ -25,14 +25,14 @@
 		{field: 'name', title: '角色名称', align: 'center'},
 		{field: 'key', title: '角色标识', align: 'center'},
 		{field: 'description', title: '描述信息', align: 'center'},
-		{field: 'control', title: '操作', align: 'left', width:'300',
+		{field: 'control', title: '操作', align: 'left', width:'360',
 	       formatter:function(value,row,index){
 	           //通过formatter可以自定义列显示的内容
 	           //value：当前field的值，即id
 	           //row：当前行的数据
-	           var a = '<a class="label label-table label-info" onclick="giveAuth(\''+row.id+'\')" href="javascript:void(0);" >菜单授权</a>&nbsp;';
+	           var a = '<a class="label label-table label-info" onclick="giveMenuAuth(\''+row.id+'\')" href="javascript:void(0);" >菜单、按钮授权</a>&nbsp;';
 	           	   a = a + '<a class="label label-table label-info" href="'+ctx+'/admin/sys/role/getRoleUserPage?roleId='+row.id+'" >分配用户</a>&nbsp;';
-			   a = a + '<a class="label label-table label-info" href="'+ctx+'/admin/sys/role/editRoleDataScope?id='+row.id+'" >数据权限</a>&nbsp;';
+			   a = a + '<a class="label label-table label-info" onclick="giveDataScope(\''+row.id+'\')" href="javascript:void(0);" >数据权限</a>&nbsp;';
 					a = a + '<a class="label label-table label-success" href="'+ctx+'/admin/sys/role/getEditPage?id='+row.id+'" >编辑</a>&nbsp;';
 					a = a + '<a class="label label-table label-danger" onclick="del(\''+row.id+'\')" href="javascript:void(0);" >删除</a>';
 	           return a;
@@ -119,7 +119,11 @@
 			}
 		});
 	};
-	function giveAuth(roleid){
+	var roleAuth;
+	function setRoleAuth(data){
+		roleAuth = data;
+	}
+	function giveMenuAuth(roleid){
 		//选择权限
 		var giveAuthIframe;
 		var index = parent.layer.open({
@@ -154,37 +158,72 @@
 							  }
 						});
 	}
-	var roleAuth;
-	function setRoleAuth(data){
-		roleAuth = data;
-	}
-	
-	
-	//设置角色下人员
-	function editRoleUser(roleid){
-		var editRoleUserDialog;
-		layer.open({
-			  type: 2,
-			  title: false, //不显示标题栏
-			  area: ['700px', '550px'],
-			  shade: 0.2,
-			  id: 'editRoleUser', //设定一个id，防止重复弹出
-			  resize: false,
-			  closeBtn: false,
-			  isOutAnim : false , 
-			  btn: ['确定', '取消'], 
-			  btnAlign: 'c',
-			  content: ctx+'/admin/sys/role/getEditRoleUserPage?roleid='+roleid,
-			  success: function(layero){
-					editRoleUserDialog = window[layero.find('iframe')[0]['name']];
-			  },
-			  yes: function(){
-				  layer.closeAll();
-			  }
-			});
+
+
+	// //设置角色下人员
+	// function editRoleUser(roleid){
+	// 	var editRoleUserDialog;
+	// 	layer.open({
+	// 		  type: 2,
+	// 		  title: false, //不显示标题栏
+	// 		  area: ['700px', '550px'],
+	// 		  shade: 0.2,
+	// 		  id: 'editRoleUser', //设定一个id，防止重复弹出
+	// 		  resize: false,
+	// 		  closeBtn: false,
+	// 		  isOutAnim : false ,
+	// 		  btn: ['确定', '取消'],
+	// 		  btnAlign: 'c',
+	// 		  content: ctx+'/admin/sys/role/getEditRoleUserPage?roleid='+roleid,
+	// 		  success: function(layero){
+	// 				editRoleUserDialog = window[layero.find('iframe')[0]['name']];
+	// 		  },
+	// 		  yes: function(){
+	// 			  layer.closeAll();
+	// 		  }
+	// 		});
+	// }
+	//数据权限
+	function giveDataScope(roleId){
+		var giveDataScopeIframe;
+		parent.layer.open({
+			type: 2,
+			title: false, //不显示标题栏
+			area: ['470px', '650px'],
+			shade: 0.2,
+			id: 'selectOneMenu', //设定一个id，防止重复弹出
+			resize: false,
+			closeBtn: false,
+			isOutAnim : false ,
+			btn: ['确定', '取消'],
+			btnAlign: 'c',
+			content: ctx+'/admin/sys/role/editRoleDataScope?roleid='+roleId,
+			success: function(layero){
+				giveDataScopeIframe = parent.window[layero.find('iframe')[0]['name']];
+			},
+			yes: function(){
+				var data = giveDataScopeIframe.getData();
+				var scope = data.scope;
+				var orgListStr = "";
+				var nodeArr = [];
+				if("4"==data.scope){
+					var orgNodes = data.orgNodes;
+					$.each(orgNodes,function(i,o){
+						nodeArr.push(o.id);
+					})
+					orgListStr = nodeArr.join(",");
+				}
+				var result = common_ajax.ajaxFunc("/admin/sys/role/saveDataScope",{"orgListStr":orgListStr,"roleId":roleId,"scope":scope}, "json", null);//保存所选角色权限
+				if(result.success){
+					pointLion.alertMsg("保存成功","success",null,null);
+				}else{
+					pointLion.alertMsg("保存失败","danger",null,null);
+				}
+				parent.layer.closeAll();
+			}
+		});
 	}
 	$(document).ready(function(){
-		
 		initTable();//初始化树
 	});
 </script>

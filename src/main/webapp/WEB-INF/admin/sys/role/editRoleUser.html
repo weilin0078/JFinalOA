@@ -44,7 +44,7 @@
 
 <script>
 	function selectOneUser(){
-		parent.pointLion.selectOneUser(encodeURIComponent("#root"),function(data){
+		parent.pointLion.selectOneUser(encodeURIComponent("root"),function(data){
 			var result = common_ajax.ajaxFunc("/admin/sys/role/addUserToRole",{"userid":data.idData,"roleid":"#(roleid)"}, "json", null);
 			if(result.success){
 				parent.pointLion.alertMsg("添加成功","success",null,null);

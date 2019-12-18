@@ -1,0 +1,119 @@
+#include("/common/include/include.html")
+<style>
+	.lay-body{
+		margin-top: 52px;
+		overflow-y: auto;
+		overflow-x: unset;
+	}
+	.lay-header{
+		position: absolute;
+		top: 0px;
+		width: 100%;
+	}
+</style>
+<div class="modal-dialog" style="width:100%">
+    <div class="modal-content" style="min-height: 100%;">
+        <div class="modal-header lay-header">
+            <button type="button" class="close" data-dismiss="modal" onclick="{parent.layer.closeAll();}"><i class="pci-cross pci-circle"></i></button>
+            <h4 class="modal-title">给角色授权</h4>
+        </div>
+
+        <div class="modal-body lay-body">
+            <form id="editForm" class="panel-body form-horizontal form-padding">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">角色名称</label>
+                    <div class="col-md-10">
+                        <input type="text"  name="sysRole.name" class="form-control"  value="#(o?o.name:'')" readonly>
+                        <input type="hidden"  name="sysRole.id" class="form-control" value="#(o?o.id:'')" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">角色标识</label>
+                    <div class="col-md-10">
+                        <input type="text"  name="sysRole.key" class="form-control"  value="#(o?o.key:'')" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">描述信息</label>
+                    <div class="col-md-10">
+                        <textarea name="sysRole.description" rows="4" class="form-control" readonly>#(o?o.description:'')</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">数据权限</label>
+                    <div class="col-md-10">
+                        <div class="select pull-left" style="width: 100%;">
+                            <select id="dataScope" class="col-md-12" style="width: 100%;" onchange="selectScope()">
+                                <option value="1" #if(o.data_scope=="1") selected #end>仅能查看自己创建的</option>
+                                <option value="2" #if(o.data_scope=="2") selected #end>能查看本部门创建的</option>
+                                <option value="3" #if(o.data_scope=="3") selected #end>能查看本部门及以下部门创建的</option>
+                                <option value="4" #if(o.data_scope=="4") selected #end>能查看自定义选择部门的</option>
+                                <option value="5" #if(o.data_scope=="5") selected #end>能查看所有人创建的</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <ul id="treeDemo" class="ztree"  #if(o.data_scope!="4") style="display: none;" #end></ul>
+        </div>
+    </div>
+</div>
+
+<script>
+	var roleId = "#(roleId)";
+    //树
+    var setting = {
+        async : {
+            enable : true,
+            url : ctx + "/admin/sys/org/getOrgTree?orgid=root&ifOpen=1"
+        },
+        check: {
+            enable: true,
+            /*Y 属性定义 checkbox 被勾选后的情况；
+            N 属性定义 checkbox 取消勾选后的情况；
+            “p” 表示操作会影响父级节点；
+            “s” 表示操作会影响子级节点。
+            请注意大小写，不要改变*/
+            chkboxType:{"Y":"s","N":"s"}
+        },
+        callback : {
+            onAsyncSuccess: function(){//默认勾选已有的权限
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                var data = common_ajax.ajaxFunc("/admin/sys/role/getRoleOrgAuthByRoleid", {"roleId":roleId}, "json", null);
+                if(data&&data.length>0){
+                    $.each(data,function(i,d){
+                        var node = zTree.getNodeByParam("id", d.org_id, null);//根据menuid获取节点
+                        if(node){
+                            zTree.checkNode(node, true, false, true);//将节点选中
+                        }
+                    })
+                }
+            }
+        }
+    };
+	//获取选择的节点
+	function getData(){
+	    var data = {};
+	    data.scope = $("#dataScope").val();//数据权限级别
+        if(data.scope=="4"){//自定义数据权限
+            var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+            var nodes = treeObj.getCheckedNodes(true);
+            data.orgNodes = nodes;
+        }
+		return data;
+	}
+	//数据权限
+    function selectScope(){
+	    var scope = $("#dataScope").val();
+	    if("4"==scope){
+	        $("#treeDemo").show();
+        }else{
+            $("#treeDemo").hide();
+        }
+    }
+	$(document).ready(function() {
+		$.fn.zTree.init($("#treeDemo"), setting);//初始化树
+		var clientH = document.body.clientHeight-54;
+		$(".lay-body").css("height",clientH+"px");
+	});
+</script>

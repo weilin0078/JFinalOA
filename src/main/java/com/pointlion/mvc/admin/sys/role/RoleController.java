@@ -11,10 +11,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.mvc.admin.oa.workflow.WorkFlowIdentityService;
 import com.pointlion.mvc.common.base.BaseController;
-import com.pointlion.mvc.common.model.SysRole;
-import com.pointlion.mvc.common.model.SysRoleMenu;
-import com.pointlion.mvc.common.model.SysUser;
-import com.pointlion.mvc.common.model.SysRoleUser;
+import com.pointlion.mvc.common.model.*;
 import com.pointlion.mvc.common.utils.UuidUtil;
 import com.pointlion.plugin.shiro.ShiroKit;
 
@@ -26,6 +23,7 @@ import com.pointlion.plugin.shiro.ShiroKit;
 
 public class RoleController extends BaseController{
 	public static final WorkFlowIdentityService idService = WorkFlowIdentityService.me;
+	public static final RoleService roleService = RoleService.me;
 	/***
 	 * 获得列表页
 	 */
@@ -124,11 +122,11 @@ public class RoleController extends BaseController{
     }
     
     /***
-     * 获取角色下所有的权限
+     * 获取角色下所有的菜单权限
      */
-    public void getRoleAuthByRoleid(){
-    	String roleid = getPara("roleid");
-    	List<SysRoleMenu> list = SysRole.dao.getRoleAuthByRoleId(roleid);
+    public void getRoleMenuAuthByRoleid(){
+    	String roleId = getPara("roleId");
+    	List<SysRoleMenu> list = SysRole.dao.getRoleMenuAuthByRoleId(roleId);
     	renderJson(list);
     }
     /***
@@ -237,5 +235,40 @@ public class RoleController extends BaseController{
 		ShiroKit.clearAllCachedAuthorizationInfo();//清除所有人shiro缓存，将重新执行初始化权限操作（ShiroDbRealm.doGetAuthorizationInfo方法）
 		renderSuccess();
     }
+
+
+	/***
+	 * 打开角色编辑数据权限页面
+	 */
+	public void editRoleDataScope(){
+		String roleId = getPara("roleid","");
+		setAttr("roleId",roleId);
+		SysRole role = SysRole.dao.getById(roleId);
+		setAttr("o",role);
+		if("4".equals(role.getDataScope())){//自定义数据权限
+
+		}
+		renderIframe("giveDataScope.html");
+	}
+
+	/***
+	 * 保存数据权限
+	 */
+	public void saveDataScope(){
+		String roleId = getPara("roleId","");
+		String scope = getPara("scope","1");
+		String orgListStr = getPara("orgListStr","");
+		roleService.saveDataScope(roleId,scope,orgListStr);
+		renderSuccess();
+	}
+
+	/***
+	 * 获取角色下所有的自定义数据权限
+	 */
+	public void getRoleOrgAuthByRoleid(){
+		String roleId = getPara("roleId");
+		List<SysRoleOrg> list = SysRole.dao.getRoleOrgAuthByRoleId(roleId);
+		renderJson(list);
+	}
 
 }
