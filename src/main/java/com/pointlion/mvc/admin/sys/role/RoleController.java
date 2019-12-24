@@ -3,11 +3,8 @@
  */
 package com.pointlion.mvc.admin.sys.role;
 
-import java.util.List;
-
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
-
 import com.jfinal.plugin.activerecord.Record;
 import com.pointlion.mvc.admin.oa.workflow.WorkFlowIdentityService;
 import com.pointlion.mvc.common.base.BaseController;
@@ -15,13 +12,15 @@ import com.pointlion.mvc.common.model.*;
 import com.pointlion.mvc.common.utils.UuidUtil;
 import com.pointlion.plugin.shiro.ShiroKit;
 
+import java.util.List;
+
 /**
  * @author Lion
  * @date 2017年2月16日 下午4:04:25
  * @qq 439635374
  */
 
-public class RoleController extends BaseController{
+public class RoleController extends BaseController {
 	public static final WorkFlowIdentityService idService = WorkFlowIdentityService.me;
 	public static final RoleService roleService = RoleService.me;
 	/***
@@ -159,7 +158,7 @@ public class RoleController extends BaseController{
     public void getEditRoleUserPage(){
     	String roleid = getPara("roleid");
     	setAttr("userList", SysRole.dao.getAllUserByRoleid(roleid));
-    	setAttr("orgid",ShiroKit.getUserOrgId());
+    	setAttr("orgid", ShiroKit.getUserOrgId());
     	setAttr("roleid",roleid);
     	//获取角色下所有用户
     	renderIframe("editRoleUser.html");
