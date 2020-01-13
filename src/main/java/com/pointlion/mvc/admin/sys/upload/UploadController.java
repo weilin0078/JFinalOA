@@ -5,6 +5,7 @@
  */
 package com.pointlion.mvc.admin.sys.upload;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.jfinal.upload.UploadFile;
+import com.pointlion.config.MainConfig;
 import com.pointlion.mvc.common.base.BaseController;
 import com.pointlion.mvc.common.utils.office.excel.ExcelUtil;
 
@@ -28,9 +30,10 @@ public class UploadController extends BaseController {
 	public void upload(){
 		UploadFile file = getFile("file","/content");
 		Map<String,String> data = new HashMap<String , String>();
-//		File f = file.getFile().renameTo(new File(upFile.getSaveDirectory()+"aa.jpg")); 
+		//重命名为新文件名-防止上传名称重复。
+//		File f = file.getFile().renameTo(new File(file.getSaveDirectory()+"aa.jpg"));
 		data.put("filename", file.getFileName());
-		data.put("path", "/content");
+		data.put("path", MainConfig.constants.getBaseUploadPath()+"content/");
 		renderSuccess(data,"上传成功");
 	}
 	

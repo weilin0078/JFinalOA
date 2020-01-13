@@ -129,4 +129,12 @@ public abstract class BaseOaApplySeal<M extends BaseOaApplySeal<M>> extends Mode
 		return getStr("title");
 	}
 
+	public void setImgUrl(java.lang.String img_url) {
+		set("img_url", img_url);
+	}
+
+	public java.lang.String getImgUrl() {
+		return getStr("img_url");
+	}
+
 }

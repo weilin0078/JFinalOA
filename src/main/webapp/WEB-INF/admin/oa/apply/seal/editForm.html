@@ -26,6 +26,19 @@
 			                        <small class="help-block">请输入用途</small>
 			                    </div>
 			                </div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">上传图片demo</label>
+								<div class="col-md-9">
+									<div id="filePicker" style="float: left;margin-top: 10px;margin-right: 10px;">上传</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">图片预览</label>
+								<div class="col-md-9">
+									<input name="#(formModelName).img_url" type="hidden" value="#(o?o.seal_name:'')" />
+									<img id="imgUrl" src="$(crx)/upload/#(o?o.seal_name:'')" width="100px">
+								</div>
+							</div>
 			                <div class="form-group">
 			                    <label class="col-md-2 control-label">申请原因以及意见</label>
 			                    <div class="col-md-9">
@@ -60,3 +73,23 @@
 
 				            #end
 		            </form>
+<script>
+	$(document).ready(function() {
+		pointLion.initUploader("/admin/upload/upload",function(data){
+			if(data.success){
+				pointLion.alertMsg(data.message,"success",null,null);
+				var relativePath = data.data.path+data.data.filename;
+				$("#imgUrl").attr("src","#(ctx)/"+relativePath);
+			}else{
+				pointLion.alertMsg(data.message,"danger",null,null);
+			}
+		});
+		$('#editForm').bootstrapValidator({
+			fields: {
+			}
+		}).on("success.form.bv", function (e) {
+			save();
+			return false;//阻止表单跳转
+		});
+	});
+</script>
