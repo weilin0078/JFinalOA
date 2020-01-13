@@ -137,4 +137,5 @@ public abstract class BaseOaApplySeal<M extends BaseOaApplySeal<M>> extends Mode
 		return getStr("img_url");
 	}
 
+
 }
