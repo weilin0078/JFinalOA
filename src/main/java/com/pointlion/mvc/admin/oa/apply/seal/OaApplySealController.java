@@ -60,13 +60,13 @@ public class OaApplySealController extends BaseController {
 
     	//添加和修改
     	String id = getPara("id");
-    	if(StrKit.notBlank(id)){//修改
-    		OaApplySeal o = service.getById(id);
-    		setAttr("o", o);
-    		//是否是查看详情页面
-    		String view = getPara("view");//查看
-    		if("detail".equals(view)){
-    			setAttr("view", view);
+		String view = getPara("view");//查看
+		setAttr("view", view);
+		if(StrKit.notBlank(id)){//修改
+			OaApplySeal o = service.getById(id);
+			setAttr("o", o);
+			//是否是查看详情页面
+			if("detail".equals(view)){
     			if(StrKit.notBlank(o.getProcInsId())){
     				setAttr("procInsId", o.getProcInsId());
     				setAttr("defId", wfservice.getDefIdByInsId(o.getProcInsId()));

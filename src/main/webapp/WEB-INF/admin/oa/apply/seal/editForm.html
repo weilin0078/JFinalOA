@@ -35,8 +35,8 @@
 							<div class="form-group">
 								<label class="col-md-2 control-label">图片预览</label>
 								<div class="col-md-9">
-									<input name="#(formModelName).img_url" type="hidden" value="#(o?o.seal_name:'')" />
-									<img id="imgUrl" src="$(crx)/upload/#(o?o.seal_name:'')" width="100px">
+									<input name="#(formModelName).img_url" id="formImgUrl" type="hidden" value="#(o?o.img_url:'')" />
+									<img id="imgUrl" src="#(ctx)/#(o?o.img_url:'')" width="100px">
 								</div>
 							</div>
 			                <div class="form-group">
@@ -80,6 +80,7 @@
 				pointLion.alertMsg(data.message,"success",null,null);
 				var relativePath = data.data.path+data.data.filename;
 				$("#imgUrl").attr("src","#(ctx)/"+relativePath);
+				$("#formImgUrl").val(relativePath);
 			}else{
 				pointLion.alertMsg(data.message,"danger",null,null);
 			}
