@@ -11,7 +11,7 @@
  Target Server Version : 50610
  File Encoding         : 65001
 
- Date: 26/11/2019 18:21:54
+ Date: 14/01/2020 09:05:33
 */
 
 SET NAMES utf8mb4;
@@ -2069,13 +2069,14 @@ CREATE TABLE `oa_apply_seal`  (
   `des` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述信息',
   `seal_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `img_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图片地址',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of oa_apply_seal
 -- ----------------------------
-INSERT INTO `oa_apply_seal` VALUES ('90c8b91f4f65452cb8bd234d09fa61da', '7ac6e4c544634e179f78803d5ba2d0ca', '管理员', 'd5534590050b4ffdaf5e9ca42ab53f61', '人力资源', NULL, NULL, '1', '0', '0', '7f1d428128894a5dafdba7915684e7c5', '2019-10-26 13:15:21', '123', '财务章', '工资证明');
+INSERT INTO `oa_apply_seal` VALUES ('90c8b91f4f65452cb8bd234d09fa61da', '7ac6e4c544634e179f78803d5ba2d0ca', '管理员', 'd5534590050b4ffdaf5e9ca42ab53f61', '人力资源', NULL, NULL, '1', '0', '0', '7f1d428128894a5dafdba7915684e7c5', '2019-10-26 13:15:21', '123', '财务章', '工资证明', NULL);
 
 -- ----------------------------
 -- Table structure for oa_flow_carbon_c
@@ -2489,6 +2490,7 @@ INSERT INTO `sys_log` VALUES ('184b6a34c6b641579477a9d312a8bfa0', 'admin', '/adm
 INSERT INTO `sys_log` VALUES ('197ccf1153d941ae89b36415b7f2318e', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"vvvg\"]}', '1', '2019-11-04 11:28:14', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
 INSERT INTO `sys_log` VALUES ('1aa3c7f6d84146e99ff9aed87ba67ed9', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"pdpe\"]}', '1', '2019-11-23 13:42:19', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
 INSERT INTO `sys_log` VALUES ('1b922b8c4f47482786b47abdd5606cc3', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"groupId\":[\"b57893d996be4dc6a88b669c7df58db7\"],\"_\":[\"1571969017399\"]}', '1', '2019-10-25 10:03:40', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
+INSERT INTO `sys_log` VALUES ('1c11b5c9483a496e8c21d129b1003711', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"uh6n\"]}', '1', '2020-01-13 16:07:24', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
 INSERT INTO `sys_log` VALUES ('1ea7221d965940d8b0333ced06c98769', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"groupId\":[\"b57893d996be4dc6a88b669c7df58db7\"],\"_\":[\"1572839862978\"]}', '1', '2019-11-04 11:57:47', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('1eed24585b1045a8b7fb9748b4142818', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"xpmt\"]}', '1', '2019-10-25 10:54:23', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
 INSERT INTO `sys_log` VALUES ('1f230b83ee3f436aaef8e7c55a4264dc', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"4885\"]}', '1', '2019-11-05 22:29:52', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
@@ -2522,6 +2524,7 @@ INSERT INTO `sys_log` VALUES ('2ba159a8bb2a4794bbe0957c76d68347', 'admin', '/adm
 INSERT INTO `sys_log` VALUES ('2ba4b0b44d274884962d6b0ac0dba83a', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"groupId\":[\"9a7e0141804c435fa2eda35dd10d55ce\"],\"_\":[\"1572839615871\"]}', '1', '2019-11-04 11:54:22', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('2bb71e0b09214c79af65fa9d5397d045', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"7m3n\"]}', '1', '2019-11-04 15:24:20', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
 INSERT INTO `sys_log` VALUES ('2c173cc81e0e47a7b9e437c79f230876', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"4\"],\"pageSize\":[\"10\"],\"groupId\":[\"b57893d996be4dc6a88b669c7df58db7\"],\"_\":[\"1572143622928\"]}', '1', '2019-10-27 10:33:52', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
+INSERT INTO `sys_log` VALUES ('2c6b621cb65149fc93a3abb01acd52c3', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"qnmj\"]}', '1', '2019-11-29 17:05:12', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
 INSERT INTO `sys_log` VALUES ('2c9bdfaaaffb4e9dbfa40e8a948bdb51', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"jd3s\"]}', '1', '2019-11-26 18:10:10', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
 INSERT INTO `sys_log` VALUES ('2cf6dbdec6d34d788201b9179cf03978', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"groupId\":[\"325d07bf3ab144d1a15ee98cebf53a88\"],\"_\":[\"1574487777718\"]}', '1', '2019-11-23 13:43:00', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('2dba64a54b664839bcf2c00c97a78485', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"k4vd\"]}', '1', '2019-10-27 12:03:23', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
@@ -2583,6 +2586,7 @@ INSERT INTO `sys_log` VALUES ('4d09f077296748a69833e651999068ff', 'admin', '/adm
 INSERT INTO `sys_log` VALUES ('4d13cf19606f41c8883c9fc0a8e9b7ad', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"_\":[\"1572154100389\"]}', '1', '2019-10-27 13:28:20', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('4d69caae46bf40858318ae343699b60f', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"cura\"]}', '1', '2019-11-07 22:29:26', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
 INSERT INTO `sys_log` VALUES ('4f3afc64045e455bb32e83a721658dcc', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"groupId\":[\"b57893d996be4dc6a88b669c7df58db7\"],\"_\":[\"1572062482450\"]}', '1', '2019-10-26 12:01:24', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
+INSERT INTO `sys_log` VALUES ('4fadb357844a4c778677d92223dc4787', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"rewp\"]}', '1', '2019-11-29 16:27:40', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
 INSERT INTO `sys_log` VALUES ('5116ad2ff6c146fa969fb953b03c88bd', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"groupId\":[\"#root\"],\"_\":[\"1572839569551\"]}', '1', '2019-11-04 11:53:11', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('51f7342cb7634e388ecc4545ecf691b4', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"groupId\":[\"9a7e0141804c435fa2eda35dd10d55ce\"],\"_\":[\"1574579387708\"]}', '1', '2019-11-24 15:09:49', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('533bfdc6ce8a43159dd357a5dd4812df', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"w7ku\"]}', '1', '2019-11-24 11:19:17', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
@@ -2623,6 +2627,7 @@ INSERT INTO `sys_log` VALUES ('6a975e5f89784d73823cae0c64748b5d', 'admin', '/adm
 INSERT INTO `sys_log` VALUES ('6b7e7987838146a381e2400cb8e7c01a', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"fset\"]}', '1', '2019-11-15 11:25:20', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
 INSERT INTO `sys_log` VALUES ('6b904c09a7a043cba57332c5fb304fba', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"2\"],\"pageSize\":[\"10\"],\"groupId\":[\"b57893d996be4dc6a88b669c7df58db7\"],\"_\":[\"1574580527122\"]}', '1', '2019-11-24 15:28:51', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('6c259df050d34f99b200f9b2b2a4cc3a', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"_\":[\"1572844772000\"]}', '1', '2019-11-04 13:19:32', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
+INSERT INTO `sys_log` VALUES ('6cc22ee150a8436ca88c31c0fa131269', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"5rgm\"]}', '1', '2019-12-24 11:58:26', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
 INSERT INTO `sys_log` VALUES ('6ed5a882a5c1485bb855949ad862add9', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"50\"],\"groupId\":[\"b57893d996be4dc6a88b669c7df58db7\"],\"_\":[\"1572153931170\"]}', '1', '2019-10-27 13:25:35', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('6f99dd899c6a42129852f7400162278a', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"3\"],\"pageSize\":[\"10\"],\"groupId\":[\"b57893d996be4dc6a88b669c7df58db7\"],\"_\":[\"1574579387711\"]}', '1', '2019-11-24 15:09:54', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('70230ebc9ca2470bbae720c4c056d411', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"_\":[\"1574579750147\"]}', '1', '2019-11-24 15:15:50', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
@@ -2632,6 +2637,7 @@ INSERT INTO `sys_log` VALUES ('735af35defc8487997605021156780b2', 'admin', '/adm
 INSERT INTO `sys_log` VALUES ('73a8eed0fd414680aa547d514af8880b', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"_\":[\"1572853246420\"]}', '1', '2019-11-04 15:40:46', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('74facc8ae274461796354c142cadc188', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"_\":[\"1572839602634\"]}', '1', '2019-11-04 11:53:22', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('752ca0f0d69f454faabc7f2e04184b28', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"groupId\":[\"b57893d996be4dc6a88b669c7df58db7\"],\"_\":[\"1573958422006\"]}', '1', '2019-11-17 10:40:29', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
+INSERT INTO `sys_log` VALUES ('75e9f9a3d4c1494c9bdf29a077f151bc', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"fxbx\"]}', '1', '2020-01-13 15:49:32', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
 INSERT INTO `sys_log` VALUES ('762a29617a9a49c8ac7f6a52e4d81772', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"_\":[\"1572062482449\"]}', '1', '2019-10-26 12:01:22', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('765bc9fdeb5f4e408ad48fcaa26b84e7', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"groupId\":[\"#root\"],\"_\":[\"1572844772002\"]}', '1', '2019-11-04 13:19:52', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('76732933ac734cbea4f76045fd4a20f6', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"groupId\":[\"b57893d996be4dc6a88b669c7df58db7\"],\"_\":[\"1573958452204\"]}', '1', '2019-11-17 10:40:56', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
@@ -2666,6 +2672,7 @@ INSERT INTO `sys_log` VALUES ('8a2825e4e0904197aa906f7981d0decf', 'admin', '/adm
 INSERT INTO `sys_log` VALUES ('8adc061d17b647bbb4f23d6274013330', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"5\"],\"groupKey\":[\"OA_APPLY_COMMON\"],\"_\":[\"1574575771097\"]}', '1', '2019-11-24 14:09:31', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('8ce70bf6ee3843aa931b739538ae36c4', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"_\":[\"1571131228589\"]}', '1', '2019-10-15 17:20:29', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('8d0331b9114c41f08e58dfdfa820a27d', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"8vqy\"]}', '1', '2019-11-24 13:54:03', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
+INSERT INTO `sys_log` VALUES ('8ddc50e805a14f84a24a58d70facce77', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"pdpt\"]}', '1', '2020-01-13 15:42:11', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
 INSERT INTO `sys_log` VALUES ('8f659715f2f94459b820d5346c24f5f6', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"3\"],\"pageSize\":[\"10\"],\"groupId\":[\"b57893d996be4dc6a88b669c7df58db7\"],\"_\":[\"1574579479695\"]}', '1', '2019-11-24 15:11:24', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('8f79a74db8884615bcca523ddb324c0d', 'admin', '/admin/sys/dct/listData', '{\"pageNumber\":[\"1\"],\"pageSize\":[\"10\"],\"groupId\":[\"cfebd51f791246e3bfc8730f17b15713\"],\"_\":[\"1573958466451\"]}', '1', '2019-11-17 10:41:09', '0', NULL, '0:0:0:0:0:0:0:1', '字典管理', 'listData', '1');
 INSERT INTO `sys_log` VALUES ('8fc88b69da4944cf84f2902d8f6f6df4', 'admin', '/admin/login/doLogin', '{\"username\":[\"admin\"],\"password\":[\"admin\"],\"captcha\":[\"aaxs\"]}', '1', '2019-10-28 15:19:38', '0', NULL, '0:0:0:0:0:0:0:1', 'PC端用户登录', 'doLogin', '12');
@@ -3039,7 +3046,7 @@ CREATE TABLE `sys_role`  (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES ('16dc46e509284639be895d6f28015828', NULL, 'MainLeader', '总经理', NULL, '1');
+INSERT INTO `sys_role` VALUES ('16dc46e509284639be895d6f28015828', NULL, 'MainLeader', '总经理', NULL, '4');
 INSERT INTO `sys_role` VALUES ('2c0f550b229343508ef03dd546703823', NULL, 'Finance', '财务', NULL, '3');
 INSERT INTO `sys_role` VALUES ('6', NULL, 'SuperAdmin', '超级管理员', '该角色标识请勿修改-角色请勿删除', '1');
 INSERT INTO `sys_role` VALUES ('8b533b9931c44635b8161045a9383c79', NULL, 'HR', '行政人事部', NULL, '1');
@@ -3626,6 +3633,7 @@ CREATE TABLE `sys_role_org`  (
 -- ----------------------------
 INSERT INTO `sys_role_org` VALUES ('1', '68b2bb2026e54c5186f75a05156abb0f', '2c0f550b229343508ef03dd546703823');
 INSERT INTO `sys_role_org` VALUES ('2', '8c6a25256fd84436bac461b85e0431a5', '2c0f550b229343508ef03dd546703823');
+INSERT INTO `sys_role_org` VALUES ('21b55599e4b24e0e9a5de56eb3db6d83', '4f2774ea653f417c9d650eb4e728b6a5', '16dc46e509284639be895d6f28015828');
 INSERT INTO `sys_role_org` VALUES ('3', '4f2774ea653f417c9d650eb4e728b6a5', '6');
 
 -- ----------------------------
